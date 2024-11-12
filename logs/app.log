@@ -126,3 +126,128 @@
 {"asctime": "2024-11-12 19:59:39,621", "levelname": "INFO", "name": "app", "message": "Dashboard accessed by user: jameshorton86"}
 {"asctime": "2024-11-12 19:59:39,622", "levelname": "ERROR", "name": "app", "message": "Error accessing dashboard: 'models.Test object' has no attribute 'category'"}
 {"asctime": "2024-11-12 19:59:39,622", "levelname": "ERROR", "name": "app", "message": "Error accessing dashboard: 'models.Test object' has no attribute 'category'"}
+{"asctime": "2024-11-12 19:59:39,665", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 19:59:39] \"\u001b[32mGET /dashboard HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-12 19:59:39,702", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-12 19:59:39,702", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-12 19:59:39,871", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 19:59:39] \"\u001b[32mGET / HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-12 19:59:39,925", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-12 19:59:39,925", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-12 19:59:40,095", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 19:59:40] \"\u001b[32mGET / HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-12 19:59:40,377", "levelname": "INFO", "name": "app", "message": "Dashboard accessed by user: jameshorton86"}
+{"asctime": "2024-11-12 19:59:40,377", "levelname": "INFO", "name": "app", "message": "Dashboard accessed by user: jameshorton86"}
+{"asctime": "2024-11-12 19:59:40,378", "levelname": "ERROR", "name": "app", "message": "Error accessing dashboard: 'models.Test object' has no attribute 'category'"}
+{"asctime": "2024-11-12 19:59:40,378", "levelname": "ERROR", "name": "app", "message": "Error accessing dashboard: 'models.Test object' has no attribute 'category'"}
+{"asctime": "2024-11-12 19:59:40,423", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 19:59:40] \"\u001b[32mGET /dashboard HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-12 19:59:40,474", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-12 19:59:40,474", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-12 19:59:40,650", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 19:59:40] \"\u001b[32mGET / HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-12 19:59:40,683", "levelname": "INFO", "name": "app", "message": "Dashboard accessed by user: jameshorton86"}
+{"asctime": "2024-11-12 19:59:40,683", "levelname": "INFO", "name": "app", "message": "Dashboard accessed by user: jameshorton86"}
+{"asctime": "2024-11-12 19:59:40,684", "levelname": "ERROR", "name": "app", "message": "Error accessing dashboard: 'models.Test object' has no attribute 'category'"}
+{"asctime": "2024-11-12 19:59:40,684", "levelname": "ERROR", "name": "app", "message": "Error accessing dashboard: 'models.Test object' has no attribute 'category'"}
+{"asctime": "2024-11-12 19:59:40,727", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 19:59:40] \"\u001b[32mGET /dashboard HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-12 19:59:40,996", "levelname": "INFO", "name": "app", "message": "Dashboard accessed by user: jameshorton86"}
+{"asctime": "2024-11-12 19:59:40,996", "levelname": "INFO", "name": "app", "message": "Dashboard accessed by user: jameshorton86"}
+{"asctime": "2024-11-12 19:59:40,998", "levelname": "ERROR", "name": "app", "message": "Error accessing dashboard: 'models.Test object' has no attribute 'category'"}
+{"asctime": "2024-11-12 19:59:40,998", "levelname": "ERROR", "name": "app", "message": "Error accessing dashboard: 'models.Test object' has no attribute 'category'"}
+{"asctime": "2024-11-12 19:59:41,042", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 19:59:41] \"\u001b[32mGET /dashboard HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-12 19:59:41,083", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-12 19:59:41,083", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-12 19:59:41,253", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 19:59:41] \"\u001b[32mGET / HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-12 19:59:41,532", "levelname": "INFO", "name": "app", "message": "Dashboard accessed by user: jameshorton86"}
+{"asctime": "2024-11-12 19:59:41,532", "levelname": "INFO", "name": "app", "message": "Dashboard accessed by user: jameshorton86"}
+{"asctime": "2024-11-12 19:59:41,534", "levelname": "ERROR", "name": "app", "message": "Error accessing dashboard: 'models.Test object' has no attribute 'category'"}
+{"asctime": "2024-11-12 19:59:41,534", "levelname": "ERROR", "name": "app", "message": "Error accessing dashboard: 'models.Test object' has no attribute 'category'"}
+{"asctime": "2024-11-12 19:59:41,578", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 19:59:41] \"\u001b[32mGET /dashboard HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-12 19:59:41,633", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-12 19:59:41,633", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-12 19:59:41,802", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 19:59:41] \"\u001b[32mGET / HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-12 19:59:42,075", "levelname": "INFO", "name": "app", "message": "Dashboard accessed by user: jameshorton86"}
+{"asctime": "2024-11-12 19:59:42,075", "levelname": "INFO", "name": "app", "message": "Dashboard accessed by user: jameshorton86"}
+{"asctime": "2024-11-12 19:59:42,076", "levelname": "ERROR", "name": "app", "message": "Error accessing dashboard: 'models.Test object' has no attribute 'category'"}
+{"asctime": "2024-11-12 19:59:42,076", "levelname": "ERROR", "name": "app", "message": "Error accessing dashboard: 'models.Test object' has no attribute 'category'"}
+{"asctime": "2024-11-12 19:59:42,120", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 19:59:42] \"\u001b[32mGET /dashboard HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-12 19:59:42,182", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-12 19:59:42,182", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-12 19:59:42,350", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 19:59:42] \"\u001b[32mGET / HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-12 19:59:42,624", "levelname": "INFO", "name": "app", "message": "Dashboard accessed by user: jameshorton86"}
+{"asctime": "2024-11-12 19:59:42,624", "levelname": "INFO", "name": "app", "message": "Dashboard accessed by user: jameshorton86"}
+{"asctime": "2024-11-12 19:59:42,625", "levelname": "ERROR", "name": "app", "message": "Error accessing dashboard: 'models.Test object' has no attribute 'category'"}
+{"asctime": "2024-11-12 19:59:42,625", "levelname": "ERROR", "name": "app", "message": "Error accessing dashboard: 'models.Test object' has no attribute 'category'"}
+{"asctime": "2024-11-12 19:59:42,670", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 19:59:42] \"\u001b[32mGET /dashboard HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-12 19:59:42,719", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-12 19:59:42,719", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-12 19:59:42,888", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 19:59:42] \"\u001b[32mGET / HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-12 19:59:43,168", "levelname": "INFO", "name": "app", "message": "Dashboard accessed by user: jameshorton86"}
+{"asctime": "2024-11-12 19:59:43,168", "levelname": "INFO", "name": "app", "message": "Dashboard accessed by user: jameshorton86"}
+{"asctime": "2024-11-12 19:59:43,169", "levelname": "ERROR", "name": "app", "message": "Error accessing dashboard: 'models.Test object' has no attribute 'category'"}
+{"asctime": "2024-11-12 19:59:43,169", "levelname": "ERROR", "name": "app", "message": "Error accessing dashboard: 'models.Test object' has no attribute 'category'"}
+{"asctime": "2024-11-12 19:59:43,214", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 19:59:43] \"\u001b[32mGET /dashboard HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-12 19:59:43,271", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-12 19:59:43,271", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-12 19:59:43,439", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 19:59:43] \"\u001b[32mGET / HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-12 19:59:43,718", "levelname": "INFO", "name": "app", "message": "Dashboard accessed by user: jameshorton86"}
+{"asctime": "2024-11-12 19:59:43,718", "levelname": "INFO", "name": "app", "message": "Dashboard accessed by user: jameshorton86"}
+{"asctime": "2024-11-12 19:59:43,719", "levelname": "ERROR", "name": "app", "message": "Error accessing dashboard: 'models.Test object' has no attribute 'category'"}
+{"asctime": "2024-11-12 19:59:43,719", "levelname": "ERROR", "name": "app", "message": "Error accessing dashboard: 'models.Test object' has no attribute 'category'"}
+{"asctime": "2024-11-12 19:59:43,764", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 19:59:43] \"\u001b[32mGET /dashboard HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-12 19:59:43,825", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-12 19:59:43,825", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-12 19:59:43,994", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 19:59:43] \"\u001b[32mGET / HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-12 19:59:44,263", "levelname": "INFO", "name": "app", "message": "Dashboard accessed by user: jameshorton86"}
+{"asctime": "2024-11-12 19:59:44,263", "levelname": "INFO", "name": "app", "message": "Dashboard accessed by user: jameshorton86"}
+{"asctime": "2024-11-12 19:59:44,265", "levelname": "ERROR", "name": "app", "message": "Error accessing dashboard: 'models.Test object' has no attribute 'category'"}
+{"asctime": "2024-11-12 19:59:44,265", "levelname": "ERROR", "name": "app", "message": "Error accessing dashboard: 'models.Test object' has no attribute 'category'"}
+{"asctime": "2024-11-12 19:59:44,309", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 19:59:44] \"\u001b[32mGET /dashboard HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-12 19:59:44,359", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-12 19:59:44,359", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-12 19:59:44,527", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 19:59:44] \"\u001b[32mGET / HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-12 19:59:44,808", "levelname": "INFO", "name": "app", "message": "Dashboard accessed by user: jameshorton86"}
+{"asctime": "2024-11-12 19:59:44,808", "levelname": "INFO", "name": "app", "message": "Dashboard accessed by user: jameshorton86"}
+{"asctime": "2024-11-12 19:59:44,809", "levelname": "ERROR", "name": "app", "message": "Error accessing dashboard: 'models.Test object' has no attribute 'category'"}
+{"asctime": "2024-11-12 19:59:44,809", "levelname": "ERROR", "name": "app", "message": "Error accessing dashboard: 'models.Test object' has no attribute 'category'"}
+{"asctime": "2024-11-12 19:59:44,853", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 19:59:44] \"\u001b[32mGET /dashboard HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-12 19:59:44,914", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-12 19:59:44,914", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-12 19:59:45,082", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 19:59:45] \"\u001b[32mGET / HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-12 19:59:45,355", "levelname": "INFO", "name": "app", "message": "Dashboard accessed by user: jameshorton86"}
+{"asctime": "2024-11-12 19:59:45,355", "levelname": "INFO", "name": "app", "message": "Dashboard accessed by user: jameshorton86"}
+{"asctime": "2024-11-12 19:59:45,356", "levelname": "ERROR", "name": "app", "message": "Error accessing dashboard: 'models.Test object' has no attribute 'category'"}
+{"asctime": "2024-11-12 19:59:45,356", "levelname": "ERROR", "name": "app", "message": "Error accessing dashboard: 'models.Test object' has no attribute 'category'"}
+{"asctime": "2024-11-12 19:59:45,401", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 19:59:45] \"\u001b[32mGET /dashboard HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-12 20:01:27,704", "levelname": "INFO", "name": "app", "message": "Initializing application..."}
+{"asctime": "2024-11-12 20:01:27,704", "levelname": "INFO", "name": "app", "message": "Initializing application..."}
+{"asctime": "2024-11-12 20:01:28,681", "levelname": "INFO", "name": "app", "message": "Database tables created successfully"}
+{"asctime": "2024-11-12 20:01:28,681", "levelname": "INFO", "name": "app", "message": "Database tables created successfully"}
+{"asctime": "2024-11-12 20:01:28,998", "levelname": "INFO", "name": "app", "message": "Initial setup completed successfully"}
+{"asctime": "2024-11-12 20:01:28,998", "levelname": "INFO", "name": "app", "message": "Initial setup completed successfully"}
+{"asctime": "2024-11-12 20:01:29,013", "levelname": "INFO", "name": "werkzeug", "message": "\u001b[31m\u001b[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.\u001b[0m\n * Running on all addresses (0.0.0.0)\n * Running on http://127.0.0.1:5000\n * Running on http://172.31.196.14:5000"}
+{"asctime": "2024-11-12 20:01:29,014", "levelname": "INFO", "name": "werkzeug", "message": "\u001b[33mPress CTRL+C to quit\u001b[0m"}
+{"asctime": "2024-11-12 20:01:29,192", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-12 20:01:29,192", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-12 20:01:29,369", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:01:29] \"\u001b[32mGET / HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-12 20:01:29,754", "levelname": "INFO", "name": "app", "message": "Dashboard accessed by user: jameshorton86"}
+{"asctime": "2024-11-12 20:01:29,754", "levelname": "INFO", "name": "app", "message": "Dashboard accessed by user: jameshorton86"}
+{"asctime": "2024-11-12 20:01:29,808", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:01:29] \"GET /dashboard HTTP/1.1\" 200 -"}
+{"asctime": "2024-11-12 20:01:29,929", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:01:29] \"\u001b[36mGET /static/css/style.css HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-12 20:01:29,989", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:01:29] \"GET /static/js/charts.js HTTP/1.1\" 200 -"}
+{"asctime": "2024-11-12 20:01:30,075", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:01:30] \"\u001b[36mGET /static/images/courthouse.svg HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-12 20:01:36,114", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-12 20:01:36,114", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-12 20:01:36,116", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:01:36] \"GET / HTTP/1.1\" 200 -"}
+{"asctime": "2024-11-12 20:01:36,128", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:01:36] \"GET /static/css/style.css HTTP/1.1\" 200 -"}
+{"asctime": "2024-11-12 20:01:36,135", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:01:36] \"GET /static/images/courthouse.svg HTTP/1.1\" 200 -"}
+{"asctime": "2024-11-12 20:01:37,247", "levelname": "INFO", "name": "app", "message": "New test created for user jameshorton86 in category 1"}
+{"asctime": "2024-11-12 20:01:37,247", "levelname": "INFO", "name": "app", "message": "New test created for user jameshorton86 in category 1"}
+{"asctime": "2024-11-12 20:01:37,335", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:01:37] \"\u001b[32mGET /test/new/1 HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-12 20:01:37,605", "levelname": "INFO", "name": "app", "message": "User jameshorton86 accessed test 4"}
+{"asctime": "2024-11-12 20:01:37,605", "levelname": "INFO", "name": "app", "message": "User jameshorton86 accessed test 4"}
+{"asctime": "2024-11-12 20:01:37,610", "levelname": "ERROR", "name": "app", "message": "Error accessing test: No filter named 'shuffle'."}
+{"asctime": "2024-11-12 20:01:37,610", "levelname": "ERROR", "name": "app", "message": "Error accessing test: No filter named 'shuffle'."}
+{"asctime": "2024-11-12 20:01:37,653", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:01:37] \"\u001b[32mGET /test/4 HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-12 20:01:38,055", "levelname": "INFO", "name": "app", "message": "Dashboard accessed by user: jameshorton86"}
+{"asctime": "2024-11-12 20:01:38,055", "levelname": "INFO", "name": "app", "message": "Dashboard accessed by user: jameshorton86"}
+{"asctime": "2024-11-12 20:01:38,099", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:01:38] \"GET /dashboard HTTP/1.1\" 200 -"}
+{"asctime": "2024-11-12 20:01:38,208", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:01:38] \"\u001b[36mGET /static/js/charts.js HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-12 20:01:38,301", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:01:38] \"\u001b[36mGET /static/css/style.css HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-12 20:01:38,345", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:01:38] \"\u001b[36mGET /static/images/courthouse.svg HTTP/1.1\u001b[0m\" 304 -"}
