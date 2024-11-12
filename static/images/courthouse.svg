@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+    <style>
+        .courthouse { fill: #003057; }
+    </style>
+    <path class="courthouse" d="M50 10 L90 30 L90 80 L10 80 L10 30 Z" />
+    <rect class="courthouse" x="45" y="80" width="10" height="10" />
+    <rect class="courthouse" x="20" y="40" width="10" height="30" />
+    <rect class="courthouse" x="45" y="40" width="10" height="30" />
+    <rect class="courthouse" x="70" y="40" width="10" height="30" />
+</svg>

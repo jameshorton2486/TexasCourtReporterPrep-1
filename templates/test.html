@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header bg-navy text-white">
+        <h4 class="mb-0">{{ test.category.name }} Test</h4>
+    </div>
+    <div class="card-body">
+        <form id="testForm">
+            {% for test_question in test.questions %}
+            <div class="question-container mb-4">
+                <h5>Question {{ loop.index }}</h5>
+                <p>{{ test_question.question.question_text }}</p>
+                <div class="options">
+                    {% set options = [test_question.question.correct_answer] + test_question.question.wrong_answers %}
+                    {% for option in options|shuffle %}
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" 
+                               name="question_{{ test_question.id }}" 
+                               id="q{{ test_question.id }}_opt{{ loop.index }}"
+                               value="{{ option }}" required>
+                        <label class="form-check-label" for="q{{ test_question.id }}_opt{{ loop.index }}">
+                            {{ option }}
+                        </label>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+            <button type="submit" class="btn btn-primary">Submit Test</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/test.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8 mx-auto">
+        <div class="card">
+            <div class="card-header bg-navy text-white">
+                <h4 class="mb-0">Test Results - {{ test.category.name }}</h4>
+            </div>
+            <div class="card-body">
+                <div class="text-center mb-4">
+                    <h2 class="display-4">Score: {{ "%.1f"|format(test.score) }}%</h2>
+                    <div class="progress" style="height: 20px;">
+                        <div class="progress-bar {% if test.score >= 70 %}bg-success{% else %}bg-danger{% endif %}"
+                             role="progressbar"
+                             style="width: {{ test.score }}%"
+                             aria-valuenow="{{ test.score }}"
+                             aria-valuemin="0"
+                             aria-valuemax="100"></div>
+                    </div>
+                </div>
+
+                <div class="questions-review">
+                    {% for question in test.questions %}
+                    <div class="question-container mb-4 p-3 {% if question.is_correct %}bg-success-subtle{% else %}bg-danger-subtle{% endif %}">
+                        <h5>Question {{ loop.index }}</h5>
+                        <p>{{ question.question.question_text }}</p>
+                        
+                        <div class="answer-details">
+                            <p><strong>Your Answer:</strong> 
+                                <span class="{% if question.is_correct %}text-success{% else %}text-danger{% endif %}">
+                                    {{ question.user_answer or 'No answer provided' }}
+                                </span>
+                            </p>
+                            {% if not question.is_correct %}
+                            <p><strong>Correct Answer:</strong> 
+                                <span class="text-success">{{ question.question.correct_answer }}</span>
+                            </p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="text-center mt-4">
+                    <a href="{{ url_for('dashboard') }}" class="btn btn-primary me-2">Back to Dashboard</a>
+                    <a href="{{ url_for('new_test', category_id=test.category_id) }}" class="btn btn-outline-primary">Try Again</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

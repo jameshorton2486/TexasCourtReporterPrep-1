@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <div class="card mb-4">
+            <div class="card-header bg-navy text-white">
+                <h4 class="mb-0">Study Categories</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    {% for category in categories %}
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ category.name }}</h5>
+                                <p class="card-text">{{ category.description }}</p>
+                                <a href="{{ url_for('new_test', category_id=category.id) }}" class="btn btn-primary">Start Test</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header bg-burgundy text-white">
+                <h4 class="mb-0">Progress Overview</h4>
+            </div>
+            <div class="card-body">
+                <canvas id="progressChart"></canvas>
+                <div class="mt-4">
+                    <h5>Recent Tests</h5>
+                    <div class="list-group">
+                        {% for test in tests[:5] %}
+                        <a href="{{ url_for('test_results', test_id=test.id) }}" class="list-group-item list-group-item-action">
+                            <div class="d-flex w-100 justify-content-between">
+                                <h6 class="mb-1">{{ test.category.name }}</h6>
+                                <small>{{ test.score }}%</small>
+                            </div>
+                            <small>{{ test.created_at.strftime('%Y-%m-%d') }}</small>
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/charts.js') }}"></script>
+{% endblock %}
