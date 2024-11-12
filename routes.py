@@ -116,14 +116,18 @@ def dashboard():
 @login_required
 def new_test(category_id):
     try:
-        app.logger.debug(f'Creating new test for category {category_id}')
+        question_count = int(request.args.get('question_count', 20))
+        if question_count not in [10, 20]:
+            question_count = 20  # Default to 20 if invalid value provided
+            
+        app.logger.debug(f'Creating new test for category {category_id} with {question_count} questions')
         questions = Question.query.filter_by(category_id=category_id).all()
         if not questions:
             app.logger.warning(f'No questions found for category_id: {category_id}')
             flash('No questions available for this category')
             return redirect(url_for('dashboard'))
             
-        selected_questions = random.sample(questions, min(20, len(questions)))
+        selected_questions = random.sample(questions, min(question_count, len(questions)))
         
         test = Test()
         test.user_id = current_user.id
@@ -207,6 +211,9 @@ def submit_test(test_id):
         app.logger.debug(f'Processing {len(answers)} answers for test {test_id}')
         for test_question in test.questions:
             answer = answers.get(str(test_question.id))
+            if not answer:
+                return jsonify({'error': 'All questions must be answered'}), 400
+                
             test_question.user_answer = answer
             test_question.is_correct = (answer == test_question.question.correct_answer)
             if test_question.is_correct:
