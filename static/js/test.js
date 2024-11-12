@@ -7,21 +7,28 @@ document.addEventListener('DOMContentLoaded', function() {
     const progressBar = document.getElementById('progressBar');
     let currentQuestionIndex = 0;
     const totalQuestions = questions.length;
+
+    console.log(`Total questions loaded: ${totalQuestions}`);
+    
     const answers = {};
 
     function updateNavigationButtons() {
         prevBtn.style.display = currentQuestionIndex > 0 ? 'inline-block' : 'none';
         nextBtn.style.display = currentQuestionIndex < totalQuestions - 1 ? 'inline-block' : 'none';
         submitBtn.style.display = currentQuestionIndex === totalQuestions - 1 ? 'inline-block' : 'none';
+        
+        console.log(`Navigation updated - Current question: ${currentQuestionIndex + 1}/${totalQuestions}`);
     }
 
     function updateProgressBar() {
         const progress = ((currentQuestionIndex + 1) / totalQuestions) * 100;
         progressBar.style.width = `${progress}%`;
         progressBar.textContent = `Question ${currentQuestionIndex + 1} of ${totalQuestions}`;
+        console.log(`Progress updated: ${progress}%`);
     }
 
     function showQuestion(index) {
+        console.log(`Showing question ${index + 1} of ${totalQuestions}`);
         questions.forEach((q, i) => {
             q.style.display = i === index ? 'block' : 'none';
         });
@@ -33,17 +40,21 @@ document.addEventListener('DOMContentLoaded', function() {
     function checkCurrentQuestionAnswered() {
         const currentQuestion = questions[currentQuestionIndex];
         const questionId = currentQuestion.querySelector('input[type="radio"]').name.split('_')[1];
-        return !!answers[questionId];
+        const isAnswered = !!answers[questionId];
+        console.log(`Question ${currentQuestionIndex + 1} answered: ${isAnswered}`);
+        return isAnswered;
     }
 
     // Event listeners for navigation buttons
     prevBtn.addEventListener('click', () => {
+        console.log('Previous button clicked');
         if (currentQuestionIndex > 0) {
             showQuestion(currentQuestionIndex - 1);
         }
     });
 
     nextBtn.addEventListener('click', () => {
+        console.log('Next button clicked');
         if (!checkCurrentQuestionAnswered()) {
             alert('Please answer the current question before proceeding.');
             return;
@@ -58,12 +69,14 @@ document.addEventListener('DOMContentLoaded', function() {
         if (e.target.type === 'radio') {
             const questionId = e.target.name.split('_')[1];
             answers[questionId] = e.target.value;
+            console.log(`Answer recorded for question ID ${questionId}`);
         }
     });
 
     // Handle form submission
     testForm.addEventListener('submit', async function(e) {
         e.preventDefault();
+        console.log('Submitting test...');
 
         // Check if all questions are answered
         const allQuestionsAnswered = Array.from(questions).every(question => {
@@ -75,6 +88,8 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('Please answer all questions before submitting.');
             return;
         }
+
+        console.log(`Submitting ${Object.keys(answers).length} answers`);
 
         try {
             const response = await fetch(window.location.href + '/submit', {
@@ -99,5 +114,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Initialize the first question
+    console.log('Initializing test interface...');
     showQuestion(0);
 });

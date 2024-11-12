@@ -90,7 +90,6 @@ def dashboard():
         app.logger.debug(f'Fetching tests for user {current_user.username}')
         tests = Test.query.filter_by(user_id=current_user.id).order_by(Test.created_at.desc()).all()
         
-        # Eagerly load category relationships to avoid detached instance errors
         for test in tests:
             app.logger.debug(f'Loading category for test {test.id}')
             db.session.refresh(test)
@@ -116,25 +115,37 @@ def dashboard():
 @login_required
 def new_test(category_id):
     try:
+        # Get and validate question count
         question_count = int(request.args.get('question_count', 20))
+        app.logger.info(f'Requested question count: {question_count}')
+        
         if question_count not in [10, 20]:
-            question_count = 20  # Default to 20 if invalid value provided
+            app.logger.warning(f'Invalid question count requested: {question_count}, defaulting to 20')
+            question_count = 20
             
-        app.logger.debug(f'Creating new test for category {category_id} with {question_count} questions')
+        # Fetch available questions
         questions = Question.query.filter_by(category_id=category_id).all()
+        total_available = len(questions)
+        app.logger.info(f'Total available questions for category {category_id}: {total_available}')
+        
         if not questions:
             app.logger.warning(f'No questions found for category_id: {category_id}')
             flash('No questions available for this category')
             return redirect(url_for('dashboard'))
             
-        selected_questions = random.sample(questions, min(question_count, len(questions)))
+        # Select questions
+        questions_to_select = min(question_count, total_available)
+        app.logger.info(f'Selecting {questions_to_select} questions from available {total_available}')
+        selected_questions = random.sample(questions, questions_to_select)
         
+        # Create test
         test = Test()
         test.user_id = current_user.id
         test.category_id = category_id
         db.session.add(test)
-        db.session.flush()  # Get the test ID without committing
+        db.session.flush()
         
+        # Add questions to test
         for question in selected_questions:
             test_question = TestQuestion()
             test_question.test_id = test.id
@@ -142,7 +153,7 @@ def new_test(category_id):
             db.session.add(test_question)
         
         db.session.commit()
-        app.logger.info(f'New test created for user {current_user.username} in category {category_id}')
+        app.logger.info(f'Created test {test.id} with {len(selected_questions)} questions')
         return redirect(url_for('take_test', test_id=test.id))
         
     except Exception as e:
@@ -164,6 +175,10 @@ def take_test(test_id):
         
         app.logger.debug(f'Loading test data and relationships for test {test_id}')
         db.session.refresh(test)
+        
+        # Log question count for debugging
+        question_count = len(test.questions)
+        app.logger.info(f'Test {test_id} loaded with {question_count} questions')
         
         # Verify all required relationships are loaded
         app.logger.debug('Verifying test question relationships')
