@@ -13,6 +13,7 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(64), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password_hash = db.Column(db.String(256))
+    is_admin = db.Column(db.Boolean, default=False, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     tests = db.relationship('Test', backref='user', lazy=True, cascade='all, delete-orphan')
     
@@ -21,6 +22,9 @@ class User(UserMixin, db.Model):
         
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
+        
+    def is_administrator(self):
+        return self.is_admin
 
 class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)

@@ -1,0 +1,103 @@
+{% extends "admin/base.html" %}
+
+{% block admin_content %}
+<div class="card">
+    <div class="card-header bg-navy text-white">
+        <h4 class="mb-0">{{ 'Edit' if question else 'Add' }} Question</h4>
+    </div>
+    <div class="card-body">
+        <form method="POST">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            
+            <div class="mb-3">
+                <label for="category" class="form-label">Category</label>
+                <select class="form-select" id="category" name="category_id" required>
+                    {% for category in categories %}
+                    <option value="{{ category.id }}" 
+                            {% if question and question.category_id == category.id %}selected{% endif %}>
+                        {{ category.name }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <div class="mb-3">
+                <label for="question_text" class="form-label">Question Text</label>
+                <textarea class="form-control" id="question_text" name="question_text" 
+                          rows="3" required>{{ question.question_text if question else '' }}</textarea>
+            </div>
+            
+            <div class="mb-3">
+                <label for="correct_answer" class="form-label">Correct Answer</label>
+                <input type="text" class="form-control" id="correct_answer" name="correct_answer"
+                       value="{{ question.correct_answer if question else '' }}" required>
+            </div>
+            
+            <div id="wrong_answers">
+                <label class="form-label">Wrong Answers</label>
+                {% if question %}
+                    {% for answer in question.wrong_answers %}
+                    <div class="mb-3 wrong-answer-group">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="wrong_answers[]" 
+                                   value="{{ answer }}" required>
+                            <button type="button" class="btn btn-danger" onclick="removeWrongAnswer(this)">
+                                Remove
+                            </button>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="mb-3 wrong-answer-group">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="wrong_answers[]" required>
+                            <button type="button" class="btn btn-danger" onclick="removeWrongAnswer(this)">
+                                Remove
+                            </button>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+            
+            <button type="button" class="btn btn-secondary mb-3" onclick="addWrongAnswer()">
+                Add Wrong Answer
+            </button>
+            
+            <div>
+                <button type="submit" class="btn btn-primary">
+                    {{ 'Update' if question else 'Create' }} Question
+                </button>
+                <a href="{{ url_for('admin_questions') }}" class="btn btn-outline-secondary">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% block scripts %}
+<script>
+function addWrongAnswer() {
+    const container = document.getElementById('wrong_answers');
+    const newGroup = document.createElement('div');
+    newGroup.className = 'mb-3 wrong-answer-group';
+    newGroup.innerHTML = `
+        <div class="input-group">
+            <input type="text" class="form-control" name="wrong_answers[]" required>
+            <button type="button" class="btn btn-danger" onclick="removeWrongAnswer(this)">
+                Remove
+            </button>
+        </div>
+    `;
+    container.appendChild(newGroup);
+}
+
+function removeWrongAnswer(button) {
+    const groupsCount = document.getElementsByClassName('wrong-answer-group').length;
+    if (groupsCount > 1) {
+        button.closest('.wrong-answer-group').remove();
+    } else {
+        alert('At least one wrong answer is required');
+    }
+}
+</script>
+{% endblock %}
+{% endblock %}

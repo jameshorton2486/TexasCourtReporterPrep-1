@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-header bg-navy text-white">
+                <h5 class="mb-0">Admin Menu</h5>
+            </div>
+            <div class="list-group list-group-flush">
+                <a href="{{ url_for('admin_questions') }}" class="list-group-item list-group-item-action">
+                    Manage Questions
+                </a>
+                <a href="{{ url_for('admin_add_question') }}" class="list-group-item list-group-item-action">
+                    Add New Question
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-9">
+        {% block admin_content %}{% endblock %}
+    </div>
+</div>
+{% endblock %}

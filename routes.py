@@ -3,9 +3,21 @@ from flask_login import login_user, logout_user, current_user, login_required
 from werkzeug.exceptions import NotFound, Unauthorized
 from sqlalchemy.orm.exc import DetachedInstanceError
 from jinja2.exceptions import TemplateError
+from functools import wraps
 from app import app, db
 from models import User, Category, Question, Test, TestQuestion
 import random
+
+def admin_required(f):
+    @wraps(f)
+    @login_required
+    def decorated_function(*args, **kwargs):
+        if not current_user.is_administrator():
+            app.logger.warning(f'Unauthorized admin access attempt by user {current_user.username}')
+            flash('Admin access required')
+            return redirect(url_for('dashboard'))
+        return f(*args, **kwargs)
+    return decorated_function
 
 @app.route('/')
 def index():
@@ -282,3 +294,109 @@ def test_results(test_id):
         app.logger.error(f'Error accessing test results: {str(e)}')
         flash('An error occurred while accessing the test results')
         return redirect(url_for('dashboard'))
+
+@app.route('/admin/questions')
+@admin_required
+def admin_questions():
+    try:
+        questions = Question.query.order_by(Question.created_at.desc()).all()
+        app.logger.info(f'Admin {current_user.username} accessed questions list')
+        return render_template('admin/questions.html', questions=questions)
+    except Exception as e:
+        app.logger.error(f'Error accessing admin questions: {str(e)}')
+        flash('An error occurred while loading questions')
+        return redirect(url_for('dashboard'))
+
+@app.route('/admin/questions/add', methods=['GET', 'POST'])
+@admin_required
+def admin_add_question():
+    try:
+        categories = Category.query.all()
+        
+        if request.method == 'POST':
+            category_id = request.form.get('category_id')
+            question_text = request.form.get('question_text')
+            correct_answer = request.form.get('correct_answer')
+            wrong_answers = request.form.getlist('wrong_answers[]')
+            
+            if not all([category_id, question_text, correct_answer]) or len(wrong_answers) < 2:
+                flash('All fields are required and at least two wrong answers must be provided')
+                return render_template('admin/add_question.html', categories=categories)
+            
+            question = Question(
+                category_id=category_id,
+                question_text=question_text,
+                correct_answer=correct_answer,
+                wrong_answers=wrong_answers
+            )
+            
+            db.session.add(question)
+            db.session.commit()
+            
+            app.logger.info(f'Admin {current_user.username} added new question: {question.id}')
+            flash('Question added successfully')
+            return redirect(url_for('admin_questions'))
+            
+        return render_template('admin/add_question.html', categories=categories)
+        
+    except Exception as e:
+        app.logger.error(f'Error adding question: {str(e)}')
+        db.session.rollback()
+        flash('An error occurred while adding the question')
+        return redirect(url_for('admin_questions'))
+
+@app.route('/admin/questions/edit/<int:id>', methods=['GET', 'POST'])
+@admin_required
+def admin_edit_question(id):
+    try:
+        question = Question.query.get_or_404(id)
+        categories = Category.query.all()
+        
+        if request.method == 'POST':
+            category_id = request.form.get('category_id')
+            question_text = request.form.get('question_text')
+            correct_answer = request.form.get('correct_answer')
+            wrong_answers = request.form.getlist('wrong_answers[]')
+            
+            if not all([category_id, question_text, correct_answer]) or len(wrong_answers) < 2:
+                flash('All fields are required and at least two wrong answers must be provided')
+                return render_template('admin/add_question.html', 
+                                    question=question, categories=categories)
+            
+            question.category_id = category_id
+            question.question_text = question_text
+            question.correct_answer = correct_answer
+            question.wrong_answers = wrong_answers
+            
+            db.session.commit()
+            
+            app.logger.info(f'Admin {current_user.username} edited question: {id}')
+            flash('Question updated successfully')
+            return redirect(url_for('admin_questions'))
+            
+        return render_template('admin/add_question.html', 
+                             question=question, categories=categories)
+                             
+    except Exception as e:
+        app.logger.error(f'Error editing question {id}: {str(e)}')
+        db.session.rollback()
+        flash('An error occurred while editing the question')
+        return redirect(url_for('admin_questions'))
+
+@app.route('/admin/questions/delete/<int:id>', methods=['POST'])
+@admin_required
+def admin_delete_question(id):
+    try:
+        question = Question.query.get_or_404(id)
+        db.session.delete(question)
+        db.session.commit()
+        
+        app.logger.info(f'Admin {current_user.username} deleted question: {id}')
+        flash('Question deleted successfully')
+        
+    except Exception as e:
+        app.logger.error(f'Error deleting question {id}: {str(e)}')
+        db.session.rollback()
+        flash('An error occurred while deleting the question')
+        
+    return redirect(url_for('admin_questions'))
