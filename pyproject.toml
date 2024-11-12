@@ -12,4 +12,6 @@ dependencies = [
     "werkzeug",
     "sqlalchemy",
     "python-json-logger>=2.0.7",
+    "pypdf2>=3.0.1",
+    "python-magic>=0.4.27",
 ]

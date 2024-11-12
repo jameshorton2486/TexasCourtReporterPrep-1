@@ -128,15 +128,21 @@ def new_test(category_id):
         total_available = len(questions)
         app.logger.info(f'Total available questions for category {category_id}: {total_available}')
         
-        if not questions:
-            app.logger.warning(f'No questions found for category_id: {category_id}')
-            flash('No questions available for this category')
+        # Check minimum required questions
+        if total_available < 10:
+            app.logger.warning(f'Insufficient questions available for category {category_id}: {total_available}')
+            flash('Not enough questions available for testing in this category. Please try again later.')
             return redirect(url_for('dashboard'))
             
+        # Adjust question count if necessary
+        if total_available < question_count:
+            app.logger.warning(f'Adjusting question count from {question_count} to {total_available}')
+            flash(f'Only {total_available} questions available. Creating test with all available questions.')
+            question_count = total_available
+            
         # Select questions
-        questions_to_select = min(question_count, total_available)
-        app.logger.info(f'Selecting {questions_to_select} questions from available {total_available}')
-        selected_questions = random.sample(questions, questions_to_select)
+        selected_questions = random.sample(questions, question_count)
+        app.logger.info(f'Selected {len(selected_questions)} questions for test')
         
         # Create test
         test = Test()
@@ -156,6 +162,10 @@ def new_test(category_id):
         app.logger.info(f'Created test {test.id} with {len(selected_questions)} questions')
         return redirect(url_for('take_test', test_id=test.id))
         
+    except ValueError as ve:
+        app.logger.error(f'Value error in new_test: {str(ve)}')
+        flash('Invalid test parameters provided')
+        return redirect(url_for('dashboard'))
     except Exception as e:
         app.logger.error(f'Error creating new test: {str(e)}')
         db.session.rollback()
