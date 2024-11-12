@@ -2,6 +2,7 @@ from flask import render_template, redirect, url_for, flash, request, jsonify
 from flask_login import login_user, logout_user, current_user, login_required
 from werkzeug.exceptions import NotFound, Unauthorized
 from sqlalchemy.orm.exc import DetachedInstanceError
+from jinja2.exceptions import TemplateError
 from app import app, db
 from models import User, Category, Question, Test, TestQuestion
 import random
@@ -98,7 +99,6 @@ def dashboard():
                 test.category_id = None
                 db.session.commit()
         
-        app.logger.info(f'Dashboard accessed by user: {current_user.username}')
         return render_template('dashboard.html', categories=categories, tests=tests)
         
     except DetachedInstanceError as e:
@@ -151,23 +151,41 @@ def new_test(category_id):
 @login_required
 def take_test(test_id):
     try:
+        app.logger.debug(f'Attempting to load test {test_id}')
         test = Test.query.get_or_404(test_id)
+        
         if test.user_id != current_user.id:
             app.logger.warning(f'Unauthorized test access attempt by user {current_user.username} for test {test_id}')
             raise Unauthorized()
         
-        app.logger.debug(f'Loading test data for test {test_id}')
+        app.logger.debug(f'Loading test data and relationships for test {test_id}')
         db.session.refresh(test)
         
-        app.logger.info(f'User {current_user.username} accessed test {test_id}')
-        return render_template('test.html', test=test)
+        # Verify all required relationships are loaded
+        app.logger.debug('Verifying test question relationships')
+        for test_question in test.questions:
+            if not test_question.question:
+                app.logger.error(f'Question relationship missing for test_question {test_question.id}')
+                raise ValueError('Invalid test question data')
         
+        try:
+            app.logger.debug('Rendering test template')
+            return render_template('test.html', test=test)
+        except TemplateError as te:
+            app.logger.error(f'Template rendering error: {str(te)}')
+            flash('An error occurred while preparing the test display')
+            return redirect(url_for('dashboard'))
+            
     except NotFound:
         app.logger.warning(f'Test not found: {test_id}')
         flash('Test not found')
         return redirect(url_for('dashboard'))
     except Unauthorized:
         flash('Unauthorized access')
+        return redirect(url_for('dashboard'))
+    except ValueError as ve:
+        app.logger.error(f'Data validation error: {str(ve)}')
+        flash('Invalid test data')
         return redirect(url_for('dashboard'))
     except Exception as e:
         app.logger.error(f'Error accessing test: {str(e)}')
@@ -186,7 +204,7 @@ def submit_test(test_id):
         answers = request.get_json()
         correct_count = 0
         
-        app.logger.debug(f'Processing answers for test {test_id}')
+        app.logger.debug(f'Processing {len(answers)} answers for test {test_id}')
         for test_question in test.questions:
             answer = answers.get(str(test_question.id))
             test_question.user_answer = answer
@@ -210,18 +228,24 @@ def submit_test(test_id):
 @login_required
 def test_results(test_id):
     try:
+        app.logger.debug(f'Loading test results for test {test_id}')
         test = Test.query.get_or_404(test_id)
+        
         if test.user_id != current_user.id:
             app.logger.warning(f'Unauthorized results access attempt by user {current_user.username} for test {test_id}')
             flash('Unauthorized access')
             return redirect(url_for('dashboard'))
         
-        app.logger.debug(f'Loading test results for test {test_id}')
         db.session.refresh(test)
         
-        app.logger.info(f'User {current_user.username} accessed results for test {test_id}')
-        return render_template('results.html', test=test)
-        
+        try:
+            app.logger.debug('Rendering results template')
+            return render_template('results.html', test=test)
+        except TemplateError as te:
+            app.logger.error(f'Template rendering error in results: {str(te)}')
+            flash('An error occurred while displaying the results')
+            return redirect(url_for('dashboard'))
+            
     except Exception as e:
         app.logger.error(f'Error accessing test results: {str(e)}')
         flash('An error occurred while accessing the test results')

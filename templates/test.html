@@ -12,8 +12,9 @@
                 <h5>Question {{ loop.index }}</h5>
                 <p>{{ test_question.question.question_text }}</p>
                 <div class="options">
-                    {% set options = [test_question.question.correct_answer] + test_question.question.wrong_answers %}
-                    {% for option in options|shuffle %}
+                    {% set options = ([test_question.question.correct_answer] + test_question.question.wrong_answers)|default([]) %}
+                    {% set shuffled_options = options|shuffle|default(options) %}
+                    {% for option in shuffled_options %}
                     <div class="form-check">
                         <input class="form-check-input" type="radio" 
                                name="question_{{ test_question.id }}" 

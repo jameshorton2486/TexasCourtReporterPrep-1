@@ -1,5 +1,6 @@
 import os
 import logging
+import random
 from logging.handlers import RotatingFileHandler
 from pythonjsonlogger import jsonlogger
 from flask import Flask, render_template
@@ -46,6 +47,15 @@ def setup_logging(app):
     app.logger.addHandler(file_handler)
     app.logger.addHandler(console_handler)
 
+def shuffle_filter(seq):
+    try:
+        result = list(seq)
+        random.shuffle(result)
+        return result
+    except Exception as e:
+        app.logger.warning(f'Shuffle filter failed: {str(e)}')
+        return seq
+
 # Create the app
 app = Flask(__name__)
 
@@ -59,6 +69,9 @@ app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
 
 # Set up logging
 setup_logging(app)
+
+# Add custom filters
+app.jinja_env.filters['shuffle'] = shuffle_filter
 
 # Initialize extensions
 db.init_app(app)
