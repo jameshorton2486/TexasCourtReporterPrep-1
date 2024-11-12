@@ -26,7 +26,7 @@
                                name="question_{{ test_question.id }}" 
                                id="q{{ test_question.id }}_opt{{ loop.index }}"
                                value="{{ option }}" required
-                               data-question-index="{{ loop.parent.loop.index0 }}">
+                               data-question-index="{{ loop.index0 }}">
                         <label class="form-check-label" for="q{{ test_question.id }}_opt{{ loop.index }}">
                             {{ option }}
                         </label>

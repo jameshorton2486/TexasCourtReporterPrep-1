@@ -426,3 +426,66 @@
 {"asctime": "2024-11-12 20:11:48,744", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:11:48] \"\u001b[36mGET /static/js/charts.js HTTP/1.1\u001b[0m\" 304 -"}
 {"asctime": "2024-11-12 20:11:48,751", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:11:48] \"\u001b[36mGET /static/css/style.css HTTP/1.1\u001b[0m\" 304 -"}
 {"asctime": "2024-11-12 20:11:48,936", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:11:48] \"\u001b[36mGET /static/images/courthouse.svg HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-12 20:12:12,501", "levelname": "INFO", "name": "app", "message": "New test created for user jameshorton86 in category 1"}
+{"asctime": "2024-11-12 20:12:12,501", "levelname": "INFO", "name": "app", "message": "New test created for user jameshorton86 in category 1"}
+{"asctime": "2024-11-12 20:12:12,586", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:12:12] \"\u001b[32mGET /test/new/1?question_count=10 HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-12 20:12:13,001", "levelname": "ERROR", "name": "app", "message": "Template rendering error: 'jinja2.runtime.LoopContext object' has no attribute 'parent'"}
+{"asctime": "2024-11-12 20:12:13,001", "levelname": "ERROR", "name": "app", "message": "Template rendering error: 'jinja2.runtime.LoopContext object' has no attribute 'parent'"}
+{"asctime": "2024-11-12 20:12:13,043", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:12:13] \"\u001b[32mGET /test/14 HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-12 20:12:13,894", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:12:13] \"GET /dashboard HTTP/1.1\" 200 -"}
+{"asctime": "2024-11-12 20:12:13,995", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:12:13] \"\u001b[36mGET /static/css/style.css HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-12 20:12:14,064", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:12:14] \"\u001b[36mGET /static/js/charts.js HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-12 20:12:14,121", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:12:14] \"\u001b[36mGET /static/images/courthouse.svg HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-12 20:12:18,516", "levelname": "INFO", "name": "app", "message": "New test created for user jameshorton86 in category 1"}
+{"asctime": "2024-11-12 20:12:18,516", "levelname": "INFO", "name": "app", "message": "New test created for user jameshorton86 in category 1"}
+{"asctime": "2024-11-12 20:12:18,600", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:12:18] \"\u001b[32mGET /test/new/1?question_count=10 HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-12 20:12:18,985", "levelname": "ERROR", "name": "app", "message": "Template rendering error: 'jinja2.runtime.LoopContext object' has no attribute 'parent'"}
+{"asctime": "2024-11-12 20:12:18,985", "levelname": "ERROR", "name": "app", "message": "Template rendering error: 'jinja2.runtime.LoopContext object' has no attribute 'parent'"}
+{"asctime": "2024-11-12 20:12:19,027", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:12:19] \"\u001b[32mGET /test/15 HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-12 20:12:19,913", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:12:19] \"GET /dashboard HTTP/1.1\" 200 -"}
+{"asctime": "2024-11-12 20:12:19,988", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:12:19] \"\u001b[36mGET /static/css/style.css HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-12 20:12:19,997", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:12:19] \"\u001b[36mGET /static/js/charts.js HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-12 20:12:20,094", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:12:20] \"\u001b[36mGET /static/images/courthouse.svg HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-12 20:12:25,195", "levelname": "INFO", "name": "app", "message": "New test created for user jameshorton86 in category 1"}
+{"asctime": "2024-11-12 20:12:25,195", "levelname": "INFO", "name": "app", "message": "New test created for user jameshorton86 in category 1"}
+{"asctime": "2024-11-12 20:12:25,278", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:12:25] \"\u001b[32mGET /test/new/1?question_count=20 HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-12 20:12:25,665", "levelname": "ERROR", "name": "app", "message": "Template rendering error: 'jinja2.runtime.LoopContext object' has no attribute 'parent'"}
+{"asctime": "2024-11-12 20:12:25,665", "levelname": "ERROR", "name": "app", "message": "Template rendering error: 'jinja2.runtime.LoopContext object' has no attribute 'parent'"}
+{"asctime": "2024-11-12 20:12:25,708", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:12:25] \"\u001b[32mGET /test/16 HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-12 20:12:26,635", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:12:26] \"GET /dashboard HTTP/1.1\" 200 -"}
+{"asctime": "2024-11-12 20:12:26,749", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:12:26] \"\u001b[36mGET /static/js/charts.js HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-12 20:12:26,750", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:12:26] \"\u001b[36mGET /static/css/style.css HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-12 20:12:26,806", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:12:26] \"\u001b[36mGET /static/images/courthouse.svg HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-12 20:13:00,979", "levelname": "INFO", "name": "app", "message": "New test created for user jameshorton86 in category 1"}
+{"asctime": "2024-11-12 20:13:00,979", "levelname": "INFO", "name": "app", "message": "New test created for user jameshorton86 in category 1"}
+{"asctime": "2024-11-12 20:13:01,062", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:13:01] \"\u001b[32mGET /test/new/1?question_count=10 HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-12 20:13:01,449", "levelname": "ERROR", "name": "app", "message": "Template rendering error: 'jinja2.runtime.LoopContext object' has no attribute 'parent'"}
+{"asctime": "2024-11-12 20:13:01,449", "levelname": "ERROR", "name": "app", "message": "Template rendering error: 'jinja2.runtime.LoopContext object' has no attribute 'parent'"}
+{"asctime": "2024-11-12 20:13:01,491", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:13:01] \"\u001b[32mGET /test/17 HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-12 20:13:03,960", "levelname": "INFO", "name": "app", "message": "Initializing application..."}
+{"asctime": "2024-11-12 20:13:03,960", "levelname": "INFO", "name": "app", "message": "Initializing application..."}
+{"asctime": "2024-11-12 20:13:04,996", "levelname": "INFO", "name": "app", "message": "Database tables created successfully"}
+{"asctime": "2024-11-12 20:13:04,996", "levelname": "INFO", "name": "app", "message": "Database tables created successfully"}
+{"asctime": "2024-11-12 20:13:05,329", "levelname": "INFO", "name": "app", "message": "Initial setup completed successfully"}
+{"asctime": "2024-11-12 20:13:05,329", "levelname": "INFO", "name": "app", "message": "Initial setup completed successfully"}
+{"asctime": "2024-11-12 20:13:05,360", "levelname": "INFO", "name": "werkzeug", "message": "\u001b[31m\u001b[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.\u001b[0m\n * Running on all addresses (0.0.0.0)\n * Running on http://127.0.0.1:5000\n * Running on http://172.31.196.14:5000"}
+{"asctime": "2024-11-12 20:13:05,360", "levelname": "INFO", "name": "werkzeug", "message": "\u001b[33mPress CTRL+C to quit\u001b[0m"}
+{"asctime": "2024-11-12 20:13:05,513", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-12 20:13:05,513", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-12 20:13:05,697", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:13:05] \"\u001b[32mGET / HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-12 20:13:05,895", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-12 20:13:05,895", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-12 20:13:05,908", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:13:05] \"GET / HTTP/1.1\" 200 -"}
+{"asctime": "2024-11-12 20:13:05,924", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:13:05] \"GET /static/css/style.css HTTP/1.1\" 200 -"}
+{"asctime": "2024-11-12 20:13:05,932", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:13:05] \"GET /static/images/courthouse.svg HTTP/1.1\" 200 -"}
+{"asctime": "2024-11-12 20:13:06,761", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:13:06] \"GET /dashboard HTTP/1.1\" 200 -"}
+{"asctime": "2024-11-12 20:13:06,840", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:13:06] \"\u001b[36mGET /static/js/charts.js HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-12 20:13:06,846", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:13:06] \"\u001b[36mGET /static/css/style.css HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-12 20:13:06,965", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:13:06] \"\u001b[36mGET /static/images/courthouse.svg HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-12 20:13:12,237", "levelname": "INFO", "name": "app", "message": "New test created for user jameshorton86 in category 2"}
+{"asctime": "2024-11-12 20:13:12,237", "levelname": "INFO", "name": "app", "message": "New test created for user jameshorton86 in category 2"}
+{"asctime": "2024-11-12 20:13:12,328", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:13:12] \"\u001b[32mGET /test/new/2?question_count=10 HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-12 20:13:12,805", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:13:12] \"GET /test/18 HTTP/1.1\" 200 -"}
+{"asctime": "2024-11-12 20:13:12,925", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:13:12] \"GET /static/js/test.js HTTP/1.1\" 200 -"}
+{"asctime": "2024-11-12 20:13:12,925", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:13:12] \"\u001b[36mGET /static/css/style.css HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-12 20:13:12,978", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.14 - - [12/Nov/2024 20:13:12] \"\u001b[36mGET /static/images/courthouse.svg HTTP/1.1\u001b[0m\" 304 -"}
