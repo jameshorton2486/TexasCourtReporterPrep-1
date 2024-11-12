@@ -9,4 +9,7 @@ dependencies = [
     "flask-sqlalchemy>=3.1.1",
     "psycopg2-binary>=2.9.10",
     "flask-login>=0.6.3",
+    "werkzeug",
+    "sqlalchemy",
+    "python-json-logger>=2.0.7",
 ]
