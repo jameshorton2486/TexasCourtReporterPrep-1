@@ -19,6 +19,29 @@ def admin_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
+def create_admin_user():
+    try:
+        # Check if admin user already exists
+        admin = User.query.filter_by(username='admin').first()
+        if not admin:
+            admin = User()
+            admin.username = 'admin'
+            admin.email = 'admin@example.com'
+            admin.set_password('admin')
+            admin.is_admin = True
+            db.session.add(admin)
+            db.session.commit()
+            app.logger.info('Admin user created successfully')
+        return admin
+    except Exception as e:
+        app.logger.error(f'Error creating admin user: {str(e)}')
+        db.session.rollback()
+        return None
+
+# Create admin user on startup
+with app.app_context():
+    create_admin_user()
+
 @app.route('/')
 def index():
     app.logger.info('Accessing index page')
@@ -76,7 +99,7 @@ def login():
                 return redirect(url_for('dashboard'))
                 
             app.logger.warning(f'Failed login attempt for username: {username}')
-            flash('Invalid username or password')
+            flash('You entered an incorrect username or password')
             
         except Exception as e:
             app.logger.error(f'Error during login: {str(e)}')
@@ -323,12 +346,11 @@ def admin_add_question():
                 flash('All fields are required and at least two wrong answers must be provided')
                 return render_template('admin/add_question.html', categories=categories)
             
-            question = Question(
-                category_id=category_id,
-                question_text=question_text,
-                correct_answer=correct_answer,
-                wrong_answers=wrong_answers
-            )
+            question = Question()
+            question.category_id = category_id
+            question.question_text = question_text
+            question.correct_answer = correct_answer
+            question.wrong_answers = wrong_answers
             
             db.session.add(question)
             db.session.commit()
