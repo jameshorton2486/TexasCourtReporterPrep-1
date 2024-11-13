@@ -23,93 +23,81 @@ def extract_text_from_pdf(pdf_path: str) -> Optional[str]:
 
 def clean_text(text: str) -> str:
     """Clean and normalize text content."""
-    # Remove unwanted headers/footers and normalize whitespace
+    # Remove unwanted headers/footers
     text = re.sub(r'Question\s+\d+\s+of\s+\d+', '', text)
     text = re.sub(r'Stuvia\.com.*?Study Material\s*', '', text, flags=re.IGNORECASE)
     text = re.sub(r'\s+', ' ', text)
     
     # Handle question numbers and formatting
-    text = re.sub(r'(\d+\.)\s*([A-Z])', r'\1 \2', text)  # Ensure space after question numbers
-    text = re.sub(r'\n+(?=[A-D]\.|\([A-D]\))', ' ', text)  # Join lines before answer choices
-    text = re.sub(r'\s*\([^)]*\)\s*$', '', text)  # Remove trailing parentheticals
-    text = re.sub(r'\s*-\s*correct answer\s*', '', text, flags=re.IGNORECASE)
-    text = re.sub(r'\s*\[.*?\]\s*', ' ', text)  # Remove bracketed content
+    text = text.strip()
+    if not text.endswith('?'):
+        text = text.rstrip('.') + '?'
     
-    return text.strip()
+    # Ensure proper capitalization
+    if text and not text[0].isupper():
+        text = text[0].upper() + text[1:]
+        
+    return text
 
 def split_into_qa_pairs(text: str) -> List[Dict]:
-    """Split text into question-answer pairs with enhanced boundary detection."""
+    """Split text into question-answer pairs with enhanced format."""
     questions = []
     
     # Split into question blocks with stronger boundary detection
-    # Look for numbered questions, question prefixes, or clear question starts
-    blocks = re.split(r'(?:\n{2,}|\r\n{2,}|\f)(?=(?:\d+\.|\(?[A-D]\)|\b(?:What|Who|When|Where|Why|How|Should|Can|Is|Are|Does|Do|Will|Which)\b))', text)
+    question_pattern = r'(?:Question:|Q:|\d+[\.:])?\s*([^?]+\??)\s*(?:A[\.:])?\s*(.*?)(?=(?:Question:|Q:|\d+[\.:])|\Z)'
+    matches = list(re.finditer(question_pattern, text, re.DOTALL | re.IGNORECASE))
     
-    for block in blocks:
-        # Extract question number and text using improved pattern
-        question_match = re.match(
-            r'^(?:(\d+)\.?\s*)?(?:Q[:.]\s*)?([^?]+\??)',
-            block,
-            re.IGNORECASE | re.DOTALL
-        )
-        
-        if not question_match:
-            continue
+    for match in matches:
+        try:
+            question_text = clean_text(match.group(1))
+            answers_text = match.group(2)
             
-        question_number = question_match.group(1)
-        question_text = clean_text(question_match.group(2))
-        
-        # Ensure question ends with question mark
-        if not question_text.endswith('?'):
-            question_text += '?'
-        
-        # Find answer choices with improved pattern matching
-        answer_pattern = r'(?:^|\n)\s*([A-D])[\)\.]\s*(.*?)(?=(?:\n\s*[A-D][\)\.]\s*|\Z))'
-        answer_matches = list(re.finditer(answer_pattern, block[question_match.end():], re.MULTILINE | re.DOTALL))
-        
-        # Verify answers are in correct order and properly formatted
-        answers = []
-        expected_letters = ['A', 'B', 'C', 'D']
-        
-        for i, match in enumerate(answer_matches):
-            if i >= len(expected_letters) or match.group(1) != expected_letters[i]:
-                logger.warning(f"Answer choices out of order in question: {question_text}")
+            # Extract answer choices with proper formatting
+            answer_pattern = r'(?:^|\n)\s*([A-D])[\.:]\s*(.*?)(?=(?:\n\s*[A-D][\.:]\s*|\Z))'
+            answer_matches = list(re.finditer(answer_pattern, answers_text, re.MULTILINE | re.DOTALL))
+            
+            if len(answer_matches) != 4:
+                logger.warning(f"Skipping question due to incorrect number of answers: {question_text}")
                 continue
                 
-            answer_text = clean_text(match.group(2))
-            if answer_text:
-                if not answer_text.endswith(('.', '!', '?')):
-                    answer_text += '.'
-                if not answer_text[0].isupper():
-                    answer_text = answer_text[0].upper() + answer_text[1:]
-                answers.append((match.group(1), answer_text))
-        
-        # Find correct answer with improved pattern
-        correct_marker = re.search(
-            r'(?:correct(?:\s+answer)?[:.-]\s*|answer[:.-]\s*|[Cc]orrect:\s*)([A-D])',
-            block,
-            re.IGNORECASE
-        )
-        
-        if len(answers) == 4 and correct_marker:
-            try:
-                correct_letter = correct_marker.group(1).upper()
-                correct_index = ord(correct_letter) - ord('A')
+            answers = []
+            for ans_match in answer_matches:
+                letter = ans_match.group(1)
+                answer_text = clean_text(ans_match.group(2))
+                if not answer_text:
+                    continue
+                answers.append((letter, answer_text))
+            
+            # Find correct answer with improved pattern
+            correct_marker = re.search(
+                r'(?:correct(?:\s+answer)?[:.-]\s*|answer[:.-]\s*|[Cc]orrect:\s*)([A-D])',
+                answers_text,
+                re.IGNORECASE
+            )
+            
+            if not correct_marker:
+                logger.warning(f"No correct answer marker found for question: {question_text}")
+                continue
                 
-                if 0 <= correct_index < len(answers):
-                    question_entry = {
-                        'question_number': question_number,
-                        'question_text': question_text,
-                        'correct_answer': answers[correct_index][1],
-                        'wrong_answers': [ans[1] for i, ans in enumerate(answers) if i != correct_index][:3]
-                    }
-                    if validate_question(question_entry):
-                        questions.append(question_entry)
-                        logger.info(f"Successfully parsed question: {question_text[:50]}...")
+            correct_letter = correct_marker.group(1).upper()
+            correct_index = ord(correct_letter) - ord('A')
+            
+            if 0 <= correct_index < len(answers):
+                question_entry = {
+                    'question_text': f"Question: {question_text}",
+                    'correct_answer': answers[correct_index][1],
+                    'wrong_answers': [ans[1] for i, ans in enumerate(answers) if i != correct_index]
+                }
+                
+                # Validate the question entry
+                if validate_question(question_entry):
+                    questions.append(question_entry)
+                    logger.info(f"Successfully parsed question: {question_text[:50]}...")
                     
-            except (ValueError, IndexError) as e:
-                logger.warning(f"Error processing answers for question: {question_text} - {str(e)}")
-                
+        except Exception as e:
+            logger.error(f"Error processing question block: {str(e)}")
+            continue
+            
     return questions
 
 def validate_question(question: Dict) -> bool:
@@ -118,7 +106,7 @@ def validate_question(question: Dict) -> bool:
         # Check required fields
         required_fields = ['question_text', 'correct_answer', 'wrong_answers']
         if not all(key in question for key in required_fields):
-            logger.warning(f"Missing required fields in question")
+            logger.warning("Missing required fields in question")
             return False
         
         # Question structure validation
@@ -126,12 +114,9 @@ def validate_question(question: Dict) -> bool:
         
         # Basic format validation
         if not (
-            len(question_text.split()) >= 3 and  # Minimum 3 words
-            question_text.endswith('?') and  # Ends with question mark
-            (
-                re.match(r'^(?:\d+\.\s*)?[A-Z]', question_text) or  # Starts with number or capital
-                re.match(r'^(?:\d+\.\s*)?(?:What|Who|When|Where|Why|How|Should|Can|Is|Are|Does|Do|Will|Which)\b', question_text, re.IGNORECASE)  # Has proper prefix
-            )
+            question_text.startswith('Question:') and
+            len(question_text.split()) >= 5 and  # Minimum 5 words for context
+            question_text.endswith('?')  # Must end with question mark
         ):
             logger.warning(f"Invalid question structure: {question_text}")
             return False
@@ -140,23 +125,23 @@ def validate_question(question: Dict) -> bool:
         all_answers = [question['correct_answer']] + question['wrong_answers']
         
         if len(all_answers) != 4:
-            logger.warning(f"Question must have exactly 4 answers")
+            logger.warning("Question must have exactly 4 answers")
             return False
         
         # Validate each answer
         for answer in all_answers:
             if not (
-                len(answer.split()) >= 2 and  # Minimum 2 words
+                len(answer.split()) >= 3 and  # Minimum 3 words for context
                 answer[0].isupper() and  # Starts with capital
                 answer[-1] in '.!?' and  # Proper ending punctuation
-                len(answer) >= 10  # Minimum length for meaningful answer
+                len(answer) >= 15  # Minimum length for meaningful answer
             ):
                 logger.warning(f"Invalid answer format: {answer}")
                 return False
         
         # Check for answer distinctness (case-insensitive)
         if len(set(map(str.lower, all_answers))) != len(all_answers):
-            logger.warning(f"Duplicate answers found")
+            logger.warning("Duplicate answers found")
             return False
         
         return True
@@ -205,7 +190,7 @@ def categorize_question(question_text: str) -> str:
         'Professional Standards & Ethics': [
             'ethics', 'professional', 'conduct', 'responsibility', 'confidential',
             'csr', 'court reporter', 'certification', 'license', 'board', 'oath',
-            'appointed', 'salary', 'fees'
+            'appointed', 'salary', 'fees', 'conflict', 'interest', 'disclosure'
         ],
         'Grammar & Vocabulary': [
             'grammar', 'spelling', 'punctuation', 'vocabulary', 'definition',
