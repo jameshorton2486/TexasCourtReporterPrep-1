@@ -46,7 +46,7 @@ task = "packager.installForAll"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "python process_pdfs.py"
+args = "python3 move_pdf.py && python3 process_pdfs.py"
 
 [deployment]
 run = ["sh", "-c", "python main.py"]
