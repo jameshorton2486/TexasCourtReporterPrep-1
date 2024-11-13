@@ -4324,3 +4324,96 @@
 {"asctime": "2024-11-13 18:50:25,608", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 18:50:25] \"GET /static/js/charts.js HTTP/1.1\" 200 -"}
 {"asctime": "2024-11-13 18:50:25,690", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 18:50:25] \"\u001b[36mGET /static/css/style.css HTTP/1.1\u001b[0m\" 304 -"}
 {"asctime": "2024-11-13 18:50:25,735", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 18:50:25] \"\u001b[36mGET /static/images/courthouse.svg HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-13 18:51:20,887", "levelname": "INFO", "name": "app", "message": "Requested question count: 10, Practice mode: False"}
+{"asctime": "2024-11-13 18:51:20,887", "levelname": "INFO", "name": "app", "message": "Requested question count: 10, Practice mode: False"}
+{"asctime": "2024-11-13 18:51:21,281", "levelname": "INFO", "name": "app", "message": "Total available questions for category 1: 1041"}
+{"asctime": "2024-11-13 18:51:21,281", "levelname": "INFO", "name": "app", "message": "Total available questions for category 1: 1041"}
+{"asctime": "2024-11-13 18:51:21,557", "levelname": "INFO", "name": "app", "message": "Created test 24 with 10 questions"}
+{"asctime": "2024-11-13 18:51:21,557", "levelname": "INFO", "name": "app", "message": "Created test 24 with 10 questions"}
+{"asctime": "2024-11-13 18:51:21,602", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 18:51:21] \"\u001b[32mGET /test/new/1?question_count=10&practice=false HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-13 18:51:21,907", "levelname": "INFO", "name": "app", "message": "Test 24 loaded with 10 questions"}
+{"asctime": "2024-11-13 18:51:21,907", "levelname": "INFO", "name": "app", "message": "Test 24 loaded with 10 questions"}
+{"asctime": "2024-11-13 18:51:22,441", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 18:51:22] \"GET /test/24 HTTP/1.1\" 200 -"}
+{"asctime": "2024-11-13 18:51:22,503", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 18:51:22] \"\u001b[36mGET /static/css/style.css HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-13 18:51:22,741", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 18:51:22] \"\u001b[36mGET /static/images/courthouse.svg HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-13 18:53:22,161", "levelname": "INFO", "name": "app", "message": "Initializing application..."}
+{"asctime": "2024-11-13 18:53:22,161", "levelname": "INFO", "name": "app", "message": "Initializing application..."}
+{"asctime": "2024-11-13 18:53:23,480", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-13 18:53:23,480", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-13 18:53:23,482", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 18:53:23] \"GET / HTTP/1.1\" 200 -"}
+{"asctime": "2024-11-13 18:53:23,511", "levelname": "INFO", "name": "app", "message": "Database tables created successfully"}
+{"asctime": "2024-11-13 18:53:23,511", "levelname": "INFO", "name": "app", "message": "Database tables created successfully"}
+{"asctime": "2024-11-13 18:53:23,513", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 18:53:23] \"GET /static/css/style.css HTTP/1.1\" 200 -"}
+{"asctime": "2024-11-13 18:53:23,668", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 18:53:23] \"GET /static/images/courthouse.svg HTTP/1.1\" 200 -"}
+{"asctime": "2024-11-13 18:53:23,809", "levelname": "INFO", "name": "app", "message": "Initial setup completed successfully"}
+{"asctime": "2024-11-13 18:53:23,809", "levelname": "INFO", "name": "app", "message": "Initial setup completed successfully"}
+{"asctime": "2024-11-13 18:53:23,911", "levelname": "INFO", "name": "__main__", "message": "Starting PDF processing..."}
+{"asctime": "2024-11-13 18:53:23,911", "levelname": "INFO", "name": "process_pdfs", "message": "Starting PDF processing..."}
+{"asctime": "2024-11-13 18:53:24,163", "levelname": "INFO", "name": "process_pdfs", "message": "Categories verified and created if needed"}
+{"asctime": "2024-11-13 18:53:24,163", "levelname": "INFO", "name": "process_pdfs", "message": "Created pdf_files directory"}
+{"asctime": "2024-11-13 18:53:24,164", "levelname": "INFO", "name": "process_pdfs", "message": "Converting study_materials.txt to PDF..."}
+{"asctime": "2024-11-13 18:53:24,165", "levelname": "INFO", "name": "utils.text_to_pdf", "message": "Successfully converted study_materials.txt to pdf_files/study_materials.pdf"}
+{"asctime": "2024-11-13 18:53:24,165", "levelname": "INFO", "name": "process_pdfs", "message": "Successfully converted study_materials.txt to PDF: pdf_files/study_materials.pdf"}
+{"asctime": "2024-11-13 18:53:24,165", "levelname": "INFO", "name": "process_pdfs", "message": "Generating questions about court reporting legal terminology using Perplexity AI..."}
+{"asctime": "2024-11-13 18:53:25,254", "levelname": "ERROR", "name": "utils.perplexity", "message": "Error from Perplexity API: 400 - {\"error\":{\"message\":\"Invalid model 'mistral-7b-instruct'. Permitted models can be found in the documentation at https://docs.perplexity.ai/docs/model-cards.\",\"type\":\"invalid_model\",\"code\":400}}"}
+{"asctime": "2024-11-13 18:53:25,256", "levelname": "INFO", "name": "process_pdfs", "message": "Generating questions about court reporter ethics using Perplexity AI..."}
+{"asctime": "2024-11-13 18:53:25,524", "levelname": "ERROR", "name": "utils.perplexity", "message": "Error from Perplexity API: 400 - {\"error\":{\"message\":\"Invalid model 'mistral-7b-instruct'. Permitted models can be found in the documentation at https://docs.perplexity.ai/docs/model-cards.\",\"type\":\"invalid_model\",\"code\":400}}"}
+{"asctime": "2024-11-13 18:53:25,526", "levelname": "INFO", "name": "process_pdfs", "message": "Generating questions about transcription standards using Perplexity AI..."}
+{"asctime": "2024-11-13 18:53:25,703", "levelname": "ERROR", "name": "utils.perplexity", "message": "Error from Perplexity API: 400 - {\"error\":{\"message\":\"Invalid model 'mistral-7b-instruct'. Permitted models can be found in the documentation at https://docs.perplexity.ai/docs/model-cards.\",\"type\":\"invalid_model\",\"code\":400}}"}
+{"asctime": "2024-11-13 18:53:25,705", "levelname": "INFO", "name": "process_pdfs", "message": "Processing all PDFs in pdf_files directory..."}
+{"asctime": "2024-11-13 18:53:25,705", "levelname": "INFO", "name": "models", "message": "Processing PDF file: court reporting Texas CSR WKT Study Guide - July 30, 2019.pdf"}
+{"asctime": "2024-11-13 18:53:32,331", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(2955, 0, 140044851203152)]"}
+{"asctime": "2024-11-13 18:53:33,506", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3094, 0, 140044851203152)]"}
+{"asctime": "2024-11-13 18:53:33,510", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3097, 0, 140044851203152)]"}
+{"asctime": "2024-11-13 18:53:33,512", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3100, 0, 140044851203152)]"}
+{"asctime": "2024-11-13 18:53:33,516", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3103, 0, 140044851203152)]"}
+{"asctime": "2024-11-13 18:53:33,518", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3106, 0, 140044851203152)]"}
+{"asctime": "2024-11-13 18:53:33,521", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3109, 0, 140044851203152)]"}
+{"asctime": "2024-11-13 18:53:33,522", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3112, 0, 140044851203152)]"}
+{"asctime": "2024-11-13 18:53:33,524", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3115, 0, 140044851203152)]"}
+{"asctime": "2024-11-13 18:53:33,527", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3118, 0, 140044851203152)]"}
+{"asctime": "2024-11-13 18:53:33,554", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3121, 0, 140044851203152)]"}
+{"asctime": "2024-11-13 18:53:33,555", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3124, 0, 140044851203152)]"}
+{"asctime": "2024-11-13 18:53:33,558", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3127, 0, 140044851203152)]"}
+{"asctime": "2024-11-13 18:53:33,559", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3130, 0, 140044851203152)]"}
+{"asctime": "2024-11-13 18:53:33,560", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3133, 0, 140044851203152)]"}
+{"asctime": "2024-11-13 18:53:33,561", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3136, 0, 140044851203152)]"}
+{"asctime": "2024-11-13 18:53:33,563", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3139, 0, 140044851203152)]"}
+{"asctime": "2024-11-13 18:53:33,591", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3144, 0, 140044851203152)]"}
+{"asctime": "2024-11-13 18:53:33,594", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3147, 0, 140044851203152)]"}
+{"asctime": "2024-11-13 18:53:33,596", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3150, 0, 140044851203152)]"}
+{"asctime": "2024-11-13 18:53:33,597", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3153, 0, 140044851203152)]"}
+{"asctime": "2024-11-13 18:53:33,599", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3156, 0, 140044851203152)]"}
+{"asctime": "2024-11-13 18:53:33,600", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3159, 0, 140044851203152)]"}
+{"asctime": "2024-11-13 18:53:33,601", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3162, 0, 140044851203152)]"}
+{"asctime": "2024-11-13 18:53:33,606", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3165, 0, 140044851203152)]"}
+{"asctime": "2024-11-13 18:53:33,607", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3168, 0, 140044851203152)]"}
+{"asctime": "2024-11-13 18:53:33,609", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3171, 0, 140044851203152)]"}
+{"asctime": "2024-11-13 18:53:33,610", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3174, 0, 140044851203152)]"}
+{"asctime": "2024-11-13 18:53:33,612", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3177, 0, 140044851203152)]"}
+{"asctime": "2024-11-13 18:53:33,613", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3180, 0, 140044851203152)]"}
+{"asctime": "2024-11-13 18:53:33,614", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3183, 0, 140044851203152)]"}
+{"asctime": "2024-11-13 18:53:33,645", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3189, 0, 140044851203152)]"}
+{"asctime": "2024-11-13 18:53:33,648", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3192, 0, 140044851203152)]"}
+{"asctime": "2024-11-13 18:53:33,649", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3195, 0, 140044851203152)]"}
+{"asctime": "2024-11-13 18:53:33,651", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3198, 0, 140044851203152)]"}
+{"asctime": "2024-11-13 18:53:33,652", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3201, 0, 140044851203152)]"}
+{"asctime": "2024-11-13 18:53:33,654", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3204, 0, 140044851203152)]"}
+{"asctime": "2024-11-13 18:53:34,418", "levelname": "INFO", "name": "utils.pdf_parser", "message": "Successfully extracted text from pdf_files/court reporting Texas CSR WKT Study Guide - July 30, 2019.pdf"}
+{"asctime": "2024-11-13 18:53:34,439", "levelname": "ERROR", "name": "utils.pdf_parser", "message": "Error processing PDF pdf_files/court reporting Texas CSR WKT Study Guide - July 30, 2019.pdf: name 'random' is not defined"}
+{"asctime": "2024-11-13 18:53:34,440", "levelname": "INFO", "name": "models", "message": "Added 0 questions from court reporting Texas CSR WKT Study Guide - July 30, 2019.pdf"}
+{"asctime": "2024-11-13 18:53:34,440", "levelname": "INFO", "name": "models", "message": "Processing PDF file: Questions for Replit CR Test application.pdf"}
+{"asctime": "2024-11-13 18:53:36,435", "levelname": "INFO", "name": "utils.pdf_parser", "message": "Successfully extracted text from pdf_files/Questions for Replit CR Test application.pdf"}
+{"asctime": "2024-11-13 18:53:36,461", "levelname": "ERROR", "name": "utils.pdf_parser", "message": "Error processing PDF pdf_files/Questions for Replit CR Test application.pdf: name 'random' is not defined"}
+{"asctime": "2024-11-13 18:53:36,462", "levelname": "INFO", "name": "models", "message": "Added 0 questions from Questions for Replit CR Test application.pdf"}
+{"asctime": "2024-11-13 18:53:36,463", "levelname": "INFO", "name": "models", "message": "Processing PDF file: Stuvia-4626595-tx-csr-wkt-vocabulary-with-some-grammar-questions-and-answers-latest-update (1).pdf"}
+{"asctime": "2024-11-13 18:53:36,730", "levelname": "INFO", "name": "utils.pdf_parser", "message": "Successfully extracted text from pdf_files/Stuvia-4626595-tx-csr-wkt-vocabulary-with-some-grammar-questions-and-answers-latest-update (1).pdf"}
+{"asctime": "2024-11-13 18:53:36,735", "levelname": "ERROR", "name": "utils.pdf_parser", "message": "Error processing PDF pdf_files/Stuvia-4626595-tx-csr-wkt-vocabulary-with-some-grammar-questions-and-answers-latest-update (1).pdf: name 'random' is not defined"}
+{"asctime": "2024-11-13 18:53:36,736", "levelname": "INFO", "name": "models", "message": "Added 0 questions from Stuvia-4626595-tx-csr-wkt-vocabulary-with-some-grammar-questions-and-answers-latest-update (1).pdf"}
+{"asctime": "2024-11-13 18:53:36,737", "levelname": "INFO", "name": "models", "message": "Processing PDF file: Stuvia-4626595-tx-csr-wkt-vocabulary-with-some-grammar-questions-and-answers-latest-update.pdf"}
+{"asctime": "2024-11-13 18:53:37,117", "levelname": "INFO", "name": "utils.pdf_parser", "message": "Successfully extracted text from pdf_files/Stuvia-4626595-tx-csr-wkt-vocabulary-with-some-grammar-questions-and-answers-latest-update.pdf"}
+{"asctime": "2024-11-13 18:53:37,128", "levelname": "ERROR", "name": "utils.pdf_parser", "message": "Error processing PDF pdf_files/Stuvia-4626595-tx-csr-wkt-vocabulary-with-some-grammar-questions-and-answers-latest-update.pdf: name 'random' is not defined"}
+{"asctime": "2024-11-13 18:53:37,128", "levelname": "INFO", "name": "models", "message": "Added 0 questions from Stuvia-4626595-tx-csr-wkt-vocabulary-with-some-grammar-questions-and-answers-latest-update.pdf"}
+{"asctime": "2024-11-13 18:53:37,128", "levelname": "INFO", "name": "models", "message": "Processing PDF file: Stuvia-4626597-tx-csr-wkt-jbcc-rules-questions-and-answers-latest-update.pdf"}
+{"asctime": "2024-11-13 18:53:37,867", "levelname": "INFO", "name": "utils.pdf_parser", "message": "Successfully extracted text from pdf_files/Stuvia-4626597-tx-csr-wkt-jbcc-rules-questions-and-answers-latest-update.pdf"}
+{"asctime": "2024-11-13 18:53:37,881", "levelname": "INFO", "name": "utils.pdf_parser", "message": "Successfully processed 13 valid questions from pdf_files/Stuvia-4626597-tx-csr-wkt-jbcc-rules-questions-and-answers-latest-update.pdf"}
