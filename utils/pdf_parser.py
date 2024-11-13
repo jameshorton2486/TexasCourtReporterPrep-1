@@ -26,167 +26,166 @@ def clean_text(text: str) -> str:
     text = ' '.join(text.split())
     text = re.sub(r'\s*Stuvia\.com.*?Study Material\s*', '', text, flags=re.IGNORECASE)
     text = re.sub(r'\s*\([^)]*\)\s*$', '', text)
-    text = re.sub(r'\s*-\s*correct answer\s*', ' - ', text, flags=re.IGNORECASE)
+    text = re.sub(r'\s*-\s*correct answer\s*', '', text, flags=re.IGNORECASE)
     text = re.sub(r'\s*\[.*?\]\s*', ' ', text)  # Remove bracketed content
     text = re.sub(r'\s+', ' ', text)  # Normalize whitespace
     return text.strip()
 
 def split_into_qa_pairs(text: str) -> List[Dict]:
-    """Split text into question-answer pairs with improved separation."""
-    pairs = []
+    """Split text into question-answer pairs with multiple choice support."""
+    questions = []
     
-    # Enhanced question patterns
-    question_patterns = [
-        r'(?:\d+\.\s+|\n\s*Q[.:]\s+)',  # Numbered or Q. format
-        r'(?=(?:[A-Z][^.!?]*[.!?])(?:\s+[A-Z]|$))',  # Sentence boundary
-        r'(?:\n\s*Question\s*[:.-]\s*)',  # Explicit Question marker
-        r'(?:\n\s*[A-Z][^.!?]{10,}[?])'  # Long question-like sentence
-    ]
+    # Split into question blocks
+    blocks = re.split(r'\n{2,}|\r\n{2,}|\f', text)
     
-    # Combine patterns
-    split_pattern = '|'.join(question_patterns)
-    questions = re.split(split_pattern, text)
-    
-    for q in questions:
-        if not q.strip():
+    for block in blocks:
+        # Find question text
+        question_match = re.match(r'^(?:\d+\.\s*)?(?:Q[:.]\s*)?([^?]+\?)', block, re.IGNORECASE)
+        if not question_match:
             continue
             
-        # Enhanced answer patterns
-        answer_patterns = [
-            r'\s*Answer\s*[:.-]\s*',  # Standard answer marker
-            r'\s*A[:.]\s+',           # A. style marker
-            r'\s*-\s+',               # Dash delimiter
-            r'\s*:\s+',               # Colon delimiter
-            r'\s+(?=[A-Z][^.!?]{2,}(?:\.|\?|\!))' # New sentence starting with capital
-        ]
+        question_text = clean_text(question_match.group(1))
         
-        # Try each pattern
-        for pattern in answer_patterns:
-            parts = re.split(pattern, q, maxsplit=1)
-            if len(parts) == 2:
-                question = clean_text(parts[0])
-                answer = clean_text(parts[1])
+        # Find answer choices
+        answer_matches = re.findall(
+            r'(?:^|\n)\s*(?:(?:\d+|[A-D])[\)\.]\s*|\([A-D]\)\s*)(.*?)(?=(?:\n\s*(?:\d+|[A-D])[\)\.]\s*|\([A-D]\)\s*|$))',
+            block[question_match.end():],
+            re.DOTALL
+        )
+        
+        # Find correct answer marker
+        correct_marker = re.search(r'(?:correct(?:\s+answer)?[:.-]\s*|answer[:.-]\s*)([A-D]|\d+)', block, re.IGNORECASE)
+        
+        if len(answer_matches) >= 4 and correct_marker:
+            answers = [clean_text(ans) for ans in answer_matches[:4]]
+            try:
+                correct_index = ord(correct_marker.group(1).upper()) - ord('A') if correct_marker.group(1).isalpha() else int(correct_marker.group(1)) - 1
+                if 0 <= correct_index < len(answers):
+                    question_entry = {
+                        'question_text': question_text,
+                        'correct_answer': answers[correct_index],
+                        'wrong_answers': [ans for i, ans in enumerate(answers) if i != correct_index]
+                    }
+                    if validate_question(question_entry):
+                        questions.append(question_entry)
+            except (ValueError, IndexError):
+                logger.warning(f"Invalid correct answer marker in question: {question_text}")
                 
-                # Add question mark if missing
-                if not re.search(r'[.!?]$', question):
-                    question = question + '?'
-                
-                # Enhanced validation
-                if validate_qa_pair(question, answer):
-                    pairs.append({
-                        'question': question,
-                        'answer': answer
-                    })
-                break
-    
-    return pairs
-
-def validate_qa_pair(question: str, answer: str) -> bool:
-    """Validate a question-answer pair with enhanced checks."""
-    # Basic length checks
-    if len(question.split()) < 3 or len(answer.split()) < 1:
-        return False
-    
-    # Question format checks
-    if not re.search(r'[.!?]$', question):
-        return False
-    
-    # Filter out invalid questions
-    invalid_patterns = [
-        r'^(?:what|who|where|when|why|how)\s+is\s+only\b',
-        r'^(?:list|name|describe)\s+only\b',
-        r'^\s*[-_*]\s*$',
-        r'^\d+\s*$'
-    ]
-    
-    for pattern in invalid_patterns:
-        if re.search(pattern, question.lower()):
-            return False
-    
-    # Answer validation
-    if (answer.lower().startswith('not ') or 
-        answer.lower().startswith('the opposite of ') or
-        len(re.findall(r'\w+', answer)) < 1):
-        return False
-    
-    return True
+    return questions
 
 def validate_question(question: Dict) -> bool:
     """Validate a question entry with enhanced checks."""
     try:
-        if not question.get('question_text') or not question.get('correct_answer'):
+        if not all(key in question for key in ['question_text', 'correct_answer', 'wrong_answers']):
             logger.warning(f"Missing required fields in question: {question}")
             return False
             
-        question_text = question['question_text']
-        correct_answer = question['correct_answer']
-        wrong_answers = question.get('wrong_answers', [])
-        
-        # Basic format validation
-        if not validate_qa_pair(question_text, correct_answer):
-            logger.warning(f"Invalid question-answer format: {question_text}")
+        # Question validation
+        if (len(question['question_text'].split()) < 3 or 
+            not re.search(r'[?]$', question['question_text'])):
+            logger.warning(f"Invalid question format: {question['question_text']}")
             return False
-        
-        # Multiple choice validation
-        if wrong_answers:
-            # Check answer distinctness
-            all_answers = [correct_answer] + wrong_answers
-            if len(set(map(str.lower, all_answers))) != len(all_answers):
-                logger.warning(f"Duplicate answers found in question: {question_text}")
-                return False
             
-            # Validate each wrong answer
-            for answer in wrong_answers:
-                if not validate_qa_pair(question_text, answer):
-                    logger.warning(f"Invalid wrong answer format: {answer}")
-                    return False
-                
-                # Check answer similarity
-                if answer.lower() in question_text.lower() or question_text.lower() in answer.lower():
-                    logger.warning(f"Answer too similar to question: {answer}")
-                    return False
+        # Answer validation
+        all_answers = [question['correct_answer']] + question['wrong_answers']
         
+        if len(all_answers) != 4:
+            logger.warning(f"Question must have exactly 4 answers: {question['question_text']}")
+            return False
+            
+        # Check for complete sentences in answers
+        for answer in all_answers:
+            if (len(answer.split()) < 3 or  # Must be at least 3 words
+                not re.match(r'^[A-Z]', answer) or  # Must start with capital letter
+                not re.search(r'[.!?]$', answer)):  # Must end with proper punctuation
+                logger.warning(f"Invalid answer format: {answer}")
+                return False
+                
+        # Check for answer distinctness
+        if len(set(map(str.lower, all_answers))) != len(all_answers):
+            logger.warning(f"Duplicate answers found in question: {question['question_text']}")
+            return False
+            
+        # Check for answer relevance
+        question_keywords = set(re.findall(r'\w+', question['question_text'].lower()))
+        for answer in all_answers:
+            answer_keywords = set(re.findall(r'\w+', answer.lower()))
+            # Answers should share some context with question but not be identical
+            overlap = len(question_keywords & answer_keywords) / len(question_keywords)
+            if overlap < 0.1 or overlap > 0.9:
+                logger.warning(f"Answer not contextually appropriate: {answer}")
+                return False
+                
         return True
         
     except Exception as e:
         logger.error(f"Error validating question: {str(e)}")
         return False
 
-def parse_questions(text: str) -> List[Dict]:
-    """Parse questions, correct answers, and wrong answers from text."""
+def process_pdf_file(pdf_path: str) -> Tuple[List[Dict], List[str]]:
+    """Process a PDF file and return extracted questions and errors."""
+    errors = []
     questions = []
+    
     try:
-        # Split text into sections
-        sections = re.split(r'\n{2,}|\r\n{2,}|\f', text)
-        
-        for section in sections:
-            # Get question-answer pairs
-            qa_pairs = split_into_qa_pairs(section)
+        text = extract_text_from_pdf(pdf_path)
+        if not text:
+            errors.append(f"Failed to extract text from {pdf_path}")
+            return [], errors
             
-            for pair in qa_pairs:
-                try:
-                    # Generate plausible wrong answers
-                    category = categorize_question(pair['question'])
-                    wrong_answers = generate_wrong_answers(pair['answer'], category)
-                    
-                    if wrong_answers and len(wrong_answers) >= 2:
-                        question_entry = {
-                            'question_text': pair['question'],
-                            'correct_answer': pair['answer'],
-                            'wrong_answers': wrong_answers
-                        }
-                        
-                        if validate_question(question_entry):
-                            questions.append(question_entry)
-                        
-                except Exception as e:
-                    logger.error(f"Error processing question pair: {str(e)}")
-                    continue
-                    
-    except Exception as e:
-        logger.error(f"Error parsing questions from text: {str(e)}")
+        extracted_questions = split_into_qa_pairs(text)
         
-    return questions
+        # Validate and categorize questions
+        for q in extracted_questions:
+            if validate_question(q):
+                q['category'] = categorize_question(q['question_text'])
+                questions.append(q)
+            else:
+                errors.append(f"Invalid question format: {q.get('question_text', 'No question text')}")
+        
+        logger.info(f"Successfully processed {len(questions)} valid questions from {pdf_path}")
+        
+    except Exception as e:
+        error_msg = f"Error processing PDF {pdf_path}: {str(e)}"
+        logger.error(error_msg)
+        errors.append(error_msg)
+    
+    return questions, errors
+
+def categorize_question(question_text: str) -> str:
+    """Determine the category for a question based on its content."""
+    keywords = {
+        'Legal & Judicial Terminology': [
+            'legal', 'court', 'judicial', 'law', 'jurisdiction', 'stare decisis', 'amicus',
+            'motion', 'pleading', 'criminal', 'civil', 'judge', 'attorney', 'counsel'
+        ],
+        'Professional Standards & Ethics': [
+            'ethics', 'professional', 'conduct', 'responsibility', 'confidential',
+            'csr', 'court reporter', 'certification', 'license', 'board', 'oath',
+            'appointed', 'salary', 'fees'
+        ],
+        'Grammar & Vocabulary': [
+            'grammar', 'spelling', 'punctuation', 'vocabulary', 'definition',
+            'word', 'sentence', 'paragraph', 'usage', 'style'
+        ],
+        'Transcription Standards': [
+            'format', 'transcript', 'margin', 'indentation', 'certification',
+            'wpm', 'dictation', 'speed', 'accuracy', 'notes', 'deposition',
+            'q & a', 'jury charge', 'literary'
+        ]
+    }
+    
+    question_lower = question_text.lower()
+    max_matches = 0
+    best_category = 'Legal & Judicial Terminology'  # Default category
+    
+    for category, terms in keywords.items():
+        matches = sum(1 for term in terms if term.lower() in question_lower)
+        if matches > max_matches:
+            max_matches = matches
+            best_category = category
+            
+    return best_category
 
 def generate_wrong_answers(correct_answer: str, category: str) -> List[str]:
     """Generate contextually relevant wrong answers based on category and correct answer."""
@@ -265,114 +264,6 @@ def generate_wrong_answers(correct_answer: str, category: str) -> List[str]:
         f"At the discretion of the {random.choice(['judge', 'attorney', 'court reporter'])}",
         f"Under special circumstances only"
     ]
-
-def validate_question(question: Dict) -> bool:
-    """Validate a question entry with enhanced checks."""
-    if not question.get('question_text') or not question.get('correct_answer'):
-        return False
-        
-    question_text = question['question_text']
-    correct_answer = question['correct_answer']
-    wrong_answers = question.get('wrong_answers', [])
-    
-    # Question format validation
-    if (len(question_text.split()) < 4 or 
-        not re.search(r'[?:.]$', question_text) or
-        len(correct_answer.split()) < 2):
-        return False
-    
-    # Answer distinctness validation
-    answers = [correct_answer] + wrong_answers
-    if len(set(answers)) != len(answers):
-        return False
-    
-    # Check for answer relevance
-    for answer in wrong_answers:
-        # Answers shouldn't be too similar to the question
-        if (answer.lower() in question_text.lower() or 
-            question_text.lower() in answer.lower()):
-            return False
-        # Answers shouldn't be template-style responses
-        if (answer.lower().startswith('not ') or 
-            answer.lower().startswith('the opposite of ')):
-            return False
-        # Answers should have meaningful content
-        if len(answer.split()) < 2:
-            return False
-    
-    # Check for nonsensical answers
-    common_words = {'the', 'a', 'an', 'in', 'on', 'at', 'to', 'for'}
-    for answer in answers:
-        words = set(answer.lower().split())
-        if len(words - common_words) < 1:
-            return False
-    
-    return True
-
-def process_pdf_file(pdf_path: str) -> Tuple[List[Dict], List[str]]:
-    """Process a PDF file and return extracted questions and errors."""
-    errors = []
-    questions = []
-    
-    try:
-        text = extract_text_from_pdf(pdf_path)
-        if not text:
-            errors.append(f"Failed to extract text from {pdf_path}")
-            return [], errors
-            
-        raw_questions = parse_questions(text)
-        
-        # Validate and categorize questions
-        for q in raw_questions:
-            if validate_question(q):
-                q['category'] = categorize_question(q['question_text'])
-                questions.append(q)
-            else:
-                errors.append(f"Invalid question format: {q.get('question_text', 'No question text')}")
-        
-        logger.info(f"Successfully processed {len(questions)} valid questions from {pdf_path}")
-        
-    except Exception as e:
-        error_msg = f"Error processing PDF {pdf_path}: {str(e)}"
-        logger.error(error_msg)
-        errors.append(error_msg)
-    
-    return questions, errors
-
-def categorize_question(question_text: str) -> str:
-    """Determine the category for a question based on its content."""
-    keywords = {
-        'Legal & Judicial Terminology': [
-            'legal', 'court', 'judicial', 'law', 'jurisdiction', 'stare decisis', 'amicus',
-            'motion', 'pleading', 'criminal', 'civil', 'judge', 'attorney', 'counsel'
-        ],
-        'Professional Standards & Ethics': [
-            'ethics', 'professional', 'conduct', 'responsibility', 'confidential',
-            'csr', 'court reporter', 'certification', 'license', 'board', 'oath',
-            'appointed', 'salary', 'fees'
-        ],
-        'Grammar & Vocabulary': [
-            'grammar', 'spelling', 'punctuation', 'vocabulary', 'definition',
-            'word', 'sentence', 'paragraph', 'usage', 'style'
-        ],
-        'Transcription Standards': [
-            'format', 'transcript', 'margin', 'indentation', 'certification',
-            'wpm', 'dictation', 'speed', 'accuracy', 'notes', 'deposition',
-            'q & a', 'jury charge', 'literary'
-        ]
-    }
-    
-    question_lower = question_text.lower()
-    max_matches = 0
-    best_category = 'Legal & Judicial Terminology'  # Default category
-    
-    for category, terms in keywords.items():
-        matches = sum(1 for term in terms if term.lower() in question_lower)
-        if matches > max_matches:
-            max_matches = matches
-            best_category = category
-            
-    return best_category
 
 def parse_questions(text: str) -> List[Dict]:
     """Parse questions, correct answers, and wrong answers from text."""

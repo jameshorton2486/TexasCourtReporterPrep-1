@@ -18,7 +18,6 @@ class User(UserMixin, db.Model):
     tests = db.relationship('Test', backref='user', lazy=True, cascade='all, delete-orphan')
     question_performance = db.relationship('UserQuestionPerformance', backref='user', lazy=True)
     study_sessions = db.relationship('StudySession', backref='user', lazy=True, cascade='all, delete-orphan')
-    study_timers = db.relationship('StudyTimer', backref='user', lazy=True, cascade='all, delete-orphan')
     
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -61,21 +60,6 @@ class StudySession(db.Model):
     @property
     def end_time(self):
         return self.start_time + timedelta(minutes=self.duration_minutes)
-
-class StudyTimer(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'), nullable=False)
-    category_id = db.Column(db.Integer, db.ForeignKey('category.id', ondelete='SET NULL'))
-    start_time = db.Column(db.DateTime, nullable=False)
-    end_time = db.Column(db.DateTime)
-    duration_seconds = db.Column(db.Integer)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
-
-    def stop(self):
-        """Stop the timer and calculate duration"""
-        if not self.end_time:
-            self.end_time = datetime.utcnow()
-            self.duration_seconds = int((self.end_time - self.start_time).total_seconds())
 
 class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
