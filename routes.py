@@ -502,7 +502,9 @@ def schedule_study():
 @login_required
 def start_timer():
     try:
-        category_id = request.form.get('category_id')
+        data = request.get_json()
+        category_id = data.get('category_id')
+        
         timer = StudyTimer(
             user_id=current_user.id,
             category_id=category_id,
@@ -510,9 +512,11 @@ def start_timer():
         )
         db.session.add(timer)
         db.session.commit()
+        
         return jsonify({'timer_id': timer.id})
     except Exception as e:
         app.logger.error(f'Error starting timer: {str(e)}')
+        db.session.rollback()
         return jsonify({'error': 'Failed to start timer'}), 500
 
 @app.route('/study/timer/<int:timer_id>/stop', methods=['POST'])
@@ -522,13 +526,12 @@ def stop_timer(timer_id):
         timer = StudyTimer.query.get_or_404(timer_id)
         if timer.user_id != current_user.id:
             return jsonify({'error': 'Unauthorized'}), 403
-        
+            
         timer.stop()
         db.session.commit()
-        return jsonify({
-            'duration': timer.duration_seconds,
-            'message': 'Timer stopped successfully'
-        })
+        
+        return jsonify({'duration': timer.duration_seconds})
     except Exception as e:
         app.logger.error(f'Error stopping timer: {str(e)}')
+        db.session.rollback()
         return jsonify({'error': 'Failed to stop timer'}), 500
