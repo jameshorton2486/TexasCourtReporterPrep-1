@@ -27,6 +27,14 @@
                                         <label class="btn btn-outline-primary" for="q20_{{ category.id }}">20 Questions</label>
                                     </div>
                                 </div>
+                                <div class="mb-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="practiceMode_{{ category.id }}">
+                                        <label class="form-check-label" for="practiceMode_{{ category.id }}">
+                                            Practice Mode (Show answers immediately)
+                                        </label>
+                                    </div>
+                                </div>
                                 <button onclick="startTest({{ category.id }})" class="btn btn-primary">Start Test</button>
                             </div>
                         </div>
@@ -69,7 +77,8 @@
 <script>
 function startTest(categoryId) {
     const questionCount = document.querySelector(`input[name="questionCount_${categoryId}"]:checked`).value;
-    window.location.href = `/test/new/${categoryId}?question_count=${questionCount}`;
+    const practiceMode = document.querySelector(`#practiceMode_${categoryId}`).checked;
+    window.location.href = `/test/new/${categoryId}?question_count=${questionCount}&practice=${practiceMode}`;
 }
 </script>
 {% endblock %}

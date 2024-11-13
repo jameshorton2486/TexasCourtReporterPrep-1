@@ -110,6 +110,7 @@ class Test(db.Model):
     score = db.Column(db.Float)
     completed = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    is_practice = db.Column(db.Boolean, default=False)  # New field for practice mode
     questions = db.relationship('TestQuestion', backref='test', lazy=True, cascade='all, delete-orphan')
 
 class TestQuestion(db.Model):

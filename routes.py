@@ -150,9 +150,11 @@ def dashboard():
 @login_required
 def new_test(category_id):
     try:
-        # Get and validate question count
+        # Get and validate question count and mode
         question_count = int(request.args.get('question_count', 20))
-        app.logger.info(f'Requested question count: {question_count}')
+        is_practice = request.args.get('practice', 'false').lower() == 'true'
+        
+        app.logger.info(f'Requested question count: {question_count}, Practice mode: {is_practice}')
         
         if question_count not in [10, 20]:
             app.logger.warning(f'Invalid question count requested: {question_count}, defaulting to 20')
@@ -183,6 +185,7 @@ def new_test(category_id):
         test = Test()
         test.user_id = current_user.id
         test.category_id = category_id
+        test.is_practice = is_practice
         db.session.add(test)
         db.session.flush()
         
@@ -284,6 +287,22 @@ def submit_test(test_id):
         db.session.commit()
         
         app.logger.info(f'Test {test_id} submitted by user {current_user.username} with score {test.score}')
+        
+        # For practice mode, return feedback immediately
+        if test.is_practice:
+            feedback = []
+            for test_question in test.questions:
+                feedback.append({
+                    'id': test_question.id,
+                    'correct': test_question.is_correct,
+                    'correct_answer': test_question.question.correct_answer
+                })
+            return jsonify({
+                'score': test.score,
+                'feedback': feedback,
+                'is_practice': True
+            })
+            
         return jsonify({'redirect': url_for('test_results', test_id=test.id)})
         
     except Exception as e:
