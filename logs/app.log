@@ -4417,3 +4417,247 @@
 {"asctime": "2024-11-13 18:53:37,128", "levelname": "INFO", "name": "models", "message": "Processing PDF file: Stuvia-4626597-tx-csr-wkt-jbcc-rules-questions-and-answers-latest-update.pdf"}
 {"asctime": "2024-11-13 18:53:37,867", "levelname": "INFO", "name": "utils.pdf_parser", "message": "Successfully extracted text from pdf_files/Stuvia-4626597-tx-csr-wkt-jbcc-rules-questions-and-answers-latest-update.pdf"}
 {"asctime": "2024-11-13 18:53:37,881", "levelname": "INFO", "name": "utils.pdf_parser", "message": "Successfully processed 13 valid questions from pdf_files/Stuvia-4626597-tx-csr-wkt-jbcc-rules-questions-and-answers-latest-update.pdf"}
+{"asctime": "2024-11-13 18:53:39,718", "levelname": "INFO", "name": "models", "message": "Added 13 questions from Stuvia-4626597-tx-csr-wkt-jbcc-rules-questions-and-answers-latest-update.pdf"}
+{"asctime": "2024-11-13 18:53:39,719", "levelname": "INFO", "name": "models", "message": "Processing PDF file: Stuvia-4626599-texas-csr-written-questions-and-answers-latest-update (1).pdf"}
+{"asctime": "2024-11-13 18:53:40,512", "levelname": "INFO", "name": "utils.pdf_parser", "message": "Successfully extracted text from pdf_files/Stuvia-4626599-texas-csr-written-questions-and-answers-latest-update (1).pdf"}
+{"asctime": "2024-11-13 18:53:40,517", "levelname": "ERROR", "name": "utils.pdf_parser", "message": "Error processing PDF pdf_files/Stuvia-4626599-texas-csr-written-questions-and-answers-latest-update (1).pdf: name 'random' is not defined"}
+{"asctime": "2024-11-13 18:53:40,518", "levelname": "INFO", "name": "models", "message": "Added 13 questions from Stuvia-4626599-texas-csr-written-questions-and-answers-latest-update (1).pdf"}
+{"asctime": "2024-11-13 18:53:40,519", "levelname": "INFO", "name": "models", "message": "Processing PDF file: Stuvia-4626599-texas-csr-written-questions-and-answers-latest-update.pdf"}
+{"asctime": "2024-11-13 18:53:40,941", "levelname": "INFO", "name": "utils.pdf_parser", "message": "Successfully extracted text from pdf_files/Stuvia-4626599-texas-csr-written-questions-and-answers-latest-update.pdf"}
+{"asctime": "2024-11-13 18:53:40,947", "levelname": "ERROR", "name": "utils.pdf_parser", "message": "Error processing PDF pdf_files/Stuvia-4626599-texas-csr-written-questions-and-answers-latest-update.pdf: name 'random' is not defined"}
+{"asctime": "2024-11-13 18:53:40,948", "levelname": "INFO", "name": "models", "message": "Added 13 questions from Stuvia-4626599-texas-csr-written-questions-and-answers-latest-update.pdf"}
+{"asctime": "2024-11-13 18:53:40,948", "levelname": "INFO", "name": "models", "message": "Processing PDF file: Stuvia-4626601-texas-csr-wkt-questions-and-answers-latest-update.pdf"}
+{"asctime": "2024-11-13 18:53:41,326", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-13 18:53:41,326", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-13 18:53:41,507", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 18:53:41] \"\u001b[32mGET / HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-13 18:53:41,883", "levelname": "INFO", "name": "utils.pdf_parser", "message": "Successfully extracted text from pdf_files/Stuvia-4626601-texas-csr-wkt-questions-and-answers-latest-update.pdf"}
+{"asctime": "2024-11-13 18:53:41,890", "levelname": "ERROR", "name": "utils.pdf_parser", "message": "Error processing PDF pdf_files/Stuvia-4626601-texas-csr-wkt-questions-and-answers-latest-update.pdf: name 'random' is not defined"}
+{"asctime": "2024-11-13 18:53:41,890", "levelname": "INFO", "name": "models", "message": "Added 13 questions from Stuvia-4626601-texas-csr-wkt-questions-and-answers-latest-update.pdf"}
+{"asctime": "2024-11-13 18:53:41,891", "levelname": "INFO", "name": "models", "message": "Processing PDF file: Stuvia-4626602-texas-court-reporting-tx-csr-exam-questions-and-answers-latest-update.pdf"}
+{"asctime": "2024-11-13 18:53:42,101", "levelname": "INFO", "name": "utils.pdf_parser", "message": "Successfully extracted text from pdf_files/Stuvia-4626602-texas-court-reporting-tx-csr-exam-questions-and-answers-latest-update.pdf"}
+{"asctime": "2024-11-13 18:53:42,104", "levelname": "ERROR", "name": "utils.pdf_parser", "message": "Error processing PDF pdf_files/Stuvia-4626602-texas-court-reporting-tx-csr-exam-questions-and-answers-latest-update.pdf: name 'random' is not defined"}
+{"asctime": "2024-11-13 18:53:42,105", "levelname": "INFO", "name": "models", "message": "Added 13 questions from Stuvia-4626602-texas-court-reporting-tx-csr-exam-questions-and-answers-latest-update.pdf"}
+{"asctime": "2024-11-13 18:53:42,106", "levelname": "INFO", "name": "models", "message": "Processing PDF file: Stuvia-4626604-texas-court-report-questions-and-answers-latest-update.pdf"}
+{"asctime": "2024-11-13 18:53:42,429", "levelname": "INFO", "name": "utils.pdf_parser", "message": "Successfully extracted text from pdf_files/Stuvia-4626604-texas-court-report-questions-and-answers-latest-update.pdf"}
+{"asctime": "2024-11-13 18:53:42,431", "levelname": "ERROR", "name": "utils.pdf_parser", "message": "Error processing PDF pdf_files/Stuvia-4626604-texas-court-report-questions-and-answers-latest-update.pdf: name 'random' is not defined"}
+{"asctime": "2024-11-13 18:53:42,431", "levelname": "INFO", "name": "models", "message": "Added 13 questions from Stuvia-4626604-texas-court-report-questions-and-answers-latest-update.pdf"}
+{"asctime": "2024-11-13 18:53:42,432", "levelname": "INFO", "name": "models", "message": "Processing PDF file: Stuvia-4626606-study-material-for-the-written-csr-exam-wk-questions-and-answers-latest-update.pdf"}
+{"asctime": "2024-11-13 18:53:42,515", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 18:53:42] \"GET /dashboard HTTP/1.1\" 200 -"}
+{"asctime": "2024-11-13 18:53:42,757", "levelname": "INFO", "name": "utils.pdf_parser", "message": "Successfully extracted text from pdf_files/Stuvia-4626606-study-material-for-the-written-csr-exam-wk-questions-and-answers-latest-update.pdf"}
+{"asctime": "2024-11-13 18:53:42,759", "levelname": "ERROR", "name": "utils.pdf_parser", "message": "Error processing PDF pdf_files/Stuvia-4626606-study-material-for-the-written-csr-exam-wk-questions-and-answers-latest-update.pdf: name 'random' is not defined"}
+{"asctime": "2024-11-13 18:53:42,759", "levelname": "INFO", "name": "models", "message": "Added 13 questions from Stuvia-4626606-study-material-for-the-written-csr-exam-wk-questions-and-answers-latest-update.pdf"}
+{"asctime": "2024-11-13 18:53:42,760", "levelname": "INFO", "name": "models", "message": "Processing PDF file: Stuvia-4626608-csr-state-test-texas-questions-and-answers-latest-update.pdf"}
+{"asctime": "2024-11-13 18:53:42,798", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 18:53:42] \"\u001b[36mGET /static/js/charts.js HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-13 18:53:42,808", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 18:53:42] \"\u001b[36mGET /static/css/style.css HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-13 18:53:42,810", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 18:53:42] \"\u001b[36mGET /static/js/timer.js HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-13 18:53:42,906", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 18:53:42] \"\u001b[36mGET /static/images/courthouse.svg HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-13 18:53:43,238", "levelname": "INFO", "name": "utils.pdf_parser", "message": "Successfully extracted text from pdf_files/Stuvia-4626608-csr-state-test-texas-questions-and-answers-latest-update.pdf"}
+{"asctime": "2024-11-13 18:53:43,245", "levelname": "INFO", "name": "utils.pdf_parser", "message": "Successfully processed 0 valid questions from pdf_files/Stuvia-4626608-csr-state-test-texas-questions-and-answers-latest-update.pdf"}
+{"asctime": "2024-11-13 18:53:43,245", "levelname": "INFO", "name": "models", "message": "Added 13 questions from Stuvia-4626608-csr-state-test-texas-questions-and-answers-latest-update.pdf"}
+{"asctime": "2024-11-13 18:53:43,252", "levelname": "INFO", "name": "models", "message": "Processing PDF file: Stuvia-4626609-csr-state-test-texas-questions-and-answers-latest-update.pdf"}
+{"asctime": "2024-11-13 18:53:43,545", "levelname": "INFO", "name": "utils.pdf_parser", "message": "Successfully extracted text from pdf_files/Stuvia-4626609-csr-state-test-texas-questions-and-answers-latest-update.pdf"}
+{"asctime": "2024-11-13 18:53:43,555", "levelname": "INFO", "name": "utils.pdf_parser", "message": "Successfully processed 0 valid questions from pdf_files/Stuvia-4626609-csr-state-test-texas-questions-and-answers-latest-update.pdf"}
+{"asctime": "2024-11-13 18:53:43,556", "levelname": "INFO", "name": "models", "message": "Added 13 questions from Stuvia-4626609-csr-state-test-texas-questions-and-answers-latest-update.pdf"}
+{"asctime": "2024-11-13 18:53:43,556", "levelname": "INFO", "name": "models", "message": "Processing PDF file: Stuvia-4626611-court-reporting-written-state-exam-questions-and-answers-latest-update.pdf"}
+{"asctime": "2024-11-13 18:53:44,543", "levelname": "INFO", "name": "utils.pdf_parser", "message": "Successfully extracted text from pdf_files/Stuvia-4626611-court-reporting-written-state-exam-questions-and-answers-latest-update.pdf"}
+{"asctime": "2024-11-13 18:53:44,546", "levelname": "ERROR", "name": "utils.pdf_parser", "message": "Error processing PDF pdf_files/Stuvia-4626611-court-reporting-written-state-exam-questions-and-answers-latest-update.pdf: name 'random' is not defined"}
+{"asctime": "2024-11-13 18:53:44,546", "levelname": "INFO", "name": "models", "message": "Added 13 questions from Stuvia-4626611-court-reporting-written-state-exam-questions-and-answers-latest-update.pdf"}
+{"asctime": "2024-11-13 18:53:44,547", "levelname": "INFO", "name": "models", "message": "Processing PDF file: Stuvia-4626612-court-reporting-texas-csr-written-questions-and-answers-latest-update.pdf"}
+{"asctime": "2024-11-13 18:53:44,740", "levelname": "INFO", "name": "utils.pdf_parser", "message": "Successfully extracted text from pdf_files/Stuvia-4626612-court-reporting-texas-csr-written-questions-and-answers-latest-update.pdf"}
+{"asctime": "2024-11-13 18:53:44,747", "levelname": "INFO", "name": "utils.pdf_parser", "message": "Successfully processed 1 valid questions from pdf_files/Stuvia-4626612-court-reporting-texas-csr-written-questions-and-answers-latest-update.pdf"}
+{"asctime": "2024-11-13 18:53:45,066", "levelname": "INFO", "name": "models", "message": "Added 14 questions from Stuvia-4626612-court-reporting-texas-csr-written-questions-and-answers-latest-update.pdf"}
+{"asctime": "2024-11-13 18:53:45,066", "levelname": "INFO", "name": "models", "message": "Processing PDF file: Stuvia-4626614-court-reporters-texas-written-knowledge-test-questions-and-answers-latest-update.pdf"}
+{"asctime": "2024-11-13 18:53:45,508", "levelname": "INFO", "name": "utils.pdf_parser", "message": "Successfully extracted text from pdf_files/Stuvia-4626614-court-reporters-texas-written-knowledge-test-questions-and-answers-latest-update.pdf"}
+{"asctime": "2024-11-13 18:53:45,512", "levelname": "INFO", "name": "utils.pdf_parser", "message": "Successfully processed 1 valid questions from pdf_files/Stuvia-4626614-court-reporters-texas-written-knowledge-test-questions-and-answers-latest-update.pdf"}
+{"asctime": "2024-11-13 18:53:45,811", "levelname": "INFO", "name": "models", "message": "Added 15 questions from Stuvia-4626614-court-reporters-texas-written-knowledge-test-questions-and-answers-latest-update.pdf"}
+{"asctime": "2024-11-13 18:53:45,811", "levelname": "INFO", "name": "models", "message": "Processing PDF file: study_materials.pdf"}
+{"asctime": "2024-11-13 18:53:45,815", "levelname": "INFO", "name": "utils.pdf_parser", "message": "Successfully extracted text from pdf_files/study_materials.pdf"}
+{"asctime": "2024-11-13 18:53:45,816", "levelname": "ERROR", "name": "utils.pdf_parser", "message": "Error processing PDF pdf_files/study_materials.pdf: name 'random' is not defined"}
+{"asctime": "2024-11-13 18:53:45,819", "levelname": "INFO", "name": "models", "message": "Added 15 questions from study_materials.pdf"}
+{"asctime": "2024-11-13 18:53:45,819", "levelname": "INFO", "name": "process_pdfs", "message": "Total questions added: 15"}
+{"asctime": "2024-11-13 18:53:45,819", "levelname": "WARNING", "name": "process_pdfs", "message": "Errors encountered during processing:"}
+{"asctime": "2024-11-13 18:53:45,819", "levelname": "WARNING", "name": "process_pdfs", "message": "- Error processing PDF pdf_files/court reporting Texas CSR WKT Study Guide - July 30, 2019.pdf: name 'random' is not defined"}
+{"asctime": "2024-11-13 18:53:45,819", "levelname": "WARNING", "name": "process_pdfs", "message": "- Error processing PDF pdf_files/Questions for Replit CR Test application.pdf: name 'random' is not defined"}
+{"asctime": "2024-11-13 18:53:45,820", "levelname": "WARNING", "name": "process_pdfs", "message": "- Error processing PDF pdf_files/Stuvia-4626595-tx-csr-wkt-vocabulary-with-some-grammar-questions-and-answers-latest-update (1).pdf: name 'random' is not defined"}
+{"asctime": "2024-11-13 18:53:45,820", "levelname": "WARNING", "name": "process_pdfs", "message": "- Error processing PDF pdf_files/Stuvia-4626595-tx-csr-wkt-vocabulary-with-some-grammar-questions-and-answers-latest-update.pdf: name 'random' is not defined"}
+{"asctime": "2024-11-13 18:53:45,820", "levelname": "WARNING", "name": "process_pdfs", "message": "- Invalid question format: Stuvia, you will find the best notes, summaries, flashcards & other study material. Search for your school or uni and find the study material you need. www.stuvia.com Downloaded by?"}
+{"asctime": "2024-11-13 18:53:45,822", "levelname": "WARNING", "name": "process_pdfs", "message": "- Invalid question format: TX CSR WKT?"}
+{"asctime": "2024-11-13 18:53:45,823", "levelname": "WARNING", "name": "process_pdfs", "message": "- Invalid question format: The renewal application and all fees are due ____ the expiration of the certification. Stuvia.com?"}
+{"asctime": "2024-11-13 18:53:45,823", "levelname": "WARNING", "name": "process_pdfs", "message": "- Invalid question format: A certification expires on the ___ day of the month on the second anniversary of the date on which it was issued unless it's renewed. Stuvia.com?"}
+{"asctime": "2024-11-13 18:53:45,823", "levelname": "WARNING", "name": "process_pdfs", "message": "- Invalid question format: E activities. Stuvia.com?"}
+{"asctime": "2024-11-13 18:53:45,823", "levelname": "WARNING", "name": "process_pdfs", "message": "- Invalid question format: Commission reconsider the complaint. RMR Registered Merit Reporter RPR Registered Professional Reporter Stuvia.com?"}
+{"asctime": "2024-11-13 18:53:45,823", "levelname": "WARNING", "name": "process_pdfs", "message": "- Invalid question format: Commission must certify to the ___ the names of applicants who have completed all requirements for certification. September 1, 1983 A person certified prior to ____, may retain a general certification if they keep that certification in continuous effect. a minor traffic offense or juvenile offense To register a court reporting firm, the form must state whether any officers, directors, or managerial employees of the firm have been convicted of a felony or misdemeanor other than _____. duties and responsibilities The Commission may refuse to certify a person who was convicted of an offense that directly relates to the ____ of a CSR. directly relates Stuvia.com?"}
+{"asctime": "2024-11-13 18:53:45,824", "levelname": "WARNING", "name": "process_pdfs", "message": "- Invalid question format: R that their certification is scheduled to expire no later than the ___ day before the expiration at their last known address. Stuvia.com?"}
+{"asctime": "2024-11-13 18:53:45,825", "levelname": "WARNING", "name": "process_pdfs", "message": "- Invalid question format: E no later than ___ before the date the reporter's certification expires. Stuvia.com?"}
+{"asctime": "2024-11-13 18:53:45,825", "levelname": "WARNING", "name": "process_pdfs", "message": "- Error processing PDF pdf_files/Stuvia-4626599-texas-csr-written-questions-and-answers-latest-update (1).pdf: name 'random' is not defined"}
+{"asctime": "2024-11-13 18:53:45,825", "levelname": "WARNING", "name": "process_pdfs", "message": "- Error processing PDF pdf_files/Stuvia-4626599-texas-csr-written-questions-and-answers-latest-update.pdf: name 'random' is not defined"}
+{"asctime": "2024-11-13 18:53:45,825", "levelname": "WARNING", "name": "process_pdfs", "message": "- Error processing PDF pdf_files/Stuvia-4626601-texas-csr-wkt-questions-and-answers-latest-update.pdf: name 'random' is not defined"}
+{"asctime": "2024-11-13 18:53:45,826", "levelname": "WARNING", "name": "process_pdfs", "message": "- Error processing PDF pdf_files/Stuvia-4626602-texas-court-reporting-tx-csr-exam-questions-and-answers-latest-update.pdf: name 'random' is not defined"}
+{"asctime": "2024-11-13 18:53:45,826", "levelname": "WARNING", "name": "process_pdfs", "message": "- Error processing PDF pdf_files/Stuvia-4626604-texas-court-report-questions-and-answers-latest-update.pdf: name 'random' is not defined"}
+{"asctime": "2024-11-13 18:53:45,826", "levelname": "WARNING", "name": "process_pdfs", "message": "- Error processing PDF pdf_files/Stuvia-4626606-study-material-for-the-written-csr-exam-wk-questions-and-answers-latest-update.pdf: name 'random' is not defined"}
+{"asctime": "2024-11-13 18:53:45,826", "levelname": "WARNING", "name": "process_pdfs", "message": "- Invalid question format: Stuvia, you will find the best notes, summaries, flashcards & other study material. Search for your school or uni and find the study material you need. www.stuvia.com Downloaded by?"}
+{"asctime": "2024-11-13 18:53:45,826", "levelname": "WARNING", "name": "process_pdfs", "message": "- Invalid question format: CSR State Test Texas ultra vires?"}
+{"asctime": "2024-11-13 18:53:45,826", "levelname": "WARNING", "name": "process_pdfs", "message": "- Invalid question format: Stuvia, you will find the best notes, summaries, flashcards & other study material. Search for your school or uni and find the study material you need. www.stuvia.com Downloaded by?"}
+{"asctime": "2024-11-13 18:53:45,828", "levelname": "WARNING", "name": "process_pdfs", "message": "- Invalid question format: CSR State Test Texas ultra vires?"}
+{"asctime": "2024-11-13 18:53:45,834", "levelname": "WARNING", "name": "process_pdfs", "message": "- Error processing PDF pdf_files/Stuvia-4626611-court-reporting-written-state-exam-questions-and-answers-latest-update.pdf: name 'random' is not defined"}
+{"asctime": "2024-11-13 18:53:45,834", "levelname": "WARNING", "name": "process_pdfs", "message": "- Invalid question format: Stuvia, you will find the best notes, summaries, flashcards & other study material. Search for your school or uni and find the study material you need. www.stuvia.com Downloaded by?"}
+{"asctime": "2024-11-13 18:53:45,834", "levelname": "WARNING", "name": "process_pdfs", "message": "- Invalid question format: Stuvia, you will find the best notes, summaries, flashcards & other study material. Search for your school or uni and find the study material you need. www.stuvia.com Downloaded by?"}
+{"asctime": "2024-11-13 18:53:45,834", "levelname": "WARNING", "name": "process_pdfs", "message": "- Error processing PDF pdf_files/study_materials.pdf: name 'random' is not defined"}
+{"asctime": "2024-11-13 18:53:45,835", "levelname": "INFO", "name": "__main__", "message": "Total questions added: 15"}
+{"asctime": "2024-11-13 18:53:45,835", "levelname": "WARNING", "name": "__main__", "message": "Errors encountered during processing:"}
+{"asctime": "2024-11-13 18:53:45,835", "levelname": "WARNING", "name": "__main__", "message": "- Error processing PDF pdf_files/court reporting Texas CSR WKT Study Guide - July 30, 2019.pdf: name 'random' is not defined"}
+{"asctime": "2024-11-13 18:53:45,835", "levelname": "WARNING", "name": "__main__", "message": "- Error processing PDF pdf_files/Questions for Replit CR Test application.pdf: name 'random' is not defined"}
+{"asctime": "2024-11-13 18:53:45,835", "levelname": "WARNING", "name": "__main__", "message": "- Error processing PDF pdf_files/Stuvia-4626595-tx-csr-wkt-vocabulary-with-some-grammar-questions-and-answers-latest-update (1).pdf: name 'random' is not defined"}
+{"asctime": "2024-11-13 18:53:45,835", "levelname": "WARNING", "name": "__main__", "message": "- Error processing PDF pdf_files/Stuvia-4626595-tx-csr-wkt-vocabulary-with-some-grammar-questions-and-answers-latest-update.pdf: name 'random' is not defined"}
+{"asctime": "2024-11-13 18:53:45,836", "levelname": "WARNING", "name": "__main__", "message": "- Invalid question format: Stuvia, you will find the best notes, summaries, flashcards & other study material. Search for your school or uni and find the study material you need. www.stuvia.com Downloaded by?"}
+{"asctime": "2024-11-13 18:53:45,836", "levelname": "WARNING", "name": "__main__", "message": "- Invalid question format: TX CSR WKT?"}
+{"asctime": "2024-11-13 18:53:45,836", "levelname": "WARNING", "name": "__main__", "message": "- Invalid question format: The renewal application and all fees are due ____ the expiration of the certification. Stuvia.com?"}
+{"asctime": "2024-11-13 18:53:45,836", "levelname": "WARNING", "name": "__main__", "message": "- Invalid question format: A certification expires on the ___ day of the month on the second anniversary of the date on which it was issued unless it's renewed. Stuvia.com?"}
+{"asctime": "2024-11-13 18:53:45,836", "levelname": "WARNING", "name": "__main__", "message": "- Invalid question format: E activities. Stuvia.com?"}
+{"asctime": "2024-11-13 18:53:45,837", "levelname": "WARNING", "name": "__main__", "message": "- Invalid question format: Commission reconsider the complaint. RMR Registered Merit Reporter RPR Registered Professional Reporter Stuvia.com?"}
+{"asctime": "2024-11-13 18:53:45,837", "levelname": "WARNING", "name": "__main__", "message": "- Invalid question format: Commission must certify to the ___ the names of applicants who have completed all requirements for certification. September 1, 1983 A person certified prior to ____, may retain a general certification if they keep that certification in continuous effect. a minor traffic offense or juvenile offense To register a court reporting firm, the form must state whether any officers, directors, or managerial employees of the firm have been convicted of a felony or misdemeanor other than _____. duties and responsibilities The Commission may refuse to certify a person who was convicted of an offense that directly relates to the ____ of a CSR. directly relates Stuvia.com?"}
+{"asctime": "2024-11-13 18:53:45,837", "levelname": "WARNING", "name": "__main__", "message": "- Invalid question format: R that their certification is scheduled to expire no later than the ___ day before the expiration at their last known address. Stuvia.com?"}
+{"asctime": "2024-11-13 18:53:45,837", "levelname": "WARNING", "name": "__main__", "message": "- Invalid question format: E no later than ___ before the date the reporter's certification expires. Stuvia.com?"}
+{"asctime": "2024-11-13 18:53:45,837", "levelname": "WARNING", "name": "__main__", "message": "- Error processing PDF pdf_files/Stuvia-4626599-texas-csr-written-questions-and-answers-latest-update (1).pdf: name 'random' is not defined"}
+{"asctime": "2024-11-13 18:53:45,837", "levelname": "WARNING", "name": "__main__", "message": "- Error processing PDF pdf_files/Stuvia-4626599-texas-csr-written-questions-and-answers-latest-update.pdf: name 'random' is not defined"}
+{"asctime": "2024-11-13 18:53:45,838", "levelname": "WARNING", "name": "__main__", "message": "- Error processing PDF pdf_files/Stuvia-4626601-texas-csr-wkt-questions-and-answers-latest-update.pdf: name 'random' is not defined"}
+{"asctime": "2024-11-13 18:53:45,838", "levelname": "WARNING", "name": "__main__", "message": "- Error processing PDF pdf_files/Stuvia-4626602-texas-court-reporting-tx-csr-exam-questions-and-answers-latest-update.pdf: name 'random' is not defined"}
+{"asctime": "2024-11-13 18:53:45,838", "levelname": "WARNING", "name": "__main__", "message": "- Error processing PDF pdf_files/Stuvia-4626604-texas-court-report-questions-and-answers-latest-update.pdf: name 'random' is not defined"}
+{"asctime": "2024-11-13 18:53:45,838", "levelname": "WARNING", "name": "__main__", "message": "- Error processing PDF pdf_files/Stuvia-4626606-study-material-for-the-written-csr-exam-wk-questions-and-answers-latest-update.pdf: name 'random' is not defined"}
+{"asctime": "2024-11-13 18:53:45,838", "levelname": "WARNING", "name": "__main__", "message": "- Invalid question format: Stuvia, you will find the best notes, summaries, flashcards & other study material. Search for your school or uni and find the study material you need. www.stuvia.com Downloaded by?"}
+{"asctime": "2024-11-13 18:53:45,838", "levelname": "WARNING", "name": "__main__", "message": "- Invalid question format: CSR State Test Texas ultra vires?"}
+{"asctime": "2024-11-13 18:53:45,839", "levelname": "WARNING", "name": "__main__", "message": "- Invalid question format: Stuvia, you will find the best notes, summaries, flashcards & other study material. Search for your school or uni and find the study material you need. www.stuvia.com Downloaded by?"}
+{"asctime": "2024-11-13 18:53:45,839", "levelname": "WARNING", "name": "__main__", "message": "- Invalid question format: CSR State Test Texas ultra vires?"}
+{"asctime": "2024-11-13 18:53:45,839", "levelname": "WARNING", "name": "__main__", "message": "- Error processing PDF pdf_files/Stuvia-4626611-court-reporting-written-state-exam-questions-and-answers-latest-update.pdf: name 'random' is not defined"}
+{"asctime": "2024-11-13 18:53:45,839", "levelname": "WARNING", "name": "__main__", "message": "- Invalid question format: Stuvia, you will find the best notes, summaries, flashcards & other study material. Search for your school or uni and find the study material you need. www.stuvia.com Downloaded by?"}
+{"asctime": "2024-11-13 18:53:45,839", "levelname": "WARNING", "name": "__main__", "message": "- Invalid question format: Stuvia, you will find the best notes, summaries, flashcards & other study material. Search for your school or uni and find the study material you need. www.stuvia.com Downloaded by?"}
+{"asctime": "2024-11-13 18:53:45,839", "levelname": "WARNING", "name": "__main__", "message": "- Error processing PDF pdf_files/study_materials.pdf: name 'random' is not defined"}
+{"asctime": "2024-11-13 18:56:28,113", "levelname": "INFO", "name": "app", "message": "Requested question count: 10, Practice mode: False"}
+{"asctime": "2024-11-13 18:56:28,113", "levelname": "INFO", "name": "app", "message": "Requested question count: 10, Practice mode: False"}
+{"asctime": "2024-11-13 18:56:28,518", "levelname": "INFO", "name": "app", "message": "Total available questions for category 1: 1056"}
+{"asctime": "2024-11-13 18:56:28,518", "levelname": "INFO", "name": "app", "message": "Total available questions for category 1: 1056"}
+{"asctime": "2024-11-13 18:56:28,799", "levelname": "INFO", "name": "app", "message": "Created test 25 with 10 questions"}
+{"asctime": "2024-11-13 18:56:28,799", "levelname": "INFO", "name": "app", "message": "Created test 25 with 10 questions"}
+{"asctime": "2024-11-13 18:56:28,844", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 18:56:28] \"\u001b[32mGET /test/new/1?question_count=10&practice=false HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-13 18:56:29,154", "levelname": "INFO", "name": "app", "message": "Test 25 loaded with 10 questions"}
+{"asctime": "2024-11-13 18:56:29,154", "levelname": "INFO", "name": "app", "message": "Test 25 loaded with 10 questions"}
+{"asctime": "2024-11-13 18:56:29,682", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 18:56:29] \"GET /test/25 HTTP/1.1\" 200 -"}
+{"asctime": "2024-11-13 18:56:29,828", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 18:56:29] \"\u001b[36mGET /static/css/style.css HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-13 18:56:29,883", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 18:56:29] \"\u001b[36mGET /static/images/courthouse.svg HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-13 18:57:01,080", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-13 18:57:01,080", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-13 18:57:01,253", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 18:57:01] \"\u001b[32mGET / HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-13 18:57:02,268", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 18:57:02] \"GET /dashboard HTTP/1.1\" 200 -"}
+{"asctime": "2024-11-13 18:57:02,431", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 18:57:02] \"\u001b[36mGET /static/js/charts.js HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-13 18:57:02,437", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 18:57:02] \"\u001b[36mGET /static/css/style.css HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-13 18:57:02,440", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 18:57:02] \"\u001b[36mGET /static/js/timer.js HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-13 18:57:02,498", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 18:57:02] \"\u001b[36mGET /static/images/courthouse.svg HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-13 18:57:20,362", "levelname": "INFO", "name": "app", "message": "Requested question count: 10, Practice mode: False"}
+{"asctime": "2024-11-13 18:57:20,362", "levelname": "INFO", "name": "app", "message": "Requested question count: 10, Practice mode: False"}
+{"asctime": "2024-11-13 18:57:20,621", "levelname": "INFO", "name": "app", "message": "Total available questions for category 3: 79"}
+{"asctime": "2024-11-13 18:57:20,621", "levelname": "INFO", "name": "app", "message": "Total available questions for category 3: 79"}
+{"asctime": "2024-11-13 18:57:20,885", "levelname": "INFO", "name": "app", "message": "Created test 26 with 10 questions"}
+{"asctime": "2024-11-13 18:57:20,885", "levelname": "INFO", "name": "app", "message": "Created test 26 with 10 questions"}
+{"asctime": "2024-11-13 18:57:20,929", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 18:57:20] \"\u001b[32mGET /test/new/3?question_count=10&practice=false HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-13 18:57:21,574", "levelname": "INFO", "name": "app", "message": "Test 26 loaded with 10 questions"}
+{"asctime": "2024-11-13 18:57:21,574", "levelname": "INFO", "name": "app", "message": "Test 26 loaded with 10 questions"}
+{"asctime": "2024-11-13 18:57:21,926", "levelname": "INFO", "name": "app", "message": "Requested question count: 10, Practice mode: False"}
+{"asctime": "2024-11-13 18:57:21,926", "levelname": "INFO", "name": "app", "message": "Requested question count: 10, Practice mode: False"}
+{"asctime": "2024-11-13 18:57:22,114", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 18:57:22] \"GET /test/26 HTTP/1.1\" 200 -"}
+{"asctime": "2024-11-13 18:57:22,188", "levelname": "INFO", "name": "app", "message": "Total available questions for category 3: 79"}
+{"asctime": "2024-11-13 18:57:22,188", "levelname": "INFO", "name": "app", "message": "Total available questions for category 3: 79"}
+{"asctime": "2024-11-13 18:57:22,462", "levelname": "INFO", "name": "app", "message": "Created test 27 with 10 questions"}
+{"asctime": "2024-11-13 18:57:22,462", "levelname": "INFO", "name": "app", "message": "Created test 27 with 10 questions"}
+{"asctime": "2024-11-13 18:57:22,506", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 18:57:22] \"\u001b[32mGET /test/new/3?question_count=10&practice=false HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-13 18:57:22,834", "levelname": "INFO", "name": "app", "message": "Test 27 loaded with 10 questions"}
+{"asctime": "2024-11-13 18:57:22,834", "levelname": "INFO", "name": "app", "message": "Test 27 loaded with 10 questions"}
+{"asctime": "2024-11-13 18:57:23,377", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 18:57:23] \"GET /test/27 HTTP/1.1\" 200 -"}
+{"asctime": "2024-11-13 18:57:23,473", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 18:57:23] \"\u001b[36mGET /static/css/style.css HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-13 18:57:23,524", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 18:57:23] \"\u001b[36mGET /static/images/courthouse.svg HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-13 18:59:36,031", "levelname": "INFO", "name": "app", "message": "Initializing application..."}
+{"asctime": "2024-11-13 18:59:36,031", "levelname": "INFO", "name": "app", "message": "Initializing application..."}
+{"asctime": "2024-11-13 18:59:37,444", "levelname": "INFO", "name": "app", "message": "Database tables created successfully"}
+{"asctime": "2024-11-13 18:59:37,444", "levelname": "INFO", "name": "app", "message": "Database tables created successfully"}
+{"asctime": "2024-11-13 18:59:37,753", "levelname": "INFO", "name": "app", "message": "Initial setup completed successfully"}
+{"asctime": "2024-11-13 18:59:37,753", "levelname": "INFO", "name": "app", "message": "Initial setup completed successfully"}
+{"asctime": "2024-11-13 18:59:37,780", "levelname": "INFO", "name": "werkzeug", "message": "\u001b[31m\u001b[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.\u001b[0m\n * Running on all addresses (0.0.0.0)\n * Running on http://127.0.0.1:5000\n * Running on http://172.31.196.22:5000"}
+{"asctime": "2024-11-13 18:59:37,781", "levelname": "INFO", "name": "werkzeug", "message": "\u001b[33mPress CTRL+C to quit\u001b[0m"}
+{"asctime": "2024-11-13 18:59:38,040", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-13 18:59:38,040", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-13 18:59:38,224", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 18:59:38] \"\u001b[32mGET / HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-13 18:59:38,294", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-13 18:59:38,294", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-13 18:59:38,721", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 18:59:38] \"\u001b[32mGET / HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-13 18:59:38,928", "levelname": "INFO", "name": "app", "message": "Initializing application..."}
+{"asctime": "2024-11-13 18:59:38,928", "levelname": "INFO", "name": "app", "message": "Initializing application..."}
+{"asctime": "2024-11-13 18:59:38,941", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-13 18:59:38,941", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-13 18:59:38,944", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 18:59:38] \"GET / HTTP/1.1\" 200 -"}
+{"asctime": "2024-11-13 18:59:38,966", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 18:59:38] \"GET /static/css/style.css HTTP/1.1\" 200 -"}
+{"asctime": "2024-11-13 18:59:38,983", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 18:59:38] \"GET /static/images/courthouse.svg HTTP/1.1\" 200 -"}
+{"asctime": "2024-11-13 18:59:39,455", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 18:59:39] \"GET /dashboard HTTP/1.1\" 200 -"}
+{"asctime": "2024-11-13 18:59:39,749", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 18:59:39] \"\u001b[36mGET /static/css/style.css HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-13 18:59:39,756", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 18:59:39] \"\u001b[36mGET /static/js/charts.js HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-13 18:59:39,840", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 18:59:39] \"GET /static/js/timer.js HTTP/1.1\" 200 -"}
+{"asctime": "2024-11-13 18:59:39,912", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 18:59:39] \"\u001b[36mGET /static/images/courthouse.svg HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-13 18:59:40,441", "levelname": "INFO", "name": "app", "message": "Database tables created successfully"}
+{"asctime": "2024-11-13 18:59:40,441", "levelname": "INFO", "name": "app", "message": "Database tables created successfully"}
+{"asctime": "2024-11-13 18:59:40,563", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 18:59:40] \"GET /dashboard HTTP/1.1\" 200 -"}
+{"asctime": "2024-11-13 18:59:40,762", "levelname": "INFO", "name": "app", "message": "Initial setup completed successfully"}
+{"asctime": "2024-11-13 18:59:40,762", "levelname": "INFO", "name": "app", "message": "Initial setup completed successfully"}
+{"asctime": "2024-11-13 18:59:40,772", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 18:59:40] \"\u001b[36mGET /static/css/style.css HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-13 18:59:40,834", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 18:59:40] \"\u001b[36mGET /static/js/timer.js HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-13 18:59:40,909", "levelname": "INFO", "name": "__main__", "message": "Starting PDF processing..."}
+{"asctime": "2024-11-13 18:59:40,909", "levelname": "INFO", "name": "process_pdfs", "message": "Starting PDF processing..."}
+{"asctime": "2024-11-13 18:59:40,930", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 18:59:40] \"\u001b[36mGET /static/images/courthouse.svg HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-13 18:59:41,121", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 18:59:41] \"\u001b[36mGET /static/js/charts.js HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-13 18:59:41,183", "levelname": "INFO", "name": "process_pdfs", "message": "Categories verified and created if needed"}
+{"asctime": "2024-11-13 18:59:41,183", "levelname": "INFO", "name": "process_pdfs", "message": "Created pdf_files directory"}
+{"asctime": "2024-11-13 18:59:41,184", "levelname": "INFO", "name": "process_pdfs", "message": "Converting study_materials.txt to PDF..."}
+{"asctime": "2024-11-13 18:59:41,185", "levelname": "INFO", "name": "utils.text_to_pdf", "message": "Successfully converted study_materials.txt to pdf_files/study_materials.pdf"}
+{"asctime": "2024-11-13 18:59:41,185", "levelname": "INFO", "name": "process_pdfs", "message": "Successfully converted study_materials.txt to PDF: pdf_files/study_materials.pdf"}
+{"asctime": "2024-11-13 18:59:41,185", "levelname": "INFO", "name": "process_pdfs", "message": "Generating questions about court reporting legal terminology using Perplexity AI..."}
+{"asctime": "2024-11-13 18:59:41,361", "levelname": "ERROR", "name": "utils.perplexity", "message": "Error from Perplexity API: 400 - {\"error\":{\"message\":\"Invalid model 'mistral-7b-instruct'. Permitted models can be found in the documentation at https://docs.perplexity.ai/docs/model-cards.\",\"type\":\"invalid_model\",\"code\":400}}"}
+{"asctime": "2024-11-13 18:59:41,363", "levelname": "INFO", "name": "process_pdfs", "message": "Generating questions about court reporter ethics using Perplexity AI..."}
+{"asctime": "2024-11-13 18:59:41,602", "levelname": "ERROR", "name": "utils.perplexity", "message": "Error from Perplexity API: 400 - {\"error\":{\"message\":\"Invalid model 'mistral-7b-instruct'. Permitted models can be found in the documentation at https://docs.perplexity.ai/docs/model-cards.\",\"type\":\"invalid_model\",\"code\":400}}"}
+{"asctime": "2024-11-13 18:59:41,605", "levelname": "INFO", "name": "process_pdfs", "message": "Generating questions about transcription standards using Perplexity AI..."}
+{"asctime": "2024-11-13 18:59:41,758", "levelname": "ERROR", "name": "utils.perplexity", "message": "Error from Perplexity API: 400 - {\"error\":{\"message\":\"Invalid model 'mistral-7b-instruct'. Permitted models can be found in the documentation at https://docs.perplexity.ai/docs/model-cards.\",\"type\":\"invalid_model\",\"code\":400}}"}
+{"asctime": "2024-11-13 18:59:41,760", "levelname": "INFO", "name": "process_pdfs", "message": "Processing all PDFs in pdf_files directory..."}
+{"asctime": "2024-11-13 18:59:41,760", "levelname": "INFO", "name": "models", "message": "Processing PDF file: court reporting Texas CSR WKT Study Guide - July 30, 2019.pdf"}
+{"asctime": "2024-11-13 18:59:48,433", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(2955, 0, 140131588788112)]"}
+{"asctime": "2024-11-13 18:59:49,777", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3094, 0, 140131588788112)]"}
+{"asctime": "2024-11-13 18:59:49,789", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3097, 0, 140131588788112)]"}
+{"asctime": "2024-11-13 18:59:49,792", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3100, 0, 140131588788112)]"}
+{"asctime": "2024-11-13 18:59:49,794", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3103, 0, 140131588788112)]"}
+{"asctime": "2024-11-13 18:59:49,797", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3106, 0, 140131588788112)]"}
+{"asctime": "2024-11-13 18:59:49,804", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3109, 0, 140131588788112)]"}
+{"asctime": "2024-11-13 18:59:49,806", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3112, 0, 140131588788112)]"}
+{"asctime": "2024-11-13 18:59:49,807", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3115, 0, 140131588788112)]"}
+{"asctime": "2024-11-13 18:59:49,819", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3118, 0, 140131588788112)]"}
+{"asctime": "2024-11-13 18:59:49,857", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3121, 0, 140131588788112)]"}
+{"asctime": "2024-11-13 18:59:49,859", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3124, 0, 140131588788112)]"}
+{"asctime": "2024-11-13 18:59:49,863", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3127, 0, 140131588788112)]"}
+{"asctime": "2024-11-13 18:59:49,864", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3130, 0, 140131588788112)]"}
+{"asctime": "2024-11-13 18:59:49,867", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3133, 0, 140131588788112)]"}
+{"asctime": "2024-11-13 18:59:49,868", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3136, 0, 140131588788112)]"}
+{"asctime": "2024-11-13 18:59:49,870", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3139, 0, 140131588788112)]"}
+{"asctime": "2024-11-13 18:59:49,922", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3144, 0, 140131588788112)]"}
+{"asctime": "2024-11-13 18:59:49,927", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3147, 0, 140131588788112)]"}
+{"asctime": "2024-11-13 18:59:49,928", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3150, 0, 140131588788112)]"}
+{"asctime": "2024-11-13 18:59:49,930", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3153, 0, 140131588788112)]"}
+{"asctime": "2024-11-13 18:59:49,932", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3156, 0, 140131588788112)]"}
+{"asctime": "2024-11-13 18:59:49,935", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3159, 0, 140131588788112)]"}
+{"asctime": "2024-11-13 18:59:49,939", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3162, 0, 140131588788112)]"}
+{"asctime": "2024-11-13 18:59:49,953", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3165, 0, 140131588788112)]"}
+{"asctime": "2024-11-13 18:59:49,956", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3168, 0, 140131588788112)]"}
+{"asctime": "2024-11-13 18:59:49,958", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3171, 0, 140131588788112)]"}
+{"asctime": "2024-11-13 18:59:49,960", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3174, 0, 140131588788112)]"}
+{"asctime": "2024-11-13 18:59:49,964", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3177, 0, 140131588788112)]"}
+{"asctime": "2024-11-13 18:59:49,967", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3180, 0, 140131588788112)]"}
+{"asctime": "2024-11-13 18:59:49,968", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3183, 0, 140131588788112)]"}
+{"asctime": "2024-11-13 18:59:50,009", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3189, 0, 140131588788112)]"}
+{"asctime": "2024-11-13 18:59:50,018", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3192, 0, 140131588788112)]"}
+{"asctime": "2024-11-13 18:59:50,019", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3195, 0, 140131588788112)]"}
+{"asctime": "2024-11-13 18:59:50,020", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3198, 0, 140131588788112)]"}
+{"asctime": "2024-11-13 18:59:50,022", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3201, 0, 140131588788112)]"}
+{"asctime": "2024-11-13 18:59:50,023", "levelname": "WARNING", "name": "PyPDF2._cmap", "message": "unknown widths : \n[0, IndirectObject(3204, 0, 140131588788112)]"}

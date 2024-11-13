@@ -1,6 +1,7 @@
 import os
 import logging
 import PyPDF2
+import random
 from typing import Dict, List, Tuple, Optional
 import re
 
