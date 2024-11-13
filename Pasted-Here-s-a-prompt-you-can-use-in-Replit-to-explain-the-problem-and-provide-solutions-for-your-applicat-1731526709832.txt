@@ -1,0 +1,49 @@
+Here's a prompt you can use in Replit to explain the problem and provide solutions for your application that uses Perplexity AI to generate questions and multiple-choice answers from PDF files:
+text
+# PDF Question Generator Improvement
+
+## Current Issue
+Our application, which uses Perplexity AI to generate multiple-choice questions from PDF files, is experiencing the following problems:
+
+1. The four multiple-choice answers are not in a logical order.
+2. Some generated choices have no connection to the question being asked.
+
+## Proposed Solutions
+
+### 1. Improve Question Generation
+- Ensure that the prompt to Perplexity AI clearly specifies the need for relevant, topic-focused questions.
+- Example prompt: "Generate a multiple-choice question based on the key concepts in the following text: [insert relevant PDF excerpt]"
+
+### 2. Enhance Answer Generation
+- Modify the prompt to Perplexity AI to explicitly request relevant answer choices.
+- Example prompt: "For the question [insert generated question], provide four answer choices where:
+  a) One is the correct answer
+  b) Three are incorrect but plausible and related to the topic
+  c) All choices are of similar length and complexity"
+
+### 3. Implement Answer Validation
+- After generating answers, use a second API call to Perplexity AI to validate the relevance of each answer choice.
+- Example prompt: "Rate the relevance of each answer choice to the question [insert question] on a scale of 1-10, where 10 is highly relevant and 1 is completely unrelated."
+
+### 4. Sort and Filter Answers
+- Implement a sorting function to arrange answers based on their relevance scores.
+- Filter out any answer choices that score below a certain threshold (e.g., below 5 out of 10).
+
+### 5. Randomize Answer Order
+- After ensuring all answers are relevant, randomize their order to avoid patterns.
+- Use Python's `random.shuffle()` function on the list of answer choices.
+
+### 6. Quality Assurance Check
+- Implement a final check using Perplexity AI to ensure the question and answers make sense together.
+- Example prompt: "Review this multiple-choice question and its answers. Are they logically consistent and relevant to each other? If not, explain why."
+
+## Implementation Steps
+1. Modify the API calls to Perplexity AI to include more specific instructions for question and answer generation.
+2. Implement the answer validation and sorting functions in Python.
+3. Add a randomization step for the final answer choices.
+4. Create a quality assurance function that uses Perplexity AI for a final check.
+5. Test the application with various PDF inputs to ensure consistent, high-quality output.
+
+By implementing these solutions, we should be able to generate more coherent and relevant multiple-choice questions from our PDF files.
+
+This prompt provides a clear explanation of the current issues and outlines specific solutions tailored to an application using Perplexity AI. It includes example prompts that can be used with the AI to improve question and answer generation, as well as steps for implementing additional validation and quality assurance measures. You can adapt this prompt as needed based on the specific details of your Replit project and the Perplexity AI integration.
