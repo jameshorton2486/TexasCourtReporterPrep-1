@@ -5842,3 +5842,75 @@
 {"asctime": "2024-11-13 19:12:17,936", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 19:12:17] \"\u001b[36mGET /static/js/charts.js HTTP/1.1\u001b[0m\" 304 -"}
 {"asctime": "2024-11-13 19:12:17,975", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 19:12:17] \"\u001b[36mGET /static/css/style.css HTTP/1.1\u001b[0m\" 304 -"}
 {"asctime": "2024-11-13 19:12:18,050", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 19:12:18] \"\u001b[36mGET /static/images/courthouse.svg HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-13 19:12:28,467", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-13 19:12:28,467", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-13 19:12:28,635", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 19:12:28] \"\u001b[32mGET / HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-13 19:12:29,855", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 19:12:29] \"GET /dashboard HTTP/1.1\" 200 -"}
+{"asctime": "2024-11-13 19:12:30,180", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 19:12:30] \"\u001b[36mGET /static/css/style.css HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-13 19:12:30,182", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 19:12:30] \"\u001b[36mGET /static/js/charts.js HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-13 19:12:30,282", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 19:12:30] \"\u001b[36mGET /static/images/courthouse.svg HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-13 19:14:15,642", "levelname": "INFO", "name": "app", "message": "Requested question count: 10, Practice mode: False"}
+{"asctime": "2024-11-13 19:14:15,642", "levelname": "INFO", "name": "app", "message": "Requested question count: 10, Practice mode: False"}
+{"asctime": "2024-11-13 19:14:16,082", "levelname": "INFO", "name": "app", "message": "Total available questions for category 1: 1565"}
+{"asctime": "2024-11-13 19:14:16,082", "levelname": "INFO", "name": "app", "message": "Total available questions for category 1: 1565"}
+{"asctime": "2024-11-13 19:14:16,372", "levelname": "INFO", "name": "app", "message": "Created test 29 with 10 questions"}
+{"asctime": "2024-11-13 19:14:16,372", "levelname": "INFO", "name": "app", "message": "Created test 29 with 10 questions"}
+{"asctime": "2024-11-13 19:14:16,422", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 19:14:16] \"\u001b[32mGET /test/new/1?question_count=10&practice=false HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-13 19:14:16,749", "levelname": "INFO", "name": "app", "message": "Test 29 loaded with 10 questions"}
+{"asctime": "2024-11-13 19:14:16,749", "levelname": "INFO", "name": "app", "message": "Test 29 loaded with 10 questions"}
+{"asctime": "2024-11-13 19:14:17,274", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 19:14:17] \"GET /test/29 HTTP/1.1\" 200 -"}
+{"asctime": "2024-11-13 19:14:17,474", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 19:14:17] \"\u001b[36mGET /static/css/style.css HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-13 19:14:17,600", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 19:14:17] \"\u001b[36mGET /static/images/courthouse.svg HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-13 19:16:02,962", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-13 19:16:02,962", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-13 19:16:03,139", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 19:16:03] \"\u001b[32mGET / HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-13 19:16:04,318", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 19:16:04] \"GET /dashboard HTTP/1.1\" 200 -"}
+{"asctime": "2024-11-13 19:16:04,416", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 19:16:04] \"\u001b[36mGET /static/css/style.css HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-13 19:16:04,438", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 19:16:04] \"\u001b[36mGET /static/js/charts.js HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-13 19:16:04,473", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 19:16:04] \"\u001b[36mGET /static/images/courthouse.svg HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-13 19:16:09,103", "levelname": "INFO", "name": "app", "message": "Requested question count: 10, Practice mode: False"}
+{"asctime": "2024-11-13 19:16:09,103", "levelname": "INFO", "name": "app", "message": "Requested question count: 10, Practice mode: False"}
+{"asctime": "2024-11-13 19:16:09,543", "levelname": "INFO", "name": "app", "message": "Total available questions for category 1: 1565"}
+{"asctime": "2024-11-13 19:16:09,543", "levelname": "INFO", "name": "app", "message": "Total available questions for category 1: 1565"}
+{"asctime": "2024-11-13 19:16:09,817", "levelname": "INFO", "name": "app", "message": "Created test 30 with 10 questions"}
+{"asctime": "2024-11-13 19:16:09,817", "levelname": "INFO", "name": "app", "message": "Created test 30 with 10 questions"}
+{"asctime": "2024-11-13 19:16:09,864", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 19:16:09] \"\u001b[32mGET /test/new/1?question_count=10&practice=false HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-13 19:16:10,181", "levelname": "INFO", "name": "app", "message": "Test 30 loaded with 10 questions"}
+{"asctime": "2024-11-13 19:16:10,181", "levelname": "INFO", "name": "app", "message": "Test 30 loaded with 10 questions"}
+{"asctime": "2024-11-13 19:16:10,699", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 19:16:10] \"GET /test/30 HTTP/1.1\" 200 -"}
+{"asctime": "2024-11-13 19:16:10,777", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 19:16:10] \"\u001b[36mGET /static/css/style.css HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-13 19:16:10,827", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 19:16:10] \"\u001b[36mGET /static/images/courthouse.svg HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-13 19:18:40,693", "levelname": "INFO", "name": "app", "message": "Initializing application..."}
+{"asctime": "2024-11-13 19:18:40,693", "levelname": "INFO", "name": "app", "message": "Initializing application..."}
+{"asctime": "2024-11-13 19:18:42,214", "levelname": "INFO", "name": "app", "message": "Database tables created successfully"}
+{"asctime": "2024-11-13 19:18:42,214", "levelname": "INFO", "name": "app", "message": "Database tables created successfully"}
+{"asctime": "2024-11-13 19:18:42,491", "levelname": "INFO", "name": "app", "message": "Initial setup completed successfully"}
+{"asctime": "2024-11-13 19:18:42,491", "levelname": "INFO", "name": "app", "message": "Initial setup completed successfully"}
+{"asctime": "2024-11-13 19:18:42,501", "levelname": "INFO", "name": "werkzeug", "message": "\u001b[31m\u001b[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.\u001b[0m\n * Running on all addresses (0.0.0.0)\n * Running on http://127.0.0.1:5000\n * Running on http://172.31.196.22:5000"}
+{"asctime": "2024-11-13 19:18:42,501", "levelname": "INFO", "name": "werkzeug", "message": "\u001b[33mPress CTRL+C to quit\u001b[0m"}
+{"asctime": "2024-11-13 19:18:42,962", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-13 19:18:42,962", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-13 19:18:43,154", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 19:18:43] \"\u001b[32mGET / HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-13 19:18:43,263", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-13 19:18:43,263", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-13 19:18:43,422", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 19:18:43] \"\u001b[32mGET / HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-13 19:18:43,492", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-13 19:18:43,492", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-13 19:18:43,515", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 19:18:43] \"GET / HTTP/1.1\" 200 -"}
+{"asctime": "2024-11-13 19:18:43,577", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 19:18:43] \"GET /static/css/style.css HTTP/1.1\" 200 -"}
+{"asctime": "2024-11-13 19:18:43,581", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-13 19:18:43,581", "levelname": "INFO", "name": "app", "message": "Accessing index page"}
+{"asctime": "2024-11-13 19:18:43,629", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 19:18:43] \"GET /static/images/courthouse.svg HTTP/1.1\" 200 -"}
+{"asctime": "2024-11-13 19:18:43,772", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 19:18:43] \"\u001b[32mGET / HTTP/1.1\u001b[0m\" 302 -"}
+{"asctime": "2024-11-13 19:18:44,827", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 19:18:44] \"GET /dashboard HTTP/1.1\" 200 -"}
+{"asctime": "2024-11-13 19:18:45,114", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 19:18:45] \"\u001b[36mGET /static/css/style.css HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-13 19:18:45,116", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 19:18:45] \"\u001b[36mGET /static/js/charts.js HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-13 19:18:45,172", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 19:18:45] \"\u001b[36mGET /static/images/courthouse.svg HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-13 19:18:45,976", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 19:18:45] \"GET /dashboard HTTP/1.1\" 200 -"}
+{"asctime": "2024-11-13 19:18:46,191", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 19:18:46] \"\u001b[36mGET /static/css/style.css HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-13 19:18:46,193", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 19:18:46] \"\u001b[36mGET /static/js/charts.js HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-13 19:18:46,253", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 19:18:46] \"\u001b[36mGET /static/images/courthouse.svg HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-13 19:18:47,224", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 19:18:47] \"GET /dashboard HTTP/1.1\" 200 -"}
+{"asctime": "2024-11-13 19:18:47,455", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 19:18:47] \"\u001b[36mGET /static/css/style.css HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-13 19:18:47,497", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 19:18:47] \"\u001b[36mGET /static/js/charts.js HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-13 19:18:47,561", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.22 - - [13/Nov/2024 19:18:47] \"\u001b[36mGET /static/images/courthouse.svg HTTP/1.1\u001b[0m\" 304 -"}

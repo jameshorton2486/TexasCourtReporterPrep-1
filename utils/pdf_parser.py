@@ -31,6 +31,30 @@ def clean_text(text: str) -> str:
     text = re.sub(r'\s+', ' ', text)  # Normalize whitespace
     return text.strip()
 
+def add_question_prefix(question: str) -> str:
+    """Add appropriate prefix to questions if missing."""
+    question = question.strip()
+    
+    # List of common question prefixes
+    prefixes = ['Should', 'Can', 'Is', 'Are', 'Does', 'Do', 'Will', 'What', 'How', 'Why', 'When', 'Where', 'Which']
+    
+    # Check if question already starts with a prefix
+    if any(question.startswith(prefix) for prefix in prefixes):
+        return question
+        
+    # Determine appropriate prefix based on context
+    lower_q = question.lower()
+    if any(word in lower_q for word in ['allowed', 'permitted', 'acceptable']):
+        prefix = 'Is it'
+    elif any(word in lower_q for word in ['requirement', 'standard', 'rule']):
+        prefix = 'What is'
+    elif any(word in lower_q for word in ['process', 'procedure', 'method']):
+        prefix = 'How should'
+    else:
+        prefix = 'Should'
+    
+    return f"{prefix} {question[0].lower()}{question[1:]}"
+
 def split_into_qa_pairs(text: str) -> List[Dict]:
     """Split text into question-answer pairs with multiple choice support."""
     questions = []
@@ -40,31 +64,42 @@ def split_into_qa_pairs(text: str) -> List[Dict]:
     
     for block in blocks:
         # Find question text
-        question_match = re.match(r'^(?:\d+\.\s*)?(?:Q[:.]\s*)?([^?]+\?)', block, re.IGNORECASE)
+        question_match = re.match(r'^(?:\d+\.\s*)?(?:Q[:.]\s*)?([^?]+\??)', block, re.IGNORECASE)
         if not question_match:
             continue
             
+        # Clean and format question text
         question_text = clean_text(question_match.group(1))
+        if not question_text.endswith('?'):
+            question_text += '?'
+        question_text = add_question_prefix(question_text)
         
-        # Find answer choices
-        answer_matches = re.findall(
-            r'(?:^|\n)\s*(?:(?:\d+|[A-D])[\)\.]\s*|\([A-D]\)\s*)(.*?)(?=(?:\n\s*(?:\d+|[A-D])[\)\.]\s*|\([A-D]\)\s*|$))',
-            block[question_match.end():],
-            re.DOTALL
-        )
+        # Find answer choices with proper ordering
+        answer_pattern = r'(?:^|\n)\s*(?:[A-D][\)\.]\s*|\([A-D]\)\s*)(.*?)(?=(?:\n\s*[A-D][\)\.]\s*|\([A-D]\)\s*|$))'
+        answer_matches = re.finditer(answer_pattern, block[question_match.end():], re.DOTALL)
+        
+        answers = []
+        for match in answer_matches:
+            answer_text = clean_text(match.group(1))
+            if answer_text:
+                # Ensure answer is a complete sentence
+                if not answer_text.endswith(('.', '!', '?')):
+                    answer_text += '.'
+                if not answer_text[0].isupper():
+                    answer_text = answer_text[0].upper() + answer_text[1:]
+                answers.append(answer_text)
         
         # Find correct answer marker
-        correct_marker = re.search(r'(?:correct(?:\s+answer)?[:.-]\s*|answer[:.-]\s*)([A-D]|\d+)', block, re.IGNORECASE)
+        correct_marker = re.search(r'(?:correct(?:\s+answer)?[:.-]\s*|answer[:.-]\s*)([A-D])', block, re.IGNORECASE)
         
-        if len(answer_matches) >= 4 and correct_marker:
-            answers = [clean_text(ans) for ans in answer_matches[:4]]
+        if len(answers) >= 4 and correct_marker:
             try:
-                correct_index = ord(correct_marker.group(1).upper()) - ord('A') if correct_marker.group(1).isalpha() else int(correct_marker.group(1)) - 1
+                correct_index = ord(correct_marker.group(1).upper()) - ord('A')
                 if 0 <= correct_index < len(answers):
                     question_entry = {
                         'question_text': question_text,
                         'correct_answer': answers[correct_index],
-                        'wrong_answers': [ans for i, ans in enumerate(answers) if i != correct_index]
+                        'wrong_answers': [ans for i, ans in enumerate(answers) if i != correct_index][:3]
                     }
                     if validate_question(question_entry):
                         questions.append(question_entry)
@@ -76,46 +111,59 @@ def split_into_qa_pairs(text: str) -> List[Dict]:
 def validate_question(question: Dict) -> bool:
     """Validate a question entry with enhanced checks."""
     try:
+        # Check required fields
         if not all(key in question for key in ['question_text', 'correct_answer', 'wrong_answers']):
             logger.warning(f"Missing required fields in question: {question}")
             return False
-            
-        # Question validation
-        if (len(question['question_text'].split()) < 3 or 
-            not re.search(r'[?]$', question['question_text'])):
-            logger.warning(f"Invalid question format: {question['question_text']}")
+        
+        # Question structure validation
+        question_text = question['question_text']
+        if not (len(question_text.split()) >= 4 and  # Minimum 4 words
+                re.match(r'^[A-Z]', question_text) and  # Starts with capital letter
+                question_text.endswith('?') and  # Ends with question mark
+                re.match(r'^(?:Should|Can|Is|Are|Does|Do|Will|What|How|Why|When|Where|Which)\s', question_text)):  # Has proper prefix
+            logger.warning(f"Invalid question structure: {question_text}")
             return False
-            
+        
         # Answer validation
         all_answers = [question['correct_answer']] + question['wrong_answers']
         
         if len(all_answers) != 4:
-            logger.warning(f"Question must have exactly 4 answers: {question['question_text']}")
+            logger.warning(f"Question must have exactly 4 answers: {question_text}")
             return False
-            
-        # Check for complete sentences in answers
+        
+        # Validate each answer
         for answer in all_answers:
-            if (len(answer.split()) < 3 or  # Must be at least 3 words
-                not re.match(r'^[A-Z]', answer) or  # Must start with capital letter
-                not re.search(r'[.!?]$', answer)):  # Must end with proper punctuation
+            # Check for complete sentence structure
+            if not (len(answer.split()) >= 3 and  # Minimum 3 words
+                    re.match(r'^[A-Z]', answer) and  # Starts with capital letter
+                    re.search(r'[.!?]$', answer) and  # Ends with proper punctuation
+                    any(char.isupper() for char in answer)):  # Contains at least one capital letter
                 logger.warning(f"Invalid answer format: {answer}")
                 return False
-                
+        
         # Check for answer distinctness
         if len(set(map(str.lower, all_answers))) != len(all_answers):
-            logger.warning(f"Duplicate answers found in question: {question['question_text']}")
+            logger.warning(f"Duplicate answers found in question: {question_text}")
             return False
-            
+        
         # Check for answer relevance
-        question_keywords = set(re.findall(r'\w+', question['question_text'].lower()))
+        question_keywords = set(re.findall(r'\b\w+\b', question_text.lower()))
+        question_keywords -= {'should', 'can', 'is', 'are', 'does', 'do', 'will', 'what', 'how', 'why', 'when', 'where', 'which'}
+        
         for answer in all_answers:
-            answer_keywords = set(re.findall(r'\w+', answer.lower()))
-            # Answers should share some context with question but not be identical
-            overlap = len(question_keywords & answer_keywords) / len(question_keywords)
-            if overlap < 0.1 or overlap > 0.9:
-                logger.warning(f"Answer not contextually appropriate: {answer}")
+            answer_keywords = set(re.findall(r'\b\w+\b', answer.lower()))
+            # Calculate semantic relevance
+            common_words = question_keywords & answer_keywords
+            if len(common_words) < 1:  # Must share at least one significant word
+                logger.warning(f"Answer not contextually relevant: {answer}")
                 return False
-                
+            
+            # Check for answer completeness
+            if len(answer_keywords) < 3:  # Must have at least 3 meaningful words
+                logger.warning(f"Answer too short or incomplete: {answer}")
+                return False
+        
         return True
         
     except Exception as e:
@@ -277,13 +325,13 @@ def parse_questions(text: str) -> List[Dict]:
         
         for pair in qa_pairs:
             # Generate plausible wrong answers based on the category
-            category = categorize_question(pair['question'])
-            wrong_answers = generate_wrong_answers(pair['answer'], category)
+            category = categorize_question(pair['question_text'])
+            wrong_answers = generate_wrong_answers(pair['correct_answer'], category)
             
             if wrong_answers and len(wrong_answers) >= 2:
                 questions.append({
-                    'question_text': pair['question'],
-                    'correct_answer': pair['answer'],
+                    'question_text': pair['question_text'],
+                    'correct_answer': pair['correct_answer'],
                     'wrong_answers': wrong_answers
                 })
     
