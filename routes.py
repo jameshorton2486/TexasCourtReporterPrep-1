@@ -7,6 +7,7 @@ from functools import wraps
 from app import app, db
 from models import User, Category, Question, Test, TestQuestion
 import random
+from datetime import datetime
 
 def admin_required(f):
     @wraps(f)
@@ -462,3 +463,72 @@ def admin_delete_question(id):
         flash('An error occurred while deleting the question')
         
     return redirect(url_for('admin_questions'))
+
+@app.route('/study/schedule', methods=['GET', 'POST'])
+@login_required
+def schedule_study():
+    if request.method == 'POST':
+        try:
+            category_id = request.form.get('category_id')
+            start_time = datetime.strptime(
+                request.form.get('start_time'),
+                '%Y-%m-%dT%H:%M'
+            )
+            duration_minutes = int(request.form.get('duration_minutes'))
+            description = request.form.get('description', '')
+
+            session = StudySession(
+                user_id=current_user.id,
+                category_id=category_id,
+                start_time=start_time,
+                duration_minutes=duration_minutes,
+                description=description
+            )
+            db.session.add(session)
+            db.session.commit()
+            
+            flash('Study session scheduled successfully')
+            return redirect(url_for('dashboard'))
+            
+        except Exception as e:
+            app.logger.error(f'Error scheduling study session: {str(e)}')
+            flash('Error scheduling study session')
+            return redirect(url_for('dashboard'))
+    
+    categories = Category.query.all()
+    return render_template('schedule_study.html', categories=categories)
+
+@app.route('/study/timer/start', methods=['POST'])
+@login_required
+def start_timer():
+    try:
+        category_id = request.form.get('category_id')
+        timer = StudyTimer(
+            user_id=current_user.id,
+            category_id=category_id,
+            start_time=datetime.utcnow()
+        )
+        db.session.add(timer)
+        db.session.commit()
+        return jsonify({'timer_id': timer.id})
+    except Exception as e:
+        app.logger.error(f'Error starting timer: {str(e)}')
+        return jsonify({'error': 'Failed to start timer'}), 500
+
+@app.route('/study/timer/<int:timer_id>/stop', methods=['POST'])
+@login_required
+def stop_timer(timer_id):
+    try:
+        timer = StudyTimer.query.get_or_404(timer_id)
+        if timer.user_id != current_user.id:
+            return jsonify({'error': 'Unauthorized'}), 403
+        
+        timer.stop()
+        db.session.commit()
+        return jsonify({
+            'duration': timer.duration_seconds,
+            'message': 'Timer stopped successfully'
+        })
+    except Exception as e:
+        app.logger.error(f'Error stopping timer: {str(e)}')
+        return jsonify({'error': 'Failed to stop timer'}), 500
