@@ -99,7 +99,7 @@ def login():
                 return redirect(url_for('dashboard'))
                 
             app.logger.warning(f'Failed login attempt for username: {username}')
-            flash('You entered an incorrect username or password')
+            flash('Invalid login credentials')
             
         except Exception as e:
             app.logger.error(f'Error during login: {str(e)}')
@@ -401,8 +401,7 @@ def admin_edit_question(id):
             
             if not all([category_id, question_text, correct_answer]) or len(wrong_answers) < 2:
                 flash('All fields are required and at least two wrong answers must be provided')
-                return render_template('admin/add_question.html', 
-                                    question=question, categories=categories)
+                return render_template('admin/edit_question.html', question=question, categories=categories)
             
             question.category_id = category_id
             question.question_text = question_text
@@ -411,15 +410,14 @@ def admin_edit_question(id):
             
             db.session.commit()
             
-            app.logger.info(f'Admin {current_user.username} edited question: {id}')
+            app.logger.info(f'Admin {current_user.username} updated question: {question.id}')
             flash('Question updated successfully')
             return redirect(url_for('admin_questions'))
             
-        return render_template('admin/add_question.html', 
-                             question=question, categories=categories)
-                             
+        return render_template('admin/edit_question.html', question=question, categories=categories)
+        
     except Exception as e:
-        app.logger.error(f'Error editing question {id}: {str(e)}')
+        app.logger.error(f'Error editing question: {str(e)}')
         db.session.rollback()
         flash('An error occurred while editing the question')
         return redirect(url_for('admin_questions'))
@@ -436,7 +434,7 @@ def admin_delete_question(id):
         flash('Question deleted successfully')
         
     except Exception as e:
-        app.logger.error(f'Error deleting question {id}: {str(e)}')
+        app.logger.error(f'Error deleting question: {str(e)}')
         db.session.rollback()
         flash('An error occurred while deleting the question')
         
