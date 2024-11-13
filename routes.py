@@ -160,9 +160,16 @@ def new_test(category_id):
             app.logger.warning(f'Invalid question count requested: {question_count}, defaulting to 20')
             question_count = 20
             
-        # Fetch available questions
-        questions = Question.query.filter_by(category_id=category_id).all()
-        total_available = len(questions)
+        # Get weak areas that need review
+        weak_questions = current_user.get_weak_areas(category_id=category_id)
+        weak_question_ids = [q.question_id for q in weak_questions]
+        
+        # Fetch remaining available questions
+        remaining_questions = Question.query.filter_by(category_id=category_id)\
+            .filter(~Question.id.in_(weak_question_ids) if weak_question_ids else True)\
+            .all()
+        
+        total_available = len(remaining_questions) + len(weak_questions)
         app.logger.info(f'Total available questions for category {category_id}: {total_available}')
         
         # Check minimum required questions
@@ -177,9 +184,22 @@ def new_test(category_id):
             flash(f'Only {total_available} questions available. Creating test with all available questions.')
             question_count = total_available
             
-        # Select questions
-        selected_questions = random.sample(questions, question_count)
-        app.logger.info(f'Selected {len(selected_questions)} questions for test')
+        # Calculate how many new questions to include
+        weak_count = len(weak_questions)
+        new_count = min(question_count - weak_count, len(remaining_questions))
+        
+        # Select questions prioritizing weak areas
+        selected_questions = []
+        selected_questions.extend(weak_questions)
+        if new_count > 0:
+            selected_questions.extend(random.sample(remaining_questions, new_count))
+        
+        # If we still need more questions, add random ones from the remaining pool
+        if len(selected_questions) < question_count:
+            additional_needed = question_count - len(selected_questions)
+            available_pool = [q for q in remaining_questions if q not in selected_questions]
+            if available_pool:
+                selected_questions.extend(random.sample(available_pool, min(additional_needed, len(available_pool))))
         
         # Create test
         test = Test()
@@ -193,7 +213,7 @@ def new_test(category_id):
         for question in selected_questions:
             test_question = TestQuestion()
             test_question.test_id = test.id
-            test_question.question_id = question.id
+            test_question.question_id = question.id if isinstance(question, Question) else question.question_id
             db.session.add(test_question)
         
         db.session.commit()
@@ -281,6 +301,9 @@ def submit_test(test_id):
             test_question.is_correct = (answer == test_question.question.correct_answer)
             if test_question.is_correct:
                 correct_count += 1
+            
+            # Update spaced repetition data
+            test_question.update_performance()
         
         test.score = (correct_count / len(test.questions)) * 100
         test.completed = True

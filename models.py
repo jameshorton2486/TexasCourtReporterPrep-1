@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 from app import db
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -16,6 +16,7 @@ class User(UserMixin, db.Model):
     is_admin = db.Column(db.Boolean, default=False, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     tests = db.relationship('Test', backref='user', lazy=True, cascade='all, delete-orphan')
+    question_performance = db.relationship('UserQuestionPerformance', backref='user', lazy=True)
     
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -25,6 +26,17 @@ class User(UserMixin, db.Model):
         
     def is_administrator(self):
         return self.is_admin
+
+    def get_weak_areas(self, category_id=None, limit=10):
+        """Get questions the user needs to review based on performance"""
+        query = UserQuestionPerformance.query.filter_by(user_id=self.id)
+        if category_id:
+            query = query.join(Question).filter(Question.category_id == category_id)
+        return query.filter(
+            UserQuestionPerformance.next_review_date <= datetime.utcnow()
+        ).order_by(
+            UserQuestionPerformance.ease_factor.asc()
+        ).limit(limit).all()
 
 class Category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -42,8 +54,9 @@ class Question(db.Model):
     category_id = db.Column(db.Integer, db.ForeignKey('category.id', ondelete='CASCADE'), nullable=False)
     question_text = db.Column(db.Text, nullable=False)
     correct_answer = db.Column(db.Text, nullable=False)
-    wrong_answers = db.Column(db.JSON)  # Store wrong answers as JSON array
+    wrong_answers = db.Column(db.JSON)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    user_performance = db.relationship('UserQuestionPerformance', backref='question', lazy=True)
     
     @classmethod
     def seed_from_pdfs(cls, pdf_directory: str) -> tuple[int, list[str]]:
@@ -54,7 +67,6 @@ class Question(db.Model):
         total_questions_added = 0
         all_errors = []
         
-        # Process each PDF file in the directory
         for filename in os.listdir(pdf_directory):
             if filename.endswith('.pdf'):
                 pdf_path = os.path.join(pdf_directory, filename)
@@ -63,7 +75,6 @@ class Question(db.Model):
                 questions, errors = process_pdf_file(pdf_path)
                 all_errors.extend(errors)
                 
-                # Add questions to database
                 for question_data in questions:
                     try:
                         category = Category.get_by_name(question_data['category'])
@@ -71,7 +82,6 @@ class Question(db.Model):
                             logger.warning(f"Category not found: {question_data['category']}")
                             continue
                             
-                        # Check if question already exists
                         existing = cls.query.filter_by(
                             question_text=question_data['question_text'],
                             category_id=category.id
@@ -110,7 +120,7 @@ class Test(db.Model):
     score = db.Column(db.Float)
     completed = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    is_practice = db.Column(db.Boolean, default=False)  # New field for practice mode
+    is_practice = db.Column(db.Boolean, default=False)
     questions = db.relationship('TestQuestion', backref='test', lazy=True, cascade='all, delete-orphan')
 
 class TestQuestion(db.Model):
@@ -120,3 +130,63 @@ class TestQuestion(db.Model):
     user_answer = db.Column(db.Text)
     is_correct = db.Column(db.Boolean)
     question = db.relationship('Question', backref='test_questions', lazy=True)
+
+    def update_performance(self):
+        """Update the user's performance record for this question"""
+        perf = UserQuestionPerformance.query.filter_by(
+            user_id=self.test.user_id,
+            question_id=self.question_id
+        ).first()
+
+        if not perf:
+            perf = UserQuestionPerformance(
+                user_id=self.test.user_id,
+                question_id=self.question_id
+            )
+            db.session.add(perf)
+
+        perf.total_attempts += 1
+        if self.is_correct:
+            perf.correct_attempts += 1
+            perf.consecutive_correct += 1
+            # Increase ease factor for correct answers
+            perf.ease_factor = max(1.3, perf.ease_factor + 0.1)
+        else:
+            perf.consecutive_correct = 0
+            # Decrease ease factor for incorrect answers
+            perf.ease_factor = max(1.3, perf.ease_factor - 0.2)
+
+        # Calculate next review date using SuperMemo-2 algorithm
+        if self.is_correct:
+            if perf.consecutive_correct == 1:
+                perf.interval_days = 1
+            elif perf.consecutive_correct == 2:
+                perf.interval_days = 6
+            else:
+                perf.interval_days = int(perf.interval_days * perf.ease_factor)
+        else:
+            perf.interval_days = 1
+
+        perf.last_attempt_date = datetime.utcnow()
+        perf.next_review_date = datetime.utcnow() + timedelta(days=perf.interval_days)
+        
+        db.session.commit()
+
+class UserQuestionPerformance(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'), nullable=False)
+    question_id = db.Column(db.Integer, db.ForeignKey('question.id', ondelete='CASCADE'), nullable=False)
+    last_attempt_date = db.Column(db.DateTime, default=datetime.utcnow)
+    next_review_date = db.Column(db.DateTime, default=datetime.utcnow)
+    ease_factor = db.Column(db.Float, default=2.5)
+    interval_days = db.Column(db.Integer, default=1)
+    consecutive_correct = db.Column(db.Integer, default=0)
+    total_attempts = db.Column(db.Integer, default=0)
+    correct_attempts = db.Column(db.Integer, default=0)
+
+    @property
+    def accuracy(self):
+        """Calculate the accuracy percentage for this question"""
+        if self.total_attempts == 0:
+            return 0
+        return (self.correct_attempts / self.total_attempts) * 100

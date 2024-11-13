@@ -35,6 +35,13 @@
                                         </label>
                                     </div>
                                 </div>
+                                {% set weak_areas = current_user.get_weak_areas(category.id) %}
+                                {% if weak_areas %}
+                                <div class="alert alert-info">
+                                    <i class="bi bi-info-circle"></i>
+                                    You have {{ weak_areas|length }} questions due for review in this category
+                                </div>
+                                {% endif %}
                                 <button onclick="startTest({{ category.id }})" class="btn btn-primary">Start Test</button>
                             </div>
                         </div>
@@ -46,7 +53,7 @@
     </div>
     
     <div class="col-md-4">
-        <div class="card">
+        <div class="card mb-4">
             <div class="card-header bg-burgundy text-white">
                 <h4 class="mb-0">Progress Overview</h4>
             </div>
@@ -66,6 +73,31 @@
                         {% endfor %}
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header bg-info text-white">
+                <h4 class="mb-0">Study Recommendations</h4>
+            </div>
+            <div class="card-body">
+                <h5>Questions Due for Review</h5>
+                {% set all_weak_areas = current_user.get_weak_areas() %}
+                {% if all_weak_areas %}
+                <ul class="list-group">
+                    {% for perf in all_weak_areas %}
+                    <li class="list-group-item">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h6 class="mb-1">{{ perf.question.category.name }}</h6>
+                            <small>{{ perf.accuracy }}% accuracy</small>
+                        </div>
+                        <small>Next review: {{ perf.next_review_date.strftime('%Y-%m-%d') }}</small>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p>No questions currently due for review.</p>
+                {% endif %}
             </div>
         </div>
     </div>
