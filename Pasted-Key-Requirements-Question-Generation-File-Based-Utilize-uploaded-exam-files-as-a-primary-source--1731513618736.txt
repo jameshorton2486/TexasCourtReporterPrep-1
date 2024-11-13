@@ -1,0 +1,59 @@
+Key Requirements:
+
+Question Generation:
+File-Based: Utilize uploaded exam files as a primary source for generating questions.
+Web-Based: If no files are uploaded, search the internet for relevant exam materials and generate questions from those results.
+Question Rewording:
+Implement a technique to reword questions without altering their meaning, ensuring a diverse question pool.
+Avoid repetitive questions by maintaining a record of generated questions and filtering out duplicates.
+Perplexity API Integration:
+Securely integrate the Perplexity API into the application to access its advanced language processing capabilities.
+Set a low temperature parameter to ensure the generated questions and answers are accurate and relevant.
+User Interface:
+Create a user-friendly interface that allows users to:
+Upload exam files.
+Initiate the question generation process.
+View and practice with the generated questions.
+Code Structure Suggestions:
+
+Python
+import perplexity
+import requests
+import os
+
+# Securely store Perplexity API key
+perplexity_api_key = os.environ.get('PERPLEXITY_API_KEY')
+
+def generate_questions(files=None):
+    if files:
+        # Process uploaded files to extract relevant information
+        # ...
+
+    else:
+        # Search the internet for relevant exam materials
+        # ...
+
+    # Use Perplexity API to generate questions and answers
+    response = perplexity.generate_text(
+        prompt="Generate multiple-choice questions based on the provided text, ensuring accuracy and avoiding repetition.",
+        text=extracted_text,
+        temperature=0.2  # Low temperature for accurate and focused output
+    )
+
+    # Process the generated questions and answers
+    # ...
+
+    # Reword questions to avoid repetition
+    # ...
+
+    return questions, answers
+
+# ... (Rest of the application code, including user interface, question display, etc.)
+Use code with caution.
+
+Additional Considerations:
+
+Question Difficulty: Consider implementing a mechanism to adjust question difficulty based on user preferences or performance.
+Explanation Generation: Explore using Perplexity to generate explanations for correct and incorrect answers.
+User Feedback: Allow users to rate the quality of questions and provide feedback to improve the generation process.
+Error Handling: Implement robust error handling to gracefully handle exceptions and API rate limits.
