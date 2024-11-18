@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-from app import db
+from extensions import db
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 import logging
@@ -18,6 +18,7 @@ class User(UserMixin, db.Model):
     tests = db.relationship('Test', backref='user', lazy=True, cascade='all, delete-orphan')
     question_performance = db.relationship('UserQuestionPerformance', backref='user', lazy=True)
     study_sessions = db.relationship('StudySession', backref='user', lazy=True, cascade='all, delete-orphan')
+    study_timers = db.relationship('StudyTimer', backref='user', lazy=True, cascade='all, delete-orphan')
     
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -47,6 +48,27 @@ class User(UserMixin, db.Model):
             StudySession.start_time > datetime.utcnow()
         ).order_by(StudySession.start_time).all()
 
+class StudyTimer(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'), nullable=False)
+    session_id = db.Column(db.Integer, db.ForeignKey('study_session.id', ondelete='CASCADE'))
+    start_time = db.Column(db.DateTime, default=datetime.utcnow)
+    duration_seconds = db.Column(db.Integer, default=0)
+    is_active = db.Column(db.Boolean, default=True)
+    
+    def __init__(self, user_id, session_id=None):
+        self.user_id = user_id
+        self.session_id = session_id
+        self.start_time = datetime.utcnow()
+        self.is_active = True
+        self.duration_seconds = 0
+    
+    def stop(self):
+        if self.is_active:
+            self.is_active = False
+            self.duration_seconds = int((datetime.utcnow() - self.start_time).total_seconds())
+            db.session.commit()
+
 class StudySession(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'), nullable=False)
@@ -56,6 +78,15 @@ class StudySession(db.Model):
     description = db.Column(db.String(200))
     is_completed = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    timers = db.relationship('StudyTimer', backref='session', lazy=True, cascade='all, delete-orphan')
+
+    def __init__(self, user_id, category_id, start_time, duration_minutes, description=None):
+        self.user_id = user_id
+        self.category_id = category_id
+        self.start_time = start_time
+        self.duration_minutes = duration_minutes
+        self.description = description
+        self.is_completed = False
 
     @property
     def end_time(self):
@@ -67,6 +98,7 @@ class Category(db.Model):
     description = db.Column(db.Text)
     questions = db.relationship('Question', backref='category', lazy=True, cascade='all, delete-orphan')
     tests = db.relationship('Test', backref='category', lazy=True)
+    study_sessions = db.relationship('StudySession', backref='category', lazy=True)
     
     @classmethod
     def get_by_name(cls, name):
@@ -156,14 +188,15 @@ class TestQuestion(db.Model):
 
     def update_performance(self):
         """Update the user's performance record for this question"""
+        user_id = Test.query.get(self.test_id).user_id
         perf = UserQuestionPerformance.query.filter_by(
-            user_id=self.test.user_id,
+            user_id=user_id,
             question_id=self.question_id
         ).first()
 
         if not perf:
             perf = UserQuestionPerformance(
-                user_id=self.test.user_id,
+                user_id=user_id,
                 question_id=self.question_id
             )
             db.session.add(perf)
@@ -172,14 +205,11 @@ class TestQuestion(db.Model):
         if self.is_correct:
             perf.correct_attempts += 1
             perf.consecutive_correct += 1
-            # Increase ease factor for correct answers
             perf.ease_factor = max(1.3, perf.ease_factor + 0.1)
         else:
             perf.consecutive_correct = 0
-            # Decrease ease factor for incorrect answers
             perf.ease_factor = max(1.3, perf.ease_factor - 0.2)
 
-        # Calculate next review date using SuperMemo-2 algorithm
         if self.is_correct:
             if perf.consecutive_correct == 1:
                 perf.interval_days = 1
@@ -192,7 +222,6 @@ class TestQuestion(db.Model):
 
         perf.last_attempt_date = datetime.utcnow()
         perf.next_review_date = datetime.utcnow() + timedelta(days=perf.interval_days)
-        
         db.session.commit()
 
 class UserQuestionPerformance(db.Model):
@@ -206,6 +235,17 @@ class UserQuestionPerformance(db.Model):
     consecutive_correct = db.Column(db.Integer, default=0)
     total_attempts = db.Column(db.Integer, default=0)
     correct_attempts = db.Column(db.Integer, default=0)
+
+    def __init__(self, user_id, question_id):
+        self.user_id = user_id
+        self.question_id = question_id
+        self.last_attempt_date = datetime.utcnow()
+        self.next_review_date = datetime.utcnow()
+        self.ease_factor = 2.5
+        self.interval_days = 1
+        self.consecutive_correct = 0
+        self.total_attempts = 0
+        self.correct_attempts = 0
 
     @property
     def accuracy(self):

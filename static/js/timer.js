@@ -1,54 +1,158 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const timerElements = {
-        startButton: document.getElementById('start-timer'),
-        stopButton: document.getElementById('stop-timer'),
-        timeCounter: document.getElementById('time-counter')
-    };
-
-    // Only initialize if we're on the right page
-    if (!timerElements.startButton || !timerElements.stopButton || !timerElements.timeCounter) {
-        console.log('Timer elements not found - skipping initialization');
-        return;
+class StudyTimer {
+    constructor(sessionId) {
+        this.sessionId = sessionId;
+        this.startTime = null;
+        this.timerId = null;
+        this.isActive = false;
+        this.timeDisplay = document.getElementById('time-counter');
+        this.progressBar = document.getElementById('timer-progress');
+        this.displayInterval = null;
+        this.setupEventListeners();
     }
 
-    let timerId = null;
-    let timerRunning = false;
-    let startTime = null;
+    setupEventListeners() {
+        const startBtn = document.getElementById('start-timer');
+        const stopBtn = document.getElementById('stop-timer');
+        const pauseBtn = document.getElementById('pause-timer');
 
-    function formatTime(seconds) {
-        const hrs = Math.floor(seconds / 3600);
-        const mins = Math.floor((seconds % 3600) / 60);
-        const secs = seconds % 60;
-        return `${String(hrs).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+        if (startBtn) startBtn.addEventListener('click', () => this.start());
+        if (stopBtn) stopBtn.addEventListener('click', () => this.stop());
+        if (pauseBtn) pauseBtn.addEventListener('click', () => this.pause());
     }
 
-    function updateTimer() {
-        if (!startTime || !timerRunning) return;
-        const now = new Date();
-        const diff = Math.floor((now - startTime) / 1000);
-        timerElements.timeCounter.textContent = formatTime(diff);
-    }
+    async start() {
+        if (this.isActive) return;
 
-    timerElements.startButton.addEventListener('click', function() {
-        if (!timerRunning) {
-            timerRunning = true;
-            startTime = new Date();
-            timerId = setInterval(updateTimer, 1000);
-            timerElements.startButton.textContent = 'Pause';
-        } else {
-            timerRunning = false;
-            clearInterval(timerId);
-            timerElements.startButton.textContent = 'Resume';
+        try {
+            const response = await fetch('/study/timer/start', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                body: JSON.stringify({ session_id: this.sessionId })
+            });
+
+            if (!response.ok) {
+                throw new Error(await response.text() || 'Failed to start timer');
+            }
+            
+            const data = await response.json();
+            if (!data.success) {
+                throw new Error(data.error || 'Failed to start timer');
+            }
+
+            this.timerId = data.timer_id;
+            this.startTime = new Date();
+            this.isActive = true;
+            
+            // Start updating display
+            this.updateDisplay();
+            if (this.displayInterval) clearInterval(this.displayInterval);
+            this.displayInterval = setInterval(() => this.updateDisplay(), 1000);
+            
+            // Update button visibility
+            this.updateButtonVisibility(true);
+            
+        } catch (error) {
+            console.error('Error starting timer:', error);
+            alert(error.message || 'Failed to start timer. Please try again.');
         }
-    });
+    }
 
-    timerElements.stopButton.addEventListener('click', function() {
-        timerRunning = false;
-        clearInterval(timerId);
-        timerElements.timeCounter.textContent = '00:00:00';
-        timerElements.startButton.textContent = 'Start';
-        startTime = null;
-    });
+    async stop() {
+        if (!this.isActive || !this.timerId) return;
 
-    console.log('Timer interface initialized successfully');
+        try {
+            const response = await fetch('/study/timer/stop', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                body: JSON.stringify({ timer_id: this.timerId })
+            });
+
+            if (!response.ok) {
+                throw new Error(await response.text() || 'Failed to stop timer');
+            }
+
+            const data = await response.json();
+            if (!data.success) {
+                throw new Error(data.error || 'Failed to stop timer');
+            }
+
+            this.cleanup();
+            this.updateButtonVisibility(false);
+            
+        } catch (error) {
+            console.error('Error stopping timer:', error);
+            alert(error.message || 'Failed to stop timer. Please try again.');
+        }
+    }
+
+    pause() {
+        if (!this.isActive) return;
+        
+        if (this.displayInterval) {
+            clearInterval(this.displayInterval);
+            this.displayInterval = null;
+        }
+        this.isActive = false;
+        this.updateButtonVisibility(false);
+    }
+
+    cleanup() {
+        if (this.displayInterval) {
+            clearInterval(this.displayInterval);
+            this.displayInterval = null;
+        }
+        this.isActive = false;
+        this.startTime = null;
+        this.timerId = null;
+    }
+
+    updateButtonVisibility(timerActive) {
+        const startBtn = document.getElementById('start-timer');
+        const stopBtn = document.getElementById('stop-timer');
+        const pauseBtn = document.getElementById('pause-timer');
+
+        if (startBtn) startBtn.style.display = timerActive ? 'none' : 'inline-block';
+        if (stopBtn) stopBtn.style.display = timerActive ? 'inline-block' : 'none';
+        if (pauseBtn) pauseBtn.style.display = timerActive ? 'inline-block' : 'none';
+    }
+
+    updateDisplay() {
+        if (!this.startTime || !this.isActive || !this.timeDisplay) return;
+        
+        const now = new Date();
+        const elapsedSeconds = Math.floor((now - this.startTime) / 1000);
+        
+        // Format time
+        const hours = Math.floor(elapsedSeconds / 3600);
+        const minutes = Math.floor((elapsedSeconds % 3600) / 60);
+        const seconds = elapsedSeconds % 60;
+        
+        this.timeDisplay.textContent = 
+            `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        
+        // Update progress bar if available
+        if (this.progressBar) {
+            const duration = parseInt(this.progressBar.dataset.duration) || 0;
+            if (duration > 0) {
+                const progress = Math.min((elapsedSeconds / (duration * 60)) * 100, 100);
+                this.progressBar.style.width = `${progress}%`;
+                this.progressBar.setAttribute('aria-valuenow', progress);
+            }
+        }
+    }
+}
+
+// Initialize timer when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    const sessionContainer = document.getElementById('study-session');
+    if (sessionContainer && sessionContainer.dataset.sessionId) {
+        console.log('Initializing study timer...');
+        window.studyTimer = new StudyTimer(sessionContainer.dataset.sessionId);
+    }
 });

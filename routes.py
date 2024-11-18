@@ -1,28 +1,32 @@
-from flask import render_template, redirect, url_for, flash, request, jsonify
+from flask import Blueprint, render_template, redirect, url_for, flash, request, jsonify
 from flask_login import login_user, logout_user, current_user, login_required
 from werkzeug.exceptions import NotFound, Unauthorized
 from sqlalchemy.orm.exc import DetachedInstanceError
 from jinja2.exceptions import TemplateError
 from functools import wraps
-from app import app, db
-from models import User, Category, Question, Test, TestQuestion
+from datetime import datetime, timedelta
 import random
-from datetime import datetime
+import logging
+from extensions import db
+from models import User, Category, Question, Test, TestQuestion, StudySession, StudyTimer
+
+logger = logging.getLogger(__name__)
+
+bp = Blueprint('main', __name__)
 
 def admin_required(f):
     @wraps(f)
     @login_required
     def decorated_function(*args, **kwargs):
         if not current_user.is_administrator():
-            app.logger.warning(f'Unauthorized admin access attempt by user {current_user.username}')
             flash('Admin access required')
-            return redirect(url_for('dashboard'))
+            return redirect(url_for('main.login'))
         return f(*args, **kwargs)
     return decorated_function
 
 def create_admin_user():
+    """Create admin user if it doesn't exist."""
     try:
-        # Check if admin user already exists
         admin = User.query.filter_by(username='admin').first()
         if not admin:
             admin = User()
@@ -32,42 +36,57 @@ def create_admin_user():
             admin.is_admin = True
             db.session.add(admin)
             db.session.commit()
-            app.logger.info('Admin user created successfully')
+            logger.info('Admin user created successfully')
         return admin
     except Exception as e:
-        app.logger.error(f'Error creating admin user: {str(e)}')
+        logger.error(f'Error creating admin user: {str(e)}')
         db.session.rollback()
         return None
 
-# Create admin user on startup
-with app.app_context():
-    create_admin_user()
-
-@app.route('/')
+@bp.route('/')
 def index():
-    app.logger.info('Accessing index page')
+    """Home page route that handles both authenticated and non-authenticated users."""
     if current_user.is_authenticated:
-        return redirect(url_for('dashboard'))
-    return render_template('login.html')
+        return redirect(url_for('main.dashboard'))
+    return redirect(url_for('main.login'))
 
-@app.route('/register', methods=['GET', 'POST'])
+@bp.route('/dashboard')
+@login_required
+def dashboard():
+    """Dashboard page showing categories and tests."""
+    try:
+        categories = Category.query.all()
+        tests = Test.query.filter_by(user_id=current_user.id).order_by(Test.created_at.desc()).all()
+        return render_template('dashboard.html', categories=categories, tests=tests)
+    except Exception as e:
+        logger.error(f'Error accessing dashboard: {str(e)}')
+        db.session.rollback()
+        flash('An error occurred while loading the dashboard')
+        return redirect(url_for('main.login'))
+
+@bp.route('/register', methods=['GET', 'POST'])
 def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('main.dashboard'))
+    
     if request.method == 'POST':
         try:
-            username = request.form['username']
-            email = request.form['email']
-            password = request.form['password']
+            username = request.form.get('username')
+            email = request.form.get('email')
+            password = request.form.get('password')
+            
+            if not all([username, email, password]):
+                flash('All fields are required')
+                return redirect(url_for('main.register'))
             
             if User.query.filter_by(username=username).first():
-                app.logger.warning(f'Registration attempt with existing username: {username}')
                 flash('Username already exists')
-                return redirect(url_for('register'))
+                return redirect(url_for('main.register'))
             
             if User.query.filter_by(email=email).first():
-                app.logger.warning(f'Registration attempt with existing email: {email}')
                 flash('Email already exists')
-                return redirect(url_for('register'))
-                
+                return redirect(url_for('main.register'))
+            
             user = User()
             user.username = username
             user.email = email
@@ -75,134 +94,188 @@ def register():
             db.session.add(user)
             db.session.commit()
             
-            app.logger.info(f'New user registered: {username}')
             login_user(user)
-            return redirect(url_for('dashboard'))
+            return redirect(url_for('main.dashboard'))
             
         except Exception as e:
-            app.logger.error(f'Error during registration: {str(e)}')
+            logger.error(f'Error during registration: {str(e)}')
             db.session.rollback()
             flash('An error occurred during registration')
-            return redirect(url_for('register'))
+            return redirect(url_for('main.register'))
     
     return render_template('register.html')
 
-@app.route('/login', methods=['GET', 'POST'])
+@bp.route('/login', methods=['GET', 'POST'])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for('main.dashboard'))
+    
     if request.method == 'POST':
         try:
-            username = request.form['username']
-            user = User.query.filter_by(username=username).first()
+            username = request.form.get('username')
+            password = request.form.get('password')
             
-            if user and user.check_password(request.form['password']):
+            if not all([username, password]):
+                flash('Username and password are required')
+                return redirect(url_for('main.login'))
+            
+            user = User.query.filter_by(username=username).first()
+            if user and user.check_password(password):
                 login_user(user)
-                app.logger.info(f'User logged in: {username}')
-                return redirect(url_for('dashboard'))
-                
-            app.logger.warning(f'Failed login attempt for username: {username}')
+                return redirect(url_for('main.dashboard'))
+            
             flash('Invalid login credentials')
             
         except Exception as e:
-            app.logger.error(f'Error during login: {str(e)}')
+            logger.error(f'Error during login: {str(e)}')
             flash('An error occurred during login')
-            
+    
     return render_template('login.html')
 
-@app.route('/logout')
+@bp.route('/logout')
 @login_required
 def logout():
-    username = current_user.username
     logout_user()
-    app.logger.info(f'User logged out: {username}')
-    return redirect(url_for('index'))
+    return redirect(url_for('main.login'))
 
-@app.route('/dashboard')
+@bp.route('/study/timer/start', methods=['POST'])
 @login_required
-def dashboard():
+def start_timer():
     try:
-        app.logger.debug('Fetching categories from database')
-        categories = Category.query.all()
+        data = request.get_json()
+        if not data:
+            return jsonify({'error': 'No data provided'}), 400
+            
+        session_id = data.get('session_id')
+        if not session_id:
+            return jsonify({'error': 'Session ID required'}), 400
         
-        app.logger.debug(f'Fetching tests for user {current_user.username}')
-        tests = Test.query.filter_by(user_id=current_user.id).order_by(Test.created_at.desc()).all()
+        study_session = StudySession.query.get_or_404(session_id)
+        if study_session.user_id != current_user.id:
+            return jsonify({'error': 'Unauthorized'}), 403
         
-        for test in tests:
-            app.logger.debug(f'Loading category for test {test.id}')
-            db.session.refresh(test)
-            if test.category_id and not test.category:
-                app.logger.warning(f'Category {test.category_id} not found for test {test.id}')
-                test.category_id = None
-                db.session.commit()
+        timer = StudyTimer(user_id=current_user.id, session_id=session_id)
+        db.session.add(timer)
+        db.session.commit()
         
-        return render_template('dashboard.html', categories=categories, tests=tests)
+        return jsonify({'timer_id': timer.id, 'success': True})
         
-    except DetachedInstanceError as e:
-        app.logger.error(f'Detached instance error in dashboard: {str(e)}')
-        db.session.rollback()
-        flash('Error loading dashboard data. Please try again.')
-        return redirect(url_for('index'))
     except Exception as e:
-        app.logger.error(f'Error accessing dashboard: {str(e)}')
-        db.session.rollback()
-        flash('An unexpected error occurred while loading the dashboard')
-        return redirect(url_for('index'))
+        logger.error(f'Error starting timer: {str(e)}')
+        return jsonify({'error': 'Failed to start timer'}), 500
 
-@app.route('/test/new/<int:category_id>')
+@bp.route('/study/timer/stop', methods=['POST'])
+@login_required
+def stop_timer():
+    try:
+        data = request.get_json()
+        if not data:
+            return jsonify({'error': 'No data provided'}), 400
+            
+        timer_id = data.get('timer_id')
+        if not timer_id:
+            return jsonify({'error': 'Timer ID required'}), 400
+        
+        timer = StudyTimer.query.get_or_404(timer_id)
+        if timer.user_id != current_user.id:
+            return jsonify({'error': 'Unauthorized'}), 403
+        
+        timer.stop()
+        return jsonify({'success': True})
+        
+    except Exception as e:
+        logger.error(f'Error stopping timer: {str(e)}')
+        return jsonify({'error': 'Failed to stop timer'}), 500
+
+@bp.route('/schedule_study', methods=['GET', 'POST'])
+@login_required
+def schedule_study():
+    try:
+        if request.method == 'POST':
+            start_time_str = request.form.get('start_time')
+            duration_str = request.form.get('duration_minutes')
+            description = request.form.get('description', '')
+            category_id = request.form.get('category_id')
+
+            if not all([category_id, start_time_str, duration_str]):
+                flash('Please fill in all required fields')
+                return redirect(url_for('main.schedule_study'))
+
+            try:
+                start_time = datetime.strptime(start_time_str, '%Y-%m-%dT%H:%M')
+                duration_minutes = int(duration_str)
+            except (ValueError, TypeError):
+                flash('Invalid date/time or duration format')
+                return redirect(url_for('main.schedule_study'))
+
+            if start_time < datetime.utcnow():
+                flash('Start time must be in the future')
+                return redirect(url_for('main.schedule_study'))
+
+            session = StudySession(
+                user_id=current_user.id,
+                category_id=int(category_id),
+                start_time=start_time,
+                duration_minutes=duration_minutes,
+                description=description
+            )
+            db.session.add(session)
+            db.session.commit()
+
+            flash('Study session scheduled successfully')
+            return redirect(url_for('main.dashboard'))
+
+        categories = Category.query.all()
+        return render_template('schedule_study.html', categories=categories)
+
+    except Exception as e:
+        logger.error(f'Error scheduling study session: {str(e)}')
+        db.session.rollback()
+        flash('An error occurred while scheduling the study session')
+        return redirect(url_for('main.dashboard'))
+
+@bp.route('/test/new/<int:category_id>')
 @login_required
 def new_test(category_id):
     try:
-        # Get and validate question count and mode
         question_count = int(request.args.get('question_count', 20))
         is_practice = request.args.get('practice', 'false').lower() == 'true'
         
-        app.logger.info(f'Requested question count: {question_count}, Practice mode: {is_practice}')
-        
         if question_count not in [10, 20]:
-            app.logger.warning(f'Invalid question count requested: {question_count}, defaulting to 20')
             question_count = 20
             
-        # Get weak areas that need review
         weak_questions = current_user.get_weak_areas(category_id=category_id)
         weak_question_ids = [q.question_id for q in weak_questions]
         
-        # Fetch remaining available questions
-        remaining_questions = Question.query.filter_by(category_id=category_id)\
-            .filter(~Question.id.in_(weak_question_ids) if weak_question_ids else True)\
-            .all()
+        remaining_questions = Question.query.filter_by(category_id=category_id)
+        if weak_question_ids:
+            remaining_questions = remaining_questions.filter(~Question.id.in_(weak_question_ids))
+        remaining_questions = remaining_questions.all()
         
         total_available = len(remaining_questions) + len(weak_questions)
-        app.logger.info(f'Total available questions for category {category_id}: {total_available}')
         
-        # Check minimum required questions
         if total_available < 10:
-            app.logger.warning(f'Insufficient questions available for category {category_id}: {total_available}')
             flash('Not enough questions available for testing in this category. Please try again later.')
-            return redirect(url_for('dashboard'))
+            return redirect(url_for('main.dashboard'))
             
-        # Adjust question count if necessary
         if total_available < question_count:
-            app.logger.warning(f'Adjusting question count from {question_count} to {total_available}')
             flash(f'Only {total_available} questions available. Creating test with all available questions.')
             question_count = total_available
             
-        # Calculate how many new questions to include
         weak_count = len(weak_questions)
         new_count = min(question_count - weak_count, len(remaining_questions))
         
-        # Select questions prioritizing weak areas
         selected_questions = []
         selected_questions.extend(weak_questions)
         if new_count > 0:
             selected_questions.extend(random.sample(remaining_questions, new_count))
         
-        # If we still need more questions, add random ones from the remaining pool
         if len(selected_questions) < question_count:
             additional_needed = question_count - len(selected_questions)
             available_pool = [q for q in remaining_questions if q not in selected_questions]
             if available_pool:
                 selected_questions.extend(random.sample(available_pool, min(additional_needed, len(available_pool))))
         
-        # Create test
         test = Test()
         test.user_id = current_user.id
         test.category_id = category_id
@@ -210,7 +283,6 @@ def new_test(category_id):
         db.session.add(test)
         db.session.flush()
         
-        # Add questions to test
         for question in selected_questions:
             test_question = TestQuestion()
             test_question.test_id = test.id
@@ -218,177 +290,143 @@ def new_test(category_id):
             db.session.add(test_question)
         
         db.session.commit()
-        app.logger.info(f'Created test {test.id} with {len(selected_questions)} questions')
-        return redirect(url_for('take_test', test_id=test.id))
+        return redirect(url_for('main.take_test', test_id=test.id))
         
     except ValueError as ve:
-        app.logger.error(f'Value error in new_test: {str(ve)}')
+        logger.error(f'Value error in new_test: {str(ve)}')
         flash('Invalid test parameters provided')
-        return redirect(url_for('dashboard'))
+        return redirect(url_for('main.dashboard'))
     except Exception as e:
-        app.logger.error(f'Error creating new test: {str(e)}')
+        logger.error(f'Error creating new test: {str(e)}')
         db.session.rollback()
         flash('An error occurred while creating the test')
-        return redirect(url_for('dashboard'))
+        return redirect(url_for('main.dashboard'))
 
-@app.route('/test/<int:test_id>')
+@bp.route('/test/<int:test_id>')
 @login_required
 def take_test(test_id):
     try:
-        app.logger.debug(f'Attempting to load test {test_id}')
         test = Test.query.get_or_404(test_id)
         
         if test.user_id != current_user.id:
-            app.logger.warning(f'Unauthorized test access attempt by user {current_user.username} for test {test_id}')
+            logger.warning(f'Unauthorized test access attempt by user {current_user.username} for test {test_id}')
             raise Unauthorized()
         
-        app.logger.debug(f'Loading test data and relationships for test {test_id}')
-        db.session.refresh(test)
-        
-        # Log question count for debugging
-        question_count = len(test.questions)
-        app.logger.info(f'Test {test_id} loaded with {question_count} questions')
-        
-        # Verify all required relationships are loaded
-        app.logger.debug('Verifying test question relationships')
-        for test_question in test.questions:
-            if not test_question.question:
-                app.logger.error(f'Question relationship missing for test_question {test_question.id}')
-                raise ValueError('Invalid test question data')
-        
-        try:
-            app.logger.debug('Rendering test template')
-            return render_template('test.html', test=test)
-        except TemplateError as te:
-            app.logger.error(f'Template rendering error: {str(te)}')
-            flash('An error occurred while preparing the test display')
-            return redirect(url_for('dashboard'))
+        if not test.questions:
+            logger.error(f'No questions found for test {test_id}')
+            flash('Test has no questions')
+            return redirect(url_for('main.dashboard'))
             
+        return render_template('test.html', test=test)
+        
     except NotFound:
-        app.logger.warning(f'Test not found: {test_id}')
+        logger.warning(f'Test not found: {test_id}')
         flash('Test not found')
-        return redirect(url_for('dashboard'))
+        return redirect(url_for('main.dashboard'))
     except Unauthorized:
         flash('Unauthorized access')
-        return redirect(url_for('dashboard'))
-    except ValueError as ve:
-        app.logger.error(f'Data validation error: {str(ve)}')
-        flash('Invalid test data')
-        return redirect(url_for('dashboard'))
+        return redirect(url_for('main.dashboard'))
     except Exception as e:
-        app.logger.error(f'Error accessing test: {str(e)}')
+        logger.error(f'Error accessing test: {str(e)}')
         flash('An error occurred while accessing the test')
-        return redirect(url_for('dashboard'))
+        return redirect(url_for('main.dashboard'))
 
-@app.route('/test/<int:test_id>/submit', methods=['POST'])
+@bp.route('/test/<int:test_id>/submit', methods=['POST'])
 @login_required
 def submit_test(test_id):
     try:
         test = Test.query.get_or_404(test_id)
         if test.user_id != current_user.id:
-            app.logger.warning(f'Unauthorized test submission attempt by user {current_user.username} for test {test_id}')
             return jsonify({'error': 'Unauthorized'}), 403
-        
-        answers = request.get_json()
+            
+        data = request.get_json()
+        if not data:
+            return jsonify({'error': 'No answer data provided'}), 400
+            
         correct_count = 0
+        total_questions = len(test.questions)
         
-        app.logger.debug(f'Processing {len(answers)} answers for test {test_id}')
-        for test_question in test.questions:
-            answer = answers.get(str(test_question.id))
+        for question in test.questions:
+            answer = data.get(str(question.id))
             if not answer:
                 return jsonify({'error': 'All questions must be answered'}), 400
                 
-            test_question.user_answer = answer
-            test_question.is_correct = (answer == test_question.question.correct_answer)
-            if test_question.is_correct:
+            question.user_answer = answer
+            question.is_correct = (answer == question.question.correct_answer)
+            if question.is_correct:
                 correct_count += 1
-            
-            # Update spaced repetition data
-            test_question.update_performance()
+                
+            question.update_performance()
         
-        test.score = (correct_count / len(test.questions)) * 100
+        test.score = (correct_count / total_questions) * 100
         test.completed = True
         db.session.commit()
         
-        app.logger.info(f'Test {test_id} submitted by user {current_user.username} with score {test.score}')
-        
-        # For practice mode, return feedback immediately
         if test.is_practice:
-            feedback = []
-            for test_question in test.questions:
-                feedback.append({
-                    'id': test_question.id,
-                    'correct': test_question.is_correct,
-                    'correct_answer': test_question.question.correct_answer
-                })
             return jsonify({
                 'score': test.score,
-                'feedback': feedback,
-                'is_practice': True
+                'correct_count': correct_count,
+                'total_questions': total_questions
             })
-            
-        return jsonify({'redirect': url_for('test_results', test_id=test.id)})
+        
+        return jsonify({'redirect': url_for('main.test_results', test_id=test_id)})
         
     except Exception as e:
-        app.logger.error(f'Error submitting test: {str(e)}')
+        logger.error(f'Error submitting test: {str(e)}')
         db.session.rollback()
         return jsonify({'error': 'An error occurred while submitting the test'}), 500
 
-@app.route('/test/<int:test_id>/results')
+@bp.route('/test/<int:test_id>/results')
 @login_required
 def test_results(test_id):
     try:
-        app.logger.debug(f'Loading test results for test {test_id}')
         test = Test.query.get_or_404(test_id)
-        
         if test.user_id != current_user.id:
-            app.logger.warning(f'Unauthorized results access attempt by user {current_user.username} for test {test_id}')
-            flash('Unauthorized access')
-            return redirect(url_for('dashboard'))
-        
-        db.session.refresh(test)
-        
-        try:
-            app.logger.debug('Rendering results template')
-            return render_template('results.html', test=test)
-        except TemplateError as te:
-            app.logger.error(f'Template rendering error in results: {str(te)}')
-            flash('An error occurred while displaying the results')
-            return redirect(url_for('dashboard'))
+            raise Unauthorized()
             
+        if not test.completed:
+            flash('Test has not been completed')
+            return redirect(url_for('main.dashboard'))
+            
+        return render_template('results.html', test=test)
+        
+    except NotFound:
+        flash('Test not found')
+        return redirect(url_for('main.dashboard'))
+    except Unauthorized:
+        flash('Unauthorized access')
+        return redirect(url_for('main.dashboard'))
     except Exception as e:
-        app.logger.error(f'Error accessing test results: {str(e)}')
+        logger.error(f'Error accessing test results: {str(e)}')
         flash('An error occurred while accessing the test results')
-        return redirect(url_for('dashboard'))
+        return redirect(url_for('main.dashboard'))
 
-@app.route('/admin/questions')
+# Admin routes
+@bp.route('/admin/questions')
 @admin_required
 def admin_questions():
     try:
         questions = Question.query.order_by(Question.created_at.desc()).all()
-        app.logger.info(f'Admin {current_user.username} accessed questions list')
         return render_template('admin/questions.html', questions=questions)
     except Exception as e:
-        app.logger.error(f'Error accessing admin questions: {str(e)}')
+        logger.error(f'Error accessing admin questions: {str(e)}')
         flash('An error occurred while loading questions')
-        return redirect(url_for('dashboard'))
+        return redirect(url_for('main.dashboard'))
 
-@app.route('/admin/questions/add', methods=['GET', 'POST'])
+@bp.route('/admin/questions/add', methods=['GET', 'POST'])
 @admin_required
 def admin_add_question():
     try:
-        categories = Category.query.all()
-        
         if request.method == 'POST':
             category_id = request.form.get('category_id')
             question_text = request.form.get('question_text')
             correct_answer = request.form.get('correct_answer')
             wrong_answers = request.form.getlist('wrong_answers[]')
             
-            if not all([category_id, question_text, correct_answer]) or len(wrong_answers) < 2:
-                flash('All fields are required and at least two wrong answers must be provided')
-                return render_template('admin/add_question.html', categories=categories)
-            
+            if not all([category_id, question_text, correct_answer]) or len(wrong_answers) < 3:
+                flash('Please fill in all required fields')
+                return redirect(url_for('main.admin_add_question'))
+
             question = Question()
             question.category_id = category_id
             question.question_text = question_text
@@ -398,24 +436,22 @@ def admin_add_question():
             db.session.add(question)
             db.session.commit()
             
-            app.logger.info(f'Admin {current_user.username} added new question: {question.id}')
             flash('Question added successfully')
-            return redirect(url_for('admin_questions'))
+            return redirect(url_for('main.admin_questions'))
             
+        categories = Category.query.all()
         return render_template('admin/add_question.html', categories=categories)
-        
     except Exception as e:
-        app.logger.error(f'Error adding question: {str(e)}')
+        logger.error(f'Error adding question: {str(e)}')
         db.session.rollback()
         flash('An error occurred while adding the question')
-        return redirect(url_for('admin_questions'))
+        return redirect(url_for('main.admin_questions'))
 
-@app.route('/admin/questions/edit/<int:id>', methods=['GET', 'POST'])
+@bp.route('/admin/questions/<int:id>/edit', methods=['GET', 'POST'])
 @admin_required
 def admin_edit_question(id):
     try:
         question = Question.query.get_or_404(id)
-        categories = Category.query.all()
         
         if request.method == 'POST':
             category_id = request.form.get('category_id')
@@ -423,30 +459,29 @@ def admin_edit_question(id):
             correct_answer = request.form.get('correct_answer')
             wrong_answers = request.form.getlist('wrong_answers[]')
             
-            if not all([category_id, question_text, correct_answer]) or len(wrong_answers) < 2:
-                flash('All fields are required and at least two wrong answers must be provided')
-                return render_template('admin/edit_question.html', question=question, categories=categories)
+            if not all([category_id, question_text, correct_answer]) or len(wrong_answers) < 3:
+                flash('Please fill in all required fields')
+                return redirect(url_for('main.admin_edit_question', id=id))
             
             question.category_id = category_id
             question.question_text = question_text
             question.correct_answer = correct_answer
             question.wrong_answers = wrong_answers
-            
             db.session.commit()
             
-            app.logger.info(f'Admin {current_user.username} updated question: {question.id}')
             flash('Question updated successfully')
-            return redirect(url_for('admin_questions'))
-            
-        return render_template('admin/edit_question.html', question=question, categories=categories)
+            return redirect(url_for('main.admin_questions'))
+        
+        categories = Category.query.all()
+        return render_template('admin/add_question.html', question=question, categories=categories)
         
     except Exception as e:
-        app.logger.error(f'Error editing question: {str(e)}')
+        logger.error(f'Error editing question: {str(e)}')
         db.session.rollback()
         flash('An error occurred while editing the question')
-        return redirect(url_for('admin_questions'))
+        return redirect(url_for('main.admin_questions'))
 
-@app.route('/admin/questions/delete/<int:id>', methods=['POST'])
+@bp.route('/admin/questions/<int:id>/delete', methods=['POST'])
 @admin_required
 def admin_delete_question(id):
     try:
@@ -454,84 +489,83 @@ def admin_delete_question(id):
         db.session.delete(question)
         db.session.commit()
         
-        app.logger.info(f'Admin {current_user.username} deleted question: {id}')
         flash('Question deleted successfully')
         
     except Exception as e:
-        app.logger.error(f'Error deleting question: {str(e)}')
+        logger.error(f'Error deleting question: {str(e)}')
         db.session.rollback()
         flash('An error occurred while deleting the question')
         
-    return redirect(url_for('admin_questions'))
+    return redirect(url_for('main.admin_questions'))
 
-@app.route('/study/schedule', methods=['GET', 'POST'])
-@login_required
-def schedule_study():
-    if request.method == 'POST':
-        try:
-            category_id = request.form.get('category_id')
-            start_time = datetime.strptime(
-                request.form.get('start_time'),
-                '%Y-%m-%dT%H:%M'
-            )
-            duration_minutes = int(request.form.get('duration_minutes'))
-            description = request.form.get('description', '')
-
-            session = StudySession(
-                user_id=current_user.id,
-                category_id=category_id,
-                start_time=start_time,
-                duration_minutes=duration_minutes,
-                description=description
-            )
-            db.session.add(session)
+@bp.route('/admin/categories', methods=['GET', 'POST'])
+@admin_required
+def admin_categories():
+    try:
+        categories = Category.query.all()
+        
+        if request.method == 'POST':
+            category_name = request.form.get('category_name')
+            if not category_name:
+                flash('Category name is required')
+                return render_template('admin/categories.html', categories=categories)
+            
+            category = Category(category_name=category_name)
+            db.session.add(category)
             db.session.commit()
             
-            flash('Study session scheduled successfully')
-            return redirect(url_for('dashboard'))
+            logger.info(f'Admin {current_user.username} added new category: {category.id}')
+            flash('Category added successfully')
+            return redirect(url_for('main.admin_categories'))
             
-        except Exception as e:
-            app.logger.error(f'Error scheduling study session: {str(e)}')
-            flash('Error scheduling study session')
-            return redirect(url_for('dashboard'))
-    
-    categories = Category.query.all()
-    return render_template('schedule_study.html', categories=categories)
-
-@app.route('/study/timer/start', methods=['POST'])
-@login_required
-def start_timer():
-    try:
-        data = request.get_json()
-        category_id = data.get('category_id')
+        return render_template('admin/categories.html', categories=categories)
         
-        timer = StudyTimer(
-            user_id=current_user.id,
-            category_id=category_id,
-            start_time=datetime.utcnow()
-        )
-        db.session.add(timer)
+    except Exception as e:
+        logger.error(f'Error accessing admin categories: {str(e)}')
+        flash('An error occurred while loading categories')
+        return redirect(url_for('main.dashboard'))
+
+@bp.route('/admin/categories/edit/<int:id>', methods=['GET', 'POST'])
+@admin_required
+def admin_edit_category(id):
+    try:
+        category = Category.query.get_or_404(id)
+        
+        if request.method == 'POST':
+            category_name = request.form.get('category_name')
+            if not category_name:
+                flash('Category name is required')
+                return render_template('admin/edit_category.html', category=category)
+            
+            category.category_name = category_name
+            db.session.commit()
+            
+            logger.info(f'Admin {current_user.username} updated category: {category.id}')
+            flash('Category updated successfully')
+            return redirect(url_for('main.admin_categories'))
+            
+        return render_template('admin/edit_category.html', category=category)
+        
+    except Exception as e:
+        logger.error(f'Error editing category: {str(e)}')
+        db.session.rollback()
+        flash('An error occurred while editing the category')
+        return redirect(url_for('main.admin_categories'))
+
+@bp.route('/admin/categories/delete/<int:id>', methods=['POST'])
+@admin_required
+def admin_delete_category(id):
+    try:
+        category = Category.query.get_or_404(id)
+        db.session.delete(category)
         db.session.commit()
         
-        return jsonify({'timer_id': timer.id})
-    except Exception as e:
-        app.logger.error(f'Error starting timer: {str(e)}')
-        db.session.rollback()
-        return jsonify({'error': 'Failed to start timer'}), 500
-
-@app.route('/study/timer/<int:timer_id>/stop', methods=['POST'])
-@login_required
-def stop_timer(timer_id):
-    try:
-        timer = StudyTimer.query.get_or_404(timer_id)
-        if timer.user_id != current_user.id:
-            return jsonify({'error': 'Unauthorized'}), 403
-            
-        timer.stop()
-        db.session.commit()
+        logger.info(f'Admin {current_user.username} deleted category: {id}')
+        flash('Category deleted successfully')
         
-        return jsonify({'duration': timer.duration_seconds})
     except Exception as e:
-        app.logger.error(f'Error stopping timer: {str(e)}')
+        logger.error(f'Error deleting category: {str(e)}')
         db.session.rollback()
-        return jsonify({'error': 'Failed to stop timer'}), 500
+        flash('An error occurred while deleting the category')
+        
+    return redirect(url_for('main.admin_categories'))

@@ -23,18 +23,22 @@ def extract_text_from_pdf(pdf_path: str) -> Optional[str]:
 
 def clean_text(text: str) -> str:
     """Clean and normalize text content with enhanced formatting."""
-    # Remove unwanted headers/footers
+    # Remove unwanted headers/footers and whitespace
     text = re.sub(r'Question\s+\d+\s+of\s+\d+', '', text)
     text = re.sub(r'Stuvia\.com.*?Study Material\s*', '', text, flags=re.IGNORECASE)
     text = re.sub(r'\s+', ' ', text)
-    
-    # Ensure proper question format
     text = text.strip()
+    
+    # Basic validation
+    if not text:
+        return None
+        
+    # Ensure proper question format
     if not text.endswith('?'):
         text = text.rstrip('.') + '?'
     
     # Ensure complete sentences
-    if text and not text[0].isupper():
+    if text[0].islower():
         text = text[0].upper() + text[1:]
         
     # Add context if needed
@@ -45,7 +49,7 @@ def clean_text(text: str) -> str:
     return text
 
 def check_answer_relevance(question_text: str, answer: str) -> bool:
-    """Check if an answer is relevant to the question."""
+    """Check if an answer is relevant to the question with improved validation."""
     # Convert to lowercase for comparison
     q_words = set(word.lower() for word in question_text.split() if len(word) > 3)
     a_words = set(word.lower() for word in answer.split() if len(word) > 3)
@@ -55,8 +59,23 @@ def check_answer_relevance(question_text: str, answer: str) -> bool:
     if len(common_words) < 2:  # Require at least 2 significant words in common
         return False
         
-    # Check answer completeness
+    # Answer validation
     if len(answer.split()) < 5:  # Require minimum length for meaningful answers
+        return False
+        
+    # Check for complete sentence
+    if not answer[0].isupper() or not answer[-1] in '.!?':
+        return False
+        
+    # Check for suspicious patterns
+    suspicious_patterns = [
+        r'^(True|False)\.?$',
+        r'^(Yes|No)\.?$',
+        r'^\d+\.?$',
+        r'^(All|None) of the above\.?$'
+    ]
+    
+    if any(re.match(pattern, answer, re.IGNORECASE) for pattern in suspicious_patterns):
         return False
         
     return True
@@ -65,8 +84,8 @@ def split_into_qa_pairs(text: str) -> List[Dict]:
     """Split text into question-answer pairs with enhanced format and validation."""
     questions = []
     
-    # Enhanced pattern for question blocks
-    question_pattern = r'(?:Question:|Q:|\d+[\.:])?\s*([^?]+\??)\s*(?:A[\.:])?\s*(.*?)(?=(?:Question:|Q:|\d+[\.:])|\Z)'
+    # Updated pattern for question blocks with more specific answer format
+    question_pattern = r'(?:Question:|Q:|\d+[\.:])?\s*([^?]+\??)\s*(?=[A-D][\.:]\s*)'
     matches = list(re.finditer(question_pattern, text, re.DOTALL | re.IGNORECASE))
     
     for match in matches:
@@ -74,52 +93,60 @@ def split_into_qa_pairs(text: str) -> List[Dict]:
             question_text = clean_text(match.group(1))
             if not question_text:
                 continue
-                
-            answers_text = match.group(2)
             
-            # Enhanced answer extraction pattern
-            answer_pattern = r'(?:^|\n)\s*([A-D])[\.:]\s*(.*?)(?=(?:\n\s*[A-D][\.:]\s*|\Z))'
-            answer_matches = list(re.finditer(answer_pattern, answers_text, re.MULTILINE | re.DOTALL))
+            # Find the answer section after the question
+            answer_section_start = match.end()
+            next_question_match = next((m for m in matches if m.start() > match.end()), None)
+            answer_section = text[answer_section_start:next_question_match.start() if next_question_match else None]
             
-            if len(answer_matches) != 4:
-                logger.warning(f"Incorrect number of answers: {question_text}")
+            # Updated answer extraction pattern with strict A, B, C, D format
+            answer_pattern = r'([A])[\.:]\s*([^B]+).*?([B])[\.:]\s*([^C]+).*?([C])[\.:]\s*([^D]+).*?([D])[\.:]\s*([^\n]+)'
+            answer_match = re.search(answer_pattern, answer_section, re.DOTALL)
+            
+            if not answer_match:
+                logger.warning(f"Could not find properly formatted answers for question: {question_text}")
                 continue
-                
-            answers = []
-            for ans_match in answer_matches:
-                letter = ans_match.group(1)
-                answer_text = clean_text(ans_match.group(2))
-                if not answer_text or not check_answer_relevance(question_text, answer_text):
-                    continue
-                answers.append((letter, answer_text))
             
-            # Find correct answer with improved pattern
+            # Extract answers ensuring correct sequence
+            answers = []
+            for i in range(0, len(answer_match.groups()), 2):
+                if answer_match.group(i+1) and answer_match.group(i+2):
+                    letter = answer_match.group(i+1)
+                    answer_text = clean_text(answer_match.group(i+2))
+                    if answer_text and check_answer_relevance(question_text, answer_text):
+                        answers.append((letter, answer_text))
+            
+            # Ensure we have exactly 4 answers in A, B, C, D sequence
+            if len(answers) != 4 or [a[0] for a in answers] != ['A', 'B', 'C', 'D']:
+                logger.warning(f"Incorrect answer sequence for question: {question_text}")
+                continue
+            
+            # Find correct answer
             correct_marker = re.search(
                 r'(?:correct(?:\s+answer)?[:.-]\s*|answer[:.-]\s*|[Cc]orrect:\s*)([A-D])',
-                answers_text,
+                answer_section,
                 re.IGNORECASE
             )
             
             if not correct_marker:
                 logger.warning(f"No clear correct answer marker: {question_text}")
                 continue
-                
+            
             correct_letter = correct_marker.group(1).upper()
             correct_index = ord(correct_letter) - ord('A')
             
             if 0 <= correct_index < len(answers):
-                # Create question entry with enhanced validation
                 question_entry = {
                     'question_text': f"Question: {question_text}",
                     'correct_answer': answers[correct_index][1],
-                    'wrong_answers': [ans[1] for i, ans in enumerate(answers) if i != correct_index]
+                    'wrong_answers': [ans[1] for i, ans in enumerate(answers) if i != correct_index],
+                    'answer_labels': ['A', 'B', 'C', 'D']  # Added to maintain letter sequence
                 }
                 
-                # Additional validation
                 if validate_question(question_entry):
                     questions.append(question_entry)
                     logger.info(f"Successfully parsed question: {question_text[:50]}...")
-                    
+            
         except Exception as e:
             logger.error(f"Error processing question block: {str(e)}")
             continue

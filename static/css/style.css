@@ -53,6 +53,42 @@ h1, h2, h3, h4, h5, h6 {
 
 .form-check {
     margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 5px;
+    transition: background-color 0.2s;
+}
+
+.form-check:hover {
+    background-color: rgba(0,0,0,0.05);
+}
+
+.answer-option {
+    border: 1px solid #dee2e6;
+    margin-bottom: 10px;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.answer-option:hover {
+    background-color: #f8f9fa;
+}
+
+.question-text {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+}
+
+.timer-container {
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+#time-counter {
+    font-family: monospace;
+    font-size: 2rem;
+    margin-bottom: 10px;
 }
 
 .progress {

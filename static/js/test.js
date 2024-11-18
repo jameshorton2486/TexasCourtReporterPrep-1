@@ -7,28 +7,36 @@ document.addEventListener('DOMContentLoaded', function() {
     const progressBar = document.getElementById('progressBar');
     let currentQuestionIndex = 0;
     const totalQuestions = questions.length;
-
-    console.log(`Total questions loaded: ${totalQuestions}`);
-    
     const answers = {};
+    const isPracticeMode = document.querySelector('.badge.bg-success') !== null;
+    let timer = null;
+
+    console.log('Test interface initializing...');
+    console.log(`Total questions: ${totalQuestions}`);
+    console.log(`Practice mode: ${isPracticeMode}`);
+
+    // Initialize timer if study session exists
+    const sessionContainer = document.getElementById('study-session');
+    if (sessionContainer && sessionContainer.dataset.sessionId) {
+        timer = new StudyTimer(sessionContainer.dataset.sessionId);
+        timer.start().catch(error => {
+            console.error('Failed to start timer:', error);
+        });
+    }
 
     function updateNavigationButtons() {
         prevBtn.style.display = currentQuestionIndex > 0 ? 'inline-block' : 'none';
         nextBtn.style.display = currentQuestionIndex < totalQuestions - 1 ? 'inline-block' : 'none';
         submitBtn.style.display = currentQuestionIndex === totalQuestions - 1 ? 'inline-block' : 'none';
-        
-        console.log(`Navigation updated - Current question: ${currentQuestionIndex + 1}/${totalQuestions}`);
     }
 
     function updateProgressBar() {
         const progress = ((currentQuestionIndex + 1) / totalQuestions) * 100;
         progressBar.style.width = `${progress}%`;
         progressBar.textContent = `Question ${currentQuestionIndex + 1} of ${totalQuestions}`;
-        console.log(`Progress updated: ${progress}%`);
     }
 
     function showQuestion(index) {
-        console.log(`Showing question ${index + 1} of ${totalQuestions}`);
         questions.forEach((q, i) => {
             q.style.display = i === index ? 'block' : 'none';
         });
@@ -37,28 +45,45 @@ document.addEventListener('DOMContentLoaded', function() {
         updateProgressBar();
     }
 
-    function checkCurrentQuestionAnswered() {
+    function validateCurrentQuestion() {
         const currentQuestion = questions[currentQuestionIndex];
-        const questionId = currentQuestion.querySelector('input[type="radio"]').name.split('_')[1];
-        const isAnswered = !!answers[questionId];
-        console.log(`Question ${currentQuestionIndex + 1} answered: ${isAnswered}`);
-        return isAnswered;
+        const radios = currentQuestion.querySelectorAll('input[type="radio"]');
+        return Array.from(radios).some(radio => radio.checked);
     }
 
-    // Event listeners for navigation buttons
+    function checkAnswer(questionId, selectedAnswer, correctAnswer) {
+        if (!isPracticeMode) return;
+
+        const feedbackDiv = document.getElementById(`feedback_${questionId}`);
+        if (!feedbackDiv) return;
+
+        const alertDiv = feedbackDiv.querySelector('.alert');
+        if (!alertDiv) return;
+        
+        if (selectedAnswer === correctAnswer) {
+            alertDiv.className = 'alert alert-success';
+            alertDiv.textContent = 'Correct! Well done!';
+        } else {
+            alertDiv.className = 'alert alert-danger';
+            alertDiv.innerHTML = `Incorrect. The correct answer is: ${correctAnswer}`;
+        }
+        
+        feedbackDiv.style.display = 'block';
+    }
+
+    // Event listeners for navigation
     prevBtn.addEventListener('click', () => {
-        console.log('Previous button clicked');
         if (currentQuestionIndex > 0) {
             showQuestion(currentQuestionIndex - 1);
         }
     });
 
     nextBtn.addEventListener('click', () => {
-        console.log('Next button clicked');
-        if (!checkCurrentQuestionAnswered()) {
+        if (!validateCurrentQuestion()) {
             alert('Please answer the current question before proceeding.');
             return;
         }
+
         if (currentQuestionIndex < totalQuestions - 1) {
             showQuestion(currentQuestionIndex + 1);
         }
@@ -69,43 +94,56 @@ document.addEventListener('DOMContentLoaded', function() {
         if (e.target.type === 'radio') {
             const questionId = e.target.name.split('_')[1];
             answers[questionId] = e.target.value;
-            console.log(`Answer recorded for question ID ${questionId}`);
+
+            if (isPracticeMode) {
+                const currentQuestion = e.target.closest('.question-container');
+                const allAnswers = currentQuestion.querySelectorAll('input[type="radio"]');
+                const correctAnswer = Array.from(allAnswers)
+                    .find(radio => radio.dataset.correct === 'true')?.value;
+                
+                if (correctAnswer) {
+                    checkAnswer(questionId, e.target.value, correctAnswer);
+                }
+            }
         }
     });
 
     // Handle form submission
     testForm.addEventListener('submit', async function(e) {
         e.preventDefault();
-        console.log('Submitting test...');
 
-        // Check if all questions are answered
-        const allQuestionsAnswered = Array.from(questions).every(question => {
-            const questionId = question.querySelector('input[type="radio"]').name.split('_')[1];
-            return !!answers[questionId];
-        });
-
-        if (!allQuestionsAnswered) {
+        if (!Array.from(questions).every(() => validateCurrentQuestion())) {
             alert('Please answer all questions before submitting.');
             return;
         }
 
-        console.log(`Submitting ${Object.keys(answers).length} answers`);
-
         try {
-            const response = await fetch(window.location.href + '/submit', {
+            if (timer) {
+                await timer.stop();
+            }
+
+            const response = await fetch(`/test/${window.location.pathname.split('/').pop()}/submit`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest'
                 },
                 body: JSON.stringify(answers)
             });
             
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
             const data = await response.json();
             
-            if (response.ok && data.redirect) {
+            if (data.redirect) {
                 window.location.href = data.redirect;
-            } else if (data.error) {
-                alert(data.error);
+            } else if (isPracticeMode && data.score !== undefined) {
+                const scoreAlert = document.createElement('div');
+                scoreAlert.className = 'alert alert-info mt-3';
+                scoreAlert.innerHTML = `Practice session completed! Your score: ${data.score}%`;
+                testForm.insertAdjacentElement('beforebegin', scoreAlert);
             }
         } catch (error) {
             console.error('Error submitting test:', error);
@@ -114,6 +152,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Initialize the first question
-    console.log('Initializing test interface...');
     showQuestion(0);
+    console.log('Test interface initialized successfully');
 });

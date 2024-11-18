@@ -9,7 +9,7 @@
             </div>
             <div class="card-body text-center">
                 <p class="lead">An unexpected error has occurred. Please try again later.</p>
-                <a href="{{ url_for('index') }}" class="btn btn-primary">Return to Home</a>
+                <a href="{{ url_for('main.dashboard' if current_user.is_authenticated else 'main.login') }}" class="btn btn-primary">Return to Home</a>
             </div>
         </div>
     </div>

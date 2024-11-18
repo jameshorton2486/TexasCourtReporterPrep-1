@@ -63,7 +63,7 @@
                     <h5>Recent Tests</h5>
                     <div class="list-group">
                         {% for test in tests[:5] %}
-                        <a href="{{ url_for('test_results', test_id=test.id) }}" class="list-group-item list-group-item-action">
+                        <a href="{{ url_for('main.test_results', test_id=test.id) }}" class="list-group-item list-group-item-action">
                             <div class="d-flex w-100 justify-content-between">
                                 <h6 class="mb-1">{{ test.category.name }}</h6>
                                 <small>{{ test.score }}%</small>
@@ -99,7 +99,7 @@
                 <p>No upcoming study sessions scheduled.</p>
                 {% endif %}
                 <div class="mt-3">
-                    <a href="{{ url_for('schedule_study') }}" class="btn btn-primary">
+                    <a href="{{ url_for('main.schedule_study') }}" class="btn btn-primary">
                         Schedule New Session
                     </a>
                 </div>
@@ -140,7 +140,8 @@
 function startTest(categoryId) {
     const questionCount = document.querySelector(`input[name="questionCount_${categoryId}"]:checked`).value;
     const practiceMode = document.querySelector(`#practiceMode_${categoryId}`).checked;
-    window.location.href = `/test/new/${categoryId}?question_count=${questionCount}&practice=${practiceMode}`;
+    window.location.href = `{{ url_for('main.new_test', category_id=0) }}`.replace('0', categoryId) + 
+        `?question_count=${questionCount}&practice=${practiceMode}`;
 }
 </script>
 {% endblock %}

@@ -1,18 +1,21 @@
+from flask import Flask, render_template, redirect, url_for
+from flask_login import current_user
+from extensions import db, login_manager
+import random
 import os
 import logging
-import random
 from logging.handlers import RotatingFileHandler
 from pythonjsonlogger import jsonlogger
-from flask import Flask, render_template
-from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager
-from sqlalchemy.orm import DeclarativeBase
 
-class Base(DeclarativeBase):
-    pass
+# Create Flask app first
+app = Flask(__name__)
 
-db = SQLAlchemy(model_class=Base)
-login_manager = LoginManager()
+# Configure app
+app.config.update(
+    SECRET_KEY=os.environ.get("FLASK_SECRET_KEY", "default_secret_key"),
+    SQLALCHEMY_DATABASE_URI=os.environ.get("DATABASE_URL"),
+    SQLALCHEMY_TRACK_MODIFICATIONS=False
+)
 
 def setup_logging(app):
     # Create logs directory if it doesn't exist
@@ -56,17 +59,6 @@ def shuffle_filter(seq):
         app.logger.warning(f'Shuffle filter failed: {str(e)}')
         return seq
 
-# Create the app
-app = Flask(__name__)
-
-# Configure the application
-app.secret_key = os.environ.get("FLASK_SECRET_KEY") or "a secret key"
-app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
-app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
-    "pool_recycle": 300,
-    "pool_pre_ping": True,
-}
-
 # Set up logging
 setup_logging(app)
 
@@ -76,12 +68,19 @@ app.jinja_env.filters['shuffle'] = shuffle_filter
 # Initialize extensions
 db.init_app(app)
 login_manager.init_app(app)
-login_manager.login_view = 'login'
+login_manager.login_view = 'main.login'
+
+# Import models
+from models import User, Category, Question, Test
+from routes import create_admin_user
 
 @login_manager.user_loader
 def load_user(id):
-    from models import User
     return User.query.get(int(id))
+
+# Register blueprints
+from routes import bp as main_bp
+app.register_blueprint(main_bp)
 
 # Error handlers
 @app.errorhandler(404)
@@ -95,18 +94,16 @@ def internal_error(error):
     db.session.rollback()
     return render_template('errors/500.html'), 500
 
+# Initialize database and create default categories
 with app.app_context():
-    app.logger.info('Initializing application...')
-    
-    import models  # noqa: F401
-    import routes  # noqa: F401
-    
     try:
         db.create_all()
         app.logger.info('Database tables created successfully')
         
+        # Create admin user
+        create_admin_user()
+        
         # Create default categories if they don't exist
-        from models import Category
         default_categories = [
             {"name": "Legal & Judicial Terminology", "description": "Common legal terms, court procedures, and Latin phrases"},
             {"name": "Professional Standards & Ethics", "description": "Court reporter responsibilities and ethical guidelines"},
@@ -114,15 +111,21 @@ with app.app_context():
             {"name": "Transcription Standards", "description": "Formatting rules and transcript preparation guidelines"}
         ]
         
-        for category in default_categories:
-            if not Category.query.filter_by(name=category["name"]).first():
-                new_category = Category(**category)
-                db.session.add(new_category)
-                app.logger.info(f'Added new category: {category["name"]}')
+        for category_data in default_categories:
+            if not Category.query.filter_by(name=category_data["name"]).first():
+                category = Category()
+                category.name = category_data["name"]
+                category.description = category_data["description"]
+                db.session.add(category)
+                app.logger.info(f'Added new category: {category_data["name"]}')
         
         db.session.commit()
         app.logger.info('Initial setup completed successfully')
         
     except Exception as e:
         app.logger.error(f'Error during initialization: {str(e)}')
+        db.session.rollback()
         raise
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000, debug=True)

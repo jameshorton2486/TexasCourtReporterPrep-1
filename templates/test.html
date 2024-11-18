@@ -20,25 +20,24 @@
             {% for test_question in test.questions %}
             <div class="question-container mb-4" id="question_{{ loop.index0 }}" style="display: {% if loop.first %}block{% else %}none{% endif %};">
                 <h5>Question {{ loop.index }} of {{ test.questions|length }}</h5>
-                <p>{{ test_question.question.question_text }}</p>
+                <p class="question-text">{{ test_question.question.question_text }}</p>
                 <div class="options">
                     {% set options = ([test_question.question.correct_answer] + test_question.question.wrong_answers)|default([]) %}
                     {% set shuffled_options = options|shuffle|default(options) %}
                     {% for option in shuffled_options %}
-                    <div class="form-check">
+                    <div class="form-check answer-option">
                         <input class="form-check-input" type="radio" 
                                name="question_{{ test_question.id }}" 
                                id="q{{ test_question.id }}_opt{{ loop.index }}"
                                value="{{ option }}" required
-                               data-question-index="{{ loop.index0 }}"
-                               {% if test.is_practice %}onchange="checkAnswer('{{ test_question.id }}', '{{ option }}', '{{ test_question.question.correct_answer }}')"{% endif %}>
+                               data-question-index="{{ loop.index0 }}">
                         <label class="form-check-label" for="q{{ test_question.id }}_opt{{ loop.index }}">
-                            {{ option }}
+                            {{ ['A', 'B', 'C', 'D'][loop.index0] }}. {{ option }}
                         </label>
                     </div>
                     {% endfor %}
                 </div>
-                <div id="feedback_{{ test_question.id }}" class="mt-3" style="display: none;">
+                <div id="feedback_{{ test_question.id }}" class="feedback mt-3" style="display: none;">
                     <div class="alert" role="alert"></div>
                 </div>
             </div>
@@ -55,108 +54,5 @@
 {% endblock %}
 
 {% block scripts %}
-<script>
-const isPracticeMode = {{ 'true' if test.is_practice else 'false' }};
-const totalQuestions = {{ test.questions|length }};
-let currentQuestion = 0;
-let answeredQuestions = new Set();
-
-function updateNavigation() {
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    const submitBtn = document.getElementById('submitBtn');
-    
-    prevBtn.style.display = currentQuestion > 0 ? 'inline-block' : 'none';
-    
-    if (currentQuestion === totalQuestions - 1) {
-        nextBtn.style.display = 'none';
-        submitBtn.style.display = 'inline-block';
-    } else {
-        nextBtn.style.display = 'inline-block';
-        submitBtn.style.display = 'none';
-    }
-    
-    // Update progress bar
-    const progress = ((currentQuestion + 1) / totalQuestions) * 100;
-    const progressBar = document.getElementById('progressBar');
-    progressBar.style.width = `${progress}%`;
-    progressBar.textContent = `Question ${currentQuestion + 1} of ${totalQuestions}`;
-}
-
-function showQuestion(index) {
-    document.querySelectorAll('.question-container').forEach(q => q.style.display = 'none');
-    document.getElementById(`question_${index}`).style.display = 'block';
-    currentQuestion = index;
-    updateNavigation();
-}
-
-function checkAnswer(questionId, selectedAnswer, correctAnswer) {
-    if (!isPracticeMode) return;
-    
-    const feedbackDiv = document.getElementById(`feedback_${questionId}`);
-    const alertDiv = feedbackDiv.querySelector('.alert');
-    
-    if (selectedAnswer === correctAnswer) {
-        alertDiv.className = 'alert alert-success';
-        alertDiv.textContent = 'Correct! Well done!';
-    } else {
-        alertDiv.className = 'alert alert-danger';
-        alertDiv.innerHTML = `Incorrect. The correct answer is: <strong>${correctAnswer}</strong>`;
-    }
-    
-    feedbackDiv.style.display = 'block';
-    answeredQuestions.add(questionId);
-}
-
-document.getElementById('prevBtn').addEventListener('click', () => {
-    if (currentQuestion > 0) {
-        showQuestion(currentQuestion - 1);
-    }
-});
-
-document.getElementById('nextBtn').addEventListener('click', () => {
-    if (currentQuestion < totalQuestions - 1) {
-        showQuestion(currentQuestion + 1);
-    }
-});
-
-document.getElementById('testForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
-    const answers = {};
-    document.querySelectorAll('input[type="radio"]:checked').forEach(radio => {
-        const questionId = radio.name.replace('question_', '');
-        answers[questionId] = radio.value;
-    });
-    
-    try {
-        const response = await fetch(`/test/{{ test.id }}/submit`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(answers)
-        });
-        
-        const data = await response.json();
-        
-        if (data.is_practice) {
-            // Show final score for practice mode
-            const scoreAlert = document.createElement('div');
-            scoreAlert.className = 'alert alert-info mt-3';
-            scoreAlert.innerHTML = `Practice session completed! Your score: ${data.score}%`;
-            document.querySelector('.card-body').insertBefore(scoreAlert, document.querySelector('.progress'));
-        } else if (data.redirect) {
-            window.location.href = data.redirect;
-        }
-    } catch (error) {
-        console.error('Error submitting test:', error);
-        alert('An error occurred while submitting the test. Please try again.');
-    }
-});
-
-// Initialize test interface
-showQuestion(0);
-console.log('Initializing test interface...');
-</script>
+<script src="{{ url_for('static', filename='js/test.js') }}"></script>
 {% endblock %}

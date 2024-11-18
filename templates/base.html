@@ -12,7 +12,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-navy">
         <div class="container">
-            <a class="navbar-brand" href="{{ url_for('index') }}">
+            <a class="navbar-brand" href="{{ url_for('main.dashboard') }}">
                 <img src="{{ url_for('static', filename='images/courthouse.svg') }}" width="30" height="30" class="d-inline-block align-top" alt="">
                 TX Court Reporter Prep
             </a>
@@ -23,7 +23,7 @@
                 <ul class="navbar-nav ms-auto">
                     {% if current_user.is_authenticated %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('dashboard') }}">Dashboard</a>
+                            <a class="nav-link" href="{{ url_for('main.dashboard') }}">Dashboard</a>
                         </li>
                         {% if current_user.is_administrator() %}
                         <li class="nav-item dropdown">
@@ -33,12 +33,12 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a class="dropdown-item" href="{{ url_for('admin_questions') }}">
+                                    <a class="dropdown-item" href="{{ url_for('main.admin_questions') }}">
                                         Manage Questions
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item" href="{{ url_for('admin_add_question') }}">
+                                    <a class="dropdown-item" href="{{ url_for('main.admin_add_question') }}">
                                         Add Question
                                     </a>
                                 </li>
@@ -46,14 +46,14 @@
                         </li>
                         {% endif %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+                            <a class="nav-link" href="{{ url_for('main.logout') }}">Logout</a>
                         </li>
                     {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+                            <a class="nav-link" href="{{ url_for('main.login') }}">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for('register') }}">Register</a>
+                            <a class="nav-link" href="{{ url_for('main.register') }}">Register</a>
                         </li>
                     {% endif %}
                 </ul>
