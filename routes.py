@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, redirect, url_for, flash, request, jsonify
+from flask import Blueprint, render_template, redirect, url_for, flash, request, jsonify, current_app
 from flask_login import login_user, logout_user, current_user, login_required
 from werkzeug.exceptions import NotFound, Unauthorized
 from sqlalchemy.orm.exc import DetachedInstanceError
@@ -13,31 +13,36 @@ from models import User, Category, Question, Test, TestQuestion, StudySession, S
 from flask_mail import Mail, Message
 from threading import Thread
 
+# Initialize blueprint
+bp = Blueprint('main', __name__)
+logger = logging.getLogger(__name__)
+
+# Initialize mail after app import
 mail = Mail()
 
 def send_async_email(app, msg):
     with app.app_context():
-        mail.send(msg)
+        try:
+            Mail(app).send(msg)
+        except Exception as e:
+            logger.error(f"Error sending email: {str(e)}")
+
+def send_password_reset_email(user):
+    token = user.get_reset_password_token()
+    msg = Message(
+        'Reset Your Password',
+        sender=current_app.config['MAIL_DEFAULT_SENDER'],
+        recipients=[user.email]
+    )
+    msg.body = render_template('email/reset_password.txt', user=user, token=token)
+    msg.html = render_template('email/reset_password.html', user=user, token=token)
+    Thread(target=send_async_email, args=(current_app._get_current_object(), msg)).start()
 
 def send_email(subject, sender, recipients, text_body, html_body):
     msg = Message(subject, sender=sender, recipients=recipients)
     msg.body = text_body
     msg.html = html_body
-    Thread(target=send_async_email, args=(app._get_current_object(), msg)).start()
-
-def send_password_reset_email(user):
-    token = user.get_reset_password_token()
-    send_email(
-        'Reset Your Password',
-        sender=app.config['MAIL_DEFAULT_SENDER'],
-        recipients=[user.email],
-        text_body=render_template('email/reset_password.txt', user=user, token=token),
-        html_body=render_template('email/reset_password.html', user=user, token=token)
-    )
-
-logger = logging.getLogger(__name__)
-
-bp = Blueprint('main', __name__)
+    Thread(target=send_async_email, args=(current_app._get_current_object(), msg)).start()
 
 def admin_required(f):
     @wraps(f)

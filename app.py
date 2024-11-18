@@ -1,13 +1,12 @@
 from flask import Flask, render_template, redirect, url_for
 from flask_login import current_user
 from extensions import db, login_manager
+from flask_mail import Mail
 import random
 import os
 import logging
 from logging.handlers import RotatingFileHandler
 from pythonjsonlogger import jsonlogger
-from flask_mail import Mail
-from routes import mail
 
 # Create Flask app first
 app = Flask(__name__)
@@ -18,12 +17,22 @@ app.config.update(
     SQLALCHEMY_DATABASE_URI=os.environ.get("DATABASE_URL"),
     SQLALCHEMY_TRACK_MODIFICATIONS=False,
     # Mail settings
-    MAIL_SERVER=os.environ.get('MAIL_SERVER', 'smtp.gmail.com'),
-    MAIL_PORT=int(os.environ.get('MAIL_PORT', '587')),
+    MAIL_SERVER='smtp.gmail.com',
+    MAIL_PORT=587,
     MAIL_USE_TLS=True,
     MAIL_USERNAME=os.environ.get('MAIL_USERNAME'),
     MAIL_PASSWORD=os.environ.get('MAIL_PASSWORD'),
-    MAIL_DEFAULT_SENDER=os.environ.get('MAIL_DEFAULT_SENDER', 'noreply@texascourtreporterprep.com')
+    MAIL_DEFAULT_SENDER=os.environ.get('MAIL_USERNAME'),
+    # Additional settings for security
+    SESSION_COOKIE_SECURE=True,
+    REMEMBER_COOKIE_SECURE=True,
+    SESSION_COOKIE_HTTPONLY=True,
+    REMEMBER_COOKIE_HTTPONLY=True,
+    # Flask-Mail timeout settings
+    MAIL_MAX_EMAILS=None,
+    MAIL_TIMEOUT=30,
+    # Development settings
+    DEBUG=True
 )
 
 def setup_logging(app):
@@ -77,19 +86,20 @@ app.jinja_env.filters['shuffle'] = shuffle_filter
 # Initialize extensions
 db.init_app(app)
 login_manager.init_app(app)
-mail.init_app(app)
 login_manager.login_view = 'main.login'
+
+# Initialize Mail
+mail = Mail(app)
 
 # Import models
 from models import User, Category, Question, Test
-from routes import create_admin_user
+from routes import create_admin_user, bp as main_bp
 
 @login_manager.user_loader
 def load_user(id):
     return User.query.get(int(id))
 
 # Register blueprints
-from routes import bp as main_bp
 app.register_blueprint(main_bp)
 
 # Error handlers
@@ -104,25 +114,16 @@ def internal_error(error):
     db.session.rollback()
     return render_template('errors/500.html'), 500
 
-# Check admin environment variables
-required_admin_vars = ['ADMIN_USERNAME', 'ADMIN_EMAIL', 'ADMIN_PASSWORD']
-missing_vars = [var for var in required_admin_vars if not os.environ.get(var)]
-if missing_vars:
-    app.logger.error(f"Missing required admin environment variables: {', '.join(missing_vars)}")
-
 # Initialize database and create default categories
 with app.app_context():
     try:
         db.create_all()
         app.logger.info('Database tables created successfully')
         
-        # Create admin user if environment variables are properly set
-        if not missing_vars:
-            admin_user = create_admin_user()
-            if not admin_user:
-                app.logger.error('Failed to create admin user')
-        else:
-            app.logger.warning('Skipping admin user creation due to missing environment variables')
+        # Create admin user if not exists
+        admin_user = create_admin_user()
+        if not admin_user:
+            app.logger.error('Failed to create admin user')
         
         # Create default categories if they don't exist
         default_categories = [
@@ -149,4 +150,4 @@ with app.app_context():
         raise
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000)
