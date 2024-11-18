@@ -150,6 +150,19 @@ wheels = [
 ]
 
 [[package]]
+name = "flask-mail"
+version = "0.10.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "blinker" },
+    { name = "flask" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/ba/29/e92dc84c675d1e8d260d5768eb3fb65c70cbd33addecf424187587bee862/flask_mail-0.10.0.tar.gz", hash = "sha256:44083e7b02bbcce792209c06252f8569dd5a325a7aaa76afe7330422bd97881d", size = 8152 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/e4/c0/a81083da779f482494d49195d8b6c9fde21072558253e4a9fb2ec969c3c1/flask_mail-0.10.0-py3-none-any.whl", hash = "sha256:a451e490931bb3441d9b11ebab6812a16bfa81855792ae1bf9c1e1e22c4e51e7", size = 8529 },
+]
+
+[[package]]
 name = "flask-sqlalchemy"
 version = "3.1.1"
 source = { registry = "https://pypi.org/simple" }
@@ -442,6 +455,15 @@ wheels = [
 ]
 
 [[package]]
+name = "pyjwt"
+version = "2.10.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/b5/05/324952ded002de746f87b21066b9373080bb5058f64cf01c4d62784b8186/pyjwt-2.10.0.tar.gz", hash = "sha256:7628a7eb7938959ac1b26e819a1df0fd3259505627b575e4bad6d08f76db695c", size = 87687 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/6f/1d/ef9b066e7ef60494c94173dc9f0b9adf5d9ec5f888109f5c669f53d4144b/PyJWT-2.10.0-py3-none-any.whl", hash = "sha256:543b77207db656de204372350926bed5a86201c4cbff159f623f79c7bb487a15", size = 23002 },
+]
+
+[[package]]
 name = "pypdf2"
 version = "3.0.1"
 source = { registry = "https://pypi.org/simple" }
@@ -506,6 +528,7 @@ dependencies = [
     { name = "email-validator" },
     { name = "flask" },
     { name = "flask-login" },
+    { name = "flask-mail" },
     { name = "flask-sqlalchemy" },
     { name = "fpdf" },
     { name = "jinja2" },
@@ -513,6 +536,7 @@ dependencies = [
     { name = "pandas" },
     { name = "plotly" },
     { name = "psycopg2-binary" },
+    { name = "pyjwt" },
     { name = "pypdf2" },
     { name = "python-dotenv" },
     { name = "python-json-logger" },
@@ -527,6 +551,7 @@ requires-dist = [
     { name = "email-validator", specifier = ">=2.2.0" },
     { name = "flask", specifier = ">=3.0.3" },
     { name = "flask-login", specifier = ">=0.6.3" },
+    { name = "flask-mail", specifier = ">=0.10.0" },
     { name = "flask-sqlalchemy", specifier = ">=3.1.1" },
     { name = "fpdf", specifier = ">=1.7.2" },
     { name = "jinja2" },
@@ -534,6 +559,7 @@ requires-dist = [
     { name = "pandas" },
     { name = "plotly" },
     { name = "psycopg2-binary", specifier = ">=2.9.10" },
+    { name = "pyjwt", specifier = ">=2.10.0" },
     { name = "pypdf2", specifier = ">=3.0.1" },
     { name = "python-dotenv" },
     { name = "python-json-logger", specifier = ">=2.0.7" },

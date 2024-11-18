@@ -6,6 +6,8 @@ import os
 import logging
 from logging.handlers import RotatingFileHandler
 from pythonjsonlogger import jsonlogger
+from flask_mail import Mail
+from routes import mail
 
 # Create Flask app first
 app = Flask(__name__)
@@ -14,7 +16,14 @@ app = Flask(__name__)
 app.config.update(
     SECRET_KEY=os.environ.get("FLASK_SECRET_KEY", "default_secret_key"),
     SQLALCHEMY_DATABASE_URI=os.environ.get("DATABASE_URL"),
-    SQLALCHEMY_TRACK_MODIFICATIONS=False
+    SQLALCHEMY_TRACK_MODIFICATIONS=False,
+    # Mail settings
+    MAIL_SERVER=os.environ.get('MAIL_SERVER', 'smtp.gmail.com'),
+    MAIL_PORT=int(os.environ.get('MAIL_PORT', '587')),
+    MAIL_USE_TLS=True,
+    MAIL_USERNAME=os.environ.get('MAIL_USERNAME'),
+    MAIL_PASSWORD=os.environ.get('MAIL_PASSWORD'),
+    MAIL_DEFAULT_SENDER=os.environ.get('MAIL_DEFAULT_SENDER', 'noreply@texascourtreporterprep.com')
 )
 
 def setup_logging(app):
@@ -68,6 +77,7 @@ app.jinja_env.filters['shuffle'] = shuffle_filter
 # Initialize extensions
 db.init_app(app)
 login_manager.init_app(app)
+mail.init_app(app)
 login_manager.login_view = 'main.login'
 
 # Import models

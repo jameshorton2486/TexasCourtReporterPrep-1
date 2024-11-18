@@ -5,17 +5,21 @@ from werkzeug.security import generate_password_hash, check_password_hash
 import logging
 import os
 from utils.pdf_parser import process_pdf_file
+import jwt
+from time import time
 
 logger = logging.getLogger(__name__)
 
 class User(UserMixin, db.Model):
-    __tablename__ = 'users'  # Explicitly set table name to avoid conflicts
+    __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     password_hash = db.Column(db.String(256))
     is_admin = db.Column(db.Boolean, default=False, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    password_reset_token = db.Column(db.String(256), unique=True)
+    password_reset_expiry = db.Column(db.DateTime)
     tests = db.relationship('Test', backref='user', lazy=True, cascade='all, delete-orphan')
     question_performance = db.relationship('UserQuestionPerformance', backref='user', lazy=True)
     study_sessions = db.relationship('StudySession', backref='user', lazy=True, cascade='all, delete-orphan')
@@ -29,6 +33,27 @@ class User(UserMixin, db.Model):
         
     def is_administrator(self):
         return self.is_admin
+
+    def get_reset_password_token(self, expires_in=3600):
+        """Generate password reset token valid for one hour."""
+        return jwt.encode(
+            {'reset_password': self.id, 'exp': time() + expires_in},
+            os.environ.get('FLASK_SECRET_KEY', 'default_secret_key'),
+            algorithm='HS256'
+        )
+
+    @staticmethod
+    def verify_reset_password_token(token):
+        """Verify the password reset token."""
+        try:
+            id = jwt.decode(
+                token,
+                os.environ.get('FLASK_SECRET_KEY', 'default_secret_key'),
+                algorithms=['HS256']
+            )['reset_password']
+            return User.query.get(id)
+        except:
+            return None
 
     def get_weak_areas(self, category_id=None, limit=10):
         """Get questions the user needs to review based on performance"""

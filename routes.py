@@ -10,6 +10,30 @@ import logging
 import os
 from extensions import db
 from models import User, Category, Question, Test, TestQuestion, StudySession, StudyTimer
+from flask_mail import Mail, Message
+from threading import Thread
+
+mail = Mail()
+
+def send_async_email(app, msg):
+    with app.app_context():
+        mail.send(msg)
+
+def send_email(subject, sender, recipients, text_body, html_body):
+    msg = Message(subject, sender=sender, recipients=recipients)
+    msg.body = text_body
+    msg.html = html_body
+    Thread(target=send_async_email, args=(app._get_current_object(), msg)).start()
+
+def send_password_reset_email(user):
+    token = user.get_reset_password_token()
+    send_email(
+        'Reset Your Password',
+        sender=app.config['MAIL_DEFAULT_SENDER'],
+        recipients=[user.email],
+        text_body=render_template('email/reset_password.txt', user=user, token=token),
+        html_body=render_template('email/reset_password.html', user=user, token=token)
+    )
 
 logger = logging.getLogger(__name__)
 
@@ -584,3 +608,58 @@ def admin_delete_category(id):
         flash('An error occurred while deleting the category')
         
     return redirect(url_for('main.admin_categories'))
+
+@bp.route('/reset_password_request', methods=['GET', 'POST'])
+def reset_password_request():
+    if current_user.is_authenticated:
+        return redirect(url_for('main.dashboard'))
+        
+    if request.method == 'POST':
+        email = request.form.get('email')
+        if not email:
+            flash('Email address is required')
+            return redirect(url_for('main.reset_password_request'))
+            
+        user = User.query.filter_by(email=email).first()
+        if user:
+            send_password_reset_email(user)
+            flash('Check your email for instructions to reset your password')
+            return redirect(url_for('main.login'))
+        else:
+            flash('Email address not found')
+            return redirect(url_for('main.reset_password_request'))
+            
+    return render_template('reset_password_request.html')
+
+@bp.route('/reset_password/<token>', methods=['GET', 'POST'])
+def reset_password(token):
+    if current_user.is_authenticated:
+        return redirect(url_for('main.dashboard'))
+        
+    user = User.verify_reset_password_token(token)
+    if not user:
+        flash('Invalid or expired reset token')
+        return redirect(url_for('main.login'))
+        
+    if request.method == 'POST':
+        password = request.form.get('password')
+        confirm_password = request.form.get('confirm_password')
+        
+        if not password or not confirm_password:
+            flash('Please fill in all fields')
+            return redirect(url_for('main.reset_password', token=token))
+            
+        if password != confirm_password:
+            flash('Passwords do not match')
+            return redirect(url_for('main.reset_password', token=token))
+            
+        if len(password) < 8:
+            flash('Password must be at least 8 characters long')
+            return redirect(url_for('main.reset_password', token=token))
+            
+        user.set_password(password)
+        db.session.commit()
+        flash('Your password has been reset')
+        return redirect(url_for('main.login'))
+        
+    return render_template('reset_password.html')
