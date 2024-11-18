@@ -9,6 +9,7 @@ from utils.pdf_parser import process_pdf_file
 logger = logging.getLogger(__name__)
 
 class User(UserMixin, db.Model):
+    __tablename__ = 'users'  # Explicitly set table name to avoid conflicts
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), unique=True, nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
@@ -49,9 +50,10 @@ class User(UserMixin, db.Model):
         ).order_by(StudySession.start_time).all()
 
 class StudyTimer(db.Model):
+    __tablename__ = 'study_timers'
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'), nullable=False)
-    session_id = db.Column(db.Integer, db.ForeignKey('study_session.id', ondelete='CASCADE'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
+    session_id = db.Column(db.Integer, db.ForeignKey('study_sessions.id', ondelete='CASCADE'))
     start_time = db.Column(db.DateTime, default=datetime.utcnow)
     duration_seconds = db.Column(db.Integer, default=0)
     is_active = db.Column(db.Boolean, default=True)
@@ -70,14 +72,18 @@ class StudyTimer(db.Model):
             db.session.commit()
 
 class StudySession(db.Model):
+    __tablename__ = 'study_sessions'
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'), nullable=False)
-    category_id = db.Column(db.Integer, db.ForeignKey('category.id', ondelete='SET NULL'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
+    category_id = db.Column(db.Integer, db.ForeignKey('categories.id', ondelete='SET NULL'))
     start_time = db.Column(db.DateTime, nullable=False)
     duration_minutes = db.Column(db.Integer, nullable=False)
     description = db.Column(db.String(200))
     is_completed = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    actual_duration = db.Column(db.Integer)  # Added for tracking actual study time
+    questions_reviewed = db.Column(db.Integer, default=0)  # Track number of questions reviewed
+    correct_answers = db.Column(db.Integer, default=0)  # Track correct answers
     timers = db.relationship('StudyTimer', backref='session', lazy=True, cascade='all, delete-orphan')
 
     def __init__(self, user_id, category_id, start_time, duration_minutes, description=None):
@@ -93,6 +99,7 @@ class StudySession(db.Model):
         return self.start_time + timedelta(minutes=self.duration_minutes)
 
 class Category(db.Model):
+    __tablename__ = 'categories'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     description = db.Column(db.Text)
@@ -105,12 +112,17 @@ class Category(db.Model):
         return cls.query.filter_by(name=name).first()
 
 class Question(db.Model):
+    __tablename__ = 'questions'
     id = db.Column(db.Integer, primary_key=True)
-    category_id = db.Column(db.Integer, db.ForeignKey('category.id', ondelete='CASCADE'), nullable=False)
+    category_id = db.Column(db.Integer, db.ForeignKey('categories.id', ondelete='CASCADE'), nullable=False)
     question_text = db.Column(db.Text, nullable=False)
     correct_answer = db.Column(db.Text, nullable=False)
     wrong_answers = db.Column(db.JSON)
+    difficulty_level = db.Column(db.Float, default=2.5)  # Added for dynamic difficulty tracking
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    last_used = db.Column(db.DateTime)  # Track when the question was last used
+    times_used = db.Column(db.Integer, default=0)  # Track how many times the question has been used
+    success_rate = db.Column(db.Float, default=0.0)  # Track overall success rate
     user_performance = db.relationship('UserQuestionPerformance', backref='question', lazy=True)
     
     @classmethod
@@ -169,21 +181,27 @@ class Question(db.Model):
         return total_questions_added, all_errors
 
 class Test(db.Model):
+    __tablename__ = 'tests'
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'), nullable=False)
-    category_id = db.Column(db.Integer, db.ForeignKey('category.id', ondelete='SET NULL'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
+    category_id = db.Column(db.Integer, db.ForeignKey('categories.id', ondelete='SET NULL'))
     score = db.Column(db.Float)
     completed = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     is_practice = db.Column(db.Boolean, default=False)
+    completion_time = db.Column(db.Integer)  # Time taken to complete the test
+    total_time_spent = db.Column(db.Integer)  # Total time including pauses
     questions = db.relationship('TestQuestion', backref='test', lazy=True, cascade='all, delete-orphan')
 
 class TestQuestion(db.Model):
+    __tablename__ = 'test_questions'
     id = db.Column(db.Integer, primary_key=True)
-    test_id = db.Column(db.Integer, db.ForeignKey('test.id', ondelete='CASCADE'), nullable=False)
-    question_id = db.Column(db.Integer, db.ForeignKey('question.id', ondelete='CASCADE'), nullable=False)
+    test_id = db.Column(db.Integer, db.ForeignKey('tests.id', ondelete='CASCADE'), nullable=False)
+    question_id = db.Column(db.Integer, db.ForeignKey('questions.id', ondelete='CASCADE'), nullable=False)
     user_answer = db.Column(db.Text)
     is_correct = db.Column(db.Boolean)
+    response_time = db.Column(db.Integer)  # Time taken to answer in seconds
+    attempt_count = db.Column(db.Integer, default=1)  # Number of attempts for practice mode
     question = db.relationship('Question', backref='test_questions', lazy=True)
 
     def update_performance(self):
@@ -220,14 +238,30 @@ class TestQuestion(db.Model):
         else:
             perf.interval_days = 1
 
+        # Update question statistics
+        self.question.times_used += 1
+        self.question.last_used = datetime.utcnow()
+        self.question.success_rate = (
+            (self.question.success_rate * (self.question.times_used - 1) + (1 if self.is_correct else 0))
+            / self.question.times_used
+        )
+
         perf.last_attempt_date = datetime.utcnow()
         perf.next_review_date = datetime.utcnow() + timedelta(days=perf.interval_days)
+        
+        # Update response time analytics
+        if self.response_time:
+            perf.average_response_time = (
+                (perf.average_response_time or 0) * perf.total_attempts + self.response_time
+            ) / (perf.total_attempts + 1)
+            
         db.session.commit()
 
 class UserQuestionPerformance(db.Model):
+    __tablename__ = 'user_question_performance'
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id', ondelete='CASCADE'), nullable=False)
-    question_id = db.Column(db.Integer, db.ForeignKey('question.id', ondelete='CASCADE'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
+    question_id = db.Column(db.Integer, db.ForeignKey('questions.id', ondelete='CASCADE'), nullable=False)
     last_attempt_date = db.Column(db.DateTime, default=datetime.utcnow)
     next_review_date = db.Column(db.DateTime, default=datetime.utcnow)
     ease_factor = db.Column(db.Float, default=2.5)
@@ -235,6 +269,7 @@ class UserQuestionPerformance(db.Model):
     consecutive_correct = db.Column(db.Integer, default=0)
     total_attempts = db.Column(db.Integer, default=0)
     correct_attempts = db.Column(db.Integer, default=0)
+    average_response_time = db.Column(db.Float)  # Average time to answer in seconds
 
     def __init__(self, user_id, question_id):
         self.user_id = user_id

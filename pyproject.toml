@@ -17,4 +17,8 @@ dependencies = [
     "fpdf>=1.7.2",
     "requests>=2.32.3",
     "jinja2",
+    "plotly",
+    "python-dotenv",
+    "pandas",
+    "numpy",
 ]
