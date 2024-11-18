@@ -1,0 +1,116 @@
+Based on the files shared, here's what you can do to improve the question formatting and functionality of your Court Reporters exam study application:
+Data Processing Improvements
+Modify process_pdfs.py to:
+Add proper error handling for PDF parsing
+Implement consistent question format validation
+Create a standardized question structure with:
+python
+class Question:
+    def __init__(self):
+        self.text = ""
+        self.type = "multiple_choice"  # or "true_false"
+        self.choices = []
+        self.correct_answer = ""
+        self.category = ""
+        self.explanation = ""
+
+Frontend Enhancements
+Update test.js to handle different question types:
+javascript
+function renderQuestion(question) {
+    const container = document.createElement('div');
+    container.className = 'question-container mb-4';
+    
+    if (question.type === 'multiple_choice') {
+        // Render multiple choice format
+        container.innerHTML = `
+            <div class="question-text mb-3">${question.text}</div>
+            <div class="options">
+                ${question.choices.map((choice, index) => `
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="q_${question.id}" value="${index}">
+                        <label class="form-check-label">${choice}</label>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+    } else if (question.type === 'true_false') {
+        // Render true/false format
+        container.innerHTML = `
+            <div class="question-text mb-3">${question.text}</div>
+            <div class="options">
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q_${question.id}" value="true">
+                    <label class="form-check-label">True</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="q_${question.id}" value="false">
+                    <label class="form-check-label">False</label>
+                </div>
+            </div>
+        `;
+    }
+    return container;
+}
+
+Progress Tracking
+Enhance charts.js to show detailed progress:
+javascript
+const progressData = {
+    labels: categories,
+    datasets: [{
+        label: 'Accuracy by Category',
+        data: categoryScores,
+        backgroundColor: [
+            '#800020',
+            '#2E8B57',
+            '#4682B4'
+        ],
+        borderWidth: 1
+    }]
+};
+
+Timer Functionality
+Update timer.js to include study session analytics:
+javascript
+class StudyTimer {
+    // ... existing code ...
+    
+    async saveSessionStats() {
+        const stats = {
+            duration: this.getElapsedTime(),
+            questionsAnswered: this.questionCount,
+            accuracy: this.calculateAccuracy(),
+            category: this.currentCategory
+        };
+        
+        await fetch('/study/stats', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(stats)
+        });
+    }
+}
+
+Additional Recommendations
+Implement question categorization by topic areas:
+Legal Terminology
+Professional Ethics
+Transcription Standards
+Court Procedures
+Add a spaced repetition system:
+Track question difficulty
+Adjust question frequency based on user performance
+Implement review sessions for missed questions
+Create a question validation system:
+Verify question clarity
+Check answer correctness
+Ensure proper formatting
+Validate citations and references
+Add feedback mechanisms:
+Detailed explanations for incorrect answers
+References to relevant study materials
+Progress tracking over time
+These improvements will create a more structured and effective study experience for users preparing for the Texas Court Reporters exam.

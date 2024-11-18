@@ -718,3 +718,6 @@
 {"asctime": "2024-11-18 18:15:03,104", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.97 - - [18/Nov/2024 18:15:03] \"\u001b[36mGET /static/css/style.css HTTP/1.1\u001b[0m\" 304 -"}
 {"asctime": "2024-11-18 18:15:03,156", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.97 - - [18/Nov/2024 18:15:03] \"\u001b[36mGET /static/js/charts.js HTTP/1.1\u001b[0m\" 304 -"}
 {"asctime": "2024-11-18 18:15:03,218", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.97 - - [18/Nov/2024 18:15:03] \"\u001b[36mGET /static/images/courthouse.svg HTTP/1.1\u001b[0m\" 304 -"}
+{"asctime": "2024-11-18 18:32:44,354", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.97 - - [18/Nov/2024 18:32:44] \"\u001b[35m\u001b[1mGET /test/new/1?question_count=10&practice=false HTTP/1.1\u001b[0m\" 500 -"}
+{"asctime": "2024-11-18 18:32:44,515", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.97 - - [18/Nov/2024 18:32:44] \"GET /test/new/1?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1\" 200 -"}
+{"asctime": "2024-11-18 18:32:44,588", "levelname": "INFO", "name": "werkzeug", "message": "172.31.196.97 - - [18/Nov/2024 18:32:44] \"GET /test/new/1?__debugger__=yes&cmd=resource&f=debugger.js HTTP/1.1\" 200 -"}
