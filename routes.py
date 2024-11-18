@@ -7,6 +7,7 @@ from functools import wraps
 from datetime import datetime, timedelta
 import random
 import logging
+import os
 from extensions import db
 from models import User, Category, Question, Test, TestQuestion, StudySession, StudyTimer
 
@@ -25,19 +26,33 @@ def admin_required(f):
     return decorated_function
 
 def create_admin_user():
-    """Create admin user if it doesn't exist."""
+    """Create admin user if it doesn't exist using environment variables."""
     try:
-        admin = User.query.filter_by(username='admin').first()
+        # Get admin credentials from environment variables
+        admin_username = os.environ.get('ADMIN_USERNAME')
+        admin_email = os.environ.get('ADMIN_EMAIL')
+        admin_password = os.environ.get('ADMIN_PASSWORD')
+
+        # Validate environment variables
+        if not all([admin_username, admin_email, admin_password]):
+            logger.error("Admin credentials not properly configured in environment variables")
+            return None
+
+        # Check if admin user already exists
+        admin = User.query.filter_by(username=admin_username).first()
         if not admin:
+            # Create new admin user
             admin = User()
-            admin.username = 'admin'
-            admin.email = 'admin@example.com'
-            admin.set_password('admin')
+            admin.username = admin_username
+            admin.email = admin_email
+            admin.set_password(admin_password)
             admin.is_admin = True
+            
             db.session.add(admin)
             db.session.commit()
             logger.info('Admin user created successfully')
         return admin
+        
     except Exception as e:
         logger.error(f'Error creating admin user: {str(e)}')
         db.session.rollback()

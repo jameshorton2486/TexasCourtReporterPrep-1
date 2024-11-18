@@ -94,14 +94,25 @@ def internal_error(error):
     db.session.rollback()
     return render_template('errors/500.html'), 500
 
+# Check admin environment variables
+required_admin_vars = ['ADMIN_USERNAME', 'ADMIN_EMAIL', 'ADMIN_PASSWORD']
+missing_vars = [var for var in required_admin_vars if not os.environ.get(var)]
+if missing_vars:
+    app.logger.error(f"Missing required admin environment variables: {', '.join(missing_vars)}")
+
 # Initialize database and create default categories
 with app.app_context():
     try:
         db.create_all()
         app.logger.info('Database tables created successfully')
         
-        # Create admin user
-        create_admin_user()
+        # Create admin user if environment variables are properly set
+        if not missing_vars:
+            admin_user = create_admin_user()
+            if not admin_user:
+                app.logger.error('Failed to create admin user')
+        else:
+            app.logger.warning('Skipping admin user creation due to missing environment variables')
         
         # Create default categories if they don't exist
         default_categories = [
