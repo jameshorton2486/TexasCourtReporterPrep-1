@@ -313,3 +313,96 @@ class UserQuestionPerformance(db.Model):
         if self.total_attempts == 0:
             return 0
         return (self.correct_attempts / self.total_attempts) * 100
+
+
+    @classmethod
+    def get_question_count_by_category(cls, category_id=None):
+        """Get the number of questions in a category or all categories."""
+        try:
+            query = db.session.query(
+                Category.name,
+                db.func.count(Question.id).label('count')
+            ).outerjoin(Question)
+            
+            if category_id:
+                query = query.filter(Category.id == category_id)
+                
+            query = query.group_by(Category.name)
+            return {row[0]: row[1] for row in query.all()}
+            
+        except Exception as e:
+            logger.error(f"Error getting question count: {str(e)}")
+            return {}
+
+    @classmethod
+    def needs_question_generation(cls, min_threshold=50):
+        """Check if any category needs more questions."""
+        counts = cls.get_question_count_by_category()
+        return {cat: count for cat, count in counts.items() if count < min_threshold}
+
+    @classmethod
+    def generate_questions_for_category(cls, category_name, count_needed):
+        """Generate questions for a category that needs more questions."""
+        try:
+            from utils.perplexity import generate_questions
+            logger.info(f"Generating {count_needed} questions for {category_name}")
+            
+            questions = generate_questions(category_name, count=count_needed)
+            if not questions:
+                logger.error(f"Failed to generate questions for {category_name}")
+                return 0
+                
+            added_count = 0
+            category = Category.get_by_name(category_name)
+            if not category:
+                logger.error(f"Category not found: {category_name}")
+                return 0
+                
+            for question_data in questions:
+                try:
+                    existing = cls.query.filter_by(
+                        question_text=question_data['question_text'],
+                        category_id=category.id
+                    ).first()
+                    
+                    if not existing:
+                        question = cls(
+                            category_id=category.id,
+                            question_text=question_data['question_text'],
+                            correct_answer=question_data['correct_answer'],
+                            wrong_answers=question_data['wrong_answers']
+                        )
+                        db.session.add(question)
+                        added_count += 1
+                        
+                except Exception as e:
+                    logger.error(f"Error adding generated question: {str(e)}")
+                    continue
+                    
+            db.session.commit()
+            logger.info(f"Added {added_count} questions to {category_name}")
+            return added_count
+            
+        except Exception as e:
+            logger.error(f"Error generating questions: {str(e)}")
+            db.session.rollback()
+            return 0
+
+    @classmethod
+    def maintain_question_pool(cls, min_threshold=50):
+        """Background task to maintain minimum number of questions per category."""
+        try:
+            needed = cls.needs_question_generation(min_threshold)
+            total_added = 0
+            
+            for category, current_count in needed.items():
+                count_needed = min_threshold - current_count
+                if count_needed > 0:
+                    added = cls.generate_questions_for_category(category, count_needed)
+                    total_added += added
+                    
+            return total_added
+            
+        except Exception as e:
+            logger.error(f"Error maintaining question pool: {str(e)}")
+            return 0

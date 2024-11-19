@@ -4,9 +4,10 @@ from models import Question, Category
 import logging
 import os
 from utils.text_to_pdf import convert_text_to_pdf
-from utils.perplexity import generate_questions
+from utils.perplexity import generate_questions, COURT_REPORTER_TOPICS
 import shutil
 from datetime import datetime
+import time
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -18,7 +19,11 @@ def ensure_categories():
         ('Legal & Judicial Terminology', 'Common legal terms, court procedures, and judicial concepts'),
         ('Professional Standards & Ethics', 'Professional conduct, responsibilities, and ethical guidelines'),
         ('Transcription Standards', 'Formatting rules, technical requirements, and industry standards'),
-        ('Grammar & Vocabulary', 'Legal writing, punctuation, and specialized terminology')
+        ('Grammar & Vocabulary', 'Legal writing, punctuation, and specialized terminology'),
+        ('Court Procedures', 'Court protocols and procedural guidelines'),
+        ('Deposition Protocol', 'Deposition procedures and best practices'),
+        ('Reporting Equipment', 'Court reporting technology and equipment usage'),
+        ('Certification Requirements', 'Licensing and certification standards')
     ]
     
     with app.app_context():
@@ -53,8 +58,42 @@ def backup_pdfs(pdf_directory: str):
         logger.error(f"Error creating PDF backup: {str(e)}")
         return False
 
+def maintain_question_pool(min_threshold=50):
+    """Ensure each category has minimum required questions."""
+    with app.app_context():
+        try:
+            question_counts = Question.get_question_count_by_category()
+            total_generated = 0
+            
+            for category in COURT_REPORTER_TOPICS:
+                current_count = question_counts.get(category, 0)
+                if current_count < min_threshold:
+                    needed_count = min_threshold - current_count
+                    logger.info(f"Generating {needed_count} questions for {category}")
+                    
+                    for attempt in range(3):  # Try up to 3 times
+                        batch_size = min(20, needed_count)  # Generate in smaller batches
+                        questions = generate_questions(category, count=batch_size)
+                        
+                        if questions:
+                            added = Question.generate_questions_for_category(category, len(questions))
+                            total_generated += added
+                            needed_count -= added
+                            
+                            if needed_count <= 0:
+                                break
+                        
+                        time.sleep(2)  # Brief pause between attempts
+                        
+            logger.info(f"Generated {total_generated} new questions across all categories")
+            return total_generated
+            
+        except Exception as e:
+            logger.error(f"Error maintaining question pool: {str(e)}")
+            return 0
+
 def process_pdfs():
-    """Process PDF files with enhanced error handling and validation."""
+    """Process PDF files and ensure minimum question threshold."""
     with app.app_context():
         total_added = 0
         all_errors = []
@@ -83,53 +122,23 @@ def process_pdfs():
                     logger.error(f"Error processing text file {txt_file}: {str(e)}")
                     all_errors.append(f"Text file conversion error: {str(e)}")
             
-            # Generate additional questions using Perplexity AI
-            topics = [
-                "court reporting legal terminology",
-                "court reporter ethics",
-                "transcription standards",
-                "legal writing and grammar"
-            ]
-            
-            for topic in topics:
-                try:
-                    logger.info(f"Generating questions about {topic} using Perplexity AI...")
-                    questions = generate_questions(topic)
-                    if questions:
-                        content = "\n\n".join([
-                            f"Question: {q['question_text']}\n"
-                            f"A. {q['correct_answer']}\n"
-                            f"B. {q['wrong_answers'][0]}\n"
-                            f"C. {q['wrong_answers'][1]}\n"
-                            f"D. {q['wrong_answers'][2]}\n"
-                            f"Correct: A"
-                            for q in questions
-                        ])
-                        
-                        filename = f"generated_{topic.replace(' ', '_')}.txt"
-                        with open(filename, 'w') as f:
-                            f.write(content)
-                            
-                        pdf_file = convert_text_to_pdf(filename, 'pdf_files')
-                        if pdf_file:
-                            logger.info(f"Saved generated questions to {pdf_file}")
-                        else:
-                            logger.error(f"Failed to convert {filename} to PDF")
-                except Exception as e:
-                    logger.error(f"Error generating questions for {topic}: {str(e)}")
-                    all_errors.append(f"Question generation error: {str(e)}")
-            
             # Create backup before processing
             if not backup_pdfs('pdf_files'):
                 logger.warning("Failed to create PDF backup")
             
-            # Now process all PDFs
+            # Process all PDFs
             logger.info("Processing all PDFs in pdf_files directory...")
-            total_added, processing_errors = Question.seed_from_pdfs('pdf_files')
+            questions_added, processing_errors = Question.seed_from_pdfs('pdf_files')
+            total_added += questions_added
             all_errors.extend(processing_errors)
             
+            # Check and maintain minimum question threshold
+            logger.info("Checking question counts and generating additional questions if needed...")
+            generated_count = maintain_question_pool(min_threshold=50)
+            total_added += generated_count
+            
             if total_added > 0:
-                logger.info(f"Successfully added {total_added} questions")
+                logger.info(f"Successfully added {total_added} questions ({questions_added} from PDFs, {generated_count} generated)")
             else:
                 logger.warning("No questions were added during processing")
             

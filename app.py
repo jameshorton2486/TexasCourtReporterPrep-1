@@ -5,8 +5,9 @@ from flask_mail import Mail
 import random
 import os
 import logging
-from logging.handlers import RotatingFileHandler
+from logging.handlers import TimedRotatingFileHandler
 from pythonjsonlogger import jsonlogger
+import traceback
 
 # Create Flask app first
 app = Flask(__name__)
@@ -37,19 +38,39 @@ app.config.update(
     SERVER_NAME=None  # Allow all hostnames
 )
 
+class CustomJsonFormatter(jsonlogger.JsonFormatter):
+    def add_fields(self, log_record, record, message_dict):
+        super(CustomJsonFormatter, self).add_fields(log_record, record, message_dict)
+        if record.exc_info:
+            log_record['stack_trace'] = traceback.format_exception(*record.exc_info)
+        log_record['logger'] = record.name
+        log_record['level'] = record.levelname
+        log_record['timestamp'] = self.formatTime(record)
+
 def setup_logging(app):
     # Create logs directory if it doesn't exist
     if not os.path.exists('logs'):
         os.makedirs('logs')
 
-    # Set up JSON formatter
-    formatter = jsonlogger.JsonFormatter(
-        '%(asctime)s %(levelname)s %(name)s %(message)s'
+    # Clear existing log file
+    log_file = 'logs/app.log'
+    if os.path.exists(log_file):
+        try:
+            os.remove(log_file)
+        except Exception as e:
+            print(f"Error clearing log file: {str(e)}")
+
+    # Set up JSON formatter with stack traces
+    formatter = CustomJsonFormatter(
+        '%(timestamp)s %(level)s %(name)s %(message)s'
     )
 
-    # Set up file handler with rotation
-    file_handler = RotatingFileHandler(
-        'logs/app.log', maxBytes=10485760, backupCount=10
+    # Set up file handler with daily rotation
+    file_handler = TimedRotatingFileHandler(
+        log_file,
+        when='midnight',
+        interval=1,
+        backupCount=30
     )
     file_handler.setFormatter(formatter)
     file_handler.setLevel(logging.INFO)
@@ -62,13 +83,23 @@ def setup_logging(app):
     # Configure root logger
     root_logger = logging.getLogger()
     root_logger.setLevel(logging.INFO)
+    
+    # Remove any existing handlers
+    root_logger.handlers = []
+    
+    # Add our handlers
     root_logger.addHandler(file_handler)
     root_logger.addHandler(console_handler)
 
     # Configure Flask logger
     app.logger.setLevel(logging.INFO)
+    # Remove default handlers
+    app.logger.handlers = []
     app.logger.addHandler(file_handler)
     app.logger.addHandler(console_handler)
+
+    # Log application startup
+    app.logger.info("Application logging initialized")
 
 def shuffle_filter(seq):
     try:
@@ -76,7 +107,7 @@ def shuffle_filter(seq):
         random.shuffle(result)
         return result
     except Exception as e:
-        app.logger.warning(f'Shuffle filter failed: {str(e)}')
+        app.logger.error(f'Shuffle filter failed: {str(e)}', exc_info=True)
         return seq
 
 # Set up logging
@@ -99,7 +130,13 @@ from routes import create_admin_user, bp as main_bp
 
 @login_manager.user_loader
 def load_user(id):
-    return User.query.get(int(id))
+    try:
+        user = User.query.get(int(id))
+        app.logger.info(f"User loaded: {id}")
+        return user
+    except Exception as e:
+        app.logger.error(f"Error loading user {id}: {str(e)}", exc_info=True)
+        return None
 
 # Register blueprints
 app.register_blueprint(main_bp)
@@ -107,12 +144,12 @@ app.register_blueprint(main_bp)
 # Error handlers
 @app.errorhandler(404)
 def not_found_error(error):
-    app.logger.warning(f'Page not found: {error}')
+    app.logger.warning(f'Page not found: {request.url}', exc_info=True)
     return render_template('errors/404.html'), 404
 
 @app.errorhandler(500)
 def internal_error(error):
-    app.logger.error(f'Server Error: {error}')
+    app.logger.error(f'Server Error: {str(error)}', exc_info=True)
     db.session.rollback()
     return render_template('errors/500.html'), 500
 
@@ -126,6 +163,8 @@ with app.app_context():
         admin_user = create_admin_user()
         if not admin_user:
             app.logger.error('Failed to create admin user')
+        else:
+            app.logger.info('Admin user verified/created successfully')
         
         # Create default categories if they don't exist
         default_categories = [
@@ -135,19 +174,24 @@ with app.app_context():
             {"name": "Transcription Standards", "description": "Formatting rules and transcript preparation guidelines"}
         ]
         
+        categories_added = 0
         for category_data in default_categories:
             if not Category.query.filter_by(name=category_data["name"]).first():
                 category = Category()
                 category.name = category_data["name"]
                 category.description = category_data["description"]
                 db.session.add(category)
+                categories_added += 1
                 app.logger.info(f'Added new category: {category_data["name"]}')
         
-        db.session.commit()
+        if categories_added > 0:
+            db.session.commit()
+            app.logger.info(f'Added {categories_added} new categories')
+        
         app.logger.info('Initial setup completed successfully')
         
     except Exception as e:
-        app.logger.error(f'Error during initialization: {str(e)}')
+        app.logger.error(f'Error during initialization: {str(e)}', exc_info=True)
         db.session.rollback()
         raise
 
