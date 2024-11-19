@@ -1,0 +1,133 @@
+# extensions.py
+from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager
+from flask_migrate import Migrate
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
+from flask_caching import Cache
+from flask_talisman import Talisman
+from sqlalchemy.orm import DeclarativeBase
+
+class Base(DeclarativeBase):
+    pass
+
+db = SQLAlchemy(model_class=Base)
+login_manager = LoginManager()
+migrate = Migrate()
+cache = Cache()
+limiter = Limiter(key_func=get_remote_address)
+talisman = Talisman()
+
+# config.py
+import os
+from datetime import timedelta
+
+class Config:
+    SECRET_KEY = os.environ.get('FLASK_SECRET_KEY')
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    
+    # Security settings
+    SESSION_COOKIE_SECURE = True
+    REMEMBER_COOKIE_SECURE = True
+    SESSION_COOKIE_HTTPONLY = True
+    REMEMBER_COOKIE_HTTPONLY = True
+    PERMANENT_SESSION_LIFETIME = timedelta(days=1)
+    
+    # Rate limiting
+    RATELIMIT_DEFAULT = "100/hour"
+    RATELIMIT_STORAGE_URL = os.environ.get('REDIS_URL')
+    
+    # Caching
+    CACHE_TYPE = 'redis'
+    CACHE_REDIS_URL = os.environ.get('REDIS_URL')
+    
+    # File upload settings
+    MAX_CONTENT_LENGTH = 16 * 1024 * 1024  # 16MB max file size
+    UPLOAD_FOLDER = 'pdf_files'
+    ALLOWED_EXTENSIONS = {'pdf'}
+
+# app.py
+from flask import Flask
+from extensions import db, login_manager, migrate, cache, limiter, talisman
+from logging.config import dictConfig
+import sentry_sdk
+from sentry_sdk.integrations.flask import FlaskIntegration
+
+def create_app(config_class=Config):
+    # Configure logging
+    dictConfig({
+        'version': 1,
+        'formatters': {
+            'default': {
+                'format': '[%(asctime)s] %(levelname)s in %(module)s: %(message)s',
+            }
+        },
+        'handlers': {
+            'wsgi': {
+                'class': 'logging.StreamHandler',
+                'stream': 'ext://flask.logging.wsgi_errors_stream',
+                'formatter': 'default'
+            },
+            'file': {
+                'class': 'logging.handlers.TimedRotatingFileHandler',
+                'filename': 'logs/app.log',
+                'when': 'midnight',
+                'interval': 1,
+                'backupCount': 30,
+                'formatter': 'default'
+            }
+        },
+        'root': {
+            'level': 'INFO',
+            'handlers': ['wsgi', 'file']
+        }
+    })
+
+    # Initialize Sentry
+    if os.environ.get('SENTRY_DSN'):
+        sentry_sdk.init(
+            dsn=os.environ.get('SENTRY_DSN'),
+            integrations=[FlaskIntegration()],
+            traces_sample_rate=1.0
+        )
+
+    app = Flask(__name__)
+    app.config.from_object(config_class)
+
+    # Initialize extensions
+    db.init_app(app)
+    login_manager.init_app(app)
+    migrate.init_app(app, db)
+    cache.init_app(app)
+    limiter.init_app(app)
+    talisman.init_app(app)
+
+    # Register error handlers
+    @app.errorhandler(429)
+    def ratelimit_handler(e):
+        return {'error': 'Rate limit exceeded'}, 429
+
+    @app.errorhandler(413)
+    def request_entity_too_large(e):
+        return {'error': 'File too large'}, 413
+
+    # PDF file utilities
+    def allowed_file(filename):
+        return '.' in filename and \
+               filename.rsplit('.', 1)[1].lower() in app.config['ALLOWED_EXTENSIONS']
+
+    @app.before_request
+    def before_request():
+        if not os.path.exists(app.config['UPLOAD_FOLDER']):
+            os.makedirs(app.config['UPLOAD_FOLDER'])
+
+    # Register blueprints
+    from routes import main_bp
+    app.register_blueprint(main_bp)
+
+    return app
+
+if __name__ == '__main__':
+    app = create_app()
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)))

@@ -1,23 +1,28 @@
-{"timestamp": "2024-11-19 14:30:05,486", "level": "INFO", "name": "app", "message": "Application logging initialized", "logger": "app"}
-{"timestamp": "2024-11-19 14:30:05,486", "level": "INFO", "name": "app", "message": "Application logging initialized", "logger": "app"}
-{"timestamp": "2024-11-19 14:30:06,136", "level": "INFO", "name": "app", "message": "Database tables created successfully", "logger": "app"}
-{"timestamp": "2024-11-19 14:30:06,136", "level": "INFO", "name": "app", "message": "Database tables created successfully", "logger": "app"}
-{"timestamp": "2024-11-19 14:30:06,204", "level": "INFO", "name": "app", "message": "Admin user verified/created successfully", "logger": "app"}
-{"timestamp": "2024-11-19 14:30:06,204", "level": "INFO", "name": "app", "message": "Admin user verified/created successfully", "logger": "app"}
-{"timestamp": "2024-11-19 14:30:06,291", "level": "INFO", "name": "app", "message": "Initial setup completed successfully", "logger": "app"}
-{"timestamp": "2024-11-19 14:30:06,291", "level": "INFO", "name": "app", "message": "Initial setup completed successfully", "logger": "app"}
-{"timestamp": "2024-11-19 14:30:06,328", "level": "WARNING", "name": "werkzeug", "message": " * Debugger is active!", "logger": "werkzeug"}
-{"timestamp": "2024-11-19 14:30:06,330", "level": "INFO", "name": "werkzeug", "message": " * Debugger PIN: 111-898-422", "logger": "werkzeug"}
-{"timestamp": "2024-11-19 14:30:06,373", "level": "INFO", "name": "werkzeug", "message": "172.31.196.113 - - [19/Nov/2024 14:30:06] \"\u001b[32mGET / HTTP/1.1\u001b[0m\" 302 -", "logger": "werkzeug"}
-{"timestamp": "2024-11-19 14:30:06,389", "level": "INFO", "name": "werkzeug", "message": "172.31.196.113 - - [19/Nov/2024 14:30:06] \"GET /login HTTP/1.1\" 200 -", "logger": "werkzeug"}
-{"timestamp": "2024-11-19 14:30:06,405", "level": "INFO", "name": "werkzeug", "message": "172.31.196.113 - - [19/Nov/2024 14:30:06] \"GET /static/css/style.css HTTP/1.1\" 200 -", "logger": "werkzeug"}
-{"timestamp": "2024-11-19 14:30:06,417", "level": "INFO", "name": "app", "message": "User loaded: 1", "logger": "app"}
-{"timestamp": "2024-11-19 14:30:06,417", "level": "INFO", "name": "app", "message": "User loaded: 1", "logger": "app"}
-{"timestamp": "2024-11-19 14:30:06,438", "level": "INFO", "name": "werkzeug", "message": "172.31.196.113 - - [19/Nov/2024 14:30:06] \"\u001b[32mGET / HTTP/1.1\u001b[0m\" 302 -", "logger": "werkzeug"}
-{"timestamp": "2024-11-19 14:30:06,525", "level": "INFO", "name": "werkzeug", "message": "172.31.196.113 - - [19/Nov/2024 14:30:06] \"GET /static/images/courthouse.svg HTTP/1.1\" 200 -", "logger": "werkzeug"}
-{"timestamp": "2024-11-19 14:30:06,547", "level": "INFO", "name": "app", "message": "User loaded: 1", "logger": "app"}
-{"timestamp": "2024-11-19 14:30:06,547", "level": "INFO", "name": "app", "message": "User loaded: 1", "logger": "app"}
-{"timestamp": "2024-11-19 14:30:07,228", "level": "INFO", "name": "werkzeug", "message": "172.31.196.113 - - [19/Nov/2024 14:30:07] \"GET /dashboard HTTP/1.1\" 200 -", "logger": "werkzeug"}
-{"timestamp": "2024-11-19 14:30:07,529", "level": "INFO", "name": "werkzeug", "message": "172.31.196.113 - - [19/Nov/2024 14:30:07] \"\u001b[36mGET /static/js/charts.js HTTP/1.1\u001b[0m\" 304 -", "logger": "werkzeug"}
-{"timestamp": "2024-11-19 14:30:07,544", "level": "INFO", "name": "werkzeug", "message": "172.31.196.113 - - [19/Nov/2024 14:30:07] \"\u001b[36mGET /static/css/style.css HTTP/1.1\u001b[0m\" 304 -", "logger": "werkzeug"}
-{"timestamp": "2024-11-19 14:30:07,625", "level": "INFO", "name": "werkzeug", "message": "172.31.196.113 - - [19/Nov/2024 14:30:07] \"\u001b[36mGET /static/images/courthouse.svg HTTP/1.1\u001b[0m\" 304 -", "logger": "werkzeug"}
+{"timestamp": "2024-11-19 14:38:52,147", "level": "INFO", "name": "app", "message": "Application logging initialized", "logger": "app"}
+{"timestamp": "2024-11-19 14:38:52,147", "level": "INFO", "name": "app", "message": "Application logging initialized", "logger": "app"}
+{"timestamp": "2024-11-19 14:38:52,869", "level": "INFO", "name": "app", "message": "Database tables created successfully", "logger": "app"}
+{"timestamp": "2024-11-19 14:38:52,869", "level": "INFO", "name": "app", "message": "Database tables created successfully", "logger": "app"}
+{"timestamp": "2024-11-19 14:38:52,961", "level": "INFO", "name": "app", "message": "Admin user verified/created successfully", "logger": "app"}
+{"timestamp": "2024-11-19 14:38:52,961", "level": "INFO", "name": "app", "message": "Admin user verified/created successfully", "logger": "app"}
+{"timestamp": "2024-11-19 14:38:53,049", "level": "INFO", "name": "app", "message": "Initial setup completed successfully", "logger": "app"}
+{"timestamp": "2024-11-19 14:38:53,049", "level": "INFO", "name": "app", "message": "Initial setup completed successfully", "logger": "app"}
+{"timestamp": "2024-11-19 14:38:53,185", "level": "INFO", "name": "utils.pdf_parser", "message": "Directories set up: pdf_files, processed_questions", "logger": "utils.pdf_parser"}
+{"timestamp": "2024-11-19 14:38:53,186", "level": "INFO", "name": "__main__", "message": "Starting PDF processing...", "logger": "__main__"}
+{"timestamp": "2024-11-19 14:38:53,393", "level": "INFO", "name": "__main__", "message": "Categories verified and created if needed", "logger": "__main__"}
+{"timestamp": "2024-11-19 14:38:53,394", "level": "INFO", "name": "__main__", "message": "Converting study_materials.txt to PDF...", "logger": "__main__"}
+{"timestamp": "2024-11-19 14:38:53,395", "level": "INFO", "name": "utils.text_to_pdf", "message": "Successfully converted study_materials.txt to pdf_files/study_materials.pdf", "logger": "utils.text_to_pdf"}
+{"timestamp": "2024-11-19 14:38:53,395", "level": "INFO", "name": "__main__", "message": "Successfully converted study_materials.txt to PDF: pdf_files/study_materials.pdf", "logger": "__main__"}
+{"timestamp": "2024-11-19 14:38:53,395", "level": "INFO", "name": "__main__", "message": "Converting Pasted-Consolidated-Recommendations-To-create-the-best-possible-study-application-for-the-Texas-Court-Repor-1731959421762.txt to PDF...", "logger": "__main__"}
+{"timestamp": "2024-11-19 14:38:53,397", "level": "ERROR", "name": "utils.text_to_pdf", "message": "Error converting Pasted-Consolidated-Recommendations-To-create-the-best-possible-study-application-for-the-Texas-Court-Repor-1731959421762.txt to PDF: 'latin-1' codec can't encode character '\\u2019' in position 201: ordinal not in range(256)", "logger": "utils.text_to_pdf"}
+{"timestamp": "2024-11-19 14:38:53,398", "level": "ERROR", "name": "__main__", "message": "Failed to convert Pasted-Consolidated-Recommendations-To-create-the-best-possible-study-application-for-the-Texas-Court-Repor-1731959421762.txt to PDF", "logger": "__main__"}
+{"timestamp": "2024-11-19 14:38:53,400", "level": "INFO", "name": "__main__", "message": "Created backup of PDF files in pdf_files/processed_backup/20241119_143853", "logger": "__main__"}
+{"timestamp": "2024-11-19 14:38:53,400", "level": "INFO", "name": "__main__", "message": "Processing PDF file: Questions for Replit CR Test application.pdf", "logger": "__main__"}
+{"timestamp": "2024-11-19 14:38:53,424", "level": "INFO", "name": "utils.pdf_parser", "message": "Processing 33 pages from pdf_files/Questions for Replit CR Test application.pdf", "logger": "utils.pdf_parser"}
+{"timestamp": "2024-11-19 14:38:55,153", "level": "INFO", "name": "__main__", "message": "Processing PDF file: More questions part 2.pdf", "logger": "__main__"}
+{"timestamp": "2024-11-19 14:38:55,169", "level": "INFO", "name": "utils.pdf_parser", "message": "Processing 27 pages from pdf_files/More questions part 2.pdf", "logger": "utils.pdf_parser"}
+{"timestamp": "2024-11-19 14:38:56,066", "level": "INFO", "name": "__main__", "message": "Processing PDF file: study_materials.pdf", "logger": "__main__"}
+{"timestamp": "2024-11-19 14:38:56,067", "level": "INFO", "name": "utils.pdf_parser", "message": "Processing 1 pages from pdf_files/study_materials.pdf", "logger": "utils.pdf_parser"}
+{"timestamp": "2024-11-19 14:38:56,113", "level": "INFO", "name": "__main__", "message": "Generating 50 questions for Legal & Judicial Terminology", "logger": "__main__"}
+{"timestamp": "2024-11-19 14:38:56,226", "level": "ERROR", "name": "utils.perplexity", "message": "Error from Perplexity API: 400 - {\"error\":{\"message\":\"Invalid model 'mistral-7b-instruct'. Permitted models can be found in the documentation at https://docs.perplexity.ai/docs/model-cards.\",\"type\":\"invalid_model\",\"code\":400}}", "logger": "utils.perplexity"}
+{"timestamp": "2024-11-19 14:38:58,364", "level": "ERROR", "name": "utils.perplexity", "message": "Error from Perplexity API: 400 - {\"error\":{\"message\":\"Invalid model 'mistral-7b-instruct'. Permitted models can be found in the documentation at https://docs.perplexity.ai/docs/model-cards.\",\"type\":\"invalid_model\",\"code\":400}}", "logger": "utils.perplexity"}
+{"timestamp": "2024-11-19 14:39:00,469", "level": "ERROR", "name": "utils.perplexity", "message": "Error from Perplexity API: 400 - {\"error\":{\"message\":\"Invalid model 'mistral-7b-instruct'. Permitted models can be found in the documentation at https://docs.perplexity.ai/docs/model-cards.\",\"type\":\"invalid_model\",\"code\":400}}", "logger": "utils.perplexity"}

@@ -5,31 +5,41 @@ import logging
 import os
 from utils.text_to_pdf import convert_text_to_pdf
 from utils.perplexity import generate_questions, COURT_REPORTER_TOPICS
+from utils.pdf_parser import QuestionProcessor, ProcessingError
 import shutil
 from datetime import datetime
 import time
+from typing import Dict, List, Optional, Tuple
+from pathlib import Path
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-def ensure_categories():
-    """Ensure all required categories exist in the database."""
-    categories = [
-        ('Legal & Judicial Terminology', 'Common legal terms, court procedures, and judicial concepts'),
-        ('Professional Standards & Ethics', 'Professional conduct, responsibilities, and ethical guidelines'),
-        ('Transcription Standards', 'Formatting rules, technical requirements, and industry standards'),
-        ('Grammar & Vocabulary', 'Legal writing, punctuation, and specialized terminology'),
-        ('Court Procedures', 'Court protocols and procedural guidelines'),
-        ('Deposition Protocol', 'Deposition procedures and best practices'),
-        ('Reporting Equipment', 'Court reporting technology and equipment usage'),
-        ('Certification Requirements', 'Licensing and certification standards')
-    ]
+class QuestionPoolManager:
+    """Manages the question pool and ensures minimum question thresholds."""
     
-    with app.app_context():
+    def __init__(self, app_context, min_threshold: int = 50):
+        self.app_context = app_context
+        self.min_threshold = min_threshold
+        self.pdf_processor = QuestionProcessor('pdf_files', 'processed_questions')
+    
+    def ensure_categories(self):
+        """Ensure all required categories exist in the database."""
+        categories = [
+            ('Legal & Judicial Terminology', 'Common legal terms, court procedures, and judicial concepts'),
+            ('Professional Standards & Ethics', 'Professional conduct, responsibilities, and ethical guidelines'),
+            ('Transcription Standards', 'Formatting rules, technical requirements, and industry standards'),
+            ('Grammar & Vocabulary', 'Legal writing, punctuation, and specialized terminology'),
+            ('Court Procedures', 'Court protocols and procedural guidelines'),
+            ('Deposition Protocol', 'Deposition procedures and best practices'),
+            ('Reporting Equipment', 'Court reporting technology and equipment usage'),
+            ('Certification Requirements', 'Licensing and certification standards')
+        ]
+        
         try:
             for name, description in categories:
-                if not Category.get_by_name(name):
+                if not Category.query.filter_by(name=name).first():
                     category = Category(name=name, description=description)
                     db.session.add(category)
             db.session.commit()
@@ -39,76 +49,28 @@ def ensure_categories():
             db.session.rollback()
             raise
 
-def backup_pdfs(pdf_directory: str):
-    """Create a backup of processed PDF files."""
-    try:
-        backup_dir = os.path.join(pdf_directory, 'processed_backup', 
-                                datetime.now().strftime('%Y%m%d_%H%M%S'))
-        os.makedirs(backup_dir, exist_ok=True)
-        
-        for filename in os.listdir(pdf_directory):
-            if filename.endswith('.pdf'):
-                src_path = os.path.join(pdf_directory, filename)
-                dst_path = os.path.join(backup_dir, filename)
-                shutil.copy2(src_path, dst_path)
+    def backup_pdfs(self) -> bool:
+        """Create a backup of processed PDF files."""
+        try:
+            backup_dir = Path('pdf_files') / 'processed_backup' / datetime.now().strftime('%Y%m%d_%H%M%S')
+            backup_dir.mkdir(parents=True, exist_ok=True)
+            
+            pdf_dir = Path('pdf_files')
+            for pdf_file in pdf_dir.glob('*.pdf'):
+                shutil.copy2(pdf_file, backup_dir / pdf_file.name)
                 
-        logger.info(f"Created backup of PDF files in {backup_dir}")
-        return True
-    except Exception as e:
-        logger.error(f"Error creating PDF backup: {str(e)}")
-        return False
-
-def maintain_question_pool(min_threshold=50):
-    """Ensure each category has minimum required questions."""
-    with app.app_context():
-        try:
-            question_counts = Question.get_question_count_by_category()
-            total_generated = 0
-            
-            for category in COURT_REPORTER_TOPICS:
-                current_count = question_counts.get(category, 0)
-                if current_count < min_threshold:
-                    needed_count = min_threshold - current_count
-                    logger.info(f"Generating {needed_count} questions for {category}")
-                    
-                    for attempt in range(3):  # Try up to 3 times
-                        batch_size = min(20, needed_count)  # Generate in smaller batches
-                        questions = generate_questions(category, count=batch_size)
-                        
-                        if questions:
-                            added = Question.generate_questions_for_category(category, len(questions))
-                            total_generated += added
-                            needed_count -= added
-                            
-                            if needed_count <= 0:
-                                break
-                        
-                        time.sleep(2)  # Brief pause between attempts
-                        
-            logger.info(f"Generated {total_generated} new questions across all categories")
-            return total_generated
-            
+            logger.info(f"Created backup of PDF files in {backup_dir}")
+            return True
         except Exception as e:
-            logger.error(f"Error maintaining question pool: {str(e)}")
-            return 0
+            logger.error(f"Error creating PDF backup: {str(e)}")
+            return False
 
-def process_pdfs():
-    """Process PDF files and ensure minimum question threshold."""
-    with app.app_context():
-        total_added = 0
-        all_errors = []
+    def process_text_files(self) -> Tuple[int, List[str]]:
+        """Process and convert text files to PDFs."""
+        total_converted = 0
+        errors = []
         
         try:
-            logger.info("Starting PDF processing...")
-            
-            # Ensure categories exist
-            ensure_categories()
-            
-            # Create pdf_files directory if it doesn't exist
-            os.makedirs('pdf_files', exist_ok=True)
-            logger.info("Created pdf_files directory")
-            
-            # Process text files first
             txt_files = [f for f in os.listdir() if f.endswith('.txt') and 'study' in f.lower()]
             for txt_file in txt_files:
                 try:
@@ -116,32 +78,161 @@ def process_pdfs():
                     pdf_file = convert_text_to_pdf(txt_file, 'pdf_files')
                     if pdf_file:
                         logger.info(f"Successfully converted {txt_file} to PDF: {pdf_file}")
+                        total_converted += 1
                     else:
-                        logger.error(f"Failed to convert {txt_file} to PDF")
+                        error_msg = f"Failed to convert {txt_file} to PDF"
+                        logger.error(error_msg)
+                        errors.append(error_msg)
                 except Exception as e:
-                    logger.error(f"Error processing text file {txt_file}: {str(e)}")
-                    all_errors.append(f"Text file conversion error: {str(e)}")
+                    error_msg = f"Error processing text file {txt_file}: {str(e)}"
+                    logger.error(error_msg)
+                    errors.append(error_msg)
+                    
+            return total_converted, errors
             
-            # Create backup before processing
-            if not backup_pdfs('pdf_files'):
+        except Exception as e:
+            error_msg = f"Error processing text files: {str(e)}"
+            logger.error(error_msg)
+            return 0, [error_msg]
+
+    def maintain_question_pool(self) -> Tuple[int, List[str]]:
+        """Ensure each category has the minimum required questions."""
+        total_generated = 0
+        errors = []
+        
+        try:
+            for category in COURT_REPORTER_TOPICS:
+                current_count = Question.query.join(Category).filter(
+                    Category.name == category
+                ).count()
+                
+                if current_count < self.min_threshold:
+                    needed_count = self.min_threshold - current_count
+                    logger.info(f"Generating {needed_count} questions for {category}")
+                    
+                    for attempt in range(3):
+                        batch_size = min(20, needed_count)
+                        questions = generate_questions(category, count=batch_size)
+                        
+                        if questions:
+                            category_obj = Category.query.filter_by(name=category).first()
+                            if not category_obj:
+                                errors.append(f"Category not found: {category}")
+                                break
+                                
+                            added_count = 0
+                            for question_data in questions:
+                                try:
+                                    existing = Question.query.filter_by(
+                                        question_text=question_data['question_text'],
+                                        category_id=category_obj.id
+                                    ).first()
+                                    
+                                    if not existing:
+                                        question = Question(
+                                            category_id=category_obj.id,
+                                            question_text=question_data['question_text'],
+                                            correct_answer=question_data['correct_answer'],
+                                            wrong_answers=question_data['wrong_answers']
+                                        )
+                                        db.session.add(question)
+                                        added_count += 1
+                                        
+                                except Exception as e:
+                                    errors.append(f"Error adding question: {str(e)}")
+                                    continue
+                                    
+                            if added_count > 0:
+                                db.session.commit()
+                                total_generated += added_count
+                                needed_count -= added_count
+                                logger.info(f"Added {added_count} questions to {category}")
+                                
+                            if needed_count <= 0:
+                                break
+                                
+                        time.sleep(2)  # Brief pause between attempts
+                        
+            return total_generated, errors
+            
+        except Exception as e:
+            error_msg = f"Error maintaining question pool: {str(e)}"
+            logger.error(error_msg)
+            return 0, [error_msg]
+
+    def process_pdfs(self) -> Tuple[int, List[str]]:
+        """Process PDF files and extract questions."""
+        total_added = 0
+        all_errors = []
+        
+        try:
+            logger.info("Starting PDF processing...")
+            
+            # Ensure categories exist
+            self.ensure_categories()
+            
+            # Create directories
+            os.makedirs('pdf_files', exist_ok=True)
+            os.makedirs('processed_questions', exist_ok=True)
+            
+            # Process text files
+            converted_count, text_errors = self.process_text_files()
+            all_errors.extend(text_errors)
+            
+            # Backup existing PDFs
+            if not self.backup_pdfs():
                 logger.warning("Failed to create PDF backup")
             
             # Process all PDFs
-            logger.info("Processing all PDFs in pdf_files directory...")
-            questions_added, processing_errors = Question.seed_from_pdfs('pdf_files')
-            total_added += questions_added
-            all_errors.extend(processing_errors)
+            pdf_dir = Path('pdf_files')
+            for pdf_file in pdf_dir.glob('*.pdf'):
+                logger.info(f"Processing PDF file: {pdf_file.name}")
+                questions, errors = self.pdf_processor.process_pdf(pdf_file.name)
+                
+                if questions:
+                    output_path = self.pdf_processor.save_questions(
+                        questions,
+                        f"processed_{pdf_file.stem}_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+                    )
+                    
+                    if output_path:
+                        # Add questions to database
+                        added_count = 0
+                        for question in questions:
+                            try:
+                                category = Category.query.filter_by(name=question.category).first()
+                                if not category:
+                                    logger.warning(f"Category not found: {question.category}")
+                                    continue
+                                    
+                                db_question = Question(
+                                    category_id=category.id,
+                                    question_text=question.question_text,
+                                    correct_answer=question.correct_answer,
+                                    wrong_answers=question.wrong_answers
+                                )
+                                db.session.add(db_question)
+                                added_count += 1
+                                
+                            except Exception as e:
+                                error_msg = f"Error adding question to database: {str(e)}"
+                                logger.error(error_msg)
+                                all_errors.append(error_msg)
+                                continue
+                                
+                        if added_count > 0:
+                            db.session.commit()
+                            total_added += added_count
+                            logger.info(f"Added {added_count} questions from {pdf_file.name}")
+                
+                all_errors.extend([e.message for e in errors])
             
-            # Check and maintain minimum question threshold
-            logger.info("Checking question counts and generating additional questions if needed...")
-            generated_count = maintain_question_pool(min_threshold=50)
+            # Generate additional questions if needed
+            generated_count, generation_errors = self.maintain_question_pool()
             total_added += generated_count
+            all_errors.extend(generation_errors)
             
-            if total_added > 0:
-                logger.info(f"Successfully added {total_added} questions ({questions_added} from PDFs, {generated_count} generated)")
-            else:
-                logger.warning("No questions were added during processing")
-            
+            logger.info(f"Total questions added: {total_added}")
             if all_errors:
                 logger.warning("Errors encountered during processing:")
                 for error in all_errors:
@@ -154,6 +245,12 @@ def process_pdfs():
             logger.error(error_msg)
             db.session.rollback()
             return 0, [error_msg]
+
+def process_pdfs():
+    """Main entry point for PDF processing."""
+    with app.app_context():
+        pool_manager = QuestionPoolManager(app.app_context)
+        return pool_manager.process_pdfs()
 
 if __name__ == "__main__":
     process_pdfs()
