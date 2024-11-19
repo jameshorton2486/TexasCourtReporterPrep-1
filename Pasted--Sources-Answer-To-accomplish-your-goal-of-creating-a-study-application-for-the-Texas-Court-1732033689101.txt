@@ -1,0 +1,215 @@
+
+
+
+
+Sources
+Answer
+To accomplish your goal of creating a study application for the Texas Court Reporter examination using Replit, you'll need to make some modifications and additions to your existing code. Here's a detailed plan on how to structure your application to achieve this:
+Question Generation and Formatting:
+Enhance the QuestionProcessor class in your process_pdfs.py file:
+python
+class QuestionProcessor:
+    def __init__(self, input_dir: str, output_dir: str):
+        # ... existing initialization ...
+        self.question_formats = ['multiple_choice', 'true_false', 'fill_in_blank']
+
+    def generate_formatted_questions(self, text: str, category: str) -> List[Question]:
+        questions = []
+        # Use OpenAI or Perplexity AI to generate questions
+        ai_generated_questions = self.generate_ai_questions(text, category)
+        
+        for q in ai_generated_questions:
+            question_format = random.choice(self.question_formats)
+            formatted_question = self.format_question(q, question_format)
+            questions.append(formatted_question)
+        
+        return questions
+
+    def generate_ai_questions(self, text: str, category: str) -> List[Dict]:
+        # Use OpenAI or Perplexity AI API to generate questions
+        # Return a list of dictionaries containing question data
+        pass
+
+    def format_question(self, question_data: Dict, format_type: str) -> Question:
+        # Format the question based on the chosen format type
+        # Return a Question object
+        pass
+
+Category Management:
+Modify the Category model in models.py:
+python
+class Category(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), unique=True, nullable=False)
+    description = db.Column(db.Text)
+    questions = db.relationship('Question', backref='category', lazy=True)
+
+    @classmethod
+    def get_or_create(cls, name: str, description: str = None):
+        category = cls.query.filter_by(name=name).first()
+        if not category:
+            category = cls(name=name, description=description)
+            db.session.add(category)
+            db.session.commit()
+        return category
+
+Question Model:
+Update the Question model in models.py:
+python
+class Question(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    category_id = db.Column(db.Integer, db.ForeignKey('category.id'), nullable=False)
+    question_text = db.Column(db.Text, nullable=False)
+    correct_answer = db.Column(db.Text, nullable=False)
+    wrong_answers = db.Column(db.JSON)  # Store as JSON for flexibility
+    question_type = db.Column(db.String(20), nullable=False)  # 'multiple_choice', 'true_false', 'fill_in_blank'
+    difficulty = db.Column(db.Integer)  # 1-5 scale
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'category': self.category.name,
+            'question_text': self.question_text,
+            'correct_answer': self.correct_answer,
+            'wrong_answers': self.wrong_answers,
+            'question_type': self.question_type,
+            'difficulty': self.difficulty
+        }
+
+Exam Generation:
+Create a new file exam_generator.py:
+python
+from models import Question, Category
+from sqlalchemy.sql.expression import func
+from typing import List
+
+class ExamGenerator:
+    def __init__(self, category: Category, question_count: int = 20):
+        self.category = category
+        self.question_count = question_count
+
+    def generate_exam(self) -> List[Question]:
+        questions = Question.query.filter_by(category_id=self.category.id).order_by(func.random()).limit(self.question_count).all()
+        return questions
+
+    def get_exam_dict(self) -> List[dict]:
+        questions = self.generate_exam()
+        return [q.to_dict() for q in questions]
+
+API Endpoints:
+Add new routes to your routes.py file:
+python
+@bp.route('/api/exam/<category_name>')
+@login_required
+def get_exam(category_name):
+    category = Category.query.filter_by(name=category_name).first_or_404()
+    exam_generator = ExamGenerator(category)
+    exam_questions = exam_generator.get_exam_dict()
+    return jsonify(exam_questions)
+
+@bp.route('/api/submit_exam', methods=['POST'])
+@login_required
+def submit_exam():
+    data = request.json
+    # Process submitted answers and calculate score
+    # Update user's performance metrics
+    # Return results
+    pass
+
+Frontend:
+Create new templates for exam taking and result display. For example, exam.html:
+xml
+{% extends "base.html" %}
+{% block content %}
+<div id="exam-container">
+    <h2>{{ category_name }} Exam</h2>
+    <form id="exam-form">
+        {% for question in questions %}
+        <div class="question">
+            <p>{{ question.question_text }}</p>
+            {% if question.question_type == 'multiple_choice' %}
+                {% for answer in question.wrong_answers + [question.correct_answer] | shuffle %}
+                <label>
+                    <input type="radio" name="q{{ question.id }}" value="{{ answer }}">
+                    {{ answer }}
+                </label>
+                {% endfor %}
+            {% elif question.question_type == 'true_false' %}
+                <label><input type="radio" name="q{{ question.id }}" value="True"> True</label>
+                <label><input type="radio" name="q{{ question.id }}" value="False"> False</label>
+            {% endif %}
+        </div>
+        {% endfor %}
+        <button type="submit">Submit Exam</button>
+    </form>
+</div>
+<script src="{{ url_for('static', filename='js/exam.js') }}"></script>
+{% endblock %}
+
+Replit Configuration:
+To let Replit know about your project structure and dependencies, create a .replit file in your project root:
+text
+language = "python3"
+run = "python app.py"
+
+Also, create a requirements.txt file with all your Python dependencies:
+text
+Flask==2.0.1
+Flask-SQLAlchemy==2.5.1
+Flask-Login==0.5.0
+PyPDF2==1.26.0
+python-magic==0.4.24
+openai==0.27.0
+requests==2.26.0
+
+Environment Variables:
+In Replit, set up your environment variables in the Secrets tab:
+FLASK_SECRET_KEY: A secret key for Flask
+DATABASE_URL: Your database connection string
+OPENAI_API_KEY: Your OpenAI API key (if using OpenAI)
+PERPLEXITY_API_KEY: Your Perplexity AI API key (if using Perplexity)
+Main Application File:
+Update your app.py to include all necessary components:
+python
+from flask import Flask
+from extensions import db, login_manager
+from models import User, Category, Question
+from routes import bp as main_bp
+from process_pdfs import QuestionProcessor
+import os
+
+def create_app():
+    app = Flask(__name__)
+    app.config['SECRET_KEY'] = os.environ.get('FLASK_SECRET_KEY')
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
+    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+    db.init_app(app)
+    login_manager.init_app(app)
+
+    app.register_blueprint(main_bp)
+
+    with app.app_context():
+        db.create_all()
+        # Initialize categories
+        categories = ['Legal & Judicial Terminology', 'Professional Standards & Ethics', 'Grammar & Vocabulary', 'Transcription Standards']
+        for cat in categories:
+            Category.get_or_create(cat)
+
+    return app
+
+if __name__ == '__main__':
+    app = create_app()
+    app.run(host='0.0.0.0', port=8080, debug=True)
+
+This structure allows your application to:
+Convert text and PDF files into structured questions.
+Use AI to generate and format questions for different categories.
+Randomly select questions for each exam attempt.
+Present exams with various question types (multiple choice, true/false).
+Track user performance and adapt difficulty.
+To run this in Replit:
+Upload all your Python files and templates to your Replit project.
+Set up the environment variables in the Secrets tab.
+Click the "Run" button, and Replit will use the .replit file to start your application.
+This setup provides a solid foundation for your Texas Court Reporter examination study application, allowing for easy expansion and modification as needed.

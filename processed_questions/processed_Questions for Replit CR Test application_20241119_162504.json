@@ -1,0 +1,50 @@
+[
+  {
+    "question_text": "Legal & Judicial Terminology 1.\nQ: Define \"res judicata\" and explain its significance in legal proceedings.\nA: Res judicata, meaning \"a matter judged\" in Latin, is a legal principle that prevents the same case from being litigated again once a final judgment has been rendered.\nIt's significant because it ensures the finality of judgments, prevents redundant liti gation, and promotes judicial efficiency.\n2.\nQ: What is the purpose of a \"writ of mandamus\" in the legal system?",
+    "correct_answer": "Court reporters should generally refrain from accepting gifts from attorneys, parties, or witnesses involved in cases they're reporting.",
+    "wrong_answers": [
+      "If a court reporter discovers a conflict of interest, they should immediately disclose this to all parties involved and the presiding judge or hiring attorney.",
+      "Voir dire, meaning \"to speak the truth\" in French, refers to the process of questioning potential jurors to determine their suitability for jury duty.",
+      "De facto segregation refers to separation that occurs \"in fact\" but not by official policy, often due to social, economic, or cultural factors."
+    ],
+    "category": "Legal & Judicial Terminology",
+    "source_file": "Questions for Replit CR Test application.pdf",
+    "content_hash": "42b01adab108cb0ee795f1737a982d0856bccf6f6d68f1b685701bc3ab303274"
+  },
+  {
+    "question_text": "21.\nQ: What are the ethical implications of a court reporter discussing case details with colleagues?",
+    "correct_answer": "Q: How should a court reporter handle a request to expedite a transcript that might compromise accuracy?",
+    "wrong_answers": [
+      "Q: What should a court reporter do if they suspect a witness is lying under oath?",
+      "Q: How should a court reporter maintain professional development in areas of specialization?",
+      "Q: What are the ethical considerations for court reporters working remotely?"
+    ],
+    "category": "Legal & Judicial Terminology",
+    "source_file": "Questions for Replit CR Test application.pdf",
+    "content_hash": "2c239cdcfce5299edc2029fba6dce29108db20231f34bc66c4fba217dd434ba7"
+  },
+  {
+    "question_text": "9.\nQ: What is a \"statute of repose\"?",
+    "correct_answer": "Q: Define \"res ipsa loquitur\" and its application in tort law.",
+    "wrong_answers": [
+      "Q: What is \"joinder\" in legal proceedings?",
+      "Q: Explain the term \"nunc pro tunc\" in legal context.",
+      "Q: What is a \"motion in limine\"?"
+    ],
+    "category": "Legal & Judicial Terminology",
+    "source_file": "Questions for Replit CR Test application.pdf",
+    "content_hash": "433ffb0f2addd4c696a240ccd19e058a69b75aafeffadb3206ba77d4e07f613d"
+  },
+  {
+    "question_text": "2.\nQ: What is \"voir dire\" and why is it conducted in court proceedings?",
+    "correct_answer": "Q: Define \"nunc pro tunc\" and describe its typical use in legal contexts.",
+    "wrong_answers": [
+      "Q: What is the \"fruit of the poisonous tree\" doctrine in criminal law?",
+      "Q: Explain the difference between \"de novo\" and \"abuse of discretion\" standards of review.",
+      "Q: What is \"estoppel\" and how is it applied in law?"
+    ],
+    "category": "Legal & Judicial Terminology",
+    "source_file": "Questions for Replit CR Test application.pdf",
+    "content_hash": "6b82cd85a8b423f21c41b70952b8451345b4acbe2429cd1f9e0f3c749cc36876"
+  }
+]

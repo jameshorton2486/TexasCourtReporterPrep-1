@@ -1,0 +1,14 @@
+[
+  {
+    "question_text": "1.\nQ: How do \"motion to dismiss\" and \"motion for summary judgment\" differ in legal proceedings?",
+    "correct_answer": "Q: What is \"voir dire\" and why is it conducted in court proceedings?",
+    "wrong_answers": [
+      "Q: Define \"nunc pro tunc\" and describe its typical use in legal contexts.",
+      "Q: What is the \"fruit of the poisonous tree\" doctrine in criminal law?",
+      "Q: Explain the difference between \"de novo\" and \"abuse of discretion\" standards of review."
+    ],
+    "category": "Legal & Judicial Terminology",
+    "source_file": "More questions part 2.pdf",
+    "content_hash": "bf7167cc256a24a9a72f5b362abebfee8c8bf21d0d5389caf0d49c2f76a62384"
+  }
+]
