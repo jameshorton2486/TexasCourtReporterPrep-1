@@ -3,8 +3,9 @@ import logging
 import json
 import requests
 import time
+import uuid
 from typing import List, Dict, Optional
-from tenacity import retry, stop_after_attempt, wait_exponential
+from tenacity import retry, stop_after_attempt, wait_exponential, before_log, after_log
 
 logger = logging.getLogger(__name__)
 
@@ -58,16 +59,37 @@ def validate_generated_question(question: Dict) -> bool:
         logger.error(f"Error validating generated question: {str(e)}")
         return False
 
+def before_retry_log(retry_state):
+    """Log information before retry attempt."""
+    logger.warning(
+        f"Retry attempt {retry_state.attempt_number} after {retry_state.outcome.exception()}, "
+        f"next retry in {retry_state.next_action.sleep} seconds"
+    )
+
+def after_retry_log(retry_state):
+    """Log information after retry attempt."""
+    if retry_state.outcome.failed:
+        logger.error(
+            f"Retry attempt {retry_state.attempt_number} failed with exception: {retry_state.outcome.exception()}"
+        )
+    else:
+        logger.info(f"Retry attempt {retry_state.attempt_number} succeeded")
+
 @retry(
     stop=stop_after_attempt(3),
     wait=wait_exponential(multiplier=1, min=4, max=10),
+    before=before_retry_log,
+    after=after_retry_log,
     reraise=True
 )
 def generate_questions(topic: str, count: int = 3) -> Optional[List[Dict]]:
-    """Generate questions using Perplexity AI API with retry mechanism and validation."""
+    """Generate questions using Perplexity AI API with enhanced error handling and logging."""
+    request_id = str(uuid.uuid4())
+    logger.info(f"Starting question generation for topic: {topic}, request_id: {request_id}")
+    
     api_key = os.environ.get('PERPLEXITY_API_KEY')
     if not api_key:
-        logger.error("Perplexity API key not found in environment")
+        logger.error(f"Perplexity API key not found in environment, request_id: {request_id}")
         return None
 
     prompt = f'''Generate {count} multiple-choice questions about {topic} for Texas Court Reporter exam preparation.
@@ -82,6 +104,7 @@ def generate_questions(topic: str, count: int = 3) -> Optional[List[Dict]]:
     '''
 
     try:
+        start_time = time.time()
         headers = {
             'Authorization': f'Bearer {api_key}',
             'Content-Type': 'application/json'
@@ -91,7 +114,7 @@ def generate_questions(topic: str, count: int = 3) -> Optional[List[Dict]]:
             'https://api.perplexity.ai/chat/completions',
             headers=headers,
             json={
-                'model': 'mistral-7b-instruct',
+                'model': 'pplx-7b-online',
                 'messages': [{'role': 'user', 'content': prompt}],
                 'max_tokens': 2000,
                 'temperature': 0.8,
@@ -100,10 +123,15 @@ def generate_questions(topic: str, count: int = 3) -> Optional[List[Dict]]:
             timeout=30
         )
         
+        response_time = time.time() - start_time
+        logger.info(f"API response time: {response_time:.2f}s, request_id: {request_id}")
+        
         if response.status_code == 200:
             content = response.json()['choices'][0]['message']['content']
             questions = []
             raw_questions = content.split('\n\nQuestion: ')
+            
+            logger.info(f"Processing {len(raw_questions)-1} raw questions, request_id: {request_id}")
             
             for raw_q in raw_questions[1:]:  # Skip first empty split
                 try:
@@ -129,25 +157,33 @@ def generate_questions(topic: str, count: int = 3) -> Optional[List[Dict]]:
                         
                         if validate_generated_question(question):
                             questions.append(question)
+                            logger.debug(f"Successfully parsed question: {question_text[:50]}..., request_id: {request_id}")
                         
                 except Exception as e:
-                    logger.error(f"Error parsing generated question: {str(e)}")
+                    logger.error(f"Error parsing generated question: {str(e)}, request_id: {request_id}")
                     continue
             
             if questions:
-                logger.info(f"Successfully generated {len(questions)} valid questions about {topic}")
+                logger.info(f"Successfully generated {len(questions)} valid questions about {topic}, request_id: {request_id}")
                 return questions
             else:
-                logger.warning(f"No valid questions were generated for {topic}")
+                logger.warning(f"No valid questions were generated for {topic}, request_id: {request_id}")
                 return None
             
         else:
-            logger.error(f"Error from Perplexity API: {response.status_code} - {response.text}")
-            return None
+            error_msg = f"Error from Perplexity API: {response.status_code}"
+            try:
+                error_details = response.json()
+                error_msg += f" - {json.dumps(error_details)}"
+            except:
+                error_msg += f" - {response.text}"
+            
+            logger.error(f"{error_msg}, request_id: {request_id}")
+            raise requests.exceptions.RequestException(error_msg)
             
     except requests.exceptions.RequestException as e:
-        logger.error(f"Request error generating questions: {str(e)}")
+        logger.error(f"Request error generating questions: {str(e)}, request_id: {request_id}")
         raise  # Let retry handle the error
     except Exception as e:
-        logger.error(f"Error generating questions: {str(e)}")
+        logger.error(f"Error generating questions: {str(e)}, request_id: {request_id}")
         return None

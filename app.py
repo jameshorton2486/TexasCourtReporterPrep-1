@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, request, g
 from flask_login import current_user
 from extensions import db, login_manager
 from flask_mail import Mail
@@ -8,6 +8,9 @@ import logging
 from logging.handlers import TimedRotatingFileHandler
 from pythonjsonlogger import jsonlogger
 import traceback
+import time
+import uuid
+from functools import wraps
 
 # Create Flask app first
 app = Flask(__name__)
@@ -41,41 +44,51 @@ app.config.update(
 class CustomJsonFormatter(jsonlogger.JsonFormatter):
     def add_fields(self, log_record, record, message_dict):
         super(CustomJsonFormatter, self).add_fields(log_record, record, message_dict)
+        if not log_record.get('timestamp'):
+            log_record['timestamp'] = self.formatTime(record)
         if record.exc_info:
             log_record['stack_trace'] = traceback.format_exception(*record.exc_info)
         log_record['logger'] = record.name
         log_record['level'] = record.levelname
-        log_record['timestamp'] = self.formatTime(record)
+        
+        # Add request context if available
+        if hasattr(g, 'request_id'):
+            log_record['request_id'] = g.request_id
+        if request:
+            log_record['method'] = request.method
+            log_record['path'] = request.path
+            log_record['ip'] = request.remote_addr
+        if hasattr(g, 'start_time'):
+            log_record['response_time'] = (time.time() - g.start_time) * 1000
+        if current_user and current_user.is_authenticated:
+            log_record['user_id'] = current_user.id
 
 def setup_logging(app):
     # Create logs directory if it doesn't exist
     if not os.path.exists('logs'):
         os.makedirs('logs')
 
-    # Clear existing log file
-    log_file = 'logs/app.log'
-    if os.path.exists(log_file):
-        try:
-            os.remove(log_file)
-        except Exception as e:
-            print(f"Error clearing log file: {str(e)}")
-
-    # Set up JSON formatter with stack traces
+    # Set up JSON formatter with enhanced context
     formatter = CustomJsonFormatter(
         '%(timestamp)s %(level)s %(name)s %(message)s'
     )
 
-    # Set up file handler with daily rotation
+    # Set up file handler with daily rotation and compression
     file_handler = TimedRotatingFileHandler(
-        log_file,
+        'logs/app.log',
         when='midnight',
         interval=1,
-        backupCount=30
+        backupCount=30,
+        encoding='utf-8'
     )
     file_handler.setFormatter(formatter)
     file_handler.setLevel(logging.INFO)
 
-    # Set up console handler
+    # Enable compression for rotated logs
+    file_handler.rotator = lambda source, dest: os.system(f'gzip {source}')
+    file_handler.namer = lambda name: name + ".gz"
+
+    # Set up console handler with more detailed output
     console_handler = logging.StreamHandler()
     console_handler.setFormatter(formatter)
     console_handler.setLevel(logging.DEBUG)
@@ -100,6 +113,31 @@ def setup_logging(app):
 
     # Log application startup
     app.logger.info("Application logging initialized")
+
+    # Add request context processor
+    @app.before_request
+    def before_request():
+        g.request_id = str(uuid.uuid4())
+        g.start_time = time.time()
+        app.logger.info(f"Request started", extra={
+            'request_id': g.request_id,
+            'method': request.method,
+            'path': request.path,
+            'ip': request.remote_addr
+        })
+
+    @app.after_request
+    def after_request(response):
+        if hasattr(g, 'start_time'):
+            response_time = (time.time() - g.start_time) * 1000
+            app.logger.info(f"Request completed", extra={
+                'request_id': getattr(g, 'request_id', 'unknown'),
+                'method': request.method,
+                'path': request.path,
+                'status_code': response.status_code,
+                'response_time': response_time
+            })
+        return response
 
 def shuffle_filter(seq):
     try:
