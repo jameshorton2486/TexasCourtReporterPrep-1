@@ -12,34 +12,42 @@ import time
 import uuid
 from functools import wraps
 
-# Create Flask app first
-app = Flask(__name__)
+def create_app():
+    # Create Flask app
+    app = Flask(__name__)
 
-# Configure app
-app.config.update(
-    SECRET_KEY=os.environ.get("FLASK_SECRET_KEY", "default_secret_key"),
-    SQLALCHEMY_DATABASE_URI=os.environ.get("DATABASE_URL"),
-    SQLALCHEMY_TRACK_MODIFICATIONS=False,
-    # Mail settings
-    MAIL_SERVER='smtp.gmail.com',
-    MAIL_PORT=587,
-    MAIL_USE_TLS=True,
-    MAIL_USERNAME=os.environ.get('MAIL_USERNAME'),
-    MAIL_PASSWORD=os.environ.get('MAIL_PASSWORD'),
-    MAIL_DEFAULT_SENDER=os.environ.get('MAIL_USERNAME'),
-    # Additional settings for security
-    SESSION_COOKIE_SECURE=True,
-    REMEMBER_COOKIE_SECURE=True,
-    SESSION_COOKIE_HTTPONLY=True,
-    REMEMBER_COOKIE_HTTPONLY=True,
-    # Flask-Mail timeout settings
-    MAIL_MAX_EMAILS=None,
-    MAIL_TIMEOUT=30,
-    # Development settings
-    DEBUG=True,
-    # Server settings
-    SERVER_NAME=None  # Allow all hostnames
-)
+    # Configure app
+    app.config.update(
+        SECRET_KEY=os.environ.get("FLASK_SECRET_KEY", "default_secret_key"),
+        SQLALCHEMY_DATABASE_URI=os.environ.get("DATABASE_URL"),
+        SQLALCHEMY_TRACK_MODIFICATIONS=False,
+        # Mail settings
+        MAIL_SERVER='smtp.gmail.com',
+        MAIL_PORT=587,
+        MAIL_USE_TLS=True,
+        MAIL_USERNAME=os.environ.get('MAIL_USERNAME'),
+        MAIL_PASSWORD=os.environ.get('MAIL_PASSWORD'),
+        MAIL_DEFAULT_SENDER=os.environ.get('MAIL_USERNAME'),
+        # Additional settings for security
+        SESSION_COOKIE_SECURE=True,
+        REMEMBER_COOKIE_SECURE=True,
+        SESSION_COOKIE_HTTPONLY=True,
+        REMEMBER_COOKIE_HTTPONLY=True,
+        # Flask-Mail timeout settings
+        MAIL_MAX_EMAILS=None,
+        MAIL_TIMEOUT=30,
+        # Development settings
+        DEBUG=True,
+        # Server settings
+        SERVER_NAME=None  # Allow all hostnames
+    )
+
+    # Initialize extensions
+    db.init_app(app)
+    login_manager.init_app(app)
+    login_manager.login_view = 'main.login'
+
+    return app
 
 class CustomJsonFormatter(jsonlogger.JsonFormatter):
     def add_fields(self, log_record, record, message_dict):
@@ -148,21 +156,20 @@ def shuffle_filter(seq):
         app.logger.error(f'Shuffle filter failed: {str(e)}', exc_info=True)
         return seq
 
-# Set up logging
-setup_logging(app)
+# Create app instance
+app = create_app()
+
+# Set up logging after app creation
+with app.app_context():
+    setup_logging(app)
 
 # Add custom filters
 app.jinja_env.filters['shuffle'] = shuffle_filter
 
-# Initialize extensions
-db.init_app(app)
-login_manager.init_app(app)
-login_manager.login_view = 'main.login'
-
 # Initialize Mail
 mail = Mail(app)
 
-# Import models
+# Import models and routes
 from models import User, Category, Question, Test
 from routes import create_admin_user, bp as main_bp
 
