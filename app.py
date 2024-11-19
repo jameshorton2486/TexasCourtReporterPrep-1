@@ -32,7 +32,9 @@ app.config.update(
     MAIL_MAX_EMAILS=None,
     MAIL_TIMEOUT=30,
     # Development settings
-    DEBUG=True
+    DEBUG=True,
+    # Server settings
+    SERVER_NAME=None  # Allow all hostnames
 )
 
 def setup_logging(app):
@@ -150,4 +152,4 @@ with app.app_context():
         raise
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5000, debug=True)
