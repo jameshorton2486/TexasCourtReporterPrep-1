@@ -4,9 +4,10 @@ from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 import logging
 import os
-from utils.pdf_parser import process_pdf_file
+from utils.pdf_parser import QuestionProcessor
 import jwt
 from time import time
+from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
@@ -143,48 +144,59 @@ class Question(db.Model):
     question_text = db.Column(db.Text, nullable=False)
     correct_answer = db.Column(db.Text, nullable=False)
     wrong_answers = db.Column(db.JSON)
-    difficulty_level = db.Column(db.Float, default=2.5)  # Added for dynamic difficulty tracking
+    difficulty_level = db.Column(db.Float, default=2.5)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    last_used = db.Column(db.DateTime)  # Track when the question was last used
-    times_used = db.Column(db.Integer, default=0)  # Track how many times the question has been used
-    success_rate = db.Column(db.Float, default=0.0)  # Track overall success rate
+    last_used = db.Column(db.DateTime)
+    times_used = db.Column(db.Integer, default=0)
+    success_rate = db.Column(db.Float, default=0.0)
     user_performance = db.relationship('UserQuestionPerformance', backref='question', lazy=True)
     
     @classmethod
     def seed_from_pdfs(cls, pdf_directory: str) -> tuple[int, list[str]]:
         """
-        Seed questions from PDF files in the specified directory.
+        Seed questions from PDF files in the specified directory using enhanced QuestionProcessor.
         Returns tuple of (number of questions added, list of errors).
         """
         total_questions_added = 0
         all_errors = []
         
-        for filename in os.listdir(pdf_directory):
-            if filename.endswith('.pdf'):
-                pdf_path = os.path.join(pdf_directory, filename)
-                logger.info(f"Processing PDF file: {filename}")
+        # Initialize QuestionProcessor
+        processor = QuestionProcessor(pdf_directory, 'processed_questions')
+        pdf_dir = Path(pdf_directory)
+        
+        try:
+            # Process each PDF file in the directory
+            for pdf_file in pdf_dir.glob('*.pdf'):
+                logger.info(f"Processing PDF file: {pdf_file.name}")
                 
-                questions, errors = process_pdf_file(pdf_path)
-                all_errors.extend(errors)
+                # Process PDF using the enhanced processor
+                questions, errors = processor.process_pdf(pdf_file.name)
                 
+                # Add any processing errors to our list
+                all_errors.extend([error.message for error in errors])
+                
+                # Process extracted questions
                 for question_data in questions:
                     try:
-                        category = Category.get_by_name(question_data['category'])
+                        category = Category.get_by_name(question_data.category)
                         if not category:
-                            logger.warning(f"Category not found: {question_data['category']}")
+                            error_msg = f"Category not found: {question_data.category}"
+                            logger.warning(error_msg)
+                            all_errors.append(error_msg)
                             continue
                             
+                        # Check for duplicate questions
                         existing = cls.query.filter_by(
-                            question_text=question_data['question_text'],
+                            question_text=question_data.question_text,
                             category_id=category.id
                         ).first()
                         
                         if not existing:
                             question = cls(
                                 category_id=category.id,
-                                question_text=question_data['question_text'],
-                                correct_answer=question_data['correct_answer'],
-                                wrong_answers=question_data['wrong_answers']
+                                question_text=question_data.question_text,
+                                correct_answer=question_data.correct_answer,
+                                wrong_answers=question_data.wrong_answers
                             )
                             db.session.add(question)
                             total_questions_added += 1
@@ -195,13 +207,19 @@ class Question(db.Model):
                         all_errors.append(error_msg)
                 
                 try:
-                    db.session.commit()
-                    logger.info(f"Added {total_questions_added} questions from {filename}")
+                    if total_questions_added > 0:
+                        db.session.commit()
+                        logger.info(f"Added {total_questions_added} questions from {pdf_file.name}")
                 except Exception as e:
                     db.session.rollback()
-                    error_msg = f"Error committing questions from {filename}: {str(e)}"
+                    error_msg = f"Error committing questions from {pdf_file.name}: {str(e)}"
                     logger.error(error_msg)
                     all_errors.append(error_msg)
+        
+        except Exception as e:
+            error_msg = f"Error processing PDF directory: {str(e)}"
+            logger.error(error_msg)
+            all_errors.append(error_msg)
         
         return total_questions_added, all_errors
 

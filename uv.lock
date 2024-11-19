@@ -543,6 +543,7 @@ dependencies = [
     { name = "python-magic" },
     { name = "requests" },
     { name = "sqlalchemy" },
+    { name = "tenacity" },
     { name = "werkzeug" },
 ]
 
@@ -566,6 +567,7 @@ requires-dist = [
     { name = "python-magic", specifier = ">=0.4.27" },
     { name = "requests", specifier = ">=2.32.3" },
     { name = "sqlalchemy" },
+    { name = "tenacity" },
     { name = "werkzeug" },
 ]
 

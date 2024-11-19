@@ -1,6 +1,7 @@
 from flask import Flask, render_template, redirect, url_for, request, g, current_app
 from flask_login import current_user
 from extensions import db, login_manager
+from models import User
 from flask_mail import Mail
 import random
 import os
@@ -25,20 +26,15 @@ class CustomJsonFormatter(jsonlogger.JsonFormatter):
         log_record['level'] = record.levelname
         
         try:
-            # Safely add request context
+            # Only add request info if we're in request context
             if hasattr(g, 'request_id'):
                 log_record['request_id'] = g.request_id
             
-            # Only add request info if we're in request context
-            if request:
-                try:
-                    log_record['method'] = request.method
-                    log_record['path'] = request.path
-                    log_record['ip'] = request.remote_addr
-                except RuntimeError:
-                    # Handle case where we're outside request context
-                    pass
-                    
+            if request and request.environ:
+                log_record['method'] = request.method
+                log_record['path'] = request.path
+                log_record['ip'] = request.remote_addr
+                
             # Add response time if available
             if hasattr(g, 'start_time'):
                 log_record['response_time'] = (time.time() - g.start_time) * 1000
@@ -53,63 +49,60 @@ class CustomJsonFormatter(jsonlogger.JsonFormatter):
 
 def setup_logging(app):
     """Configure application logging with enhanced error handling and rotation."""
-    with app.app_context():
-        try:
-            # Ensure logs directory exists
-            if not os.path.exists('logs'):
-                os.makedirs('logs')
+    try:
+        # Ensure logs directory exists
+        if not os.path.exists('logs'):
+            os.makedirs('logs')
 
-            # Set up JSON formatter with enhanced context
-            formatter = CustomJsonFormatter(
-                '%(timestamp)s %(level)s %(name)s %(message)s'
-            )
+        # Set up JSON formatter with enhanced context
+        formatter = CustomJsonFormatter(
+            '%(timestamp)s %(level)s %(name)s %(message)s'
+        )
 
-            # Set up file handler with daily rotation and compression
-            file_handler = TimedRotatingFileHandler(
-                'logs/app.log',
-                when='midnight',
-                interval=1,
-                backupCount=30,
-                encoding='utf-8'
-            )
-            file_handler.setFormatter(formatter)
-            file_handler.setLevel(logging.INFO)
+        # Set up file handler with daily rotation and compression
+        file_handler = TimedRotatingFileHandler(
+            'logs/app.log',
+            when='midnight',
+            interval=1,
+            backupCount=30,
+            encoding='utf-8'
+        )
+        file_handler.setFormatter(formatter)
+        file_handler.setLevel(logging.INFO)
 
-            # Set up console handler with more detailed output
-            console_handler = logging.StreamHandler()
-            console_handler.setFormatter(formatter)
-            console_handler.setLevel(logging.DEBUG)
+        # Set up console handler with more detailed output
+        console_handler = logging.StreamHandler()
+        console_handler.setFormatter(formatter)
+        console_handler.setLevel(logging.DEBUG)
 
-            # Configure root logger
-            root_logger = logging.getLogger()
-            root_logger.setLevel(logging.INFO)
-            
-            # Remove any existing handlers
-            root_logger.handlers = []
-            
-            # Add our handlers
-            root_logger.addHandler(file_handler)
-            root_logger.addHandler(console_handler)
+        # Configure root logger
+        root_logger = logging.getLogger()
+        root_logger.setLevel(logging.INFO)
+        
+        # Remove any existing handlers
+        root_logger.handlers = []
+        
+        # Add our handlers
+        root_logger.addHandler(file_handler)
+        root_logger.addHandler(console_handler)
 
-            # Configure Flask logger
-            app.logger.setLevel(logging.INFO)
-            # Remove default handlers
-            app.logger.handlers = []
-            app.logger.addHandler(file_handler)
-            app.logger.addHandler(console_handler)
+        # Configure Flask logger
+        app.logger.setLevel(logging.INFO)
+        # Remove default handlers
+        app.logger.handlers = []
+        app.logger.addHandler(file_handler)
+        app.logger.addHandler(console_handler)
 
-            # Log application startup
-            app.logger.info("Application logging initialized")
+        app.logger.info("Application logging initialized")
 
-        except Exception as e:
-            # If logging setup fails, ensure basic console logging works
-            print(f"Error setting up logging: {str(e)}")
-            console_handler = logging.StreamHandler()
-            console_handler.setLevel(logging.DEBUG)
-            app.logger.addHandler(console_handler)
-            app.logger.error(f"Failed to initialize logging: {str(e)}")
+    except Exception as e:
+        # If logging setup fails, ensure basic console logging works
+        print(f"Error setting up logging: {str(e)}")
+        console_handler = logging.StreamHandler()
+        console_handler.setLevel(logging.DEBUG)
+        app.logger.addHandler(console_handler)
+        app.logger.error(f"Failed to initialize logging: {str(e)}")
 
-# Update the app configuration
 def create_app():
     """Application factory function with enhanced error handling."""
     app = Flask(__name__)
@@ -139,7 +132,17 @@ def create_app():
         # Initialize extensions with error handling
         db.init_app(app)
         login_manager.init_app(app)
-        login_manager.login_view = 'main.login'
+        login_manager.login_view = 'auth.login'  # Update to use blueprint prefix
+
+        # Add user loader
+        @login_manager.user_loader
+        def load_user(user_id):
+            try:
+                return db.session.get(User, int(user_id))
+            except Exception as e:
+                app.logger.error(f"Error loading user: {str(e)}")
+                return None
+
         mail = Mail(app)
 
         # Set up logging
@@ -148,6 +151,19 @@ def create_app():
         # Register blueprints
         from routes import bp as main_bp
         app.register_blueprint(main_bp)
+
+        # Request handlers for logging
+        @app.before_request
+        def before_request():
+            g.start_time = time.time()
+            g.request_id = str(uuid.uuid4())
+
+        @app.after_request
+        def after_request(response):
+            if hasattr(g, 'start_time'):
+                total_time = (time.time() - g.start_time) * 1000
+                app.logger.info(f"Request completed in {total_time:.2f}ms")
+            return response
 
         # Initialize database and create tables
         with app.app_context():

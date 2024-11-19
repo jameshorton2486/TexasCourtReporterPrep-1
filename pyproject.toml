@@ -23,4 +23,5 @@ dependencies = [
     "numpy",
     "flask-mail>=0.10.0",
     "pyjwt>=2.10.0",
+    "tenacity",
 ]

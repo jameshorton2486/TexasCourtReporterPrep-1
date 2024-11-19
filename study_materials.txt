@@ -4,14 +4,28 @@ What is the meaning of stare decisis? - A legal principle that obligates courts 
 
 What does amicus curiae mean? - Friend of the court; someone who is not a party to a case who offers information to assist the court in deciding a matter before it.
 
+What is the term for a written statement given under oath? - An affidavit is a written statement given under oath and notarized.
+
 Professional Standards & Ethics Questions:
 
 How long must a court reporter maintain backup audio files? - 3 years from the date of the proceeding.
 
 Can a court reporter serve as a notary public in the same proceeding? - No, it creates a conflict of interest.
 
+What is the required timeframe for delivering a certified transcript? - Within 30 days of the request unless otherwise specified by court order.
+
 Transcription Standards Questions:
 
 What is the minimum speed requirement for real-time court reporting? - 225 WPM.
 
 How should speaker identification be formatted in Q&A? - The speaker should be identified in all caps followed by a colon.
+
+What is the proper format for indicating an exhibit in a transcript? - EXHIBIT [Number/Letter] followed by description in parentheses.
+
+Grammar & Vocabulary Questions:
+
+What is the correct usage of voir dire in legal context? - It refers to the preliminary examination of a witness or juror to determine their competency.
+
+How should Latin legal phrases be formatted in transcripts? - Latin phrases should be italicized or underlined, depending on court preference.
+
+What is the proper way to handle interrupted speech in transcripts? - Use two hyphens (--) to indicate interrupted speech mid-sentence.
