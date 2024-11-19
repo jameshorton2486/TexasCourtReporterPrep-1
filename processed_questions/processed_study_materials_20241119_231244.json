@@ -1,0 +1,122 @@
+[
+  {
+    "question_text": "What is the meaning of stare decisis?",
+    "correct_answer": "- A legal principle that obligates courts to follow historical cases when making a ruling on a similar case.",
+    "wrong_answers": [
+      "Incorrect: - A legal principle that obligates courts to follow historical cases when making a ruling on a similar case.",
+      "Not quite: - A legal principle that obligates courts to follow historical cases when making a ruling on a similar case.",
+      "Wrong: - A legal principle that obligates courts to follow historical cases when making a ruling on a similar case."
+    ],
+    "category": "Legal & Judicial Terminology",
+    "source_file": "study_materials.pdf",
+    "content_hash": "c1a215b194aa95550efef98c51b42e9e874e16b6a4d97fb6ec17ccfec5721e54"
+  },
+  {
+    "question_text": "What does amicus curiae mean?",
+    "correct_answer": "- Friend of the court; someone who is not a party to a case who offers information to assist the court in deciding a matter before it.",
+    "wrong_answers": [
+      "Incorrect: - Friend of the court; someone who is not a party to a case who offers information to assist the court in deciding a matter before it.",
+      "Not quite: - Friend of the court; someone who is not a party to a case who offers information to assist the court in deciding a matter before it.",
+      "Wrong: - Friend of the court; someone who is not a party to a case who offers information to assist the court in deciding a matter before it."
+    ],
+    "category": "Legal & Judicial Terminology",
+    "source_file": "study_materials.pdf",
+    "content_hash": "a69fc431502d5ab24c5d0eb3a1356e831762475ba9f2e8820283870ec3ed3422"
+  },
+  {
+    "question_text": "What is the term for a written statement given under oath?",
+    "correct_answer": "- An affidavit is a written statement given under oath and notarized. Professional Standards & Ethics Questions:",
+    "wrong_answers": [
+      "Incorrect: - An affidavit is a written statement given under oath and notarized. Professional Standards & Ethics Questions:",
+      "Not quite: - An affidavit is a written statement given under oath and notarized. Professional Standards & Ethics Questions:",
+      "Wrong: - An affidavit is a written statement given under oath and notarized. Professional Standards & Ethics Questions:"
+    ],
+    "category": "Legal & Judicial Terminology",
+    "source_file": "study_materials.pdf",
+    "content_hash": "67f48a74ed6943284e0fbdb007cfb4e03492da39a275311be786a3f1ee870061"
+  },
+  {
+    "question_text": "What is the required timeframe for delivering a certified transcript?",
+    "correct_answer": "- Within 30 days of the request unless otherwise specified by court order. Transcription Standards Questions:",
+    "wrong_answers": [
+      "Incorrect: - Within 30 days of the request unless otherwise specified by court order. Transcription Standards Questions:",
+      "Not quite: - Within 30 days of the request unless otherwise specified by court order. Transcription Standards Questions:",
+      "Wrong: - Within 30 days of the request unless otherwise specified by court order. Transcription Standards Questions:"
+    ],
+    "category": "Legal & Judicial Terminology",
+    "source_file": "study_materials.pdf",
+    "content_hash": "4492b213c7fa19675495fcb793982abacf75c23e752b9ab42d5f0989f72d4be6"
+  },
+  {
+    "question_text": "What is the minimum speed requirement for real-time court reporting?",
+    "correct_answer": "- 225 WPM.",
+    "wrong_answers": [
+      "Incorrect: - 225 WPM.",
+      "Not quite: - 225 WPM.",
+      "Wrong: - 225 WPM."
+    ],
+    "category": "Legal & Judicial Terminology",
+    "source_file": "study_materials.pdf",
+    "content_hash": "1a6af328954a1d8e0e24f50077c074ed5d3ab8a1db883630c66c9b0148f5d6d5"
+  },
+  {
+    "question_text": "How should speaker identification be formatted in Q&A?",
+    "correct_answer": "- The speaker should be identified in all caps followed by a colon.",
+    "wrong_answers": [
+      "Incorrect: - The speaker should be identified in all caps followed by a colon.",
+      "Not quite: - The speaker should be identified in all caps followed by a colon.",
+      "Wrong: - The speaker should be identified in all caps followed by a colon."
+    ],
+    "category": "Transcription Standards",
+    "source_file": "study_materials.pdf",
+    "content_hash": "b65b2121338eb988571353f0f387855505550f9ff0f0132787643618fd39f791"
+  },
+  {
+    "question_text": "What is the proper format for indicating an exhibit in a transcript?",
+    "correct_answer": "- EXHIBIT [Number/Letter] followed by description in parentheses. Grammar & Vocabulary Questions:",
+    "wrong_answers": [
+      "Incorrect: - EXHIBIT [Number/Letter] followed by description in parentheses. Grammar & Vocabulary Questions:",
+      "Not quite: - EXHIBIT [Number/Letter] followed by description in parentheses. Grammar & Vocabulary Questions:",
+      "Wrong: - EXHIBIT [Number/Letter] followed by description in parentheses. Grammar & Vocabulary Questions:"
+    ],
+    "category": "Transcription Standards",
+    "source_file": "study_materials.pdf",
+    "content_hash": "4a33e1417365bdcabcab668bb6fdfaaab22d3af42fd3849b4961ff90e25c4590"
+  },
+  {
+    "question_text": "What is the correct usage of voir dire in legal context?",
+    "correct_answer": "- It refers to the preliminary examination of a witness or juror to determine their competency.",
+    "wrong_answers": [
+      "Incorrect: - It refers to the preliminary examination of a witness or juror to determine their competency.",
+      "Not quite: - It refers to the preliminary examination of a witness or juror to determine their competency.",
+      "Wrong: - It refers to the preliminary examination of a witness or juror to determine their competency."
+    ],
+    "category": "Legal & Judicial Terminology",
+    "source_file": "study_materials.pdf",
+    "content_hash": "b87861052b8cfec1af334d05a4ebc077d7c3d62ea5479be9fb89d9a737ee3695"
+  },
+  {
+    "question_text": "How should Latin legal phrases be formatted in transcripts?",
+    "correct_answer": "- Latin phrases should be italicized or underlined, depending on court preference.",
+    "wrong_answers": [
+      "Incorrect: - Latin phrases should be italicized or underlined, depending on court preference.",
+      "Not quite: - Latin phrases should be italicized or underlined, depending on court preference.",
+      "Wrong: - Latin phrases should be italicized or underlined, depending on court preference."
+    ],
+    "category": "Legal & Judicial Terminology",
+    "source_file": "study_materials.pdf",
+    "content_hash": "c5ef6753eaac672256f1a34af45f76a91cfb9c24ac63b32d5d2c85dc5aba486f"
+  },
+  {
+    "question_text": "What is the proper way to handle interrupted speech in transcripts?",
+    "correct_answer": "- Use two hyphens (--) to indicate interrupted speech mid-sentence.",
+    "wrong_answers": [
+      "Incorrect: - Use two hyphens (--) to indicate interrupted speech mid-sentence.",
+      "Not quite: - Use two hyphens (--) to indicate interrupted speech mid-sentence.",
+      "Wrong: - Use two hyphens (--) to indicate interrupted speech mid-sentence."
+    ],
+    "category": "Legal & Judicial Terminology",
+    "source_file": "study_materials.pdf",
+    "content_hash": "bfc116b62f7f9d00ac6ea4324957c3e76995732833ee35ffbdd541b96fd5893e"
+  }
+]

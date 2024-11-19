@@ -177,7 +177,7 @@ def generate_questions(topic: str, count: int = 3) -> Optional[List[Dict]]:
             'https://api.perplexity.ai/chat/completions',
             headers=headers,
             json={
-                'model': 'mistral-7b-instruct',  # Updated model name as per Perplexity AI docs
+                'model': 'mixtral-8x7b-instruct',  # Updated to a supported model
                 'messages': [{'role': 'user', 'content': prompt}],
                 'max_tokens': 2048,
                 'temperature': 0.7,
