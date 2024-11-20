@@ -1,0 +1,1821 @@
+{
+  "metadata": {
+    "timestamp": "2024-11-20T00:40:28.929606",
+    "total_questions": 151,
+    "source_file": "More questions part 2.pdf"
+  },
+  "questions": [
+    {
+      "question_text": "2. Q: What is \"voir dire\" and why is it conducted in court proceedings?",
+      "correct_answer": "A: Voir dire is the process of questioning potential jurors to assess their suitability for jury duty. It's conducted to identify biases, conflicts of interest, or other factors that might affect a juror's impartiality, allowing attorneys to make informed decisions during jury selection. 3. Q: Define \"nunc pro tunc\" and describe its typical use in legal contexts. A: Nunc pro tunc, meaning \"now for then\" in Latin, refers to a court ruling that has retroactive effect. It's typically used to correct clerical errors in court orders or judgments, allowing the corrected order to be effective as of the date of the original order.",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "c47ee3d11aa0203346fe7eaae7f33af45c46e6d1b2258baa039bf326ffcfe9c3"
+    },
+    {
+      "question_text": "4. Q: What is the \"fruit of the poisonous tree\" doctrine in criminal law?",
+      "correct_answer": "A: The \"fruit of the poisonous tree\" doctrine holds that evidence obtained as a result of an illegal search, arrest, or interrogation (the \"poisonous tree\") is inadmissible in court. Th is extends to any evidence (the \"fruit\") derived from the initial illegal action. 5. Q: Explain the difference between \"de novo\" and \"abuse of discretion\" standards of review. A: De novo review means the appellate court considers the issue anew, giving no deference to the lower court's decision. Abuse of discretion review gives more defere nce to the lower court, only overturning decisions that are clearly unreasonable or based on an error of law.",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "56634b595f999078bf07efef1a0d5b617acf3c3ba0e2817e652ff816493a628f"
+    },
+    {
+      "question_text": "6. Q: What is \"estoppel\" and how is it applied in law?",
+      "correct_answer": "A: Estoppel is a legal principle that prevents a person from asserting something contrary to what is implied by their previous actions or statements. For example, if a landlord accepts late rent payments consistently, they may be estopped from evicting a tenant for a single late payment without proper notice.",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "4592dbd37c0d09758f8e615e77105cd7202a2561af09271151a6f8f153cfa206"
+    },
+    {
+      "question_text": "7. Q: What role does an \"amicus curiae\" brief play in court proceedings?",
+      "correct_answer": "A: An amicus curiae (\"friend of the court\") brief is submitted by a person or organization not party to a case to offer additional, relevant information or arguments to assist the court in deciding a matter before it. These briefs often provide broader perspectives or specialized knowledge. 8. Q: Describe the legal doctrine of \"respondeat superior\" and its implications. A: Respondeat superior, meaning \"let the master answer\" in Latin, is a doctrine that holds an employer responsible for the wrongful acts of an employee performed within the scope of their employment. This allows plaintiffs to seek damages from employers who may have deeper pockets than individual employees.",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "9ae47ded2050b670f5c12f55cd9aa537eb0c23880b2c1367e3af62ddead158cd"
+    },
+    {
+      "question_text": "9. Q: How do \"probation\" and \"parole\" differ in criminal law?",
+      "correct_answer": "A: Probation is a sentence that allows an offender to remain in the community under supervision instead of going to prison. Parole is the early release of a prisoner who agrees to abide by certain conditions, typically after serving part of their sentence. Probation is imposed at sentencing, while parole comes after incarceration.",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "75ccdf68f1bddde6ebc6376e515b67e50f273f0739311cd8f845709d511171c6"
+    },
+    {
+      "question_text": "10. Q: What is \"habeas corpus\" and why is it significant in the legal system?",
+      "correct_answer": "A: Habeas corpus, meaning \"produce the body\" in Latin, is a legal action or writ by which a person can seek relief from unlawful detention. It's significant as a fundamental protecti on against arbitrary imprisonment, allowing detainees to challenge the legal basis for their detention in court. Professional Standards & Ethics 1. Q: What steps should a court reporter take upon discovering a significant error in a certified",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "d6be34e65c62b9cfde43ea370203b8c5277263d4f484f609e5dc736f8feb69e7"
+    },
+    {
+      "question_text": "2. Q: How should a court reporter respond to an attorney's request to alter the record?",
+      "correct_answer": "A: A court reporter should never alter the record at an attorney's request. They should firmly explain that their ethical duty is to provide an accurate, verbatim transcri pt. If pressure continues, they should report the incident to the appropriate authority, such as the court or their professional association.",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "68be89756e3ac13c7570822cf8933b70d6f45a548cc32dd06df29b9d63f22781"
+    },
+    {
+      "question_text": "3. Q: What ethical guidelines should court reporters follow regarding social media use?",
+      "correct_answer": "A: Court reporters should avoid discussing or posting about ongoing cases, even vaguely. They should not connect on social media with attorneys or parties involved in thei r cases. Any professional use of social media should maintain the same level of confidentiality and professionalism as their work.",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "2c58ca6ba46664a90b6d20181d9b7aa969a1d79fb3f67ba7d6b5eaa91f53d759"
+    },
+    {
+      "question_text": "4. Q: Why is impartiality crucial in court reporting, and how can it be maintained?",
+      "correct_answer": "A: Impartiality is crucial because court reporters create the official record of proceedings. To maintain impartiality, reporters should avoid showing bias, refrain from offer ing opinions on cases, and treat all parties equally. This ensures the integrity and reliability of the legal record. 5. Q: What should a court reporter do if they discover a conflict of interest in an assigned",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "c14f16ad6941fdf24239332e5714817b9ae3335f9c4fc8db56103afa8767bbf5"
+    },
+    {
+      "question_text": "7. Q: What are the ethical guidelines for court reporters regarding gift acceptance?",
+      "correct_answer": "A: Court reporters should generally refrain from accepting gifts from attorneys, parties, or witnesses involved in cases they're reporting. Accepting gifts could create an ap pearance of impropriety or bias. If offered a gift, it should be politely declined to maintain professional integrity. 8. Q: How should a court reporter respond if asked for their opinion on a case they're",
+      "wrong_answers": [
+        "A: Court reporters should generally refrain from accepting gifts from attorneys, parties, or witnesses involved in cases they're reporting. Accepting gifts could create an ap pearance of impropriety or bias. If offered a gift, it should be politely declined to maintain professional integrity. 13. Q: How should a court reporter respond if asked for their opinion on a case they're",
+        "A: Court reporters should generally refrain from accepting gifts from attorneys, parties, or witnesses involved in cases they're reporting. Accepting gifts could create an ap pearance of impropriety or bias. If offered a gift, it should be politely declined to maintain professional integrity. 3. Q: How should a court reporter respond if asked for their opinion on a case they're",
+        "A: Court reporters should generally refrain from accepting gifts from attorneys, parties, or witnesses involved in cases they're reporting. Accepting gifts could create an ap pearance of impropriety or bias. If offered a gift, it should be politely declined to maintain professional integrity. 16. Q: How should a court reporter respond if asked for their opinion on a case they're"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "9ebe020056e4f3c0d1f123c9cc22c12137b7d036b1687587fb8b6731c9f5a21e"
+    },
+    {
+      "question_text": "10. Q: Why is continuing education important for court reporters from an ethical standpoint?",
+      "correct_answer": "A: Continuing education ensures court reporters stay updated on the latest technologies, legal terminologies, and ethical standards. This helps maintain the high quali ty and integrity of their work, ensuring they can provide the best possible service to the legal system and all parties involved. Grammar & Vocabulary",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "5022bc15b001205033dfcd7f5685ae5f9fafc20aab91f5020448020cec075509"
+    },
+    {
+      "question_text": "1. Q: How do \"affect\" and \"effect\" differ in legal writing?",
+      "correct_answer": "A: \"Affect\" is typically used as a verb meaning to influence or impact, while \"effect\" is usually a noun meaning result or consequence. For example: \"The new law will affect court procedures\" vs. \"Th e effect of the ruling was immediate.\"",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "199a613554f826a7070e39fe68033294eeee32dcab47953c5469fe4d323f23c6"
+    },
+    {
+      "question_text": "2. Q: When should semicolons be used in compound sentences in legal writing?",
+      "correct_answer": "A: Semicolons should be used to separate independent clauses not joined by a coordinating conjunction. They're also used to separate items in a complex list where the items themselve s contain commas. For example: \"The plaintiff seeks damages; the defendant denies liability.\"",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "9a67f721a5a0f77caf4c110d18acc15aedeb188d1be7d3f139ca04bb8d649b13"
+    },
+    {
+      "question_text": "3. Q: What is the correct plural form of \"subpoena\"?",
+      "correct_answer": "A: The correct plural form of \"subpoena\" is \"subpoenas.\" While some legal terms maintain their Latin plurals, \"subpoena\" has been fully adopted into English and follows standard English pluralization rules.",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "4c50ed84e6ea9639cd62535ca1717870f0e3c51dabed462fb2822c60a11d7731"
+    },
+    {
+      "question_text": "4. Q: How should numbers be written in legal documents?",
+      "correct_answer": "A: Generally, numbers one through ten are spelled out, while numbers 11 and above are written as numerals. Exceptions include dates, times, and measurements. For example: \"The witness identified three su spects\" and \"The contract was signed by 12 parties.\"",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "267ee9c31528fafb3c5bf24df039a64793b445325d3d0442669dc8cd90cf4fa9"
+    },
+    {
+      "question_text": "6. Q: Why is the Oxford comma important in legal writing?",
+      "correct_answer": "A: The Oxford comma (the comma before \"and\" in a list of three or more items) is important in legal writing because it can prevent ambiguity. For example, in a will stating \"I leave my estate to John, Jane and Mary,\" it's unclear whether Jane and Mary share a portion or get separate shares. \"I leave my estate to John, Jane, and Mary\" is clearer.",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "a0d3a1878444818a326a30a80ccdaccb1bb98f44ada1f3af141f35d643316987"
+    },
+    {
+      "question_text": "7. Q: How do \"counsel\" and \"council\" differ in legal contexts?",
+      "correct_answer": "A: \"Counsel\" refers to a lawyer or legal adviser, or the act of giving legal advice. \"Council\" refers to an assembly or group of people who come together to consult, deliberate, or make decisions. For example: \"The defendant sought counsel\" vs. \"The city council passed the ordinance.\"",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "0f2fc67fafc193e77c864dea067f84d7cde3f344d2aa07552af23c9d83a555cd"
+    },
+    {
+      "question_text": "8. Q: How should Latin phrases be formatted in legal writing?",
+      "correct_answer": "A: Latin phrases should typically be italicized in legal writing, especially if they're not common in everyday English. For example: de novo, prima facie, res ipsa loquitur. However, very common La tin phrases (like \"et al.\" or \"etc.\") are often not italicized.",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "65abd3779a16761ba99c626e37993daaeaf4efd929d5ba895f011cb8836b2ba1"
+    },
+    {
+      "question_text": "10. Q: How should hyphens be used with compound modifiers in legal writing?",
+      "correct_answer": "A: Compound modifiers (two or more words that act as a single adjective) should be hyphenated when they come before a noun. For example: \"well -established precedent,\" \"good-faith effor t.\" However, if the modifier comes after the noun, hyphens are typically not used: \"The precedent is well established.\" Transcription Standards",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "678d48bb275d0a29c64a91e5648eb91fb5c343bc896e4b0060757102f0688f39"
+    },
+    {
+      "question_text": "1. Q: How should a court reporter indicate that testimony was read back to the jury?",
+      "correct_answer": "A: The court reporter should use a parenthetical note, such as: \"(The following testimony was read back by the reporter:)\" followed by the read -back testimony, and then \"(End of read-back)\". 2. Q: What is the standard format for a Texas court transcript, including margins and line",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "4c758fc269a2dcd170f42a5259c088e2c6f7a7b50c9bcdf95aeb94ed1f11023d"
+    },
+    {
+      "question_text": "3. Q: How should non -verbal responses be transcribed in a deposition?",
+      "correct_answer": "A: Non-verbal responses should be described in parentheses. For example: \"(The witness nods)\" or \"(The witness shrugs)\". It's important to be objective and not interpret the meaning of the gesture.",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "77e0d9b6b70d5241797bdec5691a7ee2b307caaf9b0a15ee8bf51c0cab900415"
+    },
+    {
+      "question_text": "5. Q: How should quoted material within testimony be formatted?",
+      "correct_answer": "A: Quoted material within testimony should be transcribed verbatim and enclosed in quotation marks. If it's a long quote, it may be set off in a separate paragraph, indented on both sides.",
+      "wrong_answers": [
+        "Incorrect approach in Transcription Standards",
+        "This violates standard practices in Transcription Standards",
+        "This is not recommended in Transcription Standards"
+      ],
+      "category": "Transcription Standards",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "836ab79dbb76409f913f7901d6b38ec05a355da1b01c8ca2a1647d547edaf667"
+    },
+    {
+      "question_text": "7. Q: How should a court reporter indicate that a witness has identified an exhibit?",
+      "correct_answer": "A: This should be indicated with a parenthetical note, such as: \"(Witness identifies Exhibit A)\".",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "2dfda9ee7ba7a0f2b018c7db79ac59c67be0ee97c4832d42dd425751aa1c080a"
+    },
+    {
+      "question_text": "9. Q: How should a parenthetical note indicating an interpreter is being used be formatted?",
+      "correct_answer": "A: This should be indicated at the beginning of the transcript with a parenthetical note, such as: \"(The following proceedings were interpreted from Spanish to English )\".",
+      "wrong_answers": [
+        "This refers to a different legal concept in Transcription Standards",
+        "While related to transcription, this is incorrect",
+        "This is a common misconception in Transcription Standards"
+      ],
+      "category": "Transcription Standards",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "c9ee20cae07ac48b0a5182ee31345e5062f03fcaad5f60ccac552c1a5f1a6532"
+    },
+    {
+      "question_text": "1. What does \"nunc pro tunc\" mean in legal terms?",
+      "correct_answer": "a) Now for then b) Not for trial c) New procedure d) No prosecution 2. Which term refers to a court order demanding that a public official deliver an imprisoned",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "8e0b9a512110207c0c0cdd2ed0f840b248c8bc1fd97be2c09c762a6052cee41d"
+    },
+    {
+      "question_text": "4. What does \"voir dire\" refer to in court proceedings?",
+      "correct_answer": "a) Questioning potential jurors b) Closing arguments c) Expert witness testimony d) Jury deliberations",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "a898597c8d40a1b58fd544916cf07218d601fa3fc182a60998c5fa81857986c8"
+    },
+    {
+      "question_text": "5. What is a \"motion in limine\"?",
+      "correct_answer": "a) A pre-trial motion to exclude certain evidence b) A motion to dismiss the case c) A request for a change of venue d) A motion for a mistrial",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "80371bd08f5675c71fc2ed625e74ec1b5aa6a4c5589d869c887fc6b777bef33e"
+    },
+    {
+      "question_text": "6. What does \"de novo\" mean in legal context?",
+      "correct_answer": "a) From the beginning b) By the book c) Without prejudice d) For the record",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "dc5f0e55173aa15be96ea996146350cf1fcebaa9417d5d0db3d77ac87fb905ad"
+    },
+    {
+      "question_text": "7. What is an \"amicus curiae\" brief?",
+      "correct_answer": "a) A document submitted by a \"friend of the court\" b) A summary of the case prepared by the judge c) A witness statement d) A jury instruction",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "a977110554b63ff7f79712e7fe603b206464d31b332f54c78edfc6b132886d84"
+    },
+    {
+      "question_text": "8. What does \"pro se\" mean in legal proceedings?",
+      "correct_answer": "a) Representing oneself b) For the state c) With prejudice d) By proxy",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "0ac9bcd1f33a8f9bd5430f656a26fbbb21e9c29b337c1fc28cc175f47a3551aa"
+    },
+    {
+      "question_text": "9. What is a \"writ of certiorari\"?",
+      "correct_answer": "a) An order from a higher court to review a lower court's decision b) A warrant for arrest c) A summons to appear in court d) A document certifying a court's decision",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "2b9c0098fe1f3d5cf6fac3a918d4fa786c9809526f43d7835ccc56372ca1a0d0"
+    },
+    {
+      "question_text": "10. What does \"ex parte\" mean in legal context?",
+      "correct_answer": "a) From one side only b) Outside the court c) With extreme prejudice d) By mutual agreement Professional Standards & Ethics: 1. What should a court reporter do if they realize they've made a significant error in a certified",
+      "wrong_answers": [
+        "a) From one side only b) Outside the court c) With extreme prejudice d) By mutual agreement Professional Standards & Ethics: 6. What should a court reporter do if they realize they've made a significant error in a certified",
+        "a) From one side only b) Outside the court c) With extreme prejudice d) By mutual agreement Professional Standards & Ethics: -4. What should a court reporter do if they realize they've made a significant error in a certified",
+        "a) From one side only b) Outside the court c) With extreme prejudice d) By mutual agreement Professional Standards & Ethics: 2. What should a court reporter do if they realize they've made a significant error in a certified"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "2b78d2c0c7050462c1a314482f387440357de4e2d6cbe38cd0f9ca9635507a0c"
+    },
+    {
+      "question_text": "2. How should a court reporter handle a request to go \"off the record\" during a deposition?",
+      "correct_answer": "a) Wait for agreement from all attorneys present b) Immediately stop recording c) Continue recording but mark it as confidential d) Ask the witness for permission",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "c6e761e349e5990c2ca7d353f844a97b058d18b08a3c2a75b7bc87fc5388b24d"
+    },
+    {
+      "question_text": "3. What is the primary ethical duty of a court reporter?",
+      "correct_answer": "a) To produce an accurate, complete, and unbiased record b) To assist the attorneys in their case c) To interpret legal proceedings for the public d) To expedite the legal process",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "eb382e9080601e382d6d46fe36b47157a0c33c00177816cb7184229bb3bc6063"
+    },
+    {
+      "question_text": "4. How should a court reporter maintain confidentiality?",
+      "correct_answer": "a) By not discussing case details with anyone not involved b) By only sharing information with close friends and family c) By posting general case information on social media d) By discussing cases only with other court reporters 5. What should a court reporter do if they suspect a conflict of interest in a case they've been",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "bf10ecdd31a9cf51e981751d92bed6070e6151345d155c52389b5ee3150f8d55"
+    },
+    {
+      "question_text": "8. How should a court reporter handle pressure from an attorney to alter the record?",
+      "correct_answer": "a) Firmly refuse and explain their ethical duty b) Make minor alterations if pressured c) Consult with the judge before making any changes d) Agree to alter the record but no te it in the transcript",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "ad51819c1b340afaa26cb59445dc564f87390ef0388195c0c2145a44b82647f8"
+    },
+    {
+      "question_text": "9. What is the ethical guideline for court reporters regarding gift acceptance?",
+      "correct_answer": "a) Refrain from accepting gifts from anyone involved in the case b) Accept gifts valued under $100 c) Accept gifts only from winning parties d) Accept gifts but report them to the court",
+      "wrong_answers": [
+        "a) Refrain from accepting gifts from anyone involved in the case b) Accept gifts valued under $105 c) Accept gifts only from winning parties d) Accept gifts but report them to the court",
+        "a) Refrain from accepting gifts from anyone involved in the case b) Accept gifts valued under $95 c) Accept gifts only from winning parties d) Accept gifts but report them to the court",
+        "a) Refrain from accepting gifts from anyone involved in the case b) Accept gifts valued under $200 c) Accept gifts only from winning parties d) Accept gifts but report them to the court"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "83ab015ac0091e9f9a94baa83b699551741e46594a299a65043f94c9f4ea140b"
+    },
+    {
+      "question_text": "1. What is the correct plural form of \"subpoena\"?",
+      "correct_answer": "a) Subpoenas b) Subpoenae c) Subpoeni d) Subpoenases",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "4f701c53fd0d883c225009df5fda64983159d5fb036acf3325b525fcdd21ac00"
+    },
+    {
+      "question_text": "2. Which of the following is the correct use of \"affect\" in a sentence?",
+      "correct_answer": "a) The new law will affect court procedures. b) The effect of the ruling was immediate. c) He affected a British accent. d) The side effects of the medication were severe.",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "c9a7d0b82a9366950d85e364a0603771f10777e7329fd87bb21ce464eb95a1bb"
+    },
+    {
+      "question_text": "3. How should numbers generally be written in legal documents?",
+      "correct_answer": "a) Numbers one through ten spelled out, 11 and above as numerals b) All numbers as numerals c) All numbers spelled out d) Only dates and times as numerals",
+      "wrong_answers": [
+        "a) Numbers one through ten spelled out, 16 and above as numerals b) All numbers as numerals c) All numbers spelled out d) Only dates and times as numerals",
+        "a) Numbers one through ten spelled out, 6 and above as numerals b) All numbers as numerals c) All numbers spelled out d) Only dates and times as numerals",
+        "a) Numbers one through ten spelled out, 22 and above as numerals b) All numbers as numerals c) All numbers spelled out d) Only dates and times as numerals"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "b655c563102214477e256b0812615c63e1551fa853a3d9bdebee767e1ed66c90"
+    },
+    {
+      "question_text": "4. Which of the following is the correct use of a semicolon?",
+      "correct_answer": "a) The plaintiff seeks damages; the defendant denies liability. b) The plaintiff seeks damages, the defendant denies liability. c) The plaintiff seeks damages: the defendant denies liability. d) The plaintiff seeks damages and the defendant denies liability.",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "a5ded1ca42f39ce1357039637d8f61570e802968d913117fd7a90c5d9bfcc8ee"
+    },
+    {
+      "question_text": "5. What is the correct spelling of the medical term for inflammation of the eyelid?",
+      "correct_answer": "a) Blepharitis b) Blepheritis c) Blephiritis d) Blepharoitis",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "5075906e0c56094850c18946d8a96ffdebaa8d66b9844e884759dffc535db3d2"
+    },
+    {
+      "question_text": "6. Which of the following is the correct use of \"further\" vs \"farther\"?",
+      "correct_answer": "a) We need to further investigate the case. b) The witness was further from the scene than initially reported.",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "68bb86d9c0709e2e0a246300dfac8725dc6c204e9935ce7439d9fb575bf50dca"
+    },
+    {
+      "question_text": "c) How much further do we need to drive?",
+      "correct_answer": "d) We can discuss this further at a later date.",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "72cf69739a47b513b209a7a6d68d891263a259361cc954da0395e0ea88e4993f"
+    },
+    {
+      "question_text": "7. What is the correct way to format a Latin phrase in legal writing?",
+      "correct_answer": "a) Italicize (e.g., de novo) b) Use quotation marks (e.g., \"de novo\") c) Capitalize (e.g., DE NOVO) d) No special formatting needed",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "37dc936b332fa6ca5b6971a6bc4257074b92ec3e362feec4d50943ccf8404072"
+    },
+    {
+      "question_text": "8. Which of the following is the correct use of \"principle\" vs \"principal\"?",
+      "correct_answer": "a) The principle of due process is fundamental to our legal system. b) The principle amount of the loan was $50,000. c) He was the principle witness in the case. d) It's the principle of the thing that matters.",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "02412639ade22f0511ac26d81cb4b4cb910f1493360e3ac55b6fd5c2d668757f"
+    },
+    {
+      "question_text": "9. What is the correct spelling of the medical term for a swelling containing blood?",
+      "correct_answer": "a) Hematoma b) Hemotoma c) Haematoma d) Hemetoma",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "042e0474c483e9a52473404e3bb8f0658611aeebd49093bc20ce155c5edf5ff0"
+    },
+    {
+      "question_text": "10. Which of the following is the correct use of hyphens in compound modifiers?",
+      "correct_answer": "a) A well-established precedent b) A well established precedent c) A wellestablished precedent d) A well established -precedent Transcription Standards:",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "f9b56c1eeef9622942991ffce00b804022b96eeef48820a80211011ed27778ef"
+    },
+    {
+      "question_text": "1. How should a court reporter indicate that testimony was read back to the jury?",
+      "correct_answer": "a) (The following testimony was read back by the reporter:) b) [Read-back begins] c) --Testimony repeated -- d) /Read back to jury/",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "8ae71f5b4fbc4e0730fa2373764508d2426cd02d1cade5fc632cb817065b9d88"
+    },
+    {
+      "question_text": "2. What is the standard line and page format for a Texas court transcript?",
+      "correct_answer": "a) 25 numbered lines per page, 1.5 inch left margin, 1 inch other margins b) 30 numbered lines per page, 1 inch margins all around c) 24 numbered lines per page, 2 inch left margin, 1 inch other margins d) 28 numbered lines per page, 1.25 inch margins all around",
+      "wrong_answers": [
+        "a) 30 numbered lines per page, 1.5 inch left margin, 1 inch other margins b) 30 numbered lines per page, 1 inch margins all around c) 24 numbered lines per page, 2 inch left margin, 1 inch other margins d) 28 numbered lines per page, 1.30 inch margins all around",
+        "a) 20 numbered lines per page, 1.5 inch left margin, 1 inch other margins b) 30 numbered lines per page, 1 inch margins all around c) 24 numbered lines per page, 2 inch left margin, 1 inch other margins d) 28 numbered lines per page, 1.20 inch margins all around",
+        "a) 50 numbered lines per page, 1.5 inch left margin, 1 inch other margins b) 30 numbered lines per page, 1 inch margins all around c) 24 numbered lines per page, 2 inch left margin, 1 inch other margins d) 28 numbered lines per page, 1.50 inch margins all around"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "7ebdd45754bda66f7e5f37593d72bb8cc6f4672128bf666dc23607aa273859b6"
+    },
+    {
+      "question_text": "3. How should a court reporter transcribe a non -verbal response like a nod?",
+      "correct_answer": "a) (The witness nods) b) Witness nodded affirmatively c) [Non-verbal response] d) /Nod/",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "6e18b5b80b9bd41860bc936401cc2775724c6ea574b5511d64ad711d7fa8dade"
+    },
+    {
+      "question_text": "4. How should a court reporter indicate an off -the-record discussion in a transcript?",
+      "correct_answer": "a) (Discussion off the record) b) [Off record] c) --Pause in proceedings -- d) /Private discussion/",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "a2c795612dd9969af5b01e8200a5c7e25f97de847a5faaaeca99bfb136ba24aa"
+    },
+    {
+      "question_text": "5. How should quoted material within testimony be formatted?",
+      "correct_answer": "a) Enclosed in quotation marks b) Italicized c) Indented on both sides d) Underlined",
+      "wrong_answers": [
+        "Incorrect approach in Transcription Standards",
+        "This violates standard practices in Transcription Standards",
+        "This is not recommended in Transcription Standards"
+      ],
+      "category": "Transcription Standards",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "5ecd71d59fdcb7f9bebc5bbeda85adfa6906e43333d2adf24c0b0ad60da27991"
+    },
+    {
+      "question_text": "7. How should a court reporter indicate that a witness has identified an exhibit?",
+      "correct_answer": "a) (Witness identifies Exhibit A) b) Witness points to Exhibit A c) [Exhibit A identified] d) /Exhibit A shown/",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "2d8575ded2adab3e39570be44a662935d031e7d12bc4df32e3dab7c8e1a49057"
+    },
+    {
+      "question_text": "9. How should a parenthetical note indicating an interpreter is being used be formatted?",
+      "correct_answer": "a) (The following proceedings were interpreted from Spanish to English) b) [Interpreter present] c) /Spanish interpretation/ d) --Interpreted testimony follows --",
+      "wrong_answers": [
+        "This refers to a different legal concept in Transcription Standards",
+        "While related to transcription, this is incorrect",
+        "This is a common misconception in Transcription Standards"
+      ],
+      "category": "Transcription Standards",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "4f60774be6c45c87f0bf2b25908478d7f2d6a40a93367f87d275c3861bf17aeb"
+    },
+    {
+      "question_text": "1. What does \"nunc pro tunc\" mean in legal terms?",
+      "correct_answer": "a) Now for then b) Not for trial c) New procedure d) No prosecution",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "8ce191b8a1d8b780ef0b0a406b54f2db60841909822948ab65acfdff8f0723f9"
+    },
+    {
+      "question_text": "2. What is a \"writ of mandamus\"?",
+      "correct_answer": "a) An order from a higher court to review a lower court's decision b) A court order commanding a government official to perform a specific duty c) A request for a change of venue d) A motion to dismiss a case",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "e3f93dfda3d335daf53c0029eaf3b5fd58f6a86e309283da75927f6385c21f34"
+    },
+    {
+      "question_text": "3. What does \"res judicata\" refer to in legal proceedings?",
+      "correct_answer": "a) A matter that has been decided and cannot be litigated again b) A pending legal action c) A preliminary hearing d) A request for additional evidence",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "af95dbeacc91bc5d0637f5efba9200e01389352779c2ed561591fb1dc86ba359"
+    },
+    {
+      "question_text": "4. What is the purpose of \"voir dire\" in court proceedings?",
+      "correct_answer": "a) To present closing arguments b) To question potential jurors c) To cross -examine witnesses d) To file motions",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "1101ceee5bb24de9ecb2b0604c9b40fda22084cce9cfc5bc8effd80942115cac"
+    },
+    {
+      "question_text": "5. What is a \"motion in limine\"?",
+      "correct_answer": "a) A request for a change of venue b) A pre-trial motion to exclude certain evidence c) A motion to dismiss the case d) A request for a continuance",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "6f556a0cd4a9422e374cf53cac13dc344f6e3ce79f505f7556e5eee752f01343"
+    },
+    {
+      "question_text": "6. What does \"de novo\" mean in legal context?",
+      "correct_answer": "a) From the beginning b) By the book c) Without prejudice d) For the record",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "dc5f0e55173aa15be96ea996146350cf1fcebaa9417d5d0db3d77ac87fb905ad"
+    },
+    {
+      "question_text": "7. What is an \"amicus curiae\" brief?",
+      "correct_answer": "a) A summary of the case prepared by the judge b) A document submitted by a \"friend of the court\" c) A witness statement d) A jury instruction",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "f295c14afe6d5d1dc107e855d3d2136fdbcf2ba2c51dbdc357d6e001bd15d616"
+    },
+    {
+      "question_text": "8. What does \"pro se\" mean in legal proceedings?",
+      "correct_answer": "a) For the state b) With prejudice c) Representing oneself d) By proxy",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "5d18f4fcdedb2e1d97c8dc5a3ad9834d067162b987fc9fa91d04d4ecdb675896"
+    },
+    {
+      "question_text": "9. What is a \"writ of certiorari\"?",
+      "correct_answer": "a) A warrant for arrest b) A summons to appear in court c) An order from a higher court to review a lower court's decision d) A document certifying a court's decision",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "989edf64bb1978f9754c30fe0f49efb4a55afe8bdc4114f5209374c36c9f8046"
+    },
+    {
+      "question_text": "10. What does \"ex parte\" mean in legal context?",
+      "correct_answer": "a) From one side only b) Outside the court c) With extreme prejudice d) By mutual agreement Professional Standards & Ethics: 1. What should a court reporter do if they realize they've made a significant error in a certified",
+      "wrong_answers": [
+        "a) From one side only b) Outside the court c) With extreme prejudice d) By mutual agreement Professional Standards & Ethics: 6. What should a court reporter do if they realize they've made a significant error in a certified",
+        "a) From one side only b) Outside the court c) With extreme prejudice d) By mutual agreement Professional Standards & Ethics: -4. What should a court reporter do if they realize they've made a significant error in a certified",
+        "a) From one side only b) Outside the court c) With extreme prejudice d) By mutual agreement Professional Standards & Ethics: 2. What should a court reporter do if they realize they've made a significant error in a certified"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "2b78d2c0c7050462c1a314482f387440357de4e2d6cbe38cd0f9ca9635507a0c"
+    },
+    {
+      "question_text": "2. How should a court reporter handle a request to go \"off the record\" during a deposition?",
+      "correct_answer": "a) Immediately stop recording b) Continue recording but mark it as confidential c) Ask the witness for permission d) Wait for agreement from all attorneys present",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "fdf5db3a35f86e195a649fc2917565fd8d40f249c05b4ab5bd4e20728203ccca"
+    },
+    {
+      "question_text": "3. What is the primary ethical duty of a court reporter?",
+      "correct_answer": "a) To assist the attorneys in their case b) To interpret legal proceedings for the public c) To produce an accurate, complete, and unbiased record d) To expedite the legal process",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "d7bb271ad0c76444db7805ace096fccbea26fab9326ce629d2ad556fc4062da5"
+    },
+    {
+      "question_text": "4. How should a court reporter maintain confidentiality?",
+      "correct_answer": "a) By only sharing information with close friends and family b) By posting general case information on social media c) By discussing cases only with other court reporters d) By not discussing case details with anyone not involved 5. What should a court reporter do if they suspect a conflict of interest in a case they've been",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "a27a5a10bc7d556d0d164ab572f019a5a744fe35b354c7c269f8a48ae0840723"
+    },
+    {
+      "question_text": "8. How should a court reporter handle pressure from an attorney to alter the record?",
+      "correct_answer": "a) Make minor alterations if pressured b) Consult with the judge before making any changes c) Agree to alter the record but note it in the transcript d) Firmly refuse and exp lain their ethical duty",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "9a07b9d4fafa03a6da735bafaef7d1f2358e26e7f38b71d4e845838a31c983b9"
+    },
+    {
+      "question_text": "9. What is the ethical guideline for court reporters regarding gift acceptance?",
+      "correct_answer": "a) Accept gifts valued under $100 b) Accept gifts only from winning parties c) Refrain from accepting gifts from anyone involved in the case d) Accept gifts but report them to the court",
+      "wrong_answers": [
+        "a) Accept gifts valued under $105 b) Accept gifts only from winning parties c) Refrain from accepting gifts from anyone involved in the case d) Accept gifts but report them to the court",
+        "a) Accept gifts valued under $95 b) Accept gifts only from winning parties c) Refrain from accepting gifts from anyone involved in the case d) Accept gifts but report them to the court",
+        "a) Accept gifts valued under $200 b) Accept gifts only from winning parties c) Refrain from accepting gifts from anyone involved in the case d) Accept gifts but report them to the court"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "fb33a818a876e0f436ed07a55c9e6a60a0a4af3bdaad8ce365453e771fdf4e4c"
+    },
+    {
+      "question_text": "1. What does \"nunc pro tunc\" mean in legal terms?",
+      "correct_answer": "a) Now for then b) Not for trial c) New procedure d) No prosecution",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "8ce191b8a1d8b780ef0b0a406b54f2db60841909822948ab65acfdff8f0723f9"
+    },
+    {
+      "question_text": "2. What is a \"writ of mandamus\"?",
+      "correct_answer": "a) An order from a higher court to review a lower court's decision b) A court order commanding a government official to perform a specific duty c) A request for a change of venue d) A motion to dismiss a case",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "e3f93dfda3d335daf53c0029eaf3b5fd58f6a86e309283da75927f6385c21f34"
+    },
+    {
+      "question_text": "3. What does \"res judicata\" refer to in legal proceedings?",
+      "correct_answer": "a) A matter that has been decided and cannot be litigated again b) A pending legal action c) A preliminary hearing d) A request for additional evidence",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "af95dbeacc91bc5d0637f5efba9200e01389352779c2ed561591fb1dc86ba359"
+    },
+    {
+      "question_text": "4. What is the purpose of \"voir dire\" in court proceedings?",
+      "correct_answer": "a) To present closing arguments b) To question potential jurors c) To cross -examine witnesses d) To file motions",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "1101ceee5bb24de9ecb2b0604c9b40fda22084cce9cfc5bc8effd80942115cac"
+    },
+    {
+      "question_text": "5. What is a \"motion in limine\"?",
+      "correct_answer": "a) A request for a change of venue b) A pre-trial motion to exclude certain evidence c) A motion to dismiss the case d) A request for a continuance",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "6f556a0cd4a9422e374cf53cac13dc344f6e3ce79f505f7556e5eee752f01343"
+    },
+    {
+      "question_text": "6. What does \"de novo\" mean in legal context?",
+      "correct_answer": "a) From the beginning b) By the book c) Without prejudice d) For the record",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "dc5f0e55173aa15be96ea996146350cf1fcebaa9417d5d0db3d77ac87fb905ad"
+    },
+    {
+      "question_text": "7. What is an \"amicus curiae\" brief?",
+      "correct_answer": "a) A summary of the case prepared by the judge b) A document submitted by a \"friend of the court\" c) A witness statement d) A jury instruction",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "f295c14afe6d5d1dc107e855d3d2136fdbcf2ba2c51dbdc357d6e001bd15d616"
+    },
+    {
+      "question_text": "8. What does \"pro se\" mean in legal proceedings?",
+      "correct_answer": "a) For the state b) With prejudice c) Representing oneself d) By proxy",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "5d18f4fcdedb2e1d97c8dc5a3ad9834d067162b987fc9fa91d04d4ecdb675896"
+    },
+    {
+      "question_text": "9. What is a \"writ of certiorari\"?",
+      "correct_answer": "a) A warrant for arrest b) A summons to appear in court c) An order from a higher court to review a lower court's decision d) A document certifying a court's decision",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "989edf64bb1978f9754c30fe0f49efb4a55afe8bdc4114f5209374c36c9f8046"
+    },
+    {
+      "question_text": "10. What does \"ex parte\" mean in legal context?",
+      "correct_answer": "a) From one side only b) Outside the court c) With extreme prejudice d) By mutual agreement Professional Standards & Ethics: 1. What should a court reporter do if they realize they've made a significant error in a certified",
+      "wrong_answers": [
+        "a) From one side only b) Outside the court c) With extreme prejudice d) By mutual agreement Professional Standards & Ethics: 6. What should a court reporter do if they realize they've made a significant error in a certified",
+        "a) From one side only b) Outside the court c) With extreme prejudice d) By mutual agreement Professional Standards & Ethics: -4. What should a court reporter do if they realize they've made a significant error in a certified",
+        "a) From one side only b) Outside the court c) With extreme prejudice d) By mutual agreement Professional Standards & Ethics: 2. What should a court reporter do if they realize they've made a significant error in a certified"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "2b78d2c0c7050462c1a314482f387440357de4e2d6cbe38cd0f9ca9635507a0c"
+    },
+    {
+      "question_text": "2. How should a court reporter handle a request to go \"off the record\" during a deposition?",
+      "correct_answer": "a) Immediately stop recording b) Continue recording but mark it as confidential c) Ask the witness for permission d) Wait for agreement from all attorneys present",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "fdf5db3a35f86e195a649fc2917565fd8d40f249c05b4ab5bd4e20728203ccca"
+    },
+    {
+      "question_text": "3. What is the primary ethical duty of a court reporter?",
+      "correct_answer": "a) To assist the attorneys in their case b) To interpret legal proceedings for the public c) To produce an accurate, complete, and unbiased record d) To expedite the legal process",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "d7bb271ad0c76444db7805ace096fccbea26fab9326ce629d2ad556fc4062da5"
+    },
+    {
+      "question_text": "4. How should a court reporter maintain confidentiality?",
+      "correct_answer": "a) By only sharing information with close friends and family b) By posting general case information on social media c) By discussing cases only with other court reporters d) By not discussing case detai ls with anyone not involved 5. What should a court reporter do if they suspect a conflict of interest in a case they've been",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "fd365e292b662b0a7f3a507256cd12a8be079b8794f7182ad992d7f799478a33"
+    },
+    {
+      "question_text": "8. How should a court reporter handle pressure from an attorney to alter the record?",
+      "correct_answer": "a) Make minor alterations if pressured b) Consult with the judge before making any changes c) Agree to alter the record but note it in the transcript d) Firmly refuse and exp lain their ethical duty",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "9a07b9d4fafa03a6da735bafaef7d1f2358e26e7f38b71d4e845838a31c983b9"
+    },
+    {
+      "question_text": "9. What is the ethical guideline for court reporters regarding gift acceptance?",
+      "correct_answer": "a) Accept gifts valued under $100 b) Accept gifts only from winning parties c) Refrain from accepting gifts from anyone involved in the case d) Accept gifts but report them to the court",
+      "wrong_answers": [
+        "a) Accept gifts valued under $105 b) Accept gifts only from winning parties c) Refrain from accepting gifts from anyone involved in the case d) Accept gifts but report them to the court",
+        "a) Accept gifts valued under $95 b) Accept gifts only from winning parties c) Refrain from accepting gifts from anyone involved in the case d) Accept gifts but report them to the court",
+        "a) Accept gifts valued under $200 b) Accept gifts only from winning parties c) Refrain from accepting gifts from anyone involved in the case d) Accept gifts but report them to the court"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "fb33a818a876e0f436ed07a55c9e6a60a0a4af3bdaad8ce365453e771fdf4e4c"
+    },
+    {
+      "question_text": "1. What does \"nunc pro tunc\" mean in legal terms?",
+      "correct_answer": "a) Now for then b) Not for trial c) New procedure d) No prosecution",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "8ce191b8a1d8b780ef0b0a406b54f2db60841909822948ab65acfdff8f0723f9"
+    },
+    {
+      "question_text": "2. What is a \"writ of mandamus\"?",
+      "correct_answer": "a) An order from a higher court to review a lower court's decision b) A court order commanding a government official to perform a specific duty c) A request for a change of venue d) A motion to dismiss a case",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "e3f93dfda3d335daf53c0029eaf3b5fd58f6a86e309283da75927f6385c21f34"
+    },
+    {
+      "question_text": "3. What does \"res judicata\" refer to in legal proceedings?",
+      "correct_answer": "a) A matter that has been decided and cannot be litigated again b) A pending legal action c) A preliminary hearing d) A request for additional evidence",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "af95dbeacc91bc5d0637f5efba9200e01389352779c2ed561591fb1dc86ba359"
+    },
+    {
+      "question_text": "4. What is the purpose of \"voir dire\" in court proceedings?",
+      "correct_answer": "a) To present closing arguments b) To question potential jurors c) To cross -examine witnesses d) To file motions",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "1101ceee5bb24de9ecb2b0604c9b40fda22084cce9cfc5bc8effd80942115cac"
+    },
+    {
+      "question_text": "5. What is a \"motion in limine\"?",
+      "correct_answer": "a) A request for a change of venue b) A pre-trial motion to exclude certain evidence c) A motion to dismiss the case d) A request for a continuance",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "6f556a0cd4a9422e374cf53cac13dc344f6e3ce79f505f7556e5eee752f01343"
+    },
+    {
+      "question_text": "6. What does \"de novo\" mean in legal context?",
+      "correct_answer": "a) From the beginning b) By the book c) Without prejudice d) For the record",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "dc5f0e55173aa15be96ea996146350cf1fcebaa9417d5d0db3d77ac87fb905ad"
+    },
+    {
+      "question_text": "7. What is an \"amicus curiae\" brief?",
+      "correct_answer": "a) A summary of the case prepared by the judge b) A document submitted by a \"friend of the court\" c) A witness statement d) A jury instruction",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "f295c14afe6d5d1dc107e855d3d2136fdbcf2ba2c51dbdc357d6e001bd15d616"
+    },
+    {
+      "question_text": "8. What does \"pro se\" mean in legal proceedings?",
+      "correct_answer": "a) For the state b) With prejudice c) Representing oneself d) By proxy",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "5d18f4fcdedb2e1d97c8dc5a3ad9834d067162b987fc9fa91d04d4ecdb675896"
+    },
+    {
+      "question_text": "9. What is a \"writ of certiorari\"?",
+      "correct_answer": "a) A warrant for arrest b) A summons to appear in court c) An order from a higher court to review a lower court's decision d) A document certifying a court's decision",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "989edf64bb1978f9754c30fe0f49efb4a55afe8bdc4114f5209374c36c9f8046"
+    },
+    {
+      "question_text": "10. What does \"ex parte\" mean in legal context?",
+      "correct_answer": "a) From one side only b) Outside the court c) With extreme prejudice d) By mutual agreement Professional Standards & Ethics: 1. What should a court reporter do if they realize they've made a significant error in a certified",
+      "wrong_answers": [
+        "a) From one side only b) Outside the court c) With extreme prejudice d) By mutual agreement Professional Standards & Ethics: 6. What should a court reporter do if they realize they've made a significant error in a certified",
+        "a) From one side only b) Outside the court c) With extreme prejudice d) By mutual agreement Professional Standards & Ethics: -4. What should a court reporter do if they realize they've made a significant error in a certified",
+        "a) From one side only b) Outside the court c) With extreme prejudice d) By mutual agreement Professional Standards & Ethics: 2. What should a court reporter do if they realize they've made a significant error in a certified"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "2b78d2c0c7050462c1a314482f387440357de4e2d6cbe38cd0f9ca9635507a0c"
+    },
+    {
+      "question_text": "2. How should a court reporter handle a request to go \"off the record\" during a deposition?",
+      "correct_answer": "a) Immediately stop recording b) Continue recording but mark it as confidential c) Ask the witness for permission d) Wait for agreement from all attorneys present",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "fdf5db3a35f86e195a649fc2917565fd8d40f249c05b4ab5bd4e20728203ccca"
+    },
+    {
+      "question_text": "3. What is the primary ethical duty of a court reporter?",
+      "correct_answer": "a) To assist the attorneys in their case b) To interpret legal proceedings for the public c) To produce an accurate, complete, and unbiased record d) To expedite the legal process",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "d7bb271ad0c76444db7805ace096fccbea26fab9326ce629d2ad556fc4062da5"
+    },
+    {
+      "question_text": "4. How should a court reporter maintain confidentiality?",
+      "correct_answer": "a) By only sharing information with close friends and family b) By posting general case information on social media c) By discussing cases only with other court reporters d) By not discussing case detai ls with anyone not involved 5. What should a court reporter do if they suspect a conflict of interest in a case they've been",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "fd365e292b662b0a7f3a507256cd12a8be079b8794f7182ad992d7f799478a33"
+    },
+    {
+      "question_text": "8. How should a court reporter handle pressure from an attorney to alter the record?",
+      "correct_answer": "a) Make minor alterations if pressured b) Consult with the judge before making any changes c) Agree to alter the record but note it in the transcript d) Firmly refuse and exp lain their ethical duty",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "9a07b9d4fafa03a6da735bafaef7d1f2358e26e7f38b71d4e845838a31c983b9"
+    },
+    {
+      "question_text": "9. What is the ethical guideline for court reporters regarding gift acceptance?",
+      "correct_answer": "a) Accept gifts valued under $100 b) Accept gifts only from winning parties c) Refrain from accepting gifts from anyone involved in the case d) Accept gifts but report them to the court",
+      "wrong_answers": [
+        "a) Accept gifts valued under $105 b) Accept gifts only from winning parties c) Refrain from accepting gifts from anyone involved in the case d) Accept gifts but report them to the court",
+        "a) Accept gifts valued under $95 b) Accept gifts only from winning parties c) Refrain from accepting gifts from anyone involved in the case d) Accept gifts but report them to the court",
+        "a) Accept gifts valued under $200 b) Accept gifts only from winning parties c) Refrain from accepting gifts from anyone involved in the case d) Accept gifts but report them to the court"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "fb33a818a876e0f436ed07a55c9e6a60a0a4af3bdaad8ce365453e771fdf4e4c"
+    },
+    {
+      "question_text": "1. What is the correct plural form of \"subpoena\"?",
+      "correct_answer": "a) Subpoenas b) Subpoenae c) Subpoeni d) Subpoenases",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "4f701c53fd0d883c225009df5fda64983159d5fb036acf3325b525fcdd21ac00"
+    },
+    {
+      "question_text": "2. Which of the following is the correct use of \"affect\" in a sentence?",
+      "correct_answer": "a) The new law will affect court procedures. b) The effect of the ruling was immediate. c) He affected a British accent. d) The side effects of the medication were severe.",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "c9a7d0b82a9366950d85e364a0603771f10777e7329fd87bb21ce464eb95a1bb"
+    },
+    {
+      "question_text": "3. How should numbers generally be written in legal documents?",
+      "correct_answer": "a) Numbers one through ten spelled out, 11 and above as numerals b) All numbers as numerals c) All numbers spelled out d) Only dates and times as numerals",
+      "wrong_answers": [
+        "a) Numbers one through ten spelled out, 16 and above as numerals b) All numbers as numerals c) All numbers spelled out d) Only dates and times as numerals",
+        "a) Numbers one through ten spelled out, 6 and above as numerals b) All numbers as numerals c) All numbers spelled out d) Only dates and times as numerals",
+        "a) Numbers one through ten spelled out, 22 and above as numerals b) All numbers as numerals c) All numbers spelled out d) Only dates and times as numerals"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "b655c563102214477e256b0812615c63e1551fa853a3d9bdebee767e1ed66c90"
+    },
+    {
+      "question_text": "4. Which of the following is the correct use of a semicolon?",
+      "correct_answer": "a) The plaintiff seeks damages; the defendant denies liability. b) The plaintiff seeks damages, the defendant denies liability. c) The plaintiff seeks damages: the defendant denies liability. d) The plaintiff seeks damages and the defendant denies liability.",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "a5ded1ca42f39ce1357039637d8f61570e802968d913117fd7a90c5d9bfcc8ee"
+    },
+    {
+      "question_text": "5. What is the correct spelling of the medical term for inflammation of the eyelid?",
+      "correct_answer": "a) Blepharitis b) Blepheritis c) Blephiritis d) Blepharoitis",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "5075906e0c56094850c18946d8a96ffdebaa8d66b9844e884759dffc535db3d2"
+    },
+    {
+      "question_text": "6. Which of the following is the correct use of \"further\" vs \"farther\"?",
+      "correct_answer": "a) We need to further investigate the case. b) The witness was further from the scene than initially reported.",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "68bb86d9c0709e2e0a246300dfac8725dc6c204e9935ce7439d9fb575bf50dca"
+    },
+    {
+      "question_text": "c) How much further do we need to drive?",
+      "correct_answer": "d) We can discuss this further at a later date.",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "72cf69739a47b513b209a7a6d68d891263a259361cc954da0395e0ea88e4993f"
+    },
+    {
+      "question_text": "7. What is the correct way to format a Latin phrase in legal writing?",
+      "correct_answer": "a) Italicize (e.g., de novo) b) Use quotation marks (e.g., \"de novo\") c) Capitalize (e.g., DE NOVO) d) No special formatting needed",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "37dc936b332fa6ca5b6971a6bc4257074b92ec3e362feec4d50943ccf8404072"
+    },
+    {
+      "question_text": "8. Which of the following is the correct use of \"principle\" vs \"principal\"?",
+      "correct_answer": "a) The principle of due process is fundamental to our legal system. b) The principle amount of the loan was $50,000. c) He was the principle witness in the case. d) It's the principle of the thing that matters.",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "02412639ade22f0511ac26d81cb4b4cb910f1493360e3ac55b6fd5c2d668757f"
+    },
+    {
+      "question_text": "9. What is the correct spelling of the medical term for a swelling containing blood?",
+      "correct_answer": "a) Hematoma b) Hemotoma c) Haematoma d) Hemetoma",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "042e0474c483e9a52473404e3bb8f0658611aeebd49093bc20ce155c5edf5ff0"
+    },
+    {
+      "question_text": "10. Which of the following is the correct use of hyphens in compound modifiers?",
+      "correct_answer": "a) A well-established precedent b) A well established precedent c) A wellestablished precedent d) A well established -precedent Transcription Standards:",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "f9b56c1eeef9622942991ffce00b804022b96eeef48820a80211011ed27778ef"
+    },
+    {
+      "question_text": "1. How should a court reporter indicate that testimony was read back to the jury?",
+      "correct_answer": "a) (The following testimony was read back by the reporter:) b) [Read-back begins] c) --Testimony repeated -- d) /Read back to jury/",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "8ae71f5b4fbc4e0730fa2373764508d2426cd02d1cade5fc632cb817065b9d88"
+    },
+    {
+      "question_text": "2. What is the standard line and page format for a Texas court transcript?",
+      "correct_answer": "a) 25 numbered lines per page, 1.5 inch left margin, 1 inch other margins b) 30 numbered lines per page, 1 inch margins all around c) 24 numbered lines per page, 2 inch left margin, 1 inch other margins d) 28 numbered lines per page, 1.25 inch margins all around",
+      "wrong_answers": [
+        "a) 30 numbered lines per page, 1.5 inch left margin, 1 inch other margins b) 30 numbered lines per page, 1 inch margins all around c) 24 numbered lines per page, 2 inch left margin, 1 inch other margins d) 28 numbered lines per page, 1.30 inch margins all around",
+        "a) 20 numbered lines per page, 1.5 inch left margin, 1 inch other margins b) 30 numbered lines per page, 1 inch margins all around c) 24 numbered lines per page, 2 inch left margin, 1 inch other margins d) 28 numbered lines per page, 1.20 inch margins all around",
+        "a) 50 numbered lines per page, 1.5 inch left margin, 1 inch other margins b) 30 numbered lines per page, 1 inch margins all around c) 24 numbered lines per page, 2 inch left margin, 1 inch other margins d) 28 numbered lines per page, 1.50 inch margins all around"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "7ebdd45754bda66f7e5f37593d72bb8cc6f4672128bf666dc23607aa273859b6"
+    },
+    {
+      "question_text": "3. How should a court reporter transcribe a non -verbal response like a nod?",
+      "correct_answer": "a) (The witness nods) b) Witness nodded affirmatively c) [Non-verbal response] d) /Nod/",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "6e18b5b80b9bd41860bc936401cc2775724c6ea574b5511d64ad711d7fa8dade"
+    },
+    {
+      "question_text": "4. How should a court reporter indicate an off -the-record discussion in a transcript?",
+      "correct_answer": "a) (Discussion off the record) b) [Off record] c) --Pause in proceedings -- d) /Private discussion/",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "a2c795612dd9969af5b01e8200a5c7e25f97de847a5faaaeca99bfb136ba24aa"
+    },
+    {
+      "question_text": "5. How should quoted material within testimony be formatted?",
+      "correct_answer": "a) Enclosed in quotation marks b) Italicized c) Indented on both sides d) Underlined",
+      "wrong_answers": [
+        "Incorrect approach in Transcription Standards",
+        "This violates standard practices in Transcription Standards",
+        "This is not recommended in Transcription Standards"
+      ],
+      "category": "Transcription Standards",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "5ecd71d59fdcb7f9bebc5bbeda85adfa6906e43333d2adf24c0b0ad60da27991"
+    },
+    {
+      "question_text": "7. How should a court reporter indicate that a witness has identified an exhibit?",
+      "correct_answer": "a) (Witness identifies Exhibit A) b) Witness points to Exhibit A c) [Exhibit A identified] d) /Exhibit A shown/",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "2d8575ded2adab3e39570be44a662935d031e7d12bc4df32e3dab7c8e1a49057"
+    },
+    {
+      "question_text": "9. How should a parenthetical note indicating an interpreter is being used be formatted?",
+      "correct_answer": "a) (The following proceedings were interpreted from Spanish to English) b) [Interpreter present] c) /Spanish interpretation/ d) --Interpreted testimony follows --",
+      "wrong_answers": [
+        "This refers to a different legal concept in Transcription Standards",
+        "While related to transcription, this is incorrect",
+        "This is a common misconception in Transcription Standards"
+      ],
+      "category": "Transcription Standards",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "4f60774be6c45c87f0bf2b25908478d7f2d6a40a93367f87d275c3861bf17aeb"
+    },
+    {
+      "question_text": "1. What does \"res ipsa loquitur\" mean in legal terms?",
+      "correct_answer": "a) The thing speaks for itself b) Let the buyer beware c) Beyond a reasonable doubt d) At first glance",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "f3688d3aeda4d9db8649dd3734d32a36308c6290878fb0f38be816891cad8ba5"
+    },
+    {
+      "question_text": "2. What is a \"writ of mandamus\"?",
+      "correct_answer": "a) An order to release a prisoner b) A command to a lower court or official to perform a specific duty c) A request for a new trial d) An order to stop proceedings",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "38c4f8868a0ffdb03cf268a340ca893fb7bbd8d0999ff46c0f5c8b3e614b20c8"
+    },
+    {
+      "question_text": "3. What does \"voir dire\" refer to in court proceedings?",
+      "correct_answer": "a) Closing arguments b) Jury selection process c) Witness testimony d) Judge's instructions",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "bfab540ca4501d1615870cec87d90698df3996b2645ceaa3bfe475a570a87c4f"
+    },
+    {
+      "question_text": "4. What is \"habeas corpus\" in legal terms?",
+      "correct_answer": "a) A type of criminal charge b) A writ ordering a person in custody to be brought before a court c) A plea bargain agreement d) A type of civil lawsuit",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "7cd6fd921bbc43d913ed4f4a554027d510abad35e91003ad440f61d4f262244c"
+    },
+    {
+      "question_text": "5. What does \"de novo\" mean in a legal context?",
+      "correct_answer": "a) From the beginning b) Without prejudice c) In good faith d) Beyond a reasonable doubt",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "2779e9aaaedd712c4f98b724a81a7d196243651c816ad5db0a00d72e728fd8db"
+    },
+    {
+      "question_text": "6. What is an \"amicus curiae\" brief?",
+      "correct_answer": "a) A summary of the case by the judge b) A document submitted by a \"friend of the court\" c) A witness statement d) A jury instruction",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "112e948d7bb41685086a1737e91277cbdc7e3121c098b56656241142aff4f09a"
+    },
+    {
+      "question_text": "7. What does \"pro se\" mean in legal proceedings?",
+      "correct_answer": "a) For the state b) With prejudice c) Representing oneself d) By proxy",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "c854096b8e6e5a82710b83955c529a9fbf7e3b6bb8bbf9e11cbcb2fe26676e95"
+    },
+    {
+      "question_text": "8. What is a \"motion in limine\"?",
+      "correct_answer": "a) A request for a change of venue b) A pre-trial motion to exclude certain evidence c) A motion to dismiss the case d) A request for a continuance",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "3064ce22160eb0423b3f4882ec1ab4e5f29a94d9ecd3e5e455b00780db0b590f"
+    },
+    {
+      "question_text": "9. What does \"nunc pro tunc\" mean?",
+      "correct_answer": "a) Now for then b) Not for trial c) New procedure d) No prosecution",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "afba1c25f7b7943634ec5667f4136bf338f888b6cfe841985451080b24ae65a8"
+    },
+    {
+      "question_text": "10. What is \"stare decisis\" in legal context?",
+      "correct_answer": "a) A type of court order b) The principle of following precedent in legal decisions c) A method of jury selection d) A form of alternative dispute resolution Professional Standards & Ethics: 1. What should a court reporter do if they realize they've made a significant error in a certified",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "06523a6e892c5c8f638346d888f3b09d9ad3d92da30b3a5de22698c548b4ba6d"
+    },
+    {
+      "question_text": "4. How should a court reporter handle pressure from an attorney to alter the record?",
+      "correct_answer": "a) Make minor alterations if pressured b) Consult with the judge before making any changes c) Agree to alter the record but note it in the transcript d) Firmly refuse and exp lain their ethical duty",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "be36b30f397295d45396507ddf7760b6f7b73b34c40503afddd94f21f5c66dab"
+    },
+    {
+      "question_text": "5. What is the ethical guideline for court reporters regarding gift acceptance?",
+      "correct_answer": "a) Accept gifts valued under $100 b) Accept gifts only from winning parties c) Refrain from accepting gifts from anyone involved in the case d) Accept gifts but report them to the court",
+      "wrong_answers": [
+        "a) Accept gifts valued under $105 b) Accept gifts only from winning parties c) Refrain from accepting gifts from anyone involved in the case d) Accept gifts but report them to the court",
+        "a) Accept gifts valued under $95 b) Accept gifts only from winning parties c) Refrain from accepting gifts from anyone involved in the case d) Accept gifts but report them to the court",
+        "a) Accept gifts valued under $200 b) Accept gifts only from winning parties c) Refrain from accepting gifts from anyone involved in the case d) Accept gifts but report them to the court"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "9772ce16e1e5eb9308cc0f590ce3b929dc14ee6da21e0f5b8f7f6b330f77d94d"
+    },
+    {
+      "question_text": "8. How should a court reporter maintain confidentiality?",
+      "correct_answer": "a) By only sharing information with close friends and family b) By posting general case information on social media c) By discussing cases only with other court reporters d) By not discussing case detai ls with anyone not involved",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "edde9782cc304178d0c30b0a02c2c62abbd1da0a7ae17a878eefa191dfd926c1"
+    },
+    {
+      "question_text": "9. What is the primary ethical duty of a court reporter?",
+      "correct_answer": "a) To assist the attorneys in their case b) To interpret legal proceedings for the public c) To produce an accurate, complete, and unbiased record d) To expedite the legal process",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "7fee8e634fe132f6f56d717e7a630ab62c243c3eaa9837956ccc8eb871cea1ab"
+    },
+    {
+      "question_text": "10. How should a court reporter handle a request to go \"off the record\" during a deposition?",
+      "correct_answer": "a) Immediately stop recording b) Continue recording but mark it as confidential c) Ask the witness for permission d) Wait for agreement from all attorneys present Grammar & Vocabulary:",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "14bb3f6a8ffd5b0430634dd8ce6761290bbbe4ea004bea4ce9810e11b72d76a5"
+    },
+    {
+      "question_text": "1. What is the correct plural form of \"subpoena\"?",
+      "correct_answer": "a) Subpoenas b) Subpoenae c) Subpoeni d) Subpoenases",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "4f701c53fd0d883c225009df5fda64983159d5fb036acf3325b525fcdd21ac00"
+    },
+    {
+      "question_text": "2. Which of the following is the correct use of \"affect\" in a sentence?",
+      "correct_answer": "a) The new law will affect court procedures. b) The effect of the ruling was immediate. c) He affected a British accent. d) The side effects of the medication were severe.",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "c9a7d0b82a9366950d85e364a0603771f10777e7329fd87bb21ce464eb95a1bb"
+    },
+    {
+      "question_text": "3. How should numbers generally be written in legal documents?",
+      "correct_answer": "a) Numbers one through ten spelled out, 11 and above as numerals b) All numbers as numerals c) All numbers spelled out d) Only dates and times as numerals",
+      "wrong_answers": [
+        "a) Numbers one through ten spelled out, 16 and above as numerals b) All numbers as numerals c) All numbers spelled out d) Only dates and times as numerals",
+        "a) Numbers one through ten spelled out, 6 and above as numerals b) All numbers as numerals c) All numbers spelled out d) Only dates and times as numerals",
+        "a) Numbers one through ten spelled out, 22 and above as numerals b) All numbers as numerals c) All numbers spelled out d) Only dates and times as numerals"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "b655c563102214477e256b0812615c63e1551fa853a3d9bdebee767e1ed66c90"
+    },
+    {
+      "question_text": "4. Which of the following is the correct use of a semicolon?",
+      "correct_answer": "a) The plaintiff seeks damages; the defendant denies liability. b) The plaintiff seeks damages, the defendant denies liability. c) The plaintiff seeks damages: the defendant denies liability. d) The plaintiff seeks damages and the defendant denies liability.",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "a5ded1ca42f39ce1357039637d8f61570e802968d913117fd7a90c5d9bfcc8ee"
+    },
+    {
+      "question_text": "5. What is the correct spelling of the medical term for inflammation of the eyelid?",
+      "correct_answer": "a) Blepharitis b) Blepheritis c) Blephiritis d) Blepharoitis",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "5075906e0c56094850c18946d8a96ffdebaa8d66b9844e884759dffc535db3d2"
+    },
+    {
+      "question_text": "6. Which of the following is the correct use of \"further\" vs \"farther\"?",
+      "correct_answer": "a) We need to further investigate the case. b) The witness was further from the scene than initially reported.",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "68bb86d9c0709e2e0a246300dfac8725dc6c204e9935ce7439d9fb575bf50dca"
+    },
+    {
+      "question_text": "c) How much further do we need to drive?",
+      "correct_answer": "d) We can discuss this further at a later date.",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "72cf69739a47b513b209a7a6d68d891263a259361cc954da0395e0ea88e4993f"
+    },
+    {
+      "question_text": "7. What is the correct way to format a Latin phrase in legal writing?",
+      "correct_answer": "a) Italicize (e.g., de novo) b) Use quotation marks (e.g., \"de novo\") c) Capitalize (e.g., DE NOVO) d) No special formatting needed",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "37dc936b332fa6ca5b6971a6bc4257074b92ec3e362feec4d50943ccf8404072"
+    },
+    {
+      "question_text": "8. Which of the following is the correct use of \"principle\" vs \"principal\"?",
+      "correct_answer": "a) The principle of due process is fundamental to our legal system. b) The principle amount of the loan was $50,000. c) He was the principle witness in the case. d) It's the principle of the thing that matters.",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "02412639ade22f0511ac26d81cb4b4cb910f1493360e3ac55b6fd5c2d668757f"
+    },
+    {
+      "question_text": "9. What is the correct spelling of the medical term for a swelling containing blood?",
+      "correct_answer": "a) Hematoma b) Hemotoma c) Haematoma d) Hemetoma",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "042e0474c483e9a52473404e3bb8f0658611aeebd49093bc20ce155c5edf5ff0"
+    },
+    {
+      "question_text": "10. Which of the following is the correct use of hyphens in compound modifiers?",
+      "correct_answer": "a) A well-established precedent b) A well established precedent c) A wellestablished precedent d) A well established -precedent Transcription Standards:",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "f9b56c1eeef9622942991ffce00b804022b96eeef48820a80211011ed27778ef"
+    },
+    {
+      "question_text": "1. How should a court reporter indicate that testimony was read back to the jury?",
+      "correct_answer": "a) (The following testimony was read back by the reporter:) b) [Read-back begins] c) --Testimony repeated -- d) /Read back to jury/",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "8ae71f5b4fbc4e0730fa2373764508d2426cd02d1cade5fc632cb817065b9d88"
+    },
+    {
+      "question_text": "2. What is the standard line and page format for a Texas court transcript?",
+      "correct_answer": "a) 25 numbered lines per page, 1.5 inch left margin, 1 inch other margins b) 30 numbered lines per page, 1 inch margins all around c) 24 numbered lines per page, 2 inch left margin, 1 inch other margins d) 28 numbered lines per page, 1.25 inch margins all around",
+      "wrong_answers": [
+        "a) 30 numbered lines per page, 1.5 inch left margin, 1 inch other margins b) 30 numbered lines per page, 1 inch margins all around c) 24 numbered lines per page, 2 inch left margin, 1 inch other margins d) 28 numbered lines per page, 1.30 inch margins all around",
+        "a) 20 numbered lines per page, 1.5 inch left margin, 1 inch other margins b) 30 numbered lines per page, 1 inch margins all around c) 24 numbered lines per page, 2 inch left margin, 1 inch other margins d) 28 numbered lines per page, 1.20 inch margins all around",
+        "a) 50 numbered lines per page, 1.5 inch left margin, 1 inch other margins b) 30 numbered lines per page, 1 inch margins all around c) 24 numbered lines per page, 2 inch left margin, 1 inch other margins d) 28 numbered lines per page, 1.50 inch margins all around"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "7ebdd45754bda66f7e5f37593d72bb8cc6f4672128bf666dc23607aa273859b6"
+    },
+    {
+      "question_text": "3. How should a court reporter transcribe a non -verbal response like a nod?",
+      "correct_answer": "a) (The witness nods) b) Witness nodded affirmatively c) [Non-verbal response] d) /Nod/",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "6e18b5b80b9bd41860bc936401cc2775724c6ea574b5511d64ad711d7fa8dade"
+    },
+    {
+      "question_text": "4. How should a court reporter indicate an off -the-record discussion in a transcript?",
+      "correct_answer": "a) (Discussion off the record) b) [Off record] c) --Pause in proceedings -- d) /Private discussion/",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "a2c795612dd9969af5b01e8200a5c7e25f97de847a5faaaeca99bfb136ba24aa"
+    },
+    {
+      "question_text": "5. How should quoted material within testimony be formatted?",
+      "correct_answer": "a) Enclosed in quotation marks b) Italicized c) Indented on both sides d) Underlined",
+      "wrong_answers": [
+        "Incorrect approach in Transcription Standards",
+        "This violates standard practices in Transcription Standards",
+        "This is not recommended in Transcription Standards"
+      ],
+      "category": "Transcription Standards",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "5ecd71d59fdcb7f9bebc5bbeda85adfa6906e43333d2adf24c0b0ad60da27991"
+    },
+    {
+      "question_text": "7. How should a court reporter indicate that a witness has identified an exhibit?",
+      "correct_answer": "a) (Witness identifies Exhibit A) b) Witness points to Exhibit A c) [Exhibit A identified] d) /Exhibit A shown/",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "2d8575ded2adab3e39570be44a662935d031e7d12bc4df32e3dab7c8e1a49057"
+    },
+    {
+      "question_text": "9. How should a parenthetical note indicating an interpreter is being used be formatted?",
+      "correct_answer": "a) (The following proceedings were interpreted from Spanish to English) b) [Interpreter present] c) /Spanish interpretation/ d) --Interpreted testimony follows --",
+      "wrong_answers": [
+        "This refers to a different legal concept in Transcription Standards",
+        "While related to transcription, this is incorrect",
+        "This is a common misconception in Transcription Standards"
+      ],
+      "category": "Transcription Standards",
+      "source_file": "More questions part 2.pdf",
+      "content_hash": "4f60774be6c45c87f0bf2b25908478d7f2d6a40a93367f87d275c3861bf17aeb"
+    }
+  ]
+}

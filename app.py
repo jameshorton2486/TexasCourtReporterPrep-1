@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, request, g, current_app
+from flask import Flask, render_template, redirect, url_for, request, g, current_app, jsonify
 from flask_login import current_user
 from extensions import db, login_manager
 from models import User
@@ -132,7 +132,7 @@ def create_app():
         # Initialize extensions with error handling
         db.init_app(app)
         login_manager.init_app(app)
-        login_manager.login_view = 'auth.login'  # Update to use blueprint prefix
+        login_manager.login_view = 'auth.login'
 
         # Add user loader
         @login_manager.user_loader
@@ -143,10 +143,38 @@ def create_app():
                 app.logger.error(f"Error loading user: {str(e)}")
                 return None
 
+        # Initialize mail
         mail = Mail(app)
 
         # Set up logging
         setup_logging(app)
+
+        # Register error handlers
+        @app.errorhandler(400)
+        def bad_request_error(error):
+            app.logger.error(f"400 error: {str(error)}")
+            return jsonify(error="Bad Request", message=str(error)), 400
+
+        @app.errorhandler(401)
+        def unauthorized_error(error):
+            app.logger.error(f"401 error: {str(error)}")
+            return jsonify(error="Unauthorized", message="Please log in to access this resource"), 401
+
+        @app.errorhandler(403)
+        def forbidden_error(error):
+            app.logger.error(f"403 error: {str(error)}")
+            return jsonify(error="Forbidden", message="You don't have permission to access this resource"), 403
+
+        @app.errorhandler(404)
+        def not_found_error(error):
+            app.logger.error(f"404 error: {str(error)}")
+            return jsonify(error="Not Found", message="The requested resource was not found"), 404
+
+        @app.errorhandler(500)
+        def internal_error(error):
+            app.logger.error(f"500 error: {str(error)}")
+            db.session.rollback()
+            return jsonify(error="Internal Server Error", message="An internal server error occurred"), 500
 
         # Register blueprints
         from routes import bp as main_bp
@@ -160,17 +188,27 @@ def create_app():
 
         @app.after_request
         def after_request(response):
-            if hasattr(g, 'start_time'):
-                total_time = (time.time() - g.start_time) * 1000
-                app.logger.info(f"Request completed in {total_time:.2f}ms")
-            return response
+            try:
+                if hasattr(g, 'start_time'):
+                    total_time = (time.time() - g.start_time) * 1000
+                    app.logger.info(f"Request completed in {total_time:.2f}ms")
+                
+                # Add security headers
+                response.headers['X-Content-Type-Options'] = 'nosniff'
+                response.headers['X-Frame-Options'] = 'SAMEORIGIN'
+                response.headers['X-XSS-Protection'] = '1; mode=block'
+                
+                return response
+            except Exception as e:
+                app.logger.error(f"Error in after_request: {str(e)}")
+                return response
 
         # Initialize database and create tables
         with app.app_context():
             db.create_all()
             app.logger.info('Database tables created successfully')
 
-            # Create admin user if not exists
+            # Create admin user and default categories
             from routes import create_admin_user
             admin_user = create_admin_user()
             if not admin_user:
