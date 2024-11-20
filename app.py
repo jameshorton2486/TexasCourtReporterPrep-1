@@ -7,7 +7,7 @@ from flask_mail import Mail
 import random
 import os
 import logging
-from logging.handlers import TimedRotatingFileHandler
+from logging.handlers import TimedRotatingFileHandler, RotatingFileHandler
 from pythonjsonlogger import jsonlogger
 import traceback
 import time
@@ -16,6 +16,15 @@ from functools import wraps
 from datetime import timedelta
 from routes.dashboard import dashboard as dashboard_blueprint
 from routes.auth import auth as auth_blueprint
+import socket
+
+def is_port_in_use(port):
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        try:
+            s.bind(('0.0.0.0', port))
+            return False
+        except socket.error:
+            return True
 
 class CustomJsonFormatter(jsonlogger.JsonFormatter):
     def add_fields(self, log_record, record, message_dict):
@@ -50,6 +59,15 @@ def setup_logging(app):
         os.makedirs('logs')
 
     formatter = CustomJsonFormatter('%(timestamp)s %(level)s %(name)s %(message)s')
+    
+    # Add rotating file handler for app.log
+    file_handler = RotatingFileHandler(
+        'flask_app.log', 
+        maxBytes=10000000,  # 10MB
+        backupCount=5
+    )
+    file_handler.setFormatter(formatter)
+    file_handler.setLevel(logging.INFO)
     
     file_handler = TimedRotatingFileHandler(
         'logs/app.log',
@@ -186,4 +204,8 @@ app = create_app()
 app.jinja_env.filters['shuffle'] = shuffle_filter
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    port = 5000
+    if is_port_in_use(port):
+        logger.warning(f'Port {port} is in use, trying alternate port')
+        port = 8080
+    app.run(host='0.0.0.0', port=port)

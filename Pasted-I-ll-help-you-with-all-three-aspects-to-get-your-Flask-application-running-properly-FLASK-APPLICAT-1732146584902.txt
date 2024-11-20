@@ -1,0 +1,176 @@
+I'll help you with all three aspects to get your Flask application running properly.
+
+FLASK APPLICATION CODE REVIEW
+Here's a basic Flask app template to test:
+
+pythonCopyfrom flask import Flask
+import logging
+
+app = Flask(__name__)
+
+# Set up logging
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
+
+@app.route('/')
+def home():
+    logger.info('Homepage accessed')
+    return 'Hello, World!'
+
+@app.route('/test')
+def test():
+    logger.info('Test page accessed')
+    return 'Test route working!'
+
+if __name__ == '__main__':
+    # Debug mode for development
+    app.debug = True
+    
+    # Bind to all interfaces
+    logger.info('Starting Flask app...')
+    app.run(host='0.0.0.0', port=5000)
+    logger.info('Flask app started successfully')
+
+DEBUGGING PORT BINDING ISSUES:
+Add this code to check port availability:
+
+pythonCopyimport socket
+
+def is_port_in_use(port):
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        try:
+            s.bind(('0.0.0.0', port))
+            return False
+        except socket.error:
+            return True
+
+if __name__ == '__main__':
+    port = 5000
+    if is_port_in_use(port):
+        logger.error(f'Port {port} is already in use!')
+        # Try alternate port
+        port = 8080
+        if is_port_in_use(port):
+            logger.error(f'Alternate port {port} also in use!')
+            raise RuntimeError('No available ports')
+    
+    app.run(host='0.0.0.0', port=port)
+
+ERROR LOGGING SETUP:
+Add this more comprehensive logging setup:
+
+pythonCopyimport logging
+import sys
+from logging.handlers import RotatingFileHandler
+
+def setup_logging():
+    # Create formatter
+    formatter = logging.Formatter(
+        '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    )
+
+    # Console handler
+    console_handler = logging.StreamHandler(sys.stdout)
+    console_handler.setFormatter(formatter)
+    
+    # File handler
+    file_handler = RotatingFileHandler(
+        'flask_app.log', 
+        maxBytes=10000000,  # 10MB
+        backupCount=5
+    )
+    file_handler.setFormatter(formatter)
+    
+    # Set up logger
+    logger = logging.getLogger(__name__)
+    logger.setLevel(logging.DEBUG)
+    logger.addHandler(console_handler)
+    logger.addHandler(file_handler)
+    
+    return logger
+
+# Use in main app
+logger = setup_logging()
+COMPLETE APP WITH ALL FEATURES:
+pythonCopyfrom flask import Flask
+import logging
+import socket
+import sys
+from logging.handlers import RotatingFileHandler
+
+def setup_logging():
+    formatter = logging.Formatter(
+        '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+    )
+    
+    console_handler = logging.StreamHandler(sys.stdout)
+    console_handler.setFormatter(formatter)
+    
+    file_handler = RotatingFileHandler(
+        'flask_app.log', 
+        maxBytes=10000000,
+        backupCount=5
+    )
+    file_handler.setFormatter(formatter)
+    
+    logger = logging.getLogger(__name__)
+    logger.setLevel(logging.DEBUG)
+    logger.addHandler(console_handler)
+    logger.addHandler(file_handler)
+    
+    return logger
+
+def is_port_in_use(port):
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+        try:
+            s.bind(('0.0.0.0', port))
+            return False
+        except socket.error:
+            return True
+
+app = Flask(__name__)
+logger = setup_logging()
+
+@app.route('/')
+def home():
+    logger.info('Homepage accessed')
+    return 'Hello, World!'
+
+@app.route('/test')
+def test():
+    logger.info('Test page accessed')
+    return 'Test route working!'
+
+if __name__ == '__main__':
+    app.debug = True
+    
+    # Check port availability
+    port = 5000
+    logger.info(f'Attempting to start server on port {port}')
+    
+    if is_port_in_use(port):
+        logger.warning(f'Port {port} is in use, trying alternate port')
+        port = 8080
+        if is_port_in_use(port):
+            logger.error('No available ports found')
+            raise RuntimeError('No available ports')
+    
+    logger.info(f'Starting Flask app on port {port}')
+    try:
+        app.run(host='0.0.0.0', port=port)
+        logger.info('Flask app started successfully')
+    except Exception as e:
+        logger.error(f'Failed to start Flask app: {str(e)}')
+        raise
+To use this:
+
+Save as app.py
+Run the application
+Check flask_app.log for detailed logs
+Access http://localhost:5000 or http://localhost:8080
+
+The logs will help identify any issues with:
+
+Port binding
+Route access
+Application errors
