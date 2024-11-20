@@ -15,6 +15,7 @@ import uuid
 from functools import wraps
 from datetime import timedelta
 from routes.dashboard import dashboard
+from routes.auth import auth as auth_blueprint  # Import auth blueprint
 
 class CustomJsonFormatter(jsonlogger.JsonFormatter):
     def add_fields(self, log_record, record, message_dict):
@@ -90,8 +91,10 @@ def create_app():
 
     # Initialize extensions
     db.init_app(app)
-    login_manager.init_app(app)
-    login_manager.login_view = 'auth.login'
+    
+    # Configure login manager
+    login_manager.login_view = 'auth.login'  # Set login view
+    login_manager.init_app(app)  # Initialize login manager
 
     @login_manager.user_loader
     def load_user(user_id):
@@ -133,6 +136,7 @@ def create_app():
         from routes import bp as main_bp
         app.register_blueprint(main_bp)
         app.register_blueprint(dashboard)  # Register the dashboard blueprint
+        app.register_blueprint(auth_blueprint)  # Register the auth blueprint
         
         # Initialize database
         db.create_all()

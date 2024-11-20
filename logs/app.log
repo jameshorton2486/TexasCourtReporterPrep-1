@@ -461,3 +461,12 @@
 {"timestamp": "2024-11-20 16:18:04,430", "level": "INFO", "name": "app", "message": "Database tables created successfully", "logger": "app"}
 {"timestamp": "2024-11-20 16:18:04,520", "level": "INFO", "name": "app", "message": "Admin user verified/created successfully", "logger": "app"}
 {"timestamp": "2024-11-20 16:18:04,695", "level": "INFO", "name": "app", "message": "Request completed in 0.59ms", "logger": "app", "request_id": "3aa966bd-48bd-4370-a183-b27439aa350f", "method": "GET", "path": "/", "ip": "172.31.196.18", "response_time": 0.7143020629882812}
+{"timestamp": "2024-11-20 16:24:13,227", "level": "INFO", "name": "app", "message": "Request completed in 0.31ms", "logger": "app", "request_id": "5fea71cb-b0bf-4da0-9b4c-791052615fd4", "method": "GET", "path": "/", "ip": "172.31.196.18", "response_time": 0.4260540008544922}
+{"timestamp": "2024-11-20 16:24:50,292", "level": "INFO", "name": "app", "message": "Request completed in 0.53ms", "logger": "app", "request_id": "d9b5af7f-8d5f-4e8a-9058-b60d904d610d", "method": "GET", "path": "/", "ip": "172.31.196.18", "response_time": 0.6659030914306641}
+{"timestamp": "2024-11-20 16:26:32,120", "level": "INFO", "name": "app", "message": "Database tables created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 16:26:32,208", "level": "INFO", "name": "app", "message": "Admin user verified/created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 16:26:34,418", "level": "INFO", "name": "app", "message": "Database tables created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 16:26:34,485", "level": "INFO", "name": "app", "message": "Admin user verified/created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 16:26:35,683", "level": "INFO", "name": "app", "message": "Database tables created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 16:26:35,760", "level": "INFO", "name": "app", "message": "Admin user verified/created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 16:26:35,930", "level": "INFO", "name": "app", "message": "Request completed in 0.58ms", "logger": "app", "request_id": "dad9132f-e064-44db-be77-b4ff5516697b", "method": "GET", "path": "/", "ip": "172.31.196.18", "response_time": 0.7567405700683594}

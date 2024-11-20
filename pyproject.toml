@@ -26,4 +26,5 @@ dependencies = [
     "tenacity",
     "jwt",
     "flask-cors>=5.0.0",
+    "flask-wtf>=1.2.2",
 ]
