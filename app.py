@@ -1,5 +1,5 @@
 from flask import Flask, render_template, redirect, url_for, request, g, current_app, jsonify, make_response
-from flask_login import current_user
+from flask_login import current_user, login_required
 from flask_cors import CORS
 from extensions import db, login_manager
 from models import User
@@ -124,8 +124,8 @@ def create_app():
         })
         return response
 
-    # Register blueprints with correct prefixes
-    app.register_blueprint(auth_blueprint)
+    # Register blueprints
+    app.register_blueprint(auth_blueprint, url_prefix='/auth')
     app.register_blueprint(dashboard_blueprint)
 
     # Initialize database
@@ -162,6 +162,15 @@ def create_app():
             return redirect(url_for('dashboard.show_dashboard'))
         return redirect(url_for('auth.login'))
 
+    @app.errorhandler(404)
+    def not_found_error(error):
+        return render_template('errors/404.html'), 404
+
+    @app.errorhandler(500)
+    def internal_error(error):
+        db.session.rollback()
+        return render_template('errors/500.html'), 500
+
     return app
 
 def shuffle_filter(seq):
@@ -177,5 +186,4 @@ app = create_app()
 app.jinja_env.filters['shuffle'] = shuffle_filter
 
 if __name__ == '__main__':
-    port = int(os.environ.get('PORT', 8080))
-    app.run(host='0.0.0.0', port=port, debug=True)  # Enable debug mode for development
+    app.run(host='0.0.0.0', port=5000)

@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, jsonify
 from flask_login import login_required, current_user
-from models import UserQuestionPerformance, Category, Question, Test, db
-from sqlalchemy import func, desc
+from models import UserQuestionPerformance, Category, Question, Test, StudySession, db
+from sqlalchemy import func, desc, and_
 from datetime import datetime, timedelta
 import logging
 
@@ -33,6 +33,27 @@ def show_dashboard():
         ).with_entities(
             func.avg(UserQuestionPerformance.average_response_time)
         ).scalar() or 0
+
+        # Study time analytics
+        total_study_time = db.session.query(
+            func.sum(StudySession.actual_duration)
+        ).filter(
+            StudySession.user_id == current_user.id,
+            StudySession.is_completed == True
+        ).scalar() or 0
+
+        # Recent activity summary
+        recent_activity = db.session.query(
+            func.date(Test.created_at).label('date'),
+            func.count(Test.id).label('tests_taken'),
+            func.avg(Test.score).label('avg_score'),
+            func.sum(Test.completion_time).label('total_time')
+        ).filter(
+            Test.user_id == current_user.id,
+            Test.created_at >= datetime.utcnow() - timedelta(days=7)
+        ).group_by(
+            func.date(Test.created_at)
+        ).order_by(desc('date')).all()
         
         # Performance by category with detailed metrics
         category_stats = db.session.query(
@@ -43,49 +64,39 @@ def show_dashboard():
                 (UserQuestionPerformance.correct_attempts * 100.0 / 
                 func.nullif(UserQuestionPerformance.total_attempts, 0))
             ).label('accuracy'),
-            func.avg(UserQuestionPerformance.average_response_time).label('avg_response_time')
+            func.avg(UserQuestionPerformance.average_response_time).label('avg_response_time'),
+            func.count(UserQuestionPerformance.id).label('questions_attempted')
         ).join(
             Question, Category.id == Question.category_id
-        ).join(
-            UserQuestionPerformance, Question.id == UserQuestionPerformance.question_id
-        ).filter(
-            UserQuestionPerformance.user_id == current_user.id
+        ).outerjoin(
+            UserQuestionPerformance, 
+            and_(Question.id == UserQuestionPerformance.question_id,
+                 UserQuestionPerformance.user_id == current_user.id)
         ).group_by(Category.name).all()
-        
-        # Recent progress (last 7 days) with detailed metrics
-        today = datetime.utcnow().date()
-        daily_progress = []
-        for i in range(7):
-            date = today - timedelta(days=i)
-            next_date = date + timedelta(days=1)
-            
-            daily_stats = db.session.query(
-                func.count(Test.id).label('tests_taken'),
-                func.avg(Test.score).label('avg_score'),
-                func.sum(Test.total_time).label('study_time'),
-                func.count(UserQuestionPerformance.id).label('questions_practiced')
-            ).outerjoin(
-                UserQuestionPerformance, 
-                db.and_(
-                    UserQuestionPerformance.user_id == Test.user_id,
-                    func.date(UserQuestionPerformance.last_attempt_date) == date
-                )
-            ).filter(
-                Test.user_id == current_user.id,
-                Test.created_at >= date,
-                Test.created_at < next_date,
-                Test.completed == True
-            ).first()
-            
-            daily_progress.append({
-                'date': date.strftime('%Y-%m-%d'),
-                'tests_taken': daily_stats[0] or 0,
-                'avg_score': float(daily_stats[1] or 0),
-                'study_time': float(daily_stats[2] or 0),
-                'questions_practiced': daily_stats[3] or 0
-            })
-        
-        # Areas needing improvement with specific recommendations
+
+        # Study streak calculation
+        study_dates = db.session.query(
+            func.date(StudySession.start_time)
+        ).filter(
+            StudySession.user_id == current_user.id,
+            StudySession.is_completed == True
+        ).distinct().order_by(
+            func.date(StudySession.start_time)
+        ).all()
+
+        current_streak = 0
+        if study_dates:
+            today = datetime.utcnow().date()
+            last_date = None
+            for date_tuple in reversed(study_dates):
+                date = date_tuple[0]
+                if last_date is None or (last_date - date).days == 1:
+                    current_streak += 1
+                    last_date = date
+                else:
+                    break
+
+        # Weak areas identification
         weak_areas = db.session.query(
             Category.name,
             func.avg(
@@ -106,13 +117,14 @@ def show_dashboard():
                 func.nullif(UserQuestionPerformance.total_attempts, 0))
             ) < 70
         ).order_by('accuracy').all()
-        
+
         # Most challenging questions
         challenging_questions = db.session.query(
             Question.question_text,
             Category.name.label('category'),
             UserQuestionPerformance.accuracy,
-            UserQuestionPerformance.total_attempts
+            UserQuestionPerformance.total_attempts,
+            UserQuestionPerformance.average_response_time
         ).join(
             Category, Question.category_id == Category.id
         ).join(
@@ -124,14 +136,16 @@ def show_dashboard():
         ).order_by(
             UserQuestionPerformance.accuracy
         ).limit(5).all()
-        
+
         return render_template(
             'dashboard/index.html',
             total_questions=total_questions,
             accuracy=round(accuracy, 2),
             avg_response_time=round(avg_response_time, 2),
+            total_study_time=total_study_time,
+            current_streak=current_streak,
             category_stats=category_stats,
-            daily_progress=daily_progress,
+            recent_activity=recent_activity,
             weak_areas=weak_areas,
             challenging_questions=challenging_questions
         )
@@ -145,27 +159,28 @@ def show_dashboard():
 def category_performance(category_id):
     """API endpoint for category-specific performance data"""
     try:
-        performance = UserQuestionPerformance.query.join(
-            Question
+        # Get performance data over time
+        performance_data = db.session.query(
+            func.date(Test.created_at).label('date'),
+            func.avg(Test.score).label('score'),
+            func.count(Test.id).label('tests_taken'),
+            func.avg(Test.completion_time).label('avg_completion_time')
         ).filter(
-            UserQuestionPerformance.user_id == current_user.id,
-            Question.category_id == category_id
+            Test.user_id == current_user.id,
+            Test.category_id == category_id,
+            Test.completed == True
+        ).group_by(
+            func.date(Test.created_at)
         ).order_by(
-            UserQuestionPerformance.last_attempt_date
+            func.date(Test.created_at)
         ).all()
         
         data = {
-            'accuracy': [],
-            'response_times': [],
-            'dates': [],
-            'ease_factors': []
+            'dates': [str(p.date) for p in performance_data],
+            'scores': [float(p.score) for p in performance_data],
+            'tests_taken': [int(p.tests_taken) for p in performance_data],
+            'avg_completion_time': [float(p.avg_completion_time or 0) for p in performance_data]
         }
-        
-        for perf in performance:
-            data['accuracy'].append(perf.accuracy or 0)
-            data['response_times'].append(perf.average_response_time or 0)
-            data['dates'].append(perf.last_attempt_date.strftime('%Y-%m-%d'))
-            data['ease_factors'].append(perf.ease_factor or 1.0)
             
         return jsonify(data)
         

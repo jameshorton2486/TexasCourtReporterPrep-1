@@ -601,3 +601,82 @@
 {"timestamp": "2024-11-20 17:01:50,338", "level": "INFO", "name": "app", "message": "Admin user verified/created successfully", "logger": "app"}
 {"timestamp": "2024-11-20 17:01:52,080", "level": "INFO", "name": "app", "message": "Database tables created successfully", "logger": "app"}
 {"timestamp": "2024-11-20 17:01:52,155", "level": "INFO", "name": "app", "message": "Admin user verified/created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 17:45:38,575", "level": "INFO", "name": "app", "message": "Database tables created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 17:45:38,700", "level": "INFO", "name": "app", "message": "Admin user verified/created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 17:45:40,206", "level": "INFO", "name": "app", "message": "Database tables created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 17:45:43,034", "level": "INFO", "name": "app", "message": "Database tables created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 17:45:43,130", "level": "INFO", "name": "app", "message": "Admin user verified/created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 17:45:45,197", "level": "INFO", "name": "app", "message": "Database tables created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 17:45:45,279", "level": "INFO", "name": "app", "message": "Admin user verified/created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 17:45:45,448", "level": "INFO", "name": "app", "message": "Request completed in 0.41ms", "logger": "app", "request_id": "e7cbefd8-2f29-40e1-a566-c644be51eeb2", "method": "GET", "path": "/", "ip": "172.31.196.49", "response_time": 0.5433559417724609}
+{"timestamp": "2024-11-20 17:45:45,588", "level": "INFO", "name": "app", "message": "Request completed in 20.59ms", "logger": "app", "request_id": "5d231c8a-6f0e-4629-9a9d-1b2aeb5b6856", "method": "GET", "path": "/login", "ip": "172.31.196.49", "response_time": 20.73526382446289}
+{"timestamp": "2024-11-20 17:46:02,809", "level": "INFO", "name": "app", "message": "Database tables created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 17:46:02,885", "level": "INFO", "name": "app", "message": "Admin user verified/created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 17:46:04,267", "level": "INFO", "name": "app", "message": "Database tables created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 17:46:04,337", "level": "INFO", "name": "app", "message": "Admin user verified/created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 17:46:04,501", "level": "INFO", "name": "app", "message": "Request completed in 0.22ms", "logger": "app", "request_id": "f7c2412e-692d-4be1-bec6-72f15b06386c", "method": "GET", "path": "/", "ip": "172.31.196.49", "response_time": 0.3886222839355469}
+{"timestamp": "2024-11-20 17:46:04,658", "level": "INFO", "name": "app", "message": "Request completed in 10.24ms", "logger": "app", "request_id": "8aee7378-ab5b-48dd-9d57-b1c691de3471", "method": "GET", "path": "/login", "ip": "172.31.196.49", "response_time": 10.340690612792969}
+{"timestamp": "2024-11-20 17:46:35,753", "level": "INFO", "name": "app", "message": "Database tables created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 17:46:35,826", "level": "INFO", "name": "app", "message": "Admin user verified/created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 17:46:37,221", "level": "INFO", "name": "app", "message": "Database tables created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 17:46:37,303", "level": "INFO", "name": "app", "message": "Admin user verified/created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 17:46:37,492", "level": "INFO", "name": "app", "message": "Request completed in 0.28ms", "logger": "app", "request_id": "f55aca32-14b5-4c8a-9ff2-78dd0515e427", "method": "GET", "path": "/", "ip": "172.31.196.49", "response_time": 0.4222393035888672}
+{"timestamp": "2024-11-20 17:46:37,635", "level": "INFO", "name": "app", "message": "Request completed in 12.38ms", "logger": "app", "request_id": "2bf1ff6d-3d11-48c0-ba4f-ced7b65f2bca", "method": "GET", "path": "/login", "ip": "172.31.196.49", "response_time": 12.511730194091797}
+{"timestamp": "2024-11-20 17:47:13,885", "level": "INFO", "name": "app", "message": "Database tables created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 17:47:13,963", "level": "INFO", "name": "app", "message": "Admin user verified/created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 17:48:01,149", "level": "INFO", "name": "app", "message": "Database tables created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 17:48:01,224", "level": "INFO", "name": "app", "message": "Admin user verified/created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 17:48:02,544", "level": "INFO", "name": "app", "message": "Database tables created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 17:48:02,619", "level": "INFO", "name": "app", "message": "Admin user verified/created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 17:48:02,775", "level": "INFO", "name": "app", "message": "Request completed in 0.24ms", "logger": "app", "request_id": "4764fadf-9a11-456c-8791-8135682b85f6", "method": "GET", "path": "/", "ip": "172.31.196.49", "response_time": 0.35309791564941406}
+{"timestamp": "2024-11-20 17:48:02,925", "level": "INFO", "name": "app", "message": "Request completed in 10.56ms", "logger": "app", "request_id": "e6b42cb1-5c5a-4149-b582-9f2fe8b55263", "method": "GET", "path": "/auth/login", "ip": "172.31.196.49", "response_time": 10.653018951416016}
+{"timestamp": "2024-11-20 17:48:22,145", "level": "INFO", "name": "app", "message": "Database tables created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 17:48:22,223", "level": "INFO", "name": "app", "message": "Admin user verified/created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 17:48:23,702", "level": "INFO", "name": "app", "message": "Database tables created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 17:48:23,840", "level": "INFO", "name": "app", "message": "Admin user verified/created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 17:48:24,031", "level": "INFO", "name": "app", "message": "Request completed in 0.27ms", "logger": "app", "request_id": "bfe9f9b5-8716-4158-ac18-0080ba0b9b3d", "method": "GET", "path": "/", "ip": "172.31.196.49", "response_time": 0.40078163146972656}
+{"timestamp": "2024-11-20 17:48:24,134", "level": "INFO", "name": "app", "message": "Request completed in 20.34ms", "logger": "app", "request_id": "56bafc13-8114-463f-acab-ed9c211bdce2", "method": "GET", "path": "/auth/login", "ip": "172.31.196.49", "response_time": 20.467042922973633}
+{"timestamp": "2024-11-20 17:48:39,767", "level": "INFO", "name": "app", "message": "Database tables created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 17:48:39,833", "level": "INFO", "name": "app", "message": "Admin user verified/created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 17:48:42,109", "level": "INFO", "name": "app", "message": "Database tables created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 17:48:42,191", "level": "INFO", "name": "app", "message": "Admin user verified/created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 17:48:43,530", "level": "INFO", "name": "app", "message": "Database tables created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 17:48:43,601", "level": "INFO", "name": "app", "message": "Admin user verified/created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 17:48:43,768", "level": "INFO", "name": "app", "message": "Request completed in 0.23ms", "logger": "app", "request_id": "cd475744-992c-4ccd-a54f-855c23aadbb7", "method": "GET", "path": "/", "ip": "172.31.196.49", "response_time": 0.34332275390625}
+{"timestamp": "2024-11-20 17:48:43,926", "level": "INFO", "name": "app", "message": "Request completed in 10.91ms", "logger": "app", "request_id": "22feb7f2-13a7-4d3d-aa2f-5eae664e2213", "method": "GET", "path": "/auth/login", "ip": "172.31.196.49", "response_time": 11.057138442993164}
+{"timestamp": "2024-11-20 17:49:01,453", "level": "INFO", "name": "app", "message": "Database tables created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 17:49:01,521", "level": "INFO", "name": "app", "message": "Admin user verified/created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 17:49:02,926", "level": "INFO", "name": "app", "message": "Database tables created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 17:49:02,996", "level": "INFO", "name": "app", "message": "Admin user verified/created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 17:49:03,155", "level": "INFO", "name": "app", "message": "Request completed in 0.23ms", "logger": "app", "request_id": "f66bfee6-0688-4448-878e-c7579fd46266", "method": "GET", "path": "/", "ip": "172.31.196.49", "response_time": 0.35881996154785156}
+{"timestamp": "2024-11-20 17:49:03,307", "level": "INFO", "name": "app", "message": "Request completed in 10.78ms", "logger": "app", "request_id": "87d748e9-0af2-4e56-8bea-0b6434c6feca", "method": "GET", "path": "/auth/login", "ip": "172.31.196.49", "response_time": 10.88714599609375}
+{"timestamp": "2024-11-20 17:49:26,074", "level": "INFO", "name": "app", "message": "Database tables created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 17:49:26,144", "level": "INFO", "name": "app", "message": "Admin user verified/created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 17:49:27,548", "level": "INFO", "name": "app", "message": "Database tables created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 17:49:27,623", "level": "INFO", "name": "app", "message": "Admin user verified/created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 17:49:27,784", "level": "INFO", "name": "app", "message": "Request completed in 0.21ms", "logger": "app", "request_id": "618b7c9f-2837-4b5d-8801-6e538a070db0", "method": "GET", "path": "/", "ip": "172.31.196.49", "response_time": 0.31876564025878906}
+{"timestamp": "2024-11-20 17:49:27,919", "level": "INFO", "name": "app", "message": "Request completed in 17.20ms", "logger": "app", "request_id": "5bf5ae6e-7574-4b69-a1e9-28eaebfc0df1", "method": "GET", "path": "/auth/login", "ip": "172.31.196.49", "response_time": 17.33851432800293}
+{"timestamp": "2024-11-20 17:49:53,772", "level": "INFO", "name": "app", "message": "Database tables created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 17:49:53,854", "level": "INFO", "name": "app", "message": "Admin user verified/created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 17:49:55,120", "level": "INFO", "name": "app", "message": "Database tables created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 17:49:55,200", "level": "INFO", "name": "app", "message": "Admin user verified/created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 17:49:55,360", "level": "INFO", "name": "app", "message": "Request completed in 0.23ms", "logger": "app", "request_id": "03aa7d1d-f7e6-407a-8e41-3693c5c19fc6", "method": "GET", "path": "/", "ip": "172.31.196.49", "response_time": 0.32830238342285156}
+{"timestamp": "2024-11-20 17:49:55,483", "level": "INFO", "name": "app", "message": "Request completed in 10.49ms", "logger": "app", "request_id": "29185a2e-ec3a-46d2-b063-99ed2428dc5b", "method": "GET", "path": "/auth/login", "ip": "172.31.196.49", "response_time": 10.618209838867188}
+{"timestamp": "2024-11-20 17:50:39,576", "level": "INFO", "name": "app", "message": "Database tables created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 17:50:39,650", "level": "INFO", "name": "app", "message": "Admin user verified/created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 17:50:40,183", "level": "INFO", "name": "app", "message": "Request completed in 0.20ms", "logger": "app", "request_id": "62e7eb41-5655-4d38-a77f-629f439eaf2f", "method": "GET", "path": "/", "ip": "172.31.196.49", "response_time": 0.3216266632080078}
+{"timestamp": "2024-11-20 17:50:40,266", "level": "INFO", "name": "app", "message": "Request completed in 13.03ms", "logger": "app", "request_id": "f2825cf8-57ea-44d1-b301-caf92501c598", "method": "GET", "path": "/auth/login", "ip": "172.31.196.49", "response_time": 13.168096542358398}
+{"timestamp": "2024-11-20 17:51:51,826", "level": "INFO", "name": "app", "message": "Database tables created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 17:51:51,904", "level": "INFO", "name": "app", "message": "Admin user verified/created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 17:51:52,300", "level": "INFO", "name": "app", "message": "Request completed in 0.21ms", "logger": "app", "request_id": "eb501b9e-d747-4a33-84a1-4057436455fc", "method": "GET", "path": "/", "ip": "172.31.196.49", "response_time": 0.3504753112792969}
+{"timestamp": "2024-11-20 17:51:52,384", "level": "INFO", "name": "app", "message": "Request completed in 15.20ms", "logger": "app", "request_id": "ad53c9a0-024c-4a91-8a63-dbd43b44ec75", "method": "GET", "path": "/auth/login", "ip": "172.31.196.49", "response_time": 15.348672866821289}
+{"timestamp": "2024-11-20 23:20:51,342", "level": "INFO", "name": "app", "message": "Database tables created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 23:20:51,423", "level": "INFO", "name": "app", "message": "Admin user verified/created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 23:20:52,877", "level": "INFO", "name": "app", "message": "Database tables created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 23:20:52,943", "level": "INFO", "name": "app", "message": "Admin user verified/created successfully", "logger": "app"}
+{"timestamp": "2024-11-20 23:20:53,326", "level": "INFO", "name": "app", "message": "Request completed in 0.22ms", "logger": "app", "request_id": "c121e052-2bcf-43cb-8225-6a4f9cd0652e", "method": "GET", "path": "/", "ip": "172.31.196.5", "response_time": 0.3418922424316406}
+{"timestamp": "2024-11-20 23:20:53,487", "level": "INFO", "name": "app", "message": "Request completed in 10.25ms", "logger": "app", "request_id": "235e30ec-4251-4c7b-838d-28701a07b8c7", "method": "GET", "path": "/auth/login", "ip": "172.31.196.5", "response_time": 10.341405868530273}
+{"timestamp": "2024-11-20 23:20:54,007", "level": "INFO", "name": "app", "message": "Request completed in 0.17ms", "logger": "app", "request_id": "9ce0e911-6ff7-477e-b0ea-537996d16589", "method": "GET", "path": "/", "ip": "172.31.196.5", "response_time": 0.27632713317871094}
+{"timestamp": "2024-11-20 23:20:54,013", "level": "INFO", "name": "app", "message": "Request completed in 0.91ms", "logger": "app", "request_id": "935b88a7-764f-4cfa-a9ef-552c93a06987", "method": "GET", "path": "/auth/login", "ip": "172.31.196.5", "response_time": 0.9987354278564453}
+{"timestamp": "2024-11-20 23:20:54,025", "level": "INFO", "name": "app", "message": "Request completed in 2.92ms", "logger": "app", "request_id": "2c43cc7a-c125-4415-b74b-ba0859f88b78", "method": "GET", "path": "/static/css/style.css", "ip": "172.31.196.5", "response_time": 2.9990673065185547}
+{"timestamp": "2024-11-20 23:20:54,030", "level": "INFO", "name": "app", "message": "Request completed in 0.31ms", "logger": "app", "request_id": "755c67b8-bdb1-4b52-aaed-d82a69b03e40", "method": "GET", "path": "/static/images/courthouse.svg", "ip": "172.31.196.5", "response_time": 0.3628730773925781}
