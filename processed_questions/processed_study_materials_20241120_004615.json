@@ -1,0 +1,129 @@
+{
+  "metadata": {
+    "timestamp": "2024-11-20T00:46:15.163666",
+    "total_questions": 10,
+    "source_file": "study_materials.pdf"
+  },
+  "questions": [
+    {
+      "question_text": "What is the meaning of stare decisis?",
+      "correct_answer": "- A legal principle that obligates courts to follow historical cases when making a ruling on a similar case.",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "study_materials.pdf",
+      "content_hash": "d1f6e217830748d766f5190ca9191adae38919d2318d423325fac9dd92b96a39"
+    },
+    {
+      "question_text": "What does amicus curiae mean?",
+      "correct_answer": "- Friend of the court; someone who is not a party to a case who offers information to assist the court in deciding a matter before it.",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "study_materials.pdf",
+      "content_hash": "3e99c100c5abdf5137f804b4085af8314c1e4e730a159b0693c8637e5e5d06bb"
+    },
+    {
+      "question_text": "What is the term for a written statement given under oath?",
+      "correct_answer": "- An affidavit is a written statement given under oath and notarized. Professional Standards & Ethics Questions:",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "study_materials.pdf",
+      "content_hash": "cd405652adf2a12c764f8aadde42e698841e5705157cd21164e30ab11afa4399"
+    },
+    {
+      "question_text": "What is the required timeframe for delivering a certified transcript?",
+      "correct_answer": "- Within 30 days of the request unless otherwise specified by court order. Transcription Standards Questions:",
+      "wrong_answers": [
+        "This refers to a different legal concept in Legal & Judicial Terminology",
+        "While related to legal, this is incorrect",
+        "This is a common misconception in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "study_materials.pdf",
+      "content_hash": "7cd085fc203554a75fbaed6564af7bf44eaf8bb3da3d4a2e1d205a3bbb31e925"
+    },
+    {
+      "question_text": "What is the minimum speed requirement for real-time court reporting?",
+      "correct_answer": "- 225 WPM.",
+      "wrong_answers": [
+        "- 230 WPM.",
+        "- 220 WPM.",
+        "- 450 WPM."
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "study_materials.pdf",
+      "content_hash": "fd746b7014be7ec0940c302abedd7f4bf2280cb999f5430a55c533327f54fb61"
+    },
+    {
+      "question_text": "How should speaker identification be formatted in Q&A?",
+      "correct_answer": "- The speaker should be identified in all caps followed by a colon.",
+      "wrong_answers": [
+        "Incorrect approach in Transcription Standards",
+        "This violates standard practices in Transcription Standards",
+        "This is not recommended in Transcription Standards"
+      ],
+      "category": "Transcription Standards",
+      "source_file": "study_materials.pdf",
+      "content_hash": "d39f143d4f9197e5fc837dd73089eb720362e92139d13373247829fcffbec21b"
+    },
+    {
+      "question_text": "What is the proper format for indicating an exhibit in a transcript?",
+      "correct_answer": "- EXHIBIT [Number/Letter] followed by description in parentheses. Grammar & Vocabulary Questions:",
+      "wrong_answers": [
+        "This refers to a different legal concept in Transcription Standards",
+        "While related to transcription, this is incorrect",
+        "This is a common misconception in Transcription Standards"
+      ],
+      "category": "Transcription Standards",
+      "source_file": "study_materials.pdf",
+      "content_hash": "647efc6f64a48aaa1fb8413e57a175db48f4afea2d0843931f35017bb665adb5"
+    },
+    {
+      "question_text": "What is the correct usage of voir dire in legal context?",
+      "correct_answer": "- It refers to the preliminary examination of a witness or juror to determine their competency.",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "study_materials.pdf",
+      "content_hash": "17510625395678ecb57e00f4cc7be04401f1c52d3c9a0c774e3174c856d8e703"
+    },
+    {
+      "question_text": "How should Latin legal phrases be formatted in transcripts?",
+      "correct_answer": "- Latin phrases should be italicized or underlined, depending on court preference.",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "study_materials.pdf",
+      "content_hash": "a96bc75a54e0493a87480b4a164f89ee1bfe336efb3bb188c38815132f6ea288"
+    },
+    {
+      "question_text": "What is the proper way to handle interrupted speech in transcripts?",
+      "correct_answer": "- Use two hyphens (--) to indicate interrupted speech mid-sentence.",
+      "wrong_answers": [
+        "Incorrect approach in Legal & Judicial Terminology",
+        "This violates standard practices in Legal & Judicial Terminology",
+        "This is not recommended in Legal & Judicial Terminology"
+      ],
+      "category": "Legal & Judicial Terminology",
+      "source_file": "study_materials.pdf",
+      "content_hash": "284d538c1cedb7c439e91b1187612fbcabea9411131952580acb1e8bb405f7f6"
+    }
+  ]
+}

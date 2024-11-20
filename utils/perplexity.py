@@ -93,11 +93,12 @@ def generate_questions(topic: str, count: int = 3) -> Optional[List[Dict]]:
             'https://api.perplexity.ai/chat/completions',
             headers=headers,
             json={
-                'model': 'pplx-7b-online',  # Updated to use the correct model name
+                'model': 'llama-3.1-sonar-small-128k-online',
                 'messages': [{'role': 'user', 'content': prompt}],
                 'max_tokens': 2048,
                 'temperature': 0.7,
-                'top_p': 0.9
+                'top_p': 0.9,
+                'stop': ["\nQuestion: ", "\nCorrect:"]  # Added stop sequences
             },
             timeout=30
         )
