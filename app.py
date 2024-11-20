@@ -14,6 +14,7 @@ import time
 import uuid
 from functools import wraps
 from datetime import timedelta
+from routes.dashboard import dashboard
 
 class CustomJsonFormatter(jsonlogger.JsonFormatter):
     def add_fields(self, log_record, record, message_dict):
@@ -92,6 +93,10 @@ def create_app():
     login_manager.init_app(app)
     login_manager.login_view = 'auth.login'
 
+    @login_manager.user_loader
+    def load_user(user_id):
+        return User.query.get(int(user_id))
+
     @app.before_request
     def before_request():
         g.start_time = time.time()
@@ -127,6 +132,7 @@ def create_app():
         # Register blueprints
         from routes import bp as main_bp
         app.register_blueprint(main_bp)
+        app.register_blueprint(dashboard)  # Register the dashboard blueprint
         
         # Initialize database
         db.create_all()
@@ -170,4 +176,4 @@ app = create_app()
 app.jinja_env.filters['shuffle'] = shuffle_filter
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=3000)
+    app.run(host='0.0.0.0', port=5000, debug=True)
