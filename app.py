@@ -14,8 +14,8 @@ import time
 import uuid
 from functools import wraps
 from datetime import timedelta
-from routes.dashboard import dashboard
-from routes.auth import auth as auth_blueprint  # Import auth blueprint
+from routes.dashboard import dashboard as dashboard_blueprint
+from routes.auth import auth as auth_blueprint
 
 class CustomJsonFormatter(jsonlogger.JsonFormatter):
     def add_fields(self, log_record, record, message_dict):
@@ -75,6 +75,9 @@ def setup_logging(app):
 def create_app():
     app = Flask(__name__)
     
+    # Enable CORS
+    CORS(app)
+    
     # Basic configuration
     app.config.update(
         SECRET_KEY=os.environ.get('FLASK_SECRET_KEY', 'default_secret_key'),
@@ -93,8 +96,9 @@ def create_app():
     db.init_app(app)
     
     # Configure login manager
-    login_manager.login_view = 'auth.login'  # Set login view
-    login_manager.init_app(app)  # Initialize login manager
+    login_manager.init_app(app)
+    login_manager.login_view = 'auth.login'
+    login_manager.login_message = 'Please log in to access this page.'
 
     @login_manager.user_loader
     def load_user(user_id):
@@ -111,34 +115,21 @@ def create_app():
             total_time = (time.time() - g.start_time) * 1000
             logger.info(f"Request completed in {total_time:.2f}ms")
         
-        # Add security and CORS headers
+        # Add security headers
         response.headers.update({
             'X-Content-Type-Options': 'nosniff',
             'X-Frame-Options': 'SAMEORIGIN',
             'X-XSS-Protection': '1; mode=block',
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Headers': 'Content-Type,Authorization',
-            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,OPTIONS'
+            'Access-Control-Allow-Origin': '*'
         })
         return response
 
-    with app.app_context():
-        # Configure CORS for Replit domains
-        CORS(app, resources={
-            r"/*": {
-                "origins": ["*.replit.dev", "*.repl.co"],
-                "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-                "allow_headers": ["Content-Type", "Authorization"]
-            }
-        })
+    # Register blueprints with correct prefixes
+    app.register_blueprint(auth_blueprint)
+    app.register_blueprint(dashboard_blueprint)
 
-        # Register blueprints
-        from routes import bp as main_bp
-        app.register_blueprint(main_bp)
-        app.register_blueprint(dashboard)  # Register the dashboard blueprint
-        app.register_blueprint(auth_blueprint)  # Register the auth blueprint
-        
-        # Initialize database
+    # Initialize database
+    with app.app_context():
         db.create_all()
         logger.info('Database tables created successfully')
 
@@ -165,6 +156,12 @@ def create_app():
         
         db.session.commit()
 
+    @app.route('/')
+    def index():
+        if current_user.is_authenticated:
+            return redirect(url_for('dashboard.show_dashboard'))
+        return redirect(url_for('auth.login'))
+
     return app
 
 def shuffle_filter(seq):
@@ -180,4 +177,5 @@ app = create_app()
 app.jinja_env.filters['shuffle'] = shuffle_filter
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
+    port = int(os.environ.get('PORT', 8080))
+    app.run(host='0.0.0.0', port=port, debug=True)  # Enable debug mode for development

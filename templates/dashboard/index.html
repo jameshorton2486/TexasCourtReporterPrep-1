@@ -15,6 +15,10 @@
                 <h3>Overall Accuracy</h3>
                 <p class="stat-value">{{ accuracy }}%</p>
             </div>
+            <div class="stat-card">
+                <h3>Average Response Time</h3>
+                <p class="stat-value">{{ avg_response_time }}s</p>
+            </div>
         </div>
     </div>
 
@@ -30,6 +34,7 @@
                 <h4>{{ stat.name }}</h4>
                 <p>Questions: {{ stat.total_questions }}</p>
                 <p>Accuracy: {{ "%.1f"|format(stat.accuracy|float) }}%</p>
+                <p>Avg Response Time: {{ "%.1f"|format(stat.avg_response_time|float) }}s</p>
                 <p>Difficulty Level: {{ "%.1f"|format(stat.avg_ease|float) }}</p>
             </div>
             {% endfor %}
@@ -42,6 +47,17 @@
         <div class="chart-container">
             <canvas id="progressChart"></canvas>
         </div>
+        <div class="progress-stats">
+            {% for progress in daily_progress %}
+            <div class="progress-stat-card">
+                <h4>{{ progress.date }}</h4>
+                <p>Tests: {{ progress.tests_taken }}</p>
+                <p>Score: {{ "%.1f"|format(progress.avg_score|float) }}%</p>
+                <p>Study Time: {{ "%.1f"|format(progress.study_time/60|float) }} mins</p>
+                <p>Questions: {{ progress.questions_practiced }}</p>
+            </div>
+            {% endfor %}
+        </div>
     </div>
 
     <!-- Areas for Improvement -->
@@ -53,7 +69,33 @@
             <div class="weak-area-card">
                 <h4>{{ area.name }}</h4>
                 <p>Current Accuracy: {{ "%.1f"|format(area.accuracy|float) }}%</p>
+                <p>Questions Available: {{ area.total_questions }}</p>
+                <p>Difficulty Level: {{ "%.1f"|format(area.difficulty|float) }}</p>
+                <div class="recommendation">
+                    {% if area.accuracy < 50 %}
+                    <p class="urgent">Needs immediate attention</p>
+                    {% else %}
+                    <p class="moderate">Additional practice recommended</p>
+                    {% endif %}
+                </div>
                 <a href="{{ url_for('study.start_session', category=area.name) }}" class="btn btn-primary">Study Now</a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Challenging Questions -->
+    {% if challenging_questions %}
+    <div class="dashboard-section">
+        <h2>Most Challenging Questions</h2>
+        <div class="challenging-questions">
+            {% for question in challenging_questions %}
+            <div class="question-card">
+                <h4>{{ question.category }}</h4>
+                <p class="question-text">{{ question.question_text }}</p>
+                <p>Accuracy: {{ "%.1f"|format(question.accuracy|float) }}%</p>
+                <p>Attempts: {{ question.total_attempts }}</p>
             </div>
             {% endfor %}
         </div>
@@ -77,6 +119,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 backgroundColor: 'rgba(54, 162, 235, 0.5)',
                 borderColor: 'rgba(54, 162, 235, 1)',
                 borderWidth: 1
+            }, {
+                label: 'Response Time (s)',
+                data: {{ category_stats|map(attribute='avg_response_time')|list|tojson }},
+                backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1,
+                yAxisID: 'response-time'
             }]
         },
         options: {
@@ -84,7 +133,19 @@ document.addEventListener('DOMContentLoaded', function() {
             scales: {
                 y: {
                     beginAtZero: true,
-                    max: 100
+                    max: 100,
+                    title: {
+                        display: true,
+                        text: 'Accuracy (%)'
+                    }
+                },
+                'response-time': {
+                    position: 'right',
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Response Time (s)'
+                    }
                 }
             }
         }
@@ -102,6 +163,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 fill: false,
                 borderColor: 'rgba(75, 192, 192, 1)',
                 tension: 0.1
+            }, {
+                label: 'Questions Practiced',
+                data: {{ daily_progress|map(attribute='questions_practiced')|list|tojson }},
+                fill: false,
+                borderColor: 'rgba(153, 102, 255, 1)',
+                tension: 0.1,
+                yAxisID: 'questions'
             }]
         },
         options: {
@@ -109,7 +177,19 @@ document.addEventListener('DOMContentLoaded', function() {
             scales: {
                 y: {
                     beginAtZero: true,
-                    max: 100
+                    max: 100,
+                    title: {
+                        display: true,
+                        text: 'Score (%)'
+                    }
+                },
+                'questions': {
+                    position: 'right',
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Questions'
+                    }
                 }
             }
         }
@@ -157,14 +237,14 @@ document.addEventListener('DOMContentLoaded', function() {
     margin: 20px 0;
 }
 
-.category-stats {
+.category-stats, .progress-stats {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
     margin-top: 20px;
 }
 
-.category-stat-card {
+.category-stat-card, .progress-stat-card {
     background: #f8f9fa;
     padding: 15px;
     border-radius: 6px;
@@ -180,6 +260,37 @@ document.addEventListener('DOMContentLoaded', function() {
     background: #fff3cd;
     padding: 15px;
     border-radius: 6px;
+}
+
+.recommendation {
+    margin: 10px 0;
+}
+
+.urgent {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+.moderate {
+    color: #ffc107;
+    font-weight: bold;
+}
+
+.challenging-questions {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.question-card {
+    background: #f8d7da;
+    padding: 15px;
+    border-radius: 6px;
+}
+
+.question-text {
+    font-style: italic;
+    margin: 10px 0;
 }
 
 .btn-primary {

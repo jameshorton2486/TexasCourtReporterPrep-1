@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, jsonify
 from flask_login import login_required, current_user
-from models import UserQuestionPerformance, Category, Question, Test
-from sqlalchemy import func
+from models import UserQuestionPerformance, Category, Question, Test, db
+from sqlalchemy import func, desc
 from datetime import datetime, timedelta
 import logging
 
@@ -26,18 +26,24 @@ def show_dashboard():
             func.sum(UserQuestionPerformance.total_attempts)
         ).scalar() or 0
         
-        # Calculate accuracy
+        # Calculate accuracy and study time
         accuracy = (correct_answers / total_attempts * 100) if total_attempts > 0 else 0
+        avg_response_time = UserQuestionPerformance.query.filter_by(
+            user_id=current_user.id
+        ).with_entities(
+            func.avg(UserQuestionPerformance.average_response_time)
+        ).scalar() or 0
         
-        # Performance by category
+        # Performance by category with detailed metrics
         category_stats = db.session.query(
             Category.name,
             func.count(Question.id).label('total_questions'),
             func.avg(UserQuestionPerformance.ease_factor).label('avg_ease'),
             func.avg(
                 (UserQuestionPerformance.correct_attempts * 100.0 / 
-                UserQuestionPerformance.total_attempts)
-            ).label('accuracy')
+                func.nullif(UserQuestionPerformance.total_attempts, 0))
+            ).label('accuracy'),
+            func.avg(UserQuestionPerformance.average_response_time).label('avg_response_time')
         ).join(
             Question, Category.id == Question.category_id
         ).join(
@@ -46,7 +52,7 @@ def show_dashboard():
             UserQuestionPerformance.user_id == current_user.id
         ).group_by(Category.name).all()
         
-        # Recent progress (last 7 days)
+        # Recent progress (last 7 days) with detailed metrics
         today = datetime.utcnow().date()
         daily_progress = []
         for i in range(7):
@@ -55,7 +61,15 @@ def show_dashboard():
             
             daily_stats = db.session.query(
                 func.count(Test.id).label('tests_taken'),
-                func.avg(Test.score).label('avg_score')
+                func.avg(Test.score).label('avg_score'),
+                func.sum(Test.total_time).label('study_time'),
+                func.count(UserQuestionPerformance.id).label('questions_practiced')
+            ).outerjoin(
+                UserQuestionPerformance, 
+                db.and_(
+                    UserQuestionPerformance.user_id == Test.user_id,
+                    func.date(UserQuestionPerformance.last_attempt_date) == date
+                )
             ).filter(
                 Test.user_id == current_user.id,
                 Test.created_at >= date,
@@ -66,16 +80,20 @@ def show_dashboard():
             daily_progress.append({
                 'date': date.strftime('%Y-%m-%d'),
                 'tests_taken': daily_stats[0] or 0,
-                'avg_score': float(daily_stats[1] or 0)
+                'avg_score': float(daily_stats[1] or 0),
+                'study_time': float(daily_stats[2] or 0),
+                'questions_practiced': daily_stats[3] or 0
             })
         
-        # Areas needing improvement
+        # Areas needing improvement with specific recommendations
         weak_areas = db.session.query(
             Category.name,
             func.avg(
                 (UserQuestionPerformance.correct_attempts * 100.0 / 
-                UserQuestionPerformance.total_attempts)
-            ).label('accuracy')
+                func.nullif(UserQuestionPerformance.total_attempts, 0))
+            ).label('accuracy'),
+            func.count(Question.id).label('total_questions'),
+            func.avg(UserQuestionPerformance.ease_factor).label('difficulty')
         ).join(
             Question, Category.id == Question.category_id
         ).join(
@@ -85,17 +103,37 @@ def show_dashboard():
         ).group_by(Category.name).having(
             func.avg(
                 (UserQuestionPerformance.correct_attempts * 100.0 / 
-                UserQuestionPerformance.total_attempts)
+                func.nullif(UserQuestionPerformance.total_attempts, 0))
             ) < 70
-        ).all()
+        ).order_by('accuracy').all()
+        
+        # Most challenging questions
+        challenging_questions = db.session.query(
+            Question.question_text,
+            Category.name.label('category'),
+            UserQuestionPerformance.accuracy,
+            UserQuestionPerformance.total_attempts
+        ).join(
+            Category, Question.category_id == Category.id
+        ).join(
+            UserQuestionPerformance, Question.id == UserQuestionPerformance.question_id
+        ).filter(
+            UserQuestionPerformance.user_id == current_user.id,
+            UserQuestionPerformance.total_attempts > 0,
+            UserQuestionPerformance.accuracy < 50
+        ).order_by(
+            UserQuestionPerformance.accuracy
+        ).limit(5).all()
         
         return render_template(
             'dashboard/index.html',
             total_questions=total_questions,
             accuracy=round(accuracy, 2),
+            avg_response_time=round(avg_response_time, 2),
             category_stats=category_stats,
             daily_progress=daily_progress,
-            weak_areas=weak_areas
+            weak_areas=weak_areas,
+            challenging_questions=challenging_questions
         )
         
     except Exception as e:
@@ -112,18 +150,22 @@ def category_performance(category_id):
         ).filter(
             UserQuestionPerformance.user_id == current_user.id,
             Question.category_id == category_id
+        ).order_by(
+            UserQuestionPerformance.last_attempt_date
         ).all()
         
         data = {
             'accuracy': [],
             'response_times': [],
-            'dates': []
+            'dates': [],
+            'ease_factors': []
         }
         
         for perf in performance:
-            data['accuracy'].append(perf.accuracy)
+            data['accuracy'].append(perf.accuracy or 0)
             data['response_times'].append(perf.average_response_time or 0)
             data['dates'].append(perf.last_attempt_date.strftime('%Y-%m-%d'))
+            data['ease_factors'].append(perf.ease_factor or 1.0)
             
         return jsonify(data)
         
